@@ -98,6 +98,26 @@
                     </li>
                 </ul>
             </li>
+
+            <li ngbDropdown class="nav-item dropdown pointer" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                <a class="nav-link dropdown-toggle" ngbDropdownToggle href="javascript:void(0);" id="angularMaterial">
+                    <span>
+                        <i class="fa fa-flag" aria-hidden="true"></i>
+                        <span>Material</span>
+                    </span>
+                </a>
+                <ul class="dropdown-menu" ngbDropdownMenu>
+                    <li uiSrefActive="active">
+                        <a class="dropdown-item" routerLink="button" routerLinkActive="active" (click)="collapseNavbar()">
+                            <i class="fa fa-fw fa-bullseye" aria-hidden="true"></i>
+                            <span>Button</span>
+                        </a>
+                    </li>
+
+                </ul>
+            </li>
+
+
             <li ngbDropdown class="nav-item dropdown pointer" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
                 <a class="nav-link dropdown-toggle" ngbDropdownToggle href="javascript:void(0);" id="account-menu">
                   <span *ngIf="!getImageUrl()">
