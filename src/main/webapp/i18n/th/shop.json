@@ -1,0 +1,28 @@
+{
+    "rainyApp": {
+        "shop" : {
+            "home": {
+                "title": "Shops",
+                "createLabel": "สร้าง Shop",
+                "createOrEditLabel": "สร้างหรือแก้ไข Shop"
+            },
+            "created": "Shop ถูกสร้างด้วย {{ param }}",
+            "updated": "Shop ถูกแก้ไขด้วย {{ param }}",
+            "deleted": "Shop ถูกลบด้วย {{ param }}",
+            "delete": {
+                "question": "คุณต้องการที่จะลบ Shop {{ id }}?"
+            },
+            "detail": {
+                "title": "Shop"
+            },
+            "name": "Name",
+            "pic_cover": "Pic Cover",
+            "tel": "Tel",
+            "line_uname": "Line Uname",
+            "description": "Description",
+            "age": "Age",
+            "category": "Category",
+            "price": "Price"
+        }
+    }
+}
