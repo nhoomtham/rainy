@@ -26,8 +26,8 @@ public class Shop implements Serializable {
     private Long id;
 
     @NotNull
-    @Size(max = 20)
-    @Column(name = "name", length = 20, nullable = false)
+    @Size(max = 50)
+    @Column(name = "name", length = 50, nullable = false)
     private String name;
 
     @Column(name = "pic_cover")
