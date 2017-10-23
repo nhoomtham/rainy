@@ -3,11 +3,14 @@ package com.rainy.web.rest;
 import com.codahale.metrics.annotation.Timed;
 import com.rainy.domain.Album;
 
+import com.rainy.domain.Shop;
 import com.rainy.repository.AlbumRepository;
+import com.rainy.service.ShopService;
 import com.rainy.web.rest.util.HeaderUtil;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -31,9 +34,10 @@ public class AlbumResource {
 
     private final AlbumRepository albumRepository;
 
-    public AlbumResource(AlbumRepository albumRepository) {
-        this.albumRepository = albumRepository;
-    }
+    @Autowired
+    private ShopService shopService;
+
+    public AlbumResource(AlbumRepository albumRepository) {this.albumRepository = albumRepository;}
 
     /**
      * POST  /albums : Create a new album.
@@ -116,4 +120,20 @@ public class AlbumResource {
         albumRepository.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
     }
+
+
+    /**
+     * GET  /albums/:id : get the "id" album.
+     *
+     * @param id the id of the album to retrieve
+     * @return the ResponseEntity with status 200 (OK) and with body the album, or with status 404 (Not Found)
+     */
+    @GetMapping("/albums/shop/{id}")
+    @Timed
+    public List<Album> getAlbumByShop(@PathVariable Long id) {
+        log.debug("REST request to get Album of Shop id : {}", id);
+        Shop shop = shopService.findOne(id);
+        return albumRepository.findByShop(shop);
+    }
+
 }

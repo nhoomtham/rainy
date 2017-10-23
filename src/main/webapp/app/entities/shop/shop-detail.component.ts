@@ -3,8 +3,12 @@ import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/Rx';
 import { JhiEventManager } from 'ng-jhipster';
 
+import { ResponseWrapper } from '../../shared';
+
 import { Shop } from './shop.model';
 import { ShopService } from './shop.service';
+import { Album } from '../album/album.model';
+import { AlbumService } from '../album/album.service';
 
 @Component({
     selector: 'jhi-shop-detail',
@@ -17,16 +21,20 @@ export class ShopDetailComponent implements OnInit, OnDestroy {
     private subscription: Subscription;
     private eventSubscriber: Subscription;
 
+    albums: Album[];
+
     constructor(
         private eventManager: JhiEventManager,
         private shopService: ShopService,
-        private route: ActivatedRoute
+        private route: ActivatedRoute,
+        private albumService: AlbumService
     ) {
     }
 
     ngOnInit() {
         this.subscription = this.route.params.subscribe((params) => {
             this.load(params['id']);
+            this.loadAlbums(params['id']);
         });
         this.registerChangeInShops();
     }
@@ -36,6 +44,15 @@ export class ShopDetailComponent implements OnInit, OnDestroy {
             this.shop = shop;
         });
     }
+
+    loadAlbums(id) {
+      this.albumService.loadAlbumByShop(id).subscribe(
+        (res: ResponseWrapper) => {
+            this.albums = res.json;
+         },
+        );
+    }
+
     previousState() {
         window.history.back();
     }

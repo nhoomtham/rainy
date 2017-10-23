@@ -1,11 +1,14 @@
 package com.rainy.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.Objects;
 
 import com.rainy.domain.enumeration.Ra_type;
@@ -26,8 +29,8 @@ public class Shop implements Serializable {
     private Long id;
 
     @NotNull
-    @Size(max = 50)
-    @Column(name = "name", length = 50, nullable = false)
+    @Size(max = 20)
+    @Column(name = "name", length = 20, nullable = false)
     private String name;
 
     @Column(name = "pic_cover")
@@ -55,6 +58,11 @@ public class Shop implements Serializable {
 
     @Column(name = "price")
     private Integer price;
+
+    @OneToMany(mappedBy = "shop")
+    @JsonIgnore
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    private Set<Album> albums = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -167,6 +175,31 @@ public class Shop implements Serializable {
 
     public void setPrice(Integer price) {
         this.price = price;
+    }
+
+    public Set<Album> getAlbums() {
+        return albums;
+    }
+
+    public Shop albums(Set<Album> albums) {
+        this.albums = albums;
+        return this;
+    }
+
+    public Shop addAlbum(Album album) {
+        this.albums.add(album);
+        album.setShop(this);
+        return this;
+    }
+
+    public Shop removeAlbum(Album album) {
+        this.albums.remove(album);
+        album.setShop(null);
+        return this;
+    }
+
+    public void setAlbums(Set<Album> albums) {
+        this.albums = albums;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 

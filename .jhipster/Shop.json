@@ -1,6 +1,13 @@
 {
     "fluentMethods": true,
-    "relationships": [],
+    "relationships": [
+        {
+            "relationshipName": "album",
+            "otherEntityName": "album",
+            "relationshipType": "one-to-many",
+            "otherEntityRelationshipName": "shop"
+        }
+    ],
     "fields": [
         {
             "fieldName": "name",

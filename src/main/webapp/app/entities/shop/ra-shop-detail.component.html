@@ -5,18 +5,14 @@
     <div class ="row">
         <div class="col"></div>
         <div class="col-12 col-md-10 col-lg-8">
-            <mat-grid-list cols="3" rowHeight="2:1">
-                <mat-grid-tile>
-                    <picture>
-                        <!--<source media="(min-width: 1024px)" srcset="https://i.imgsafe.org/30/30d15ed64b.jpeg">-->
-                        <source media="(min-width: 600px)" srcset="https://i.imgsafe.org/30/30d1594c95.jpeg"> <!--128 x 128-->
-                        <source media="(min-width: 360px)" srcset="https://i.imgsafe.org/30/30d146899c.jpeg"> <!--256 x 256-->
-                        <img />
-                    </picture>
-                </mat-grid-tile>
-                <mat-grid-tile><img src="{{shop.pic_cover}}"></mat-grid-tile>
+            <div *ngIf="albums">
+                <mat-grid-list cols="3" rowHeight="2:1">
+                    <div *ngFor="let album of albums">
+                        <mat-grid-tile><img src="{{album.url}}"></mat-grid-tile>
+                    </div>
+                </mat-grid-list>
+            </div>
 
-            </mat-grid-list>
             <br/>
             <mat-tab-group>
                 <mat-tab label="รายละเอียด">
@@ -71,9 +67,8 @@
         </div>
         <div class="col"></div>
     </div>
-<!--
 
--->
+
 
     <button type="submit"
             (click)="previousState()"

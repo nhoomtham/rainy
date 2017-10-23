@@ -19,6 +19,7 @@ export class Shop implements BaseEntity {
         public age?: number,
         public category?: Ra_type,
         public price?: number,
+        public albums?: BaseEntity[],
     ) {
     }
 }

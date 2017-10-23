@@ -46,6 +46,10 @@ export class AlbumService {
         return this.http.delete(`${this.resourceUrl}/${id}`);
     }
 
+    loadAlbumByShop(id: number): Observable<ResponseWrapper> {
+        return this.http.get(`${this.resourceUrl}/shop/1001`).map((res: Response) => this.convertResponse(res));
+    }
+
     private convertResponse(res: Response): ResponseWrapper {
         const jsonResponse = res.json();
         const result = [];

@@ -22,7 +22,8 @@
             "description": "Description",
             "age": "Age",
             "category": "Category",
-            "price": "Price"
+            "price": "Price",
+            "album": "Album"
         }
     }
 }

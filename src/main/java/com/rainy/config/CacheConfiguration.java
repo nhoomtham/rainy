@@ -44,6 +44,7 @@ public class CacheConfiguration {
             cm.createCache(com.rainy.domain.SocialUserConnection.class.getName(), jcacheConfiguration);
             cm.createCache(com.rainy.domain.Shop.class.getName(), jcacheConfiguration);
             cm.createCache(com.rainy.domain.Album.class.getName(), jcacheConfiguration);
+            cm.createCache(com.rainy.domain.Shop.class.getName() + ".albums", jcacheConfiguration);
             // jhipster-needle-ehcache-add-entry
         };
     }
