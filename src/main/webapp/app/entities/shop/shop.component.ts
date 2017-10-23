@@ -10,7 +10,9 @@ import { PaginationConfig } from '../../blocks/config/uib-pagination.config';
 
 @Component({
     selector: 'jhi-shop',
-    templateUrl: './shop.component.html'
+    templateUrl: './ra-shop.component.html',
+    styleUrls: ['card.css']
+
 })
 export class ShopComponent implements OnInit, OnDestroy {
 

@@ -16,6 +16,8 @@ import {
     ShopResolvePagingParams,
 } from './';
 
+import { RainyMaterialModule } from '../../material/rainy-material.module';
+
 const ENTITY_STATES = [
     ...shopRoute,
     ...shopPopupRoute,
@@ -24,7 +26,8 @@ const ENTITY_STATES = [
 @NgModule({
     imports: [
         RainySharedModule,
-        RouterModule.forRoot(ENTITY_STATES, { useHash: true })
+        RouterModule.forRoot(ENTITY_STATES, { useHash: true }),
+        RainyMaterialModule
     ],
     declarations: [
         ShopComponent,

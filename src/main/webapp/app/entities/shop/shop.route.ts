@@ -33,7 +33,7 @@ export const shopRoute: Routes = [
             'pagingParams': ShopResolvePagingParams
         },
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: [],
             pageTitle: 'rainyApp.shop.home.title'
         },
         canActivate: [UserRouteAccessService]
@@ -41,7 +41,7 @@ export const shopRoute: Routes = [
         path: 'shop/:id',
         component: ShopDetailComponent,
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: [],
             pageTitle: 'rainyApp.shop.home.title'
         },
         canActivate: [UserRouteAccessService]
