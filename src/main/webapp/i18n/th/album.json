@@ -1,0 +1,22 @@
+{
+    "rainyApp": {
+        "album" : {
+            "home": {
+                "title": "Albums",
+                "createLabel": "สร้าง Album",
+                "createOrEditLabel": "สร้างหรือแก้ไข Album"
+            },
+            "created": "Album ถูกสร้างด้วย {{ param }}",
+            "updated": "Album ถูกแก้ไขด้วย {{ param }}",
+            "deleted": "Album ถูกลบด้วย {{ param }}",
+            "delete": {
+                "question": "คุณต้องการที่จะลบ Album {{ id }}?"
+            },
+            "detail": {
+                "title": "Album"
+            },
+            "url": "Url",
+            "shop": "Shop"
+        }
+    }
+}
