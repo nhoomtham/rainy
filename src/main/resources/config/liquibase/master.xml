@@ -10,4 +10,6 @@
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
     <include file="config/liquibase/changelog/20171023150328_added_entity_constraints_Album.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
+    <include file="config/liquibase/changelog/201710225150000_added_column_location_Shop.xml" relativeToChangelogFile="false"/>
+
 </databaseChangeLog>
