@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:spatial="http://www.liquibase.org/xml/ns/dbchangelog-ext/liquibase-spatial"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext/liquibase-spatial
+                        http://lonnyj.github.io/liquibase-spatial/liquibase-spatial.xsd">
+
+    <changeSet id="201710250000-add_column_location" author="che">
+        <addColumn tableName="ra_shop">
+            <column name="location" type="GEOMETRY(POINT, 4326)">
+                <constraints nullable="true" />
+            </column>
+        </addColumn >
+
+    </changeSet>
+
+    <changeSet id="201710250001-add_index_location" author="che">
+        <spatial:createSpatialIndex tableName="ra_shop" indexName="x2_ra_shop_location" geometryType="Point" srid="4326">
+            <column name="location" />
+        </spatial:createSpatialIndex>
+    </changeSet>
+
+</databaseChangeLog>
