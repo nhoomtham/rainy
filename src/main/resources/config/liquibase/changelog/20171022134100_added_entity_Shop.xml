@@ -64,11 +64,13 @@
     <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here, do not remove-->
 
     <changeSet id="20171022134100-2" author="jhipster">
-        <loadData encoding="UTF-8"
+        <loadUpdateData encoding="UTF-8"
                   file="config/liquibase/demo-shop.csv"
-                  separator=";"
+                  primaryKey="id"
+                  quotchar="'"
+                  separator=","
                   tableName="ra_shop">
-        </loadData>
+        </loadUpdateData>
     </changeSet>
 
 </databaseChangeLog>
