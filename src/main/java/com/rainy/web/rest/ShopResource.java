@@ -90,8 +90,12 @@ public class ShopResource {
      */
     @GetMapping("/shops")
     @Timed
-    public ResponseEntity<List<Shop>> getAllShops(@ApiParam Pageable pageable) {
+    public ResponseEntity<List<Shop>> getAllShops(@ApiParam Pageable pageable,
+              @RequestParam(value = "lat", defaultValue = "0.0", required = true) Double lat,
+              @RequestParam(value = "lon", defaultValue = "0.0", required = true) Double lon) {
         log.debug("REST request to get a page of Shops");
+        log.debug("REST request to get all Shops near by lat:" + lat +",lon:" + lon.toString());
+
         Page<Shop> page = shopService.findAll(pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/shops");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);

@@ -30,6 +30,7 @@ currentAccount: any;
     predicate: any;
     previousPage: any;
     reverse: any;
+    geolocationPosition: any;
 
     constructor(
         private shopService: ShopService,
@@ -60,6 +61,20 @@ currentAccount: any;
             (res: ResponseWrapper) => this.onError(res.json)
         );
     }
+
+    loadAllWithPosition() {
+        this.shopService.query({
+            page: this.page - 1,
+            size: this.itemsPerPage,
+            sort: this.sort(),
+            lat: this.geolocationPosition.coords.latitude,
+            lon: this.geolocationPosition.coords.longitude
+        }).subscribe(
+            (res: ResponseWrapper) => this.onSuccess(res.json, res.headers),
+            (res: ResponseWrapper) => this.onError(res.json)
+            );
+    }
+
     loadPage(page: number) {
         if (page !== this.previousPage) {
             this.previousPage = page;
@@ -86,11 +101,44 @@ currentAccount: any;
         this.loadAll();
     }
     ngOnInit() {
-        this.loadAll();
+        this.getCurrentPosition().then(
+            // able to get current position from browser
+            () => this.loadAllWithPosition(),
+            // unable to get current position from browser
+            () => this.loadAll()
+        );
         this.principal.identity().then((account) => {
             this.currentAccount = account;
         });
         this.registerChangeInShops();
+    }
+
+    private getCurrentPosition() {
+        return new Promise((resolve, reject) => {
+            if (window.navigator && window.navigator.geolocation) {
+                window.navigator.geolocation.getCurrentPosition(
+                    (position) => {
+                        this.geolocationPosition = position,
+                        console.log(position)
+                        resolve();
+                    },
+                    (error) => {
+                        switch (error.code) {
+                            case 1:
+                                console.log('Permission Denied');
+                                break;
+                            case 2:
+                                console.log('Position Unavailable');
+                                break;
+                            case 3:
+                                console.log('Timeout');
+                                break;
+                        }
+                        reject();
+                    }
+                );
+            };
+        });
     }
 
     ngOnDestroy() {
@@ -122,11 +170,4 @@ currentAccount: any;
     private onError(error) {
         this.jhiAlertService.error(error.message, null, null);
     }
-}
-
-export const environment = {
-  production: false,
-  mapbox: {
-    accessToken: 'pk.eyJ1IjoiY2hlZ29sYSIsImEiOiJjaXh0Nm81Z28wMDFqMzNxaHVkbzhhNnl2In0.7_8FXcHUWUgnlDTn2gFDBA'
-  }
 }

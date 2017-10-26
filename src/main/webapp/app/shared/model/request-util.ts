@@ -11,6 +11,13 @@ export const createRequestOption = (req?: any): BaseRequestOptions => {
         }
         params.set('query', req.query);
 
+        if (req.lat) {
+            params.set('lat', req.lat);
+        }
+        if (req.lon) {
+            params.set('lon', req.lon);
+        }
+
         options.params = params;
     }
     return options;
