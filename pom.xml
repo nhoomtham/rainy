@@ -50,7 +50,8 @@
         <node.version>v6.11.3</node.version>
         <postgresql.version>9.4.1212</postgresql.version>
         <problem-spring-web.version>0.20.0</problem-spring-web.version>
-        <!-- These remain empty unless the corresponding profile is active -->
+        <jackson-jts.version>2.4</jackson-jts.version>
+        <!-- These remain empy unless the corresponding profile is active -->
         <profile.no-liquibase />
         <profile.swagger />
         <prometheus-simpleclient.version>0.0.20</prometheus-simpleclient.version>
@@ -154,6 +155,11 @@
         <dependency>
             <groupId>com.fasterxml.jackson.module</groupId>
             <artifactId>jackson-module-afterburner</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.bedatadriven</groupId>
+            <artifactId>jackson-datatype-jts</artifactId>
+            <version>${jackson-jts.version}</version>
         </dependency>
         <dependency>
             <groupId>com.h2database</groupId>

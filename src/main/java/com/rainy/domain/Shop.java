@@ -1,6 +1,7 @@
 package com.rainy.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.vividsolutions.jts.geom.Point;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
@@ -58,6 +59,22 @@ public class Shop implements Serializable {
 
     @Column(name = "price")
     private Integer price;
+
+    @Column(name = "location", columnDefinition = "Geometry(Point,4326)")
+    private Point location;
+
+    public Point getLocation() {
+        return location;
+    }
+
+    public void setLocation(Point location) {
+        this.location = location;
+    }
+
+    public Shop location(Point location) {
+        this.location = location;
+        return this;
+    }
 
     @OneToMany(mappedBy = "shop")
     @JsonIgnore
@@ -235,6 +252,7 @@ public class Shop implements Serializable {
             ", age='" + getAge() + "'" +
             ", category='" + getCategory() + "'" +
             ", price='" + getPrice() + "'" +
+            ", location='" + location.getCoordinate().toString() + "'" +
             "}";
     }
 }
