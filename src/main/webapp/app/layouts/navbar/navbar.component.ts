@@ -81,16 +81,4 @@ export class NavbarComponent implements OnInit {
         return this.isAuthenticated() ? this.principal.getImageUrl() : null;
     }
 
-    // searchNearBy() {
-    //    this.router.navigate(['/'], {
-    //        queryParams:
-    //        {
-    //            page: 1,
-    //            size: 1,
-    //            lat: 0.0,
-    //            lon: 0.0,
-    //            km: 2
-    //        }
-    //    });
-    // }
 }

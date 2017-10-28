@@ -32,7 +32,6 @@ currentAccount: any;
     reverse: any;
     geolocationPosition: any;
     km: number;
-    // private sub: any;
 
     constructor(
         private shopService: ShopService,
@@ -104,11 +103,6 @@ currentAccount: any;
         this.loadAll();
     }
     ngOnInit() {
-        // this.myform = new FormGroup({ km: new FormControl() });
-        // this.sub = this.activatedroute.params.subscribe((params) => {
-        //    this.km = +params['km'];
-        //    console.log("km: " + params);
-        // });
 
         this.getCurrentPosition().then(
             // able to get current position from browser
@@ -152,7 +146,6 @@ currentAccount: any;
 
     ngOnDestroy() {
         this.eventManager.destroy(this.eventSubscriber);
-        // this.sub.unsubscribe();
     }
 
     trackId(index: number, item: Shop) {
@@ -170,6 +163,10 @@ currentAccount: any;
         return result;
     }
 
+    searchNearBy() {
+        this.loadAllWithPosition();
+    }
+
     private onSuccess(data, headers) {
         this.links = this.parseLinks.parse(headers.get('link'));
         this.totalItems = headers.get('X-Total-Count');
@@ -180,9 +177,5 @@ currentAccount: any;
     }
     private onError(error) {
         this.jhiAlertService.error(error.message, null, null);
-    }
-
-    searchNearBy() {
-        this.loadAllWithPosition();
     }
 }
