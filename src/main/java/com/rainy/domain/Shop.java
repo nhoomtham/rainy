@@ -1,18 +1,19 @@
 package com.rainy.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.rainy.domain.enumeration.Ra_type;
 import com.vividsolutions.jts.geom.Point;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
-import javax.validation.constraints.*;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.HashSet;
-import java.util.Set;
 import java.util.Objects;
-
-import com.rainy.domain.enumeration.Ra_type;
+import java.util.Set;
 
 /**
  * A Shop.
@@ -75,6 +76,7 @@ public class Shop implements Serializable {
         this.location = location;
         return this;
     }
+
 
     @OneToMany(mappedBy = "shop")
     @JsonIgnore
@@ -255,4 +257,22 @@ public class Shop implements Serializable {
             ", location='" + location.getCoordinate().toString() + "'" +
             "}";
     }
+
+/*
+    public void setDistance(Double distance) {
+        this.distance = distance;
+    }*/
+
+/*    @Transient
+    private Double distance;
+
+    @Transient
+    public Double getDistance() {
+        System.out.println("distance:" + distance.toString());
+        return distance;
+    }
+    @PostLoad
+    private void postLoad(){
+        distance = shopRepository.findAllWithPosition(id);
+    }*/
 }

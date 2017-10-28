@@ -51,6 +51,7 @@
         <postgresql.version>9.4.1212</postgresql.version>
         <problem-spring-web.version>0.20.0</problem-spring-web.version>
         <jackson-jts.version>2.4</jackson-jts.version>
+        <esri-geometry.version>2.0.0</esri-geometry.version>
         <!-- These remain empy unless the corresponding profile is active -->
         <profile.no-liquibase />
         <profile.swagger />
@@ -161,6 +162,14 @@
             <artifactId>jackson-datatype-jts</artifactId>
             <version>${jackson-jts.version}</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/com.esri.geometry/esri-geometry-api -->
+        <dependency>
+            <groupId>com.esri.geometry</groupId>
+            <artifactId>esri-geometry-api</artifactId>
+            <version>${esri-geometry.version}</version>
+        </dependency>
+
+
         <dependency>
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>

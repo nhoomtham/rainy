@@ -17,6 +17,9 @@ export const createRequestOption = (req?: any): BaseRequestOptions => {
         if (req.lon) {
             params.set('lon', req.lon);
         }
+        if (req.km) {
+            params.set('km', req.km);
+        }
 
         options.params = params;
     }

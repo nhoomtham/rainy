@@ -31,6 +31,8 @@ currentAccount: any;
     previousPage: any;
     reverse: any;
     geolocationPosition: any;
+    km: number;
+    // private sub: any;
 
     constructor(
         private shopService: ShopService,
@@ -68,7 +70,8 @@ currentAccount: any;
             size: this.itemsPerPage,
             sort: this.sort(),
             lat: this.geolocationPosition.coords.latitude,
-            lon: this.geolocationPosition.coords.longitude
+            lon: this.geolocationPosition.coords.longitude,
+            km: this.km
         }).subscribe(
             (res: ResponseWrapper) => this.onSuccess(res.json, res.headers),
             (res: ResponseWrapper) => this.onError(res.json)
@@ -101,6 +104,12 @@ currentAccount: any;
         this.loadAll();
     }
     ngOnInit() {
+        // this.myform = new FormGroup({ km: new FormControl() });
+        // this.sub = this.activatedroute.params.subscribe((params) => {
+        //    this.km = +params['km'];
+        //    console.log("km: " + params);
+        // });
+
         this.getCurrentPosition().then(
             // able to get current position from browser
             () => this.loadAllWithPosition(),
@@ -143,6 +152,7 @@ currentAccount: any;
 
     ngOnDestroy() {
         this.eventManager.destroy(this.eventSubscriber);
+        // this.sub.unsubscribe();
     }
 
     trackId(index: number, item: Shop) {
@@ -165,9 +175,14 @@ currentAccount: any;
         this.totalItems = headers.get('X-Total-Count');
         this.queryCount = this.totalItems;
         // this.page = pagingParams.page;
+        console.log(data);
         this.shops = data;
     }
     private onError(error) {
         this.jhiAlertService.error(error.message, null, null);
+    }
+
+    searchNearBy() {
+        this.loadAllWithPosition();
     }
 }

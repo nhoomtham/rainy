@@ -1,8 +1,9 @@
 package com.rainy.service.impl;
 
-import com.rainy.service.ShopService;
 import com.rainy.domain.Shop;
 import com.rainy.repository.ShopRepository;
+import com.rainy.service.ShopService;
+import com.vividsolutions.jts.geom.Geometry;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -50,6 +51,19 @@ public class ShopServiceImpl implements ShopService{
         log.debug("Request to get all Shops");
         return shopRepository.findAll(pageable);
     }
+
+    @Override
+    public Page<Shop> findShopNearby(Pageable pageable, Geometry geometry, Double km) {
+        return shopRepository.findNearBy(pageable, geometry, km);
+    }
+
+/*
+    @Override
+    public Page<Shop> findAllWithPosition(Pageable pageable, Geometry geometry) {
+        log.debug("Request to get all Shops with current position : {}");
+        return shopRepository.findAllWithPosition(pageable, geometry);
+    }
+*/
 
     /**
      *  Get one shop by id.

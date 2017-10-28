@@ -5,10 +5,17 @@ import com.rainy.domain.Shop;
 import com.rainy.service.ShopService;
 import com.rainy.web.rest.util.HeaderUtil;
 import com.rainy.web.rest.util.PaginationUtil;
+import com.vividsolutions.jts.geom.Coordinate;
+import com.vividsolutions.jts.geom.Geometry;
+import com.vividsolutions.jts.geom.GeometryFactory;
+import com.vividsolutions.jts.geom.Point;
+import com.vividsolutions.jts.io.ParseException;
+import com.vividsolutions.jts.io.WKTReader;
 import io.swagger.annotations.ApiParam;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
@@ -30,6 +37,8 @@ import java.util.Optional;
 @RequestMapping("/api")
 public class ShopResource {
 
+    private final int SRID = 4326;
+
     private final Logger log = LoggerFactory.getLogger(ShopResource.class);
 
     private static final String ENTITY_NAME = "shop";
@@ -39,6 +48,9 @@ public class ShopResource {
     public ShopResource(ShopService shopService) {
         this.shopService = shopService;
     }
+
+    @Autowired
+    private GeometryFactory geometryFactory;
 
     /**
      * POST  /shops : Create a new shop.
@@ -91,16 +103,60 @@ public class ShopResource {
     @GetMapping("/shops")
     @Timed
     public ResponseEntity<List<Shop>> getAllShops(@ApiParam Pageable pageable,
-              @RequestParam(value = "lat", defaultValue = "0.0", required = true) Double lat,
-              @RequestParam(value = "lon", defaultValue = "0.0", required = true) Double lon) {
+          @RequestParam(value = "lat", defaultValue = "0.0", required = false) Double lat,
+          @RequestParam(value = "lon", defaultValue = "0.0", required = false) Double lon,
+          @RequestParam(value = "km", defaultValue = "0.0", required = false) Double km ) {
         log.debug("REST request to get a page of Shops");
-        log.debug("REST request to get all Shops near by lat:" + lat +",lon:" + lon.toString());
+        log.debug("REST request to get all Shops near by lat:" + lat +",lon:" + lon.toString()+ ",km:" + km.toString());
 
-        Page<Shop> page = shopService.findAll(pageable);
+        final Geometry geometry = wktToGeometry("POINT(" + lat.toString() + " " + lon.toString() + ")");
+        if (!geometry.getGeometryType().equals("Point")) {
+            throw new RuntimeException("Geometry must be a point. Got a " + geometry.getGeometryType());
+        }
+        final Point newPoint = geometryFactory.createPoint(new Coordinate(geometry.getCoordinate()));
+        newPoint.setSRID(SRID);
+        Page<Shop> page;
+        if (km == 0.0) {
+            page = shopService.findAll(pageable);
+        } else {
+            page = shopService.findShopNearby(pageable, geometry, km);
+        }
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/shops");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
 
+/*    @GetMapping("/shops-nearby")
+    @Timed
+    public List<Shop> getAllShopsNearBy(
+              @RequestParam(value = "lat", defaultValue = "0.0", required = true) Double lat,
+              @RequestParam(value = "lon", defaultValue = "0.0", required = true) Double lon,
+              @RequestParam(value = "km", defaultValue = "1", required = true) Double km) {
+        // log.debug("REST request to get a page of Shops");
+        log.debug("REST request to get all Shops near by lat:" + lat +",lon:" + lon.toString() + ",km:" + km.toString());
+
+        final Geometry geometry = wktToGeometry("POINT(" + lat.toString() + " " + lon.toString() + ")");
+        if (!geometry.getGeometryType().equals("Point")) {
+            throw new RuntimeException("Geometry must be a point. Got a " + geometry.getGeometryType());
+        }
+        final Point newPoint = geometryFactory.createPoint(new Coordinate(geometry.getCoordinate()));
+        newPoint.setSRID(SRID);
+        List<Shop> shops = shopService.findShopNearby(newPoint, km);
+        //HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/shops");
+        return shops;
+    }*/
+
+
+
+    private Geometry wktToGeometry(String wktPoint) {
+        WKTReader fromText = new WKTReader();
+        Geometry geom = null;
+        try {
+            geom = fromText.read(wktPoint);
+        } catch (ParseException e) {
+            throw new RuntimeException("Not a WKT string:" + wktPoint);
+        }
+        return geom;
+    }
     /**
      * GET  /shops/:id : get the "id" shop.
      *

@@ -1,4 +1,13 @@
 <!-- Stack the columns on mobile by making one full-width and the other half-width -->
+<div>
+    <form  class="form-inline my-2 my-lg-0">
+        <div class="form-group">
+            <input class="form-control mr-sm-2" id="km"  name = "km" [(ngModel)]="km" type="search" placeholder="ค้นหาร้านใกล้ๆคุณ" aria-label="ค้นหาร้านใกล้ๆคุณ">
+        </div>            
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit" (click)="searchNearBy()">Search</button>
+</form>
+</div>
+
 <div class="row" *ngIf="shops">
     <div class="col-12 col-md-6 col-lg-3 pt-1" *ngFor="let shop of shops ;trackBy: trackId">
         <mat-card class="example-card">
