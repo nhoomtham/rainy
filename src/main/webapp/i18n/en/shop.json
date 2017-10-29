@@ -1,6 +1,6 @@
 {
     "rainyApp": {
-        "shop" : {
+        "shop": {
             "home": {
                 "title": "Shops",
                 "createLabel": "Create a new Shop",
@@ -18,12 +18,16 @@
             "name": "Name",
             "pic_cover": "Pic Cover",
             "tel": "Tel",
-            "line_uname": "Line Uname",
+            "line_uname": "Line Id",
             "description": "Description",
             "age": "Age",
             "category": "Category",
             "price": "Price",
-            "album": "Album"
+            "album": "Album",
+            "type": "Sex",
+            "details": "Details",
+            "comment": "Comments",
+            "map": "Map"
         }
     }
 }

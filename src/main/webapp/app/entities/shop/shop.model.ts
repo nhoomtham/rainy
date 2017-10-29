@@ -24,7 +24,6 @@ export class Shop implements BaseEntity {
         public albums?: BaseEntity[],
         public location?: GeoJson,
         public distance?: number,
-
     ) {
     }
 }

@@ -2,11 +2,11 @@
     "rainyApp": {
         "Ra_type" : {
             "null": "",
-            "MALE": "MALE",
-            "FEMALE": "FEMALE",
-            "LADY_BOY_S": "LADY_BOY_S",
-            "LADY_BOY": "LADY_BOY",
-            "TOM": "TOM"
+            "MALE": "ชาย",
+            "FEMALE": "หญิง",
+            "LADY_BOY_S": "สาวสองมีงู",
+            "LADY_BOY": "สาวสองไม่มีงู",
+            "TOM": "ทอม"
         }
     }
 }
