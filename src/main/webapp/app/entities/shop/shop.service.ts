@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Http, Response } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Rx';
 import { SERVER_API_URL } from '../../app.constants';
 
@@ -11,7 +12,7 @@ export class ShopService {
 
     private resourceUrl = SERVER_API_URL + 'api/shops';
 
-    constructor(private http: Http) { }
+    constructor(private http: Http, private httpClient: HttpClient) { }
 
     create(shop: Shop): Observable<Shop> {
         const copy = this.convert(shop);
@@ -30,10 +31,17 @@ export class ShopService {
     }
 
     find(id: number): Observable<Shop> {
-        return this.http.get(`${this.resourceUrl}/${id}`).map((res: Response) => {
-            const jsonResponse = res.json();
-            return this.convertItemFromServer(jsonResponse);
-        });
+        return this.httpClient.get<Shop>(`${this.resourceUrl}/${id}`);
+
+        // const ab = this.httpClient.get<Shop>(`${this.resourceUrl}/${id}`).subscribe((data) => {
+        //    console.log('xx:' + data);
+        //    return data;
+        // })
+        // return Observable.create(ab);
+        // return this.http.get(`${this.resourceUrl}/${id}`).map((res) => {
+        //    const jsonResponse = res.json();
+        //    return this.convertItemFromServer(jsonResponse);
+        // });
     }
 
     query(req?: any): Observable<ResponseWrapper> {
@@ -59,6 +67,7 @@ export class ShopService {
      * Convert a returned JSON object to Shop.
      */
     private convertItemFromServer(json: any): Shop {
+        console.log('z:' + json)
         const entity: Shop = Object.assign(new Shop(), json);
         return entity;
     }

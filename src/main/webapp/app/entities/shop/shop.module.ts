@@ -1,5 +1,6 @@
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { HttpClientModule } from '@angular/common/http';
 
 import { RainySharedModule } from '../../shared';
 import {
@@ -18,6 +19,8 @@ import {
 
 import { RainyMaterialModule } from '../../material/rainy-material.module';
 
+import { AgmCoreModule } from '@agm/core';
+
 const ENTITY_STATES = [
     ...shopRoute,
     ...shopPopupRoute,
@@ -27,7 +30,11 @@ const ENTITY_STATES = [
     imports: [
         RainySharedModule,
         RouterModule.forRoot(ENTITY_STATES, { useHash: true }),
-        RainyMaterialModule
+        RainyMaterialModule,
+        AgmCoreModule.forRoot({
+            apiKey: 'AIzaSyBlk6Nxh8iMaKuhuJK_sv3gFhi_aoeK_Kg'
+        }),
+        HttpClientModule
     ],
     declarations: [
         ShopComponent,

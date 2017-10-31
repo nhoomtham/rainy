@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/Rx';
+import { HttpClient } from '@angular/common/http';
 import { JhiEventManager } from 'ng-jhipster';
 
 import { ResponseWrapper } from '../../shared';
@@ -13,14 +14,13 @@ import { AlbumService } from '../album/album.service';
 @Component({
     selector: 'jhi-shop-detail',
     templateUrl: './ra-shop-detail.component.html',
-    styleUrls: ['card.css']
+    styleUrls: ['card.css'],
 })
 export class ShopDetailComponent implements OnInit, OnDestroy {
 
     shop: Shop;
     private subscription: Subscription;
     private eventSubscriber: Subscription;
-
     albums: Album[];
 
     constructor(

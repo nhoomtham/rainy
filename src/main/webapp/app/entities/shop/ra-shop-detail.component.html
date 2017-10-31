@@ -12,7 +12,6 @@
                     </div>
                 </mat-grid-list>
             </div>
-
             <br/>
             <mat-tab-group>
                 <mat-tab label="รายละเอียด">
@@ -53,10 +52,23 @@
                     </dl>
 </mat-tab>
                 <mat-tab label="การบ้าน">Content 2</mat-tab>
-                <mat-tab label="แผนที่">แผนที่</mat-tab>
-
             </mat-tab-group>
-           
+            <agm-map [latitude]="shop.location.coordinates[0]"
+                     [longitude]="shop.location.coordinates[1]"
+                     [zoom]="17"
+                     [disableDefaultUI]="false"
+                     [zoomControl]="true">
+                <agm-marker
+                        [latitude]="shop.location.coordinates[0]"
+                        [longitude]="shop.location.coordinates[1]">
+                </agm-marker>
+                <!--<agm-circle [latitude]="lat" [longitude]="lng"
+                                        [radius]="50"
+                                        [fillColor]="'red'"
+                                        [circleDraggable]="false"
+                                        [editable]="false">
+                </agm-circle> -->
+            </agm-map>
 
 
         </div>
