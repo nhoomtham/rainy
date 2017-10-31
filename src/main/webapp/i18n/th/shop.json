@@ -20,14 +20,16 @@
             "tel": "โทร",
             "line_uname": "ไลน์",
             "description": "รายละเอียดเพิ่มเติม",
-            "age": "Age",
+            "age": "อายุ",
             "category": "Category",
             "price": "ค่าขนม",
             "album": "Album",
             "type": "เพศ",
             "details": "รายละเอียด",
             "comment": "การบ้าน",
-            "map": "แผนที่"
+            "map": "แผนที่",
+            "distance": "ระยะทาง: ~{{param}} กม.",
+            "more_detail":  "ดูเพิ่มเติม"
         }
     }
 }

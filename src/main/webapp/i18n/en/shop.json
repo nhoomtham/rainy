@@ -27,7 +27,9 @@
             "type": "Sex",
             "details": "Details",
             "comment": "Comments",
-            "map": "Map"
+            "map": "Map",
+            "distance": "Distance: ~{{param}} km.",
+            "more_detail": "More details"
         }
     }
 }

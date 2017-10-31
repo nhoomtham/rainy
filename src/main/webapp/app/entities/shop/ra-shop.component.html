@@ -3,7 +3,7 @@
     <form>
         <mat-form-field>
             <mat-icon matPrefix><i class="material-icons">search</i></mat-icon>           
-            <input id="km" name = "km" [(ngModel)]="km" matInput type="number" placeholder="&nbsp;ค้นหาร้านใกล้ๆ คุณ">
+            <input id="km" name = "km" [(ngModel)]="km" matInput type="number" placeholder="&nbsp;ร้านระยะทางใกล้ๆ คุณ">
             <span matSuffix>กม.</span>
         </mat-form-field>
         <button mat-button type="submit" (click)="searchNearBy()" hidden></button>
@@ -20,10 +20,9 @@
             </mat-card-header>-->
             <mat-card-title-group>
                 <mat-card-title>{{shop.name}}</mat-card-title>
-                <mat-card-subtitle>{{shop.category}}</mat-card-subtitle>
-                <mat-card-subtitle>อายุ: {{shop.age}}</mat-card-subtitle>
-                <mat-card-subtitle>ระยะทาง: {{shop.distance}} กม.</mat-card-subtitle>
-
+                <mat-card-subtitle><span jhiTranslate="{{'rainyApp.Ra_type.' + shop.category}}"></span></mat-card-subtitle>
+                <mat-card-subtitle><span jhiTranslate="rainyApp.shop.age"></span>: {{shop.age}}</mat-card-subtitle>
+                <mat-card-subtitle><span jhiTranslate="rainyApp.shop.distance" translateValues="{ param: {{shop.distance}}}"></span></mat-card-subtitle>
                 <img mat-card-lg-image src={{shop.pic_cover}}></mat-card-title-group>
             </mat-card-title-group>
 
@@ -36,7 +35,7 @@
                 </p>
             </mat-card-content>-->
             <mat-card-actions>
-                <button mat-button type="submit"  [routerLink]="['../shop', shop.id ]">ดูรายละเอียด</button>
+                <button mat-button type="submit"  [routerLink]="['../shop', shop.id ]"><span jhiTranslate="rainyApp.shop.more_detail"></span></button>
                 <!--<button mat-button>SHARE</button>--ฬ
             </mat-card-actions>
         </mat-card>
