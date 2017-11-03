@@ -35,11 +35,11 @@ public class AlbumResource {
 
     private final AlbumRepository albumRepository;
 
+    @Autowired
     private ShopRepository shopRepository;
 
-    public AlbumResource(AlbumRepository albumRepository, ShopRepository shopRepository) {
+    public AlbumResource(AlbumRepository albumRepository) {
         this.albumRepository = albumRepository;
-        this.shopRepository = shopRepository;
     }
 
     /**

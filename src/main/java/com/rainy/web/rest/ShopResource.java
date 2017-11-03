@@ -47,14 +47,14 @@ public class ShopResource {
 
     private final ShopService shopService;
 
+    @Autowired
     private GeometryFactory geometryFactory;
 
-    private final GeometryService geometryService;
+    @Autowired
+    private GeometryService geometryService;
 
-    public ShopResource(ShopService shopService, GeometryService geometryService, GeometryFactory geometryFactory) {
+    public ShopResource(ShopService shopService) {
         this.shopService = shopService;
-        this.geometryService = geometryService;
-        this.geometryFactory = geometryFactory;
     }
 
     /**
