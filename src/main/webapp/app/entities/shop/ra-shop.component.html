@@ -4,6 +4,8 @@
         <mat-form-field>
             <mat-icon matPrefix><i class="material-icons">search</i></mat-icon>           
             <input id="km" name = "km" [(ngModel)]="km" matInput type="number" placeholder="&nbsp;ร้านระยะทางใกล้ๆ คุณ">
+            <mat-hint align="start"><strong>ใส่ระยะทางเป็นกิโลเมตร</strong> </mat-hint>
+            
             <span matSuffix>กม.</span>
         </mat-form-field>
         <button mat-button type="submit" (click)="searchNearBy()" hidden></button>

@@ -51,8 +51,10 @@
                         </dd>
                     </dl>
 </mat-tab>
-                <mat-tab label="การบ้าน">Content 2</mat-tab>
+                <mat-tab label="การบ้าน">น้องๆ ยังรอการบ้านพี่ๆ อยู่นะ</mat-tab>
             </mat-tab-group>
+            <hr />
+            <h3>แผนที่</h3>
             <agm-map [latitude]="shop.location.coordinates[0]"
                      [longitude]="shop.location.coordinates[1]"
                      [zoom]="17"
@@ -75,18 +77,16 @@
         <div class="col"></div>
     </div>
 
-
-
-    <button type="submit"
+    <button  mat-button type="submit"
             (click)="previousState()"
             class="btn btn-info">
         <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
     </button>
 
-    <button type="button"
+    <!--<button type="button"
             [routerLink]="['/', { outlets: { popup: 'shop/'+ shop.id + '/edit'} }]"
             replaceUrl="true"
             class="btn btn-primary">
         <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
-    </button>
+    </button>-->
 </div>
