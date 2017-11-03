@@ -24,4 +24,14 @@
         </spatial:createSpatialIndex>
     </changeSet>
 
+    <changeSet id="201710250001-insert_demo_data_ra_shop" author="che">
+        <loadUpdateData encoding="UTF-8"
+                        file="config/liquibase/demo-shop.csv"
+                        primaryKey="id"
+                        quotchar="'"
+                        separator=","
+                        tableName="ra_shop">
+        </loadUpdateData>
+    </changeSet>
+
 </databaseChangeLog>
