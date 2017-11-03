@@ -21,9 +21,9 @@ spring:
             enabled: false
     datasource:
         type: com.zaxxer.hikari.HikariDataSource
-        url: jdbc:postgresql://localhost:5432/rainy
-        username: rainy
-        password:
+        url: jdbc:postgresql://ec2-23-23-237-68.compute-1.amazonaws.com:5432/dakkm1jlm28b9j
+        username: sanhyrynmflwsc
+        password: d539cec6f73015498041d19d22ff596873000fb610b81d5ce84da006850381c2
     jpa:
         # database-platform: io.github.jhipster.domain.util.FixedPostgreSQL82Dialect
         database-platform: org.hibernate.spatial.dialect.postgis.PostgisDialect
