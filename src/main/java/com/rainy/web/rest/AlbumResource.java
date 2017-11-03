@@ -5,6 +5,7 @@ import com.rainy.domain.Album;
 
 import com.rainy.domain.Shop;
 import com.rainy.repository.AlbumRepository;
+import com.rainy.repository.ShopRepository;
 import com.rainy.service.ShopService;
 import com.rainy.web.rest.util.HeaderUtil;
 import io.github.jhipster.web.util.ResponseUtil;
@@ -34,10 +35,12 @@ public class AlbumResource {
 
     private final AlbumRepository albumRepository;
 
-    @Autowired
-    private ShopService shopService;
+    private ShopRepository shopRepository;
 
-    public AlbumResource(AlbumRepository albumRepository) {this.albumRepository = albumRepository;}
+    public AlbumResource(AlbumRepository albumRepository, ShopRepository shopRepository) {
+        this.albumRepository = albumRepository;
+        this.shopRepository = shopRepository;
+    }
 
     /**
      * POST  /albums : Create a new album.
@@ -132,7 +135,7 @@ public class AlbumResource {
     @Timed
     public List<Album> getAlbumByShop(@PathVariable Long id) {
         log.debug("REST request to get Album of Shop id : {}", id);
-        Shop shop = shopService.findOne(id);
+        Shop shop = shopRepository.findOne(id);
         return albumRepository.findByShop(shop);
     }
 

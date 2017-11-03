@@ -2,14 +2,21 @@ package com.rainy.service.impl;
 
 import com.rainy.domain.Shop;
 import com.rainy.repository.ShopRepository;
+import com.rainy.service.GeometryService;
 import com.rainy.service.ShopService;
+import com.rainy.service.dto.ShopDTO;
+import com.rainy.service.mapper.ShopMapper;
 import com.vividsolutions.jts.geom.Geometry;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -23,8 +30,14 @@ public class ShopServiceImpl implements ShopService{
 
     private final ShopRepository shopRepository;
 
-    public ShopServiceImpl(ShopRepository shopRepository) {
+    private final ShopMapper shopMapper;
+
+    private final GeometryService geometryService;
+
+    public ShopServiceImpl(ShopRepository shopRepository, ShopMapper shopMapper, GeometryService geometryService) {
         this.shopRepository = shopRepository;
+        this.shopMapper = shopMapper;
+        this.geometryService = geometryService;
     }
 
     /**
@@ -47,23 +60,38 @@ public class ShopServiceImpl implements ShopService{
      */
     @Override
     @Transactional(readOnly = true)
-    public Page<Shop> findAll(Pageable pageable) {
+    public Page<ShopDTO> findAll(Pageable pageable) {
         log.debug("Request to get all Shops");
-        return shopRepository.findAll(pageable);
+        Page<Shop> shopPages = shopRepository.findAll(pageable);
+        List<ShopDTO> newShopDTOs = calculateDistance(shopPages);
+        return new PageImpl<>(newShopDTOs, pageable, shopPages.getTotalElements());
     }
 
     @Override
-    public Page<Shop> findShopNearby(Pageable pageable, Geometry geometry, Double km) {
-        return shopRepository.findNearBy(pageable, geometry, km);
+    public Page<ShopDTO> findShopNearby(Pageable pageable, Geometry geometry, Double km) {
+        log.debug("Request to get all Shops NearBy");
+        Page<Shop> shopPages = shopRepository.findNearBy(pageable, geometry, km);
+        List<ShopDTO> newShopDTOs = calculateDistance(shopPages);
+        return new PageImpl<>(newShopDTOs, pageable, shopPages.getTotalElements());
     }
 
-/*
-    @Override
-    public Page<Shop> findAllWithPosition(Pageable pageable, Geometry geometry) {
-        log.debug("Request to get all Shops with current position : {}");
-        return shopRepository.findAllWithPosition(pageable, geometry);
+    private List<ShopDTO> calculateDistance(Page<Shop> shopPages) {
+        final List<Shop> shops = shopPages.getContent();
+        final List<ShopDTO> shopDTOs = shopMapper.shopsToShopDTOs(shops);
+        List<ShopDTO> newShopDTOs = new ArrayList<>();
+        for (ShopDTO shopDTO : shopDTOs) {
+            final Geometry g1 = shopDTO.getLocation().norm();
+            final Geometry g2 = geometryService.wktToGeometry("POINT("
+                                    + geometryService.getLat().toString()
+                                    + " "
+                                    + geometryService.getLng().toString()
+                                    + ")");
+            final Double dist = g1.distance(g2) * 100;
+            shopDTO.setDistance(dist.shortValue());
+            newShopDTOs.add(shopDTO);
+        }
+        return newShopDTOs;
     }
-*/
 
     /**
      *  Get one shop by id.
@@ -73,9 +101,10 @@ public class ShopServiceImpl implements ShopService{
      */
     @Override
     @Transactional(readOnly = true)
-    public Shop findOne(Long id) {
+    public ShopDTO findOne(Long id) {
         log.debug("Request to get Shop : {}", id);
-        return shopRepository.findOne(id);
+        Shop shop = shopRepository.findOne(id);
+        return shopMapper.shopToShopDTO(shop);
     }
 
     /**

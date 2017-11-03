@@ -1,11 +1,10 @@
 package com.rainy.service;
 
 import com.rainy.domain.Shop;
+import com.rainy.service.dto.ShopDTO;
 import com.vividsolutions.jts.geom.Geometry;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-
-import java.util.List;
 
 /**
  * Service Interface for managing Shop.
@@ -26,7 +25,7 @@ public interface ShopService {
      *  @param pageable the pagination information
      *  @return the list of entities
      */
-    Page<Shop> findAll(Pageable pageable);
+    Page<ShopDTO> findAll(Pageable pageable);
 
     /**
      *  Get all the shops with position.
@@ -35,16 +34,14 @@ public interface ShopService {
      *  @param  geometry the current position
      *  @return the list of entities
      */
-  /*  Page<Shop> findAllWithPosition(Pageable pageable, Geometry geometry);
-*/
-      Page<Shop> findShopNearby(Pageable pageable, Geometry geometry, Double km);
+      Page<ShopDTO> findShopNearby(Pageable pageable, Geometry geometry, Double km);
     /**
      *  Get the "id" shop.
      *
      *  @param id the id of the entity
      *  @return the entity
      */
-    Shop findOne(Long id);
+    ShopDTO findOne(Long id);
 
     /**
      *  Delete the "id" shop.

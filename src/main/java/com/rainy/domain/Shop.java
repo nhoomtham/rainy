@@ -1,18 +1,10 @@
 package com.rainy.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.rainy.domain.enumeration.Ra_type;
-import com.vividsolutions.jts.geom.Geometry;
-import com.vividsolutions.jts.geom.GeometryFactory;
 import com.vividsolutions.jts.geom.Point;
-import com.vividsolutions.jts.io.ParseException;
-import com.vividsolutions.jts.io.WKTReader;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.persistence.*;
 import javax.validation.constraints.Max;
@@ -32,7 +24,6 @@ import java.util.Set;
 public class Shop implements Serializable {
 
     private static final long serialVersionUID = 1L;
-
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
@@ -264,52 +255,6 @@ public class Shop implements Serializable {
             ", category='" + getCategory() + "'" +
             ", price='" + getPrice() + "'" +
             ", location='" + location.getCoordinate().toString() + "'" +
-            ", distance=" + distance +
             "}";
-    }
-
-/*
-    public void setDistance(Double distance) {
-        this.distance = distance;
-    }*/
-
-/*    @Transient
-    private Double distance;
-
-    @Transient
-    public Double getDistance() {
-        System.out.println("distance:" + distance.toString());
-        return distance;
-    }
-    @PostLoad
-    private void postLoad(){
-        distance = shopRepository.findAllWithPosition(id);
-    }*/
-
-    @Transient
-    @JsonProperty
-    private Short distance;
-
-    public Short getDistance() {
-        return distance;
-    }
-
-    @PostLoad
-    private void postLoad() {
-        final Geometry g1 = location.norm();
-        final Geometry g2 = wktToGeometry("POINT(13.8975881 100.37498769999)");
-        final Double dist = g1.distance(g2) * 100;
-        distance = dist.shortValue();
-    }
-
-    private Geometry wktToGeometry(String wktPoint) {
-        final WKTReader fromText = new WKTReader();
-        Geometry geom = null;
-        try {
-            geom = fromText.read(wktPoint);
-        } catch (ParseException e) {
-            throw new RuntimeException("Not a WKT string:" + wktPoint);
-        }
-        return geom;
     }
 }
