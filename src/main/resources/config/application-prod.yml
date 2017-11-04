@@ -21,9 +21,9 @@ spring:
             enabled: false
     datasource:
         type: com.zaxxer.hikari.HikariDataSource
-        url: jdbc:postgresql://ec2-23-23-237-68.compute-1.amazonaws.com:5432/dakkm1jlm28b9j
-        username: sanhyrynmflwsc
-        password: d539cec6f73015498041d19d22ff596873000fb610b81d5ce84da006850381c2
+        url: jdbc:postgresql://ec2-54-247-99-159.eu-west-1.compute.amazonaws.com:5432/d2aspmjh41jmd1
+        username: mqhfpvdbrtpfeu
+        password: ad1414d668b65f4569ef658548c2ac1ba22f64211ec6e732f967ec68fa625110
     jpa:
         # database-platform: io.github.jhipster.domain.util.FixedPostgreSQL82Dialect
         database-platform: org.hibernate.spatial.dialect.postgis.PostgisDialect
