@@ -1,6 +1,7 @@
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
+import { FormsModule, FormGroup, FormControl, ReactiveFormsModule } from '@angular/forms';
 
 import { RainySharedModule } from '../../shared';
 import {
@@ -28,6 +29,8 @@ const ENTITY_STATES = [
 
 @NgModule({
     imports: [
+        FormsModule,
+        ReactiveFormsModule,
         RainySharedModule,
         RouterModule.forRoot(ENTITY_STATES, { useHash: true }),
         RainyMaterialModule,

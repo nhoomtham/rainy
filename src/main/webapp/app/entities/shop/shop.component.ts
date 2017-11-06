@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs/Rx';
+import { FormGroup, FormControl, ReactiveFormsModule } from '@angular/forms';
 import { JhiEventManager, JhiParseLinks, JhiPaginationUtil, JhiLanguageService, JhiAlertService } from 'ng-jhipster';
 
 import { Shop } from './shop.model';
@@ -16,7 +17,7 @@ import { PaginationConfig } from '../../blocks/config/uib-pagination.config';
 })
 export class ShopComponent implements OnInit, OnDestroy {
 
-currentAccount: any;
+    currentAccount: any;
     shops: Shop[];
     error: any;
     success: any;
@@ -31,7 +32,7 @@ currentAccount: any;
     previousPage: any;
     reverse: any;
     geolocationPosition: any;
-    km: number;
+    searchForm: FormGroup;
 
     constructor(
         private shopService: ShopService,
@@ -53,6 +54,25 @@ currentAccount: any;
         });
     }
 
+    ngOnInit() {
+
+        this.searchForm = new FormGroup({
+            km: new FormControl(),
+            price: new FormControl()
+        });
+
+        this.getCurrentPosition().then(
+            // able to get current position from browser
+            () => this.loadAllWithPosition(),
+            // unable to get current position from browser
+            () => this.loadAll()
+        );
+        this.principal.identity().then((account) => {
+            this.currentAccount = account;
+        });
+        this.registerChangeInShops();
+    }
+
     loadAll() {
         this.shopService.query({
             page: this.page - 1,
@@ -67,10 +87,10 @@ currentAccount: any;
         this.shopService.query({
             page: this.page - 1,
             size: this.itemsPerPage,
-            sort: this.sort(),
+            sort: ['price' + ',' + (this.searchForm.get('price').untouched ? 'asc' : this.searchForm.get('price').value)],
             lat: this.geolocationPosition.coords.latitude,
             lon: this.geolocationPosition.coords.longitude,
-            km: this.km
+            km: this.searchForm.get('km').value
         }).subscribe(
             (res: ResponseWrapper) => this.onSuccess(res.json, res.headers),
             (res: ResponseWrapper) => this.onError(res.json)
@@ -101,19 +121,6 @@ currentAccount: any;
             sort: this.predicate + ',' + (this.reverse ? 'asc' : 'desc')
         }]);
         this.loadAll();
-    }
-    ngOnInit() {
-
-        this.getCurrentPosition().then(
-            // able to get current position from browser
-            () => this.loadAllWithPosition(),
-            // unable to get current position from browser
-            () => this.loadAll()
-        );
-        this.principal.identity().then((account) => {
-            this.currentAccount = account;
-        });
-        this.registerChangeInShops();
     }
 
     private getCurrentPosition() {
@@ -151,6 +158,11 @@ currentAccount: any;
     trackId(index: number, item: Shop) {
         return item.id;
     }
+
+    trackDistance(index: number, item: Shop) {
+        return item.distance;
+    }
+
     registerChangeInShops() {
         this.eventSubscriber = this.eventManager.subscribe('shopListModification', (response) => this.loadAll());
     }

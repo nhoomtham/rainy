@@ -67,7 +67,6 @@ export class ShopService {
      * Convert a returned JSON object to Shop.
      */
     private convertItemFromServer(json: any): Shop {
-        console.log('z:' + json)
         const entity: Shop = Object.assign(new Shop(), json);
         return entity;
     }

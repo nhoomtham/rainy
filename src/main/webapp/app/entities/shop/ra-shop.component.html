@@ -1,19 +1,29 @@
 <!-- Stack the columns on mobile by making one full-width and the other half-width -->
-<div>    
-    <form>
-        <mat-form-field>
-            <mat-icon matPrefix><i class="material-icons">search</i></mat-icon>           
-            <input id="km" name = "km" [(ngModel)]="km" matInput type="number" placeholder="&nbsp;ร้านระยะทางใกล้ๆ คุณ">
-            <mat-hint align="start"><strong>ใส่ระยะทางเป็นกิโลเมตร</strong> </mat-hint>
-            
-            <span matSuffix>กม.</span>
-        </mat-form-field>
-        <button mat-button type="submit" (click)="searchNearBy()">Search</button>
-    </form>
-</div>
+<form novalidate [formGroup]='searchForm' (ngSubmit)="searchNearBy()">
+    <div class="row">
+        <div class="col-12 col-md-6 col-lg-2 pt-1">
+                <mat-form-field class='ra-full-width'>
+                    <mat-icon matPrefix><i class="material-icons">search</i></mat-icon>
+                    <input formControlName="km" matInput type="number" placeholder="&nbsp;ร้านระยะทางใกล้ๆ คุณ">
+                    <mat-hint align="start"><strong>ใส่ระยะทางเป็นกิโลเมตร</strong> </mat-hint>
+                    <span matSuffix>กม.</span>
+                </mat-form-field>
+        </div>
+        <div class="col-12 col-md-6 col-lg-2 pt-1">
+                <label>ราคา: </label>
+                <mat-radio-group  formControlName="price" >
+                    <mat-radio-button value="asc" checked>น้อยไปมาก</mat-radio-button>
+                    <mat-radio-button value="desc">มากไปน้อย</mat-radio-button>
+                </mat-radio-group>
+        </div>
+    </div>
+    <!--<pre>{{searchForm.value | json}}</pre>-->
+    <button mat-button type="submit" hidden>Search</button>
+</form>
+
 
 <div class="row" *ngIf="shops">
-    <div class="col-12 col-md-6 col-lg-3 pt-1" *ngFor="let shop of shops ;trackBy: trackId">
+    <div class="col-12 col-md-6 col-lg-3 pt-1" *ngFor="let shop of shops ;trackBy: trackDistance">
         <mat-card class="example-card">
             <!--<mat-card-header>
                 <div mat-card-avatar class="example-header-image"></div>
@@ -23,7 +33,7 @@
             <mat-card-title-group>
                 <mat-card-title>{{shop.name}}</mat-card-title>
                 <mat-card-subtitle><span jhiTranslate="{{'rainyApp.Ra_type.' + shop.category}}"></span></mat-card-subtitle>
-                <mat-card-subtitle><span jhiTranslate="rainyApp.shop.age"></span>: {{shop.age}}</mat-card-subtitle>
+                <mat-card-subtitle><span jhiTranslate="rainyApp.shop.price"></span>: {{shop.price}}</mat-card-subtitle>
                 <mat-card-subtitle><span jhiTranslate="rainyApp.shop.distance" translateValues="{ param: {{shop.distance}}}"></span></mat-card-subtitle>
                 <img mat-card-lg-image src={{shop.pic_cover}}></mat-card-title-group>
             </mat-card-title-group>

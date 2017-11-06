@@ -2,15 +2,14 @@
   width: 320px;
 }
 
-.example-header-image {
-  background-image: url('https://i.imgsafe.org/30/30d146899c.jpeg');
-  background-size: cover;
-}
-
 mat-grid-tile {
   background: lightblue;
 }
 
 agm-map {
     height: 300px;
+}
+
+.ra-full-width {
+    width: 100%;
 }
