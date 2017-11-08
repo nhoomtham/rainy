@@ -59,7 +59,8 @@
                      [longitude]="shop.location.coordinates[1]"
                      [zoom]="17"
                      [disableDefaultUI]="false"
-                     [zoomControl]="true">
+                     [zoomControl]="true"
+      			     (mapClick)="onMapClick($event)">
                 <agm-marker
                         [latitude]="shop.location.coordinates[0]"
                         [longitude]="shop.location.coordinates[1]">
@@ -71,6 +72,11 @@
                                         [editable]="false">
                 </agm-circle> -->
             </agm-map>
+            <hr />
+            <div *ngIf="address">
+                <h5>{{address.results[0].address_components[2].short_name}} {{address.results[0].address_components[3].short_name}} {{address.results[0].address_components[4].short_name}}
+                {{address.results[0].address_components[5].short_name}}</h5>
+            </div>
 
 
         </div>
