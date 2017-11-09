@@ -15,7 +15,7 @@ import { AlbumService } from '../album/album.service';
 
 interface Address {
     long_name: string;
-    short_name: string;   
+    short_name: string;
 }
 interface AddressComponent {
     address_components: Address[];
@@ -57,7 +57,7 @@ export class ShopDetailComponent implements OnInit, OnDestroy {
         // .do(console.log);
         this.courses.subscribe((x) => {
             console.log(x);
-           
+
             this.address = x;
             console.log(this.address[0]);
             // address_components[1].short_name

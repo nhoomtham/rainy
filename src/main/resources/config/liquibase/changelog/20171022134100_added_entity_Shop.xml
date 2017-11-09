@@ -53,14 +53,43 @@
                 <constraints nullable="true" />
             </column>
 
+            <column name="shape" type="varchar(20)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="skin" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="high" type="integer">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="weight" type="integer">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="district" type="varchar(50)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="subdistrict" type="varchar(50)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="province" type="varchar(30)">
+                <constraints nullable="true" />
+            </column>
+
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->
         </createTable>
-
-        <createIndex tableName="ra_shop" indexName="x1_ra_shop" unique="true">
-            <column name="id" type="bigint"></column>
-        </createIndex>
 
     </changeSet>
     <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here, do not remove-->
 
+    <changeSet id="20171022134100-2_add_index_ra_shop" author="che">
+        <createIndex tableName="ra_shop" indexName="x1_ra_shop" unique="true">
+            <column name="id" type="bigint"></column>
+        </createIndex>
+    </changeSet>
 </databaseChangeLog>

@@ -95,6 +95,89 @@
             <input type="number" class="form-control" name="price" id="field_price"
                 [(ngModel)]="shop.price"  />
         </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="rainyApp.shop.shape" for="field_shape">Shape</label>
+            <input type="text" class="form-control" name="shape" id="field_shape"
+                [(ngModel)]="shop.shape" maxlength="20" />
+            <div [hidden]="!(editForm.controls.shape?.dirty && editForm.controls.shape?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.shape?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 20 }">
+                   This field cannot be longer than 20 characters.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="rainyApp.shop.skin" for="field_skin">Skin</label>
+            <select class="form-control" name="skin" [(ngModel)]="shop.skin" id="field_skin" >
+                <option value="WHITE">{{'rainyApp.Ra_skin.WHITE' | translate}}</option>
+                <option value="PALE">{{'rainyApp.Ra_skin.PALE' | translate}}</option>
+                <option value="TAN">{{'rainyApp.Ra_skin.TAN' | translate}}</option>
+                <option value="BLACK">{{'rainyApp.Ra_skin.BLACK' | translate}}</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="rainyApp.shop.high" for="field_high">High</label>
+            <input type="number" class="form-control" name="high" id="field_high"
+                [(ngModel)]="shop.high" max="200" />
+            <div [hidden]="!(editForm.controls.high?.dirty && editForm.controls.high?.invalid)">
+                <small class="form-text text-danger"
+                    [hidden]="!editForm.controls.high?.errors?.max" jhiTranslate="entity.validation.max" translateValues="{ max: 200 }">
+                    This field cannot be more than 200.
+                </small>
+                <small class="form-text text-danger"
+                    [hidden]="!editForm.controls.high?.errors?.number" jhiTranslate="entity.validation.number">
+                    This field should be a number.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="rainyApp.shop.weight" for="field_weight">Weight</label>
+            <input type="number" class="form-control" name="weight" id="field_weight"
+                [(ngModel)]="shop.weight" max="200" />
+            <div [hidden]="!(editForm.controls.weight?.dirty && editForm.controls.weight?.invalid)">
+                <small class="form-text text-danger"
+                    [hidden]="!editForm.controls.weight?.errors?.max" jhiTranslate="entity.validation.max" translateValues="{ max: 200 }">
+                    This field cannot be more than 200.
+                </small>
+                <small class="form-text text-danger"
+                    [hidden]="!editForm.controls.weight?.errors?.number" jhiTranslate="entity.validation.number">
+                    This field should be a number.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="rainyApp.shop.district" for="field_district">District</label>
+            <input type="text" class="form-control" name="district" id="field_district"
+                [(ngModel)]="shop.district" maxlength="50" />
+            <div [hidden]="!(editForm.controls.district?.dirty && editForm.controls.district?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.district?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 50 }">
+                   This field cannot be longer than 50 characters.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="rainyApp.shop.subdistrict" for="field_subdistrict">Subdistrict</label>
+            <input type="text" class="form-control" name="subdistrict" id="field_subdistrict"
+                [(ngModel)]="shop.subdistrict" maxlength="50" />
+            <div [hidden]="!(editForm.controls.subdistrict?.dirty && editForm.controls.subdistrict?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.subdistrict?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 50 }">
+                   This field cannot be longer than 50 characters.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="rainyApp.shop.province" for="field_province">Province</label>
+            <input type="text" class="form-control" name="province" id="field_province"
+                [(ngModel)]="shop.province" maxlength="30" />
+            <div [hidden]="!(editForm.controls.province?.dirty && editForm.controls.province?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.province?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 30 }">
+                   This field cannot be longer than 30 characters.
+                </small>
+            </div>
+        </div>
 
     </div>
     <div class="modal-footer">

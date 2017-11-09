@@ -1,6 +1,7 @@
 package com.rainy.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.rainy.domain.enumeration.Ra_skin;
 import com.rainy.domain.enumeration.Ra_type;
 import com.vividsolutions.jts.geom.Point;
 import org.hibernate.annotations.Cache;
@@ -31,8 +32,8 @@ public class Shop implements Serializable {
     private Long id;
 
     @NotNull
-    @Size(max = 20)
-    @Column(name = "name", length = 20, nullable = false)
+    @Size(max = 30)
+    @Column(name = "name", length = 30, nullable = false)
     private String name;
 
     @Column(name = "pic_cover")
@@ -77,6 +78,33 @@ public class Shop implements Serializable {
         return this;
     }
 
+    @Size(max = 20)
+    @Column(name = "shape", length = 20)
+    private String shape;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "skin")
+    private Ra_skin skin;
+
+    @Max(value = 200)
+    @Column(name = "high")
+    private Integer high;
+
+    @Max(value = 200)
+    @Column(name = "weight")
+    private Integer weight;
+
+    @Size(max = 50)
+    @Column(name = "district", length = 50)
+    private String district;
+
+    @Size(max = 50)
+    @Column(name = "subdistrict", length = 50)
+    private String subdistrict;
+
+    @Size(max = 30)
+    @Column(name = "province", length = 30)
+    private String province;
 
     @OneToMany(mappedBy = "shop")
     @JsonIgnore
@@ -196,6 +224,97 @@ public class Shop implements Serializable {
         this.price = price;
     }
 
+    public String getShape() {
+        return shape;
+    }
+
+    public Shop shape(String shape) {
+        this.shape = shape;
+        return this;
+    }
+
+    public void setShape(String shape) {
+        this.shape = shape;
+    }
+
+    public Ra_skin getSkin() {
+        return skin;
+    }
+
+    public Shop skin(Ra_skin skin) {
+        this.skin = skin;
+        return this;
+    }
+
+    public void setSkin(Ra_skin skin) {
+        this.skin = skin;
+    }
+
+    public Integer getHigh() {
+        return high;
+    }
+
+    public Shop high(Integer high) {
+        this.high = high;
+        return this;
+    }
+
+    public void setHigh(Integer high) {
+        this.high = high;
+    }
+
+    public Integer getWeight() {
+        return weight;
+    }
+
+    public Shop weight(Integer weight) {
+        this.weight = weight;
+        return this;
+    }
+
+    public void setWeight(Integer weight) {
+        this.weight = weight;
+    }
+
+    public String getDistrict() {
+        return district;
+    }
+
+    public Shop district(String district) {
+        this.district = district;
+        return this;
+    }
+
+    public void setDistrict(String district) {
+        this.district = district;
+    }
+
+    public String getSubdistrict() {
+        return subdistrict;
+    }
+
+    public Shop subdistrict(String subdistrict) {
+        this.subdistrict = subdistrict;
+        return this;
+    }
+
+    public void setSubdistrict(String subdistrict) {
+        this.subdistrict = subdistrict;
+    }
+
+    public String getProvince() {
+        return province;
+    }
+
+    public Shop province(String province) {
+        this.province = province;
+        return this;
+    }
+
+    public void setProvince(String province) {
+        this.province = province;
+    }
+
     public Set<Album> getAlbums() {
         return albums;
     }
@@ -254,6 +373,13 @@ public class Shop implements Serializable {
             ", age='" + getAge() + "'" +
             ", category='" + getCategory() + "'" +
             ", price='" + getPrice() + "'" +
+            ", shape='" + getShape() + "'" +
+            ", skin='" + getSkin() + "'" +
+            ", high='" + getHigh() + "'" +
+            ", weight='" + getWeight() + "'" +
+            ", district='" + getDistrict() + "'" +
+            ", subdistrict='" + getSubdistrict() + "'" +
+            ", province='" + getProvince() + "'" +
             ", location='" + location.getCoordinate().toString() + "'" +
             "}";
     }

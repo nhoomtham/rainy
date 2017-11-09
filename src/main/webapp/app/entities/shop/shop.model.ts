@@ -10,6 +10,13 @@ export const enum Ra_type {
     'TOM'
 }
 
+export const enum Ra_skin {
+    'WHITE',
+    'PALE',
+    'TAN',
+    'BLACK'
+}
+
 export class Shop implements BaseEntity {
     constructor(
         public id?: number,
@@ -21,6 +28,13 @@ export class Shop implements BaseEntity {
         public age?: number,
         public category?: Ra_type,
         public price?: number,
+        public shape?: string,
+        public skin?: Ra_skin,
+        public high?: number,
+        public weight?: number,
+        public district?: string,
+        public subdistrict?: string,
+        public province?: string,
         public albums?: BaseEntity[],
         public location?: GeoJson,
         public distance?: number,

@@ -1,0 +1,11 @@
+{
+    "rainyApp": {
+        "Ra_skin" : {
+            "null": "",
+            "WHITE": "WHITE",
+            "PALE": "PALE",
+            "TAN": "TAN",
+            "BLACK": "BLACK"
+        }
+    }
+}

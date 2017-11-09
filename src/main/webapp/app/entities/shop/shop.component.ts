@@ -184,7 +184,6 @@ export class ShopComponent implements OnInit, OnDestroy {
         this.totalItems = headers.get('X-Total-Count');
         this.queryCount = this.totalItems;
         // this.page = pagingParams.page;
-        console.log(data);
         this.shops = data;
     }
     private onError(error) {

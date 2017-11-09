@@ -50,6 +50,19 @@ describe('Shop e2e test', () => {
         shopDialogPage.categorySelectLastOption();
         shopDialogPage.setPriceInput('5');
         expect(shopDialogPage.getPriceInput()).toMatch('5');
+        shopDialogPage.setShapeInput('shape');
+        expect(shopDialogPage.getShapeInput()).toMatch('shape');
+        shopDialogPage.skinSelectLastOption();
+        shopDialogPage.setHighInput('5');
+        expect(shopDialogPage.getHighInput()).toMatch('5');
+        shopDialogPage.setWeightInput('5');
+        expect(shopDialogPage.getWeightInput()).toMatch('5');
+        shopDialogPage.setDistrictInput('district');
+        expect(shopDialogPage.getDistrictInput()).toMatch('district');
+        shopDialogPage.setSubdistrictInput('subdistrict');
+        expect(shopDialogPage.getSubdistrictInput()).toMatch('subdistrict');
+        shopDialogPage.setProvinceInput('province');
+        expect(shopDialogPage.getProvinceInput()).toMatch('province');
         shopDialogPage.save();
         expect(shopDialogPage.getSaveButton().isPresent()).toBeFalsy();
     }); 
@@ -84,6 +97,13 @@ export class ShopDialogPage {
     ageInput = element(by.css('input#field_age'));
     categorySelect = element(by.css('select#field_category'));
     priceInput = element(by.css('input#field_price'));
+    shapeInput = element(by.css('input#field_shape'));
+    skinSelect = element(by.css('select#field_skin'));
+    highInput = element(by.css('input#field_high'));
+    weightInput = element(by.css('input#field_weight'));
+    districtInput = element(by.css('input#field_district'));
+    subdistrictInput = element(by.css('input#field_subdistrict'));
+    provinceInput = element(by.css('input#field_province'));
 
     getModalTitle() {
         return this.modalTitle.getAttribute('jhiTranslate');
@@ -154,6 +174,65 @@ export class ShopDialogPage {
 
     getPriceInput = function () {
         return this.priceInput.getAttribute('value');
+    }
+
+    setShapeInput = function (shape) {
+        this.shapeInput.sendKeys(shape);
+    }
+
+    getShapeInput = function () {
+        return this.shapeInput.getAttribute('value');
+    }
+
+    setSkinSelect = function (skin) {
+        this.skinSelect.sendKeys(skin);
+    }
+
+    getSkinSelect = function () {
+        return this.skinSelect.element(by.css('option:checked')).getText();
+    }
+
+    skinSelectLastOption = function () {
+        this.skinSelect.all(by.tagName('option')).last().click();
+    }
+    setHighInput = function (high) {
+        this.highInput.sendKeys(high);
+    }
+
+    getHighInput = function () {
+        return this.highInput.getAttribute('value');
+    }
+
+    setWeightInput = function (weight) {
+        this.weightInput.sendKeys(weight);
+    }
+
+    getWeightInput = function () {
+        return this.weightInput.getAttribute('value');
+    }
+
+    setDistrictInput = function (district) {
+        this.districtInput.sendKeys(district);
+    }
+
+    getDistrictInput = function () {
+        return this.districtInput.getAttribute('value');
+    }
+
+    setSubdistrictInput = function (subdistrict) {
+        this.subdistrictInput.sendKeys(subdistrict);
+    }
+
+    getSubdistrictInput = function () {
+        return this.subdistrictInput.getAttribute('value');
+    }
+
+    setProvinceInput = function (province) {
+        this.provinceInput.sendKeys(province);
+    }
+
+    getProvinceInput = function () {
+        return this.provinceInput.getAttribute('value');
     }
 
     save() {

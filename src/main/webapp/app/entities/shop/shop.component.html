@@ -25,6 +25,13 @@
             <th jhiSortBy="age"><span jhiTranslate="rainyApp.shop.age">Age</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="category"><span jhiTranslate="rainyApp.shop.category">Category</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="price"><span jhiTranslate="rainyApp.shop.price">Price</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="shape"><span jhiTranslate="rainyApp.shop.shape">Shape</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="skin"><span jhiTranslate="rainyApp.shop.skin">Skin</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="high"><span jhiTranslate="rainyApp.shop.high">High</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="weight"><span jhiTranslate="rainyApp.shop.weight">Weight</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="district"><span jhiTranslate="rainyApp.shop.district">District</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="subdistrict"><span jhiTranslate="rainyApp.shop.subdistrict">Subdistrict</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="province"><span jhiTranslate="rainyApp.shop.province">Province</span> <span class="fa fa-sort"></span></th>
             <th></th>
             </tr>
             </thead>
@@ -39,6 +46,13 @@
                 <td>{{shop.age}}</td>
                 <td jhiTranslate="{{'rainyApp.Ra_type.' + shop.category}}">{{shop.category}}</td>
                 <td>{{shop.price}}</td>
+                <td>{{shop.shape}}</td>
+                <td jhiTranslate="{{'rainyApp.Ra_skin.' + shop.skin}}">{{shop.skin}}</td>
+                <td>{{shop.high}}</td>
+                <td>{{shop.weight}}</td>
+                <td>{{shop.district}}</td>
+                <td>{{shop.subdistrict}}</td>
+                <td>{{shop.province}}</td>
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
                         <button type="submit"

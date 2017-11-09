@@ -30,6 +30,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 import com.rainy.domain.enumeration.Ra_type;
+import com.rainy.domain.enumeration.Ra_skin;
 /**
  * Test class for the ShopResource REST controller.
  *
@@ -62,6 +63,27 @@ public class ShopResourceIntTest {
 
     private static final Integer DEFAULT_PRICE = 1;
     private static final Integer UPDATED_PRICE = 2;
+
+    private static final String DEFAULT_SHAPE = "AAAAAAAAAA";
+    private static final String UPDATED_SHAPE = "BBBBBBBBBB";
+
+    private static final Ra_skin DEFAULT_SKIN = Ra_skin.WHITE;
+    private static final Ra_skin UPDATED_SKIN = Ra_skin.PALE;
+
+    private static final Integer DEFAULT_HIGH = 200;
+    private static final Integer UPDATED_HIGH = 199;
+
+    private static final Integer DEFAULT_WEIGHT = 200;
+    private static final Integer UPDATED_WEIGHT = 199;
+
+    private static final String DEFAULT_DISTRICT = "AAAAAAAAAA";
+    private static final String UPDATED_DISTRICT = "BBBBBBBBBB";
+
+    private static final String DEFAULT_SUBDISTRICT = "AAAAAAAAAA";
+    private static final String UPDATED_SUBDISTRICT = "BBBBBBBBBB";
+
+    private static final String DEFAULT_PROVINCE = "AAAAAAAAAA";
+    private static final String UPDATED_PROVINCE = "BBBBBBBBBB";
 
     @Autowired
     private ShopRepository shopRepository;
@@ -110,7 +132,14 @@ public class ShopResourceIntTest {
             .description(DEFAULT_DESCRIPTION)
             .age(DEFAULT_AGE)
             .category(DEFAULT_CATEGORY)
-            .price(DEFAULT_PRICE);
+            .price(DEFAULT_PRICE)
+            .shape(DEFAULT_SHAPE)
+            .skin(DEFAULT_SKIN)
+            .high(DEFAULT_HIGH)
+            .weight(DEFAULT_WEIGHT)
+            .district(DEFAULT_DISTRICT)
+            .subdistrict(DEFAULT_SUBDISTRICT)
+            .province(DEFAULT_PROVINCE);
         return shop;
     }
 
@@ -142,6 +171,13 @@ public class ShopResourceIntTest {
         assertThat(testShop.getAge()).isEqualTo(DEFAULT_AGE);
         assertThat(testShop.getCategory()).isEqualTo(DEFAULT_CATEGORY);
         assertThat(testShop.getPrice()).isEqualTo(DEFAULT_PRICE);
+        assertThat(testShop.getShape()).isEqualTo(DEFAULT_SHAPE);
+        assertThat(testShop.getSkin()).isEqualTo(DEFAULT_SKIN);
+        assertThat(testShop.getHigh()).isEqualTo(DEFAULT_HIGH);
+        assertThat(testShop.getWeight()).isEqualTo(DEFAULT_WEIGHT);
+        assertThat(testShop.getDistrict()).isEqualTo(DEFAULT_DISTRICT);
+        assertThat(testShop.getSubdistrict()).isEqualTo(DEFAULT_SUBDISTRICT);
+        assertThat(testShop.getProvince()).isEqualTo(DEFAULT_PROVINCE);
     }
 
     @Test
@@ -199,7 +235,14 @@ public class ShopResourceIntTest {
             .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION.toString())))
             .andExpect(jsonPath("$.[*].age").value(hasItem(DEFAULT_AGE)))
             .andExpect(jsonPath("$.[*].category").value(hasItem(DEFAULT_CATEGORY.toString())))
-            .andExpect(jsonPath("$.[*].price").value(hasItem(DEFAULT_PRICE)));
+            .andExpect(jsonPath("$.[*].price").value(hasItem(DEFAULT_PRICE)))
+            .andExpect(jsonPath("$.[*].shape").value(hasItem(DEFAULT_SHAPE.toString())))
+            .andExpect(jsonPath("$.[*].skin").value(hasItem(DEFAULT_SKIN.toString())))
+            .andExpect(jsonPath("$.[*].high").value(hasItem(DEFAULT_HIGH)))
+            .andExpect(jsonPath("$.[*].weight").value(hasItem(DEFAULT_WEIGHT)))
+            .andExpect(jsonPath("$.[*].district").value(hasItem(DEFAULT_DISTRICT.toString())))
+            .andExpect(jsonPath("$.[*].subdistrict").value(hasItem(DEFAULT_SUBDISTRICT.toString())))
+            .andExpect(jsonPath("$.[*].province").value(hasItem(DEFAULT_PROVINCE.toString())));
     }
 
     @Test
@@ -220,7 +263,14 @@ public class ShopResourceIntTest {
             .andExpect(jsonPath("$.description").value(DEFAULT_DESCRIPTION.toString()))
             .andExpect(jsonPath("$.age").value(DEFAULT_AGE))
             .andExpect(jsonPath("$.category").value(DEFAULT_CATEGORY.toString()))
-            .andExpect(jsonPath("$.price").value(DEFAULT_PRICE));
+            .andExpect(jsonPath("$.price").value(DEFAULT_PRICE))
+            .andExpect(jsonPath("$.shape").value(DEFAULT_SHAPE.toString()))
+            .andExpect(jsonPath("$.skin").value(DEFAULT_SKIN.toString()))
+            .andExpect(jsonPath("$.high").value(DEFAULT_HIGH))
+            .andExpect(jsonPath("$.weight").value(DEFAULT_WEIGHT))
+            .andExpect(jsonPath("$.district").value(DEFAULT_DISTRICT.toString()))
+            .andExpect(jsonPath("$.subdistrict").value(DEFAULT_SUBDISTRICT.toString()))
+            .andExpect(jsonPath("$.province").value(DEFAULT_PROVINCE.toString()));
     }
 
     @Test
@@ -249,7 +299,14 @@ public class ShopResourceIntTest {
             .description(UPDATED_DESCRIPTION)
             .age(UPDATED_AGE)
             .category(UPDATED_CATEGORY)
-            .price(UPDATED_PRICE);
+            .price(UPDATED_PRICE)
+            .shape(UPDATED_SHAPE)
+            .skin(UPDATED_SKIN)
+            .high(UPDATED_HIGH)
+            .weight(UPDATED_WEIGHT)
+            .district(UPDATED_DISTRICT)
+            .subdistrict(UPDATED_SUBDISTRICT)
+            .province(UPDATED_PROVINCE);
 
         restShopMockMvc.perform(put("/api/shops")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -268,6 +325,13 @@ public class ShopResourceIntTest {
         assertThat(testShop.getAge()).isEqualTo(UPDATED_AGE);
         assertThat(testShop.getCategory()).isEqualTo(UPDATED_CATEGORY);
         assertThat(testShop.getPrice()).isEqualTo(UPDATED_PRICE);
+        assertThat(testShop.getShape()).isEqualTo(UPDATED_SHAPE);
+        assertThat(testShop.getSkin()).isEqualTo(UPDATED_SKIN);
+        assertThat(testShop.getHigh()).isEqualTo(UPDATED_HIGH);
+        assertThat(testShop.getWeight()).isEqualTo(UPDATED_WEIGHT);
+        assertThat(testShop.getDistrict()).isEqualTo(UPDATED_DISTRICT);
+        assertThat(testShop.getSubdistrict()).isEqualTo(UPDATED_SUBDISTRICT);
+        assertThat(testShop.getProvince()).isEqualTo(UPDATED_PROVINCE);
     }
 
     @Test

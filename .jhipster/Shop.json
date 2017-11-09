@@ -16,7 +16,7 @@
                 "required",
                 "maxlength"
             ],
-            "fieldValidateRulesMaxlength": "20"
+            "fieldValidateRulesMaxlength": "30"
         },
         {
             "fieldName": "pic_cover",
@@ -62,6 +62,59 @@
         {
             "fieldName": "price",
             "fieldType": "Integer"
+        },
+        {
+            "fieldName": "shape",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": "20"
+        },
+        {
+            "fieldName": "skin",
+            "fieldType": "Ra_skin",
+            "fieldValues": "WHITE,PALE,TAN,BLACK"
+        },
+        {
+            "fieldName": "high",
+            "fieldType": "Integer",
+            "fieldValidateRules": [
+                "max"
+            ],
+            "fieldValidateRulesMax": "200"
+        },
+        {
+            "fieldName": "weight",
+            "fieldType": "Integer",
+            "fieldValidateRules": [
+                "max"
+            ],
+            "fieldValidateRulesMax": "200"
+        },
+        {
+            "fieldName": "district",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": "50"
+        },
+        {
+            "fieldName": "subdistrict",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": "50"
+        },
+        {
+            "fieldName": "province",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": "30"
         }
     ],
     "changelogDate": "20171022134100",
