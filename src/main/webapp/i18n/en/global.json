@@ -18,7 +18,8 @@
                 "sessions": "Sessions",
                 "login": "Sign in",
                 "logout": "Sign out",
-                "register": "Register"
+                "register": "Register",
+                "myinfo": "Personal"
             },
             "admin": {
                 "main": "Administration",

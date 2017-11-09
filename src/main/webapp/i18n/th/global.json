@@ -18,7 +18,8 @@
                 "sessions": "เซสชั่น",
                 "login": "เข้าระบบ",
                 "logout": "ออกระบบ",
-                "register": "ลงทะเบียน"
+                "register": "ลงทะเบียน",
+                "myinfo" :  "ข้อมูล"
             },
             "admin": {
                 "main": "ผู้ดูแลระบบ",
@@ -47,8 +48,15 @@
         },
         "messages": {
             "info": {
-                "authenticated": "หากคุณต้องการ <a class=\"alert-link\" href=\"\" ng-click=\"vm.login()\">เข้าระบบ</a>, คุณสามารถใช้บัญชี:<br/>- ผู้ดูแลระบบ (login=\"admin\" and password=\"admin\") <br/>- ผู้ใช้งานทั่วไป (login=\"user\" and password=\"user\").",
-                "register": "ถ้าคุณยังไม่มีบัญชี? <a class=\"alert-link\" href=\"\" ng-click=\"vm.register()\">ลงทะเบียน</a>."
+                "authenticated": {
+                    "prefix": "ถ้าคุณต้องการ ",
+                    "link": "ลงชื่อเข้าใช้",
+                    "suffix": ", you can try the default accounts:<br/>- Administrator (login=\"admin\" and password=\"admin\") <br/>- User (login=\"user\" and password=\"user\")."
+                },
+                "register": {
+                    "noaccount": "ถ้ายังไม่มีบัญชี?",
+                    "link": "ลงทะเบียนที่นี่"
+                }
             },
             "error": {
                 "dontmatch": "รหัสผ่านและยืนยันรหัสผ่าน ไม่เหมือนกัน."
