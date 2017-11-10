@@ -4,6 +4,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, FormGroup, FormControl, ReactiveFormsModule } from '@angular/forms';
 
 import { RainySharedModule } from '../../shared';
+import { RainyAdminModule } from '../../admin/admin.module';
 import {
     ShopService,
     ShopPopupService,

@@ -32,6 +32,7 @@
             <th jhiSortBy="district"><span jhiTranslate="rainyApp.shop.district">District</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="subdistrict"><span jhiTranslate="rainyApp.shop.subdistrict">Subdistrict</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="province"><span jhiTranslate="rainyApp.shop.province">Province</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="user.login"><span jhiTranslate="rainyApp.shop.user">User</span> <span class="fa fa-sort"></span></th>
             <th></th>
             </tr>
             </thead>
@@ -53,6 +54,9 @@
                 <td>{{shop.district}}</td>
                 <td>{{shop.subdistrict}}</td>
                 <td>{{shop.province}}</td>
+                <td>
+                    {{shop.user?.login}}
+                </td>
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
                         <button type="submit"

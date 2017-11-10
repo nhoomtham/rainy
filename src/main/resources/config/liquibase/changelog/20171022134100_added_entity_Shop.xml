@@ -81,6 +81,10 @@
                 <constraints nullable="true" />
             </column>
 
+            <column name="user_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->
         </createTable>
 
@@ -92,4 +96,11 @@
             <column name="id" type="bigint"></column>
         </createIndex>
     </changeSet>
+
+    <changeSet id="20171022134100-3_add_index_ra_shop" author="che">
+        <createIndex tableName="ra_shop" indexName="x2_ra_shop">
+            <column name="user_id" type="bigint"></column>
+        </createIndex>
+    </changeSet>
+
 </databaseChangeLog>

@@ -1,5 +1,6 @@
 package com.rainy.service.impl;
 
+import com.rainy.service.ShopService;
 import com.rainy.domain.Shop;
 import com.rainy.repository.ShopRepository;
 import com.rainy.service.GeometryService;

@@ -111,6 +111,9 @@ public class Shop implements Serializable {
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<Album> albums = new HashSet<>();
 
+    @ManyToOne
+    private User user;
+
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
         return id;
@@ -339,6 +342,20 @@ public class Shop implements Serializable {
     public void setAlbums(Set<Album> albums) {
         this.albums = albums;
     }
+
+    public User getUser() {
+        return user;
+    }
+
+    public Shop user(User user) {
+        this.user = user;
+        return this;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
     @Override
@@ -380,7 +397,6 @@ public class Shop implements Serializable {
             ", district='" + getDistrict() + "'" +
             ", subdistrict='" + getSubdistrict() + "'" +
             ", province='" + getProvince() + "'" +
-            ", location='" + location.getCoordinate().toString() + "'" +
             "}";
     }
 }

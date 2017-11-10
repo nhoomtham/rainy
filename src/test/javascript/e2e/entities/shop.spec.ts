@@ -63,6 +63,7 @@ describe('Shop e2e test', () => {
         expect(shopDialogPage.getSubdistrictInput()).toMatch('subdistrict');
         shopDialogPage.setProvinceInput('province');
         expect(shopDialogPage.getProvinceInput()).toMatch('province');
+        shopDialogPage.userSelectLastOption();
         shopDialogPage.save();
         expect(shopDialogPage.getSaveButton().isPresent()).toBeFalsy();
     }); 
@@ -104,6 +105,7 @@ export class ShopDialogPage {
     districtInput = element(by.css('input#field_district'));
     subdistrictInput = element(by.css('input#field_subdistrict'));
     provinceInput = element(by.css('input#field_province'));
+    userSelect = element(by.css('select#field_user'));
 
     getModalTitle() {
         return this.modalTitle.getAttribute('jhiTranslate');
@@ -233,6 +235,22 @@ export class ShopDialogPage {
 
     getProvinceInput = function () {
         return this.provinceInput.getAttribute('value');
+    }
+
+    userSelectLastOption = function () {
+        this.userSelect.all(by.tagName('option')).last().click();
+    }
+
+    userSelectOption = function (option) {
+        this.userSelect.sendKeys(option);
+    }
+
+    getUserSelect = function () {
+        return this.userSelect;
+    }
+
+    getUserSelectedOption = function () {
+        return this.userSelect.element(by.css('option:checked')).getText();
     }
 
     save() {

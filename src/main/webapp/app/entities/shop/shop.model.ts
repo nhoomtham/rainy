@@ -1,7 +1,5 @@
-import { BaseEntity } from './../../shared';
-
+import { BaseEntity, User } from './../../shared';
 import { GeoJson } from '../../geometry/map';
-
 export const enum Ra_type {
     'MALE',
     'FEMALE',
@@ -36,6 +34,7 @@ export class Shop implements BaseEntity {
         public subdistrict?: string,
         public province?: string,
         public albums?: BaseEntity[],
+        public user?: User,
         public location?: GeoJson,
         public distance?: number,
     ) {
