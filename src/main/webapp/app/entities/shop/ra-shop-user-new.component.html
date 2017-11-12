@@ -1,0 +1,126 @@
+<form novalidate [formGroup]='shopForm' (ngSubmit)="save(shopForm)">
+    <div class="row">
+        <div class="col-12 col-md-6 col-lg-3 pt-1">
+            <mat-form-field class='ra-full-width'>
+                <input formControlName="name" matInput type="text" />
+                <mat-hint align="start"><strong jhiTranslate="rainyApp.shop.name"></strong></mat-hint>
+            </mat-form-field>
+        </div>
+        <div class="col-12 col-md-6 col-lg-3 pt-1">
+            <mat-form-field class='ra-full-width'>
+                <mat-select formControlName="sex" [value]="FEMALE">
+                    <mat-option value="MALE">{{'rainyApp.Ra_type.MALE' | translate}}</mat-option>
+                    <mat-option value="FEMALE">{{'rainyApp.Ra_type.FEMALE' | translate}}</mat-option>
+                    <mat-option value="LADY_BOY_S">{{'rainyApp.Ra_type.LADY_BOY_S' | translate}}</mat-option>
+                    <mat-option value="LADY_BOY">{{'rainyApp.Ra_type.LADY_BOY' | translate}}</mat-option>
+                    <mat-option value="TOM">{{'rainyApp.Ra_type.TOM' | translate}}</mat-option>
+                </mat-select>
+                <mat-hint align="start"><strong jhiTranslate="rainyApp.shop.category"></strong></mat-hint>
+            </mat-form-field>
+        </div>
+        <div class="col-12 col-md-6 col-lg-3 pt-1">
+            <mat-form-field class='ra-full-width'>
+                <input formControlName="age" matInput type="number" />
+                <mat-hint align="start"><strong jhiTranslate="rainyApp.shop.age"></strong></mat-hint>
+            </mat-form-field>
+        </div>
+        <div class="col-12 col-md-6 col-lg-3 pt-1">
+            <mat-form-field class='ra-full-width'>
+                <input formControlName="shape" matInput type="text" />
+                <mat-hint align="start"><strong jhiTranslate="rainyApp.shop.shape"></strong></mat-hint>
+            </mat-form-field>
+        </div>
+        <div class="col-12 col-md-6 col-lg-3 pt-1">
+            <mat-form-field class='ra-full-width'>
+                <input formControlName="weight" matInput type="number" />
+                <mat-hint align="start"><strong jhiTranslate="rainyApp.shop.weight"></strong></mat-hint>
+            </mat-form-field>
+        </div>
+
+        <div class="col-12 col-md-6 col-lg-3 pt-1">
+            <mat-form-field class='ra-full-width'>
+                <input formControlName="high" matInput type="number" />
+                <mat-hint align="start"><strong jhiTranslate="rainyApp.shop.high"></strong></mat-hint>
+            </mat-form-field>
+        </div>
+        <div class="col-12 col-md-6 col-lg-3 pt-1">
+            <mat-form-field class='ra-full-width'>
+                <mat-select formControlName="skin" [value]="WHITE" role="option">
+                    <mat-option value="WHITE">{{'rainyApp.Ra_skin.WHITE' | translate}}</mat-option>
+                    <mat-option value="PALE">{{'rainyApp.Ra_skin.PALE' | translate}}</mat-option>
+                    <mat-option value="TAN">{{'rainyApp.Ra_skin.TAN' | translate}}</mat-option>
+                    <mat-option value="BLACK">{{'rainyApp.Ra_skin.BLACK' | translate}}</mat-option>
+                </mat-select>
+                <mat-hint align="start"><strong jhiTranslate="rainyApp.shop.skin"></strong></mat-hint>
+            </mat-form-field>
+        </div>
+        <!--<div class="col-12 col-md-6 col-lg-3 pt-1">
+            <mat-form-field class='ra-full-width'>
+                <input formControlName="pic_cover" matInput type="text" />
+                <mat-hint align="start"><strong jhiTranslate="rainyApp.shop.pic_cover"></strong></mat-hint>
+            </mat-form-field>
+        </div>-->        
+    </div>
+    <div class="row">
+        <div class="col-12 col-md-6 col-lg-6 pt-1">
+            <div class="form-group">
+                <input formControlName="pic_cover" type="file" class="form-control" name="pic_cover" id="field_pic_cover"/>
+            </div>
+                
+        </div>
+    </div>
+    <div class="row">
+            <div class="col-12 col-md-6 col-lg-6 pt-1">
+                <mat-form-field class='ra-full-width'>
+                    <input formControlName="description" matInput type="text" />
+                    <mat-hint align="start"><strong jhiTranslate="rainyApp.shop.description"></strong></mat-hint>
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 pt-1">
+                <agm-map [latitude]="13.8976027"
+                         [longitude]="100.3750329"
+                         [zoom]="17"
+                         [disableDefaultUI]="false"
+                         [zoomControl]="true"
+                         (mapClick)="onMapClick($event)">
+                    <agm-marker [latitude]="0"
+                                [longitude]="0">
+                    </agm-marker>
+                    <!--<agm-circle [latitude]="lat" [longitude]="lng"
+                                            [radius]="50"
+                                            [fillColor]="'red'"
+                                            [circleDraggable]="false"
+                                            [editable]="false">
+                    </agm-circle> -->
+                </agm-map>
+            </div>
+            <div class="col-12 col-md-6 col-lg-3 pt-1">
+                <mat-form-field class='ra-full-width'>
+                    <input formControlName="district" matInput type="text" />
+                    <mat-hint align="start"><strong jhiTranslate="rainyApp.shop.district"></strong></mat-hint>
+                </mat-form-field>
+            </div>
+            <div class="col-12 col-md-6 col-lg-3 pt-1">
+                <mat-form-field class='ra-full-width'>
+                    <input formControlName="subdistrict" matInput type="text" />
+                    <mat-hint align="start"><strong jhiTranslate="rainyApp.shop.subdistrict"></strong></mat-hint>
+                </mat-form-field>
+            </div>
+            <div class="col-12 col-md-6 col-lg-3 pt-1">
+                <mat-form-field class='ra-full-width'>
+                    <input formControlName="province" matInput type="text" />
+                    <mat-hint align="start"><strong jhiTranslate="rainyApp.shop.province"></strong></mat-hint>
+                </mat-form-field>
+            </div>
+            <!--<div class="col-12 col-md-6 col-lg-6 pt-1">
+                <mat-form-field class='ra-full-width'>
+                    <input formControlName="formatted_address" matInput  />
+                    <mat-hint align="start"><strong jhiTranslate="rainyApp.shop.province"></strong></mat-hint>
+                </mat-form-field>
+            </div>-->
+        </div>
+        <pre>{{shopForm.value | json}}</pre>
+        <button mat-button type="submit" >Search</button>
+</form>
