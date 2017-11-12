@@ -24,4 +24,5 @@ public interface ShopRepository extends JpaRepository<Shop, Long> {
     @Query(value = "select s from Shop s where dwithin(?1, s.location, ?2 * 1000.0, false) = true")
     Page<Shop> findNearBy(Pageable pageable, Geometry geometry, Double km);
 
+    List<Shop> findByUserId(Long id);
 }

@@ -12,6 +12,8 @@ import {
     ShopDetailComponent,
     ShopDialogComponent,
     ShopPopupComponent,
+    ShopUserComponent,
+    ShopUserNewComponent,
     ShopDeletePopupComponent,
     ShopDeleteDialogComponent,
     shopRoute,
@@ -47,6 +49,8 @@ const ENTITY_STATES = [
         ShopDeleteDialogComponent,
         ShopPopupComponent,
         ShopDeletePopupComponent,
+        ShopUserComponent,
+        ShopUserNewComponent,
     ],
     entryComponents: [
         ShopComponent,
@@ -54,6 +58,8 @@ const ENTITY_STATES = [
         ShopPopupComponent,
         ShopDeleteDialogComponent,
         ShopDeletePopupComponent,
+        ShopUserComponent,
+        ShopUserNewComponent,
     ],
     providers: [
         ShopService,

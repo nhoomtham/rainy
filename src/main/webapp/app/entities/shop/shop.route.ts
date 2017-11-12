@@ -8,6 +8,8 @@ import { ShopComponent } from './shop.component';
 import { ShopDetailComponent } from './shop-detail.component';
 import { ShopPopupComponent } from './shop-dialog.component';
 import { ShopDeletePopupComponent } from './shop-delete-dialog.component';
+import { ShopUserComponent } from './ra-shop-user.component';
+import { ShopUserNewComponent } from './ra-shop-user-new.component';
 
 @Injectable()
 export class ShopResolvePagingParams implements Resolve<any> {
@@ -37,11 +39,30 @@ export const shopRoute: Routes = [
             pageTitle: 'rainyApp.shop.home.title'
         },
         canActivate: [UserRouteAccessService]
-    }, {
+    },
+    {
         path: 'shop/:id',
         component: ShopDetailComponent,
         data: {
             authorities: [],
+            pageTitle: 'rainyApp.shop.home.title'
+        },
+        canActivate: [UserRouteAccessService]
+    },
+    {
+        path: 'shop-user',
+        component: ShopUserComponent,
+        data: {
+            authorities: ['ROLE_USER'],
+            pageTitle: 'rainyApp.shop.home.title'
+        },
+        canActivate: [UserRouteAccessService]
+    },
+    {
+        path: 'shop-user-new',
+        component: ShopUserNewComponent,
+        data: {
+            authorities: ['ROLE_USER'],
             pageTitle: 'rainyApp.shop.home.title'
         },
         canActivate: [UserRouteAccessService]

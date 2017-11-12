@@ -1,1 +1,47 @@
-<h1>aksjdfkasjf</h1>
+<div>
+    <div class="col-12 col-md-6 col-lg-3 pt-1">
+        <h2>
+            <span jhiTranslate="rainyApp.shop.home.title">Shops</span>
+            <button mat-button class="btn btn-primary float-right jh-create-entity create-shop" [routerLink]="['/shop-user-new']">
+                <span class="fa fa-plus"></span>
+                <span jhiTranslate="rainyApp.shop.home.createLabel">
+                    Create new Shop
+                </span>
+            </button>
+        </h2>
+
+    </div>
+        
+    <div class="row" *ngIf="shops">
+        <div class="col-12 col-md-6 col-lg-3 pt-1" *ngFor="let shop of shops">
+            <mat-card class="example-card">
+                <mat-card-title-group>
+                    <mat-card-title>{{shop.name}}</mat-card-title>
+                    <mat-card-subtitle><span jhiTranslate="{{'rainyApp.Ra_type.' + shop.category}}"></span></mat-card-subtitle>
+                    <mat-card-subtitle><span jhiTranslate="rainyApp.shop.price"></span>: {{shop.price}}</mat-card-subtitle>
+                    <!--<mat-card-subtitle><span jhiTranslate="rainyApp.shop.distance" translateValues="{ param: {{shop.distance}}}"></span></mat-card-subtitle>-->
+                    <img mat-card-lg-image src={{shop.pic_cover}}>
+                </mat-card-title-group>
+                <mat-card-actions>
+                    <button mat-button type="submit" [routerLink]="['../shop', shop.id ]"><span jhiTranslate="rainyApp.shop.more_detail"></span></button>
+                    <button mat-button>delete</button>
+                </mat-card-actions>
+        </div>
+        <div class="col-12 col-md-6 col-lg-6 pt-1">
+            <mat-form-field class='ra-full-width'>
+                <mat-select [value]="option2">
+                    <mat-option>None</mat-option>
+                    <mat-option value="option1">Option 1</mat-option>
+                    <mat-option value="option2">Option 2</mat-option>
+                    <mat-option value="option3">Option 3</mat-option>
+                </mat-select>
+            </mat-form-field>
+
+        </div>
+
+
+    </div>
+
+
+</div>
+

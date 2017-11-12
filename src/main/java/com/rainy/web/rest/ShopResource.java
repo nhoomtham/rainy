@@ -110,7 +110,6 @@ public class ShopResource {
             @RequestParam(value = "lat", defaultValue = "0.0", required = false) Double lat,
             @RequestParam(value = "lon", defaultValue = "0.0", required = false) Double lon,
             @RequestParam(value = "km", defaultValue = "0.0", required = false) Double km ) {
-        log.debug("REST request to get a page of Shops");
         log.debug("REST request to get all Shops near by lat:" + lat +",lon:" + lon.toString()+ ",km:" + km.toString());
 
         final Geometry geometry = geometryService.wktToGeometry("POINT(" + lat.toString() + " " + lon.toString() + ")");
@@ -159,5 +158,19 @@ public class ShopResource {
         log.debug("REST request to delete Shop : {}", id);
         shopService.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
+    }
+
+    /**
+     * GET  /shop-user : get all the shops by user id
+     *
+     * @param id the user id
+     * @return the ResponseEntity with status 200 (OK) and the list of shops in body
+     */
+    @GetMapping("/shops/shop-user/{id}")
+    @Timed
+    public List<ShopDTO> getAllShopsByUserId(@PathVariable Long id) {
+        log.debug("REST request to get Shops by User Id");
+
+        return shopService.findByUserId(id);
     }
 }

@@ -14,7 +14,7 @@ import { ResponseWrapper } from '../../shared';
 
 @Component({
     selector: 'jhi-shop-dialog',
-    templateUrl: './shop-dialog.component.html'
+    templateUrl: './shop-dialog.component.html',
 })
 export class ShopDialogComponent implements OnInit {
 

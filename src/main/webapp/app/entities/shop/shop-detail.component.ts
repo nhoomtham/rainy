@@ -6,7 +6,7 @@ import { JhiEventManager } from 'ng-jhipster';
 
 import { ResponseWrapper } from '../../shared';
 
-import { Observable } from "rxjs/Observable";
+import { Observable } from 'rxjs/Observable';
 
 import { Shop } from './shop.model';
 import { ShopService } from './shop.service';

@@ -2,41 +2,41 @@
     "rainyApp": {
         "shop": {
             "home": {
-                "title": "Shops",
-                "createLabel": "สร้าง Shop",
-                "createOrEditLabel": "สร้างหรือแก้ไข Shop"
+                "title": "ข้อมูลของคุณ",
+                "createLabel": "เพิ่มข้อมูล",
+                "createOrEditLabel": "สร้างหรือแก้ไขข้อมูล"
             },
-            "created": "Shop ถูกสร้างด้วย {{ param }}",
-            "updated": "Shop ถูกแก้ไขด้วย {{ param }}",
-            "deleted": "Shop ถูกลบด้วย {{ param }}",
+            "created": "ข้อมูล ถูกสร้างด้วย {{ param }}",
+            "updated": "ข้อมูล ถูกแก้ไขด้วย {{ param }}",
+            "deleted": "ข้อมูล ถูกลบด้วย {{ param }}",
             "delete": {
-                "question": "คุณต้องการที่จะลบ Shop {{ id }}?"
+                "question": "คุณต้องการที่จะลบ ข้อมูล {{ id }}?"
             },
             "detail": {
-                "title": "Shop"
+                "title": "ข้อมูล"
             },
             "name": "ชื่อ",
-            "pic_cover": "Pic Cover",
+            "pic_cover": "ภาพหน้าปก",
             "tel": "โทร",
             "line_uname": "ไลน์",
             "description": "รายละเอียดเพิ่มเติม",
             "age": "อายุ",
-            "category": "Category",
-            "price": "Price",
-            "shape": "Shape",
-            "skin": "Skin",
-            "high": "High",
-            "weight": "Weight",
-            "district": "District",
-            "subdistrict": "Subdistrict",
-            "province": "Province",
+            "category": "เพศ",
+            "price": "ค่าขนม",
+            "shape": "สัดส่วน",
+            "skin": "สีผิว",
+            "high": "สูง",
+            "weight": "น้ำหนัก",
+            "district": "อำเภอ/เขต",
+            "subdistrict": "ตำบล/แขวง",
+            "province": "จังหวัด",
             "album": "Album",
             "type": "เพศ",
             "details": "รายละเอียด",
             "comment": "การบ้าน",
             "map": "แผนที่",
             "distance": "ระยะทาง: ~{{param}} กม.",
-            "more_detail":  "ดูเพิ่มเติม"
+            "more_detail": "ดูเพิ่มเติม"
         }
     }
 }

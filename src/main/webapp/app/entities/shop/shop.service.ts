@@ -44,6 +44,10 @@ export class ShopService {
         // });
     }
 
+    findByUser(id: number): Observable<Shop> {
+        return this.httpClient.get<Shop>(`${this.resourceUrl}/shop-user/${id}`);
+    }
+
     query(req?: any): Observable<ResponseWrapper> {
         const options = createRequestOption(req);
         return this.http.get(this.resourceUrl, options)

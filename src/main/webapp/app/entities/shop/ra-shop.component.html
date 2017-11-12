@@ -4,7 +4,7 @@
         <div class="col-12 col-md-6 col-lg-2 pt-1">
                 <mat-form-field class='ra-full-width'>
                     <mat-icon matPrefix><i class="material-icons">search</i></mat-icon>
-                    <input formControlName="km" matInput type="number" placeholder="&nbsp;ร้านระยะทางใกล้ๆ คุณ">
+                    <input formControlName="km" matInput type="number" placeholder="&nbsp;ร้านระยะทางใกล้ๆ คุณ" />
                     <mat-hint align="start"><strong>ใส่ระยะทางเป็นกิโลเมตร</strong> </mat-hint>
                     <span matSuffix>กม.</span>
                 </mat-form-field>
@@ -48,7 +48,6 @@
             </mat-card-content>-->
             <mat-card-actions>
                 <button mat-button type="submit"  [routerLink]="['../shop', shop.id ]"><span jhiTranslate="rainyApp.shop.more_detail"></span></button>
-                <!--<button mat-button>SHARE</button>--ฬ
             </mat-card-actions>
         </mat-card>
         <!--<p>&nbsp;</p>-->

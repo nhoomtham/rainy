@@ -6,6 +6,8 @@ import com.vividsolutions.jts.geom.Geometry;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import java.util.List;
+
 /**
  * Service Interface for managing Shop.
  */
@@ -49,4 +51,15 @@ public interface ShopService {
      *  @param id the id of the entity
      */
     void delete(Long id);
+
+    /**
+     *  Get the shop by user id
+     *
+     *  @param id the user id
+     *  @return the entity
+     */
+
+    List<ShopDTO> findByUserId(Long id);
+
+
 }

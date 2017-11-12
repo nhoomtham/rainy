@@ -1,6 +1,5 @@
 package com.rainy.service.impl;
 
-import com.rainy.service.ShopService;
 import com.rainy.domain.Shop;
 import com.rainy.repository.ShopRepository;
 import com.rainy.service.GeometryService;
@@ -117,5 +116,11 @@ public class ShopServiceImpl implements ShopService{
     public void delete(Long id) {
         log.debug("Request to delete Shop : {}", id);
         shopRepository.delete(id);
+    }
+
+    @Override
+    public List<ShopDTO> findByUserId(Long id) {
+        List<Shop> shops = shopRepository.findByUserId(id);
+        return  shopMapper.shopsToShopDTOs(shops);
     }
 }

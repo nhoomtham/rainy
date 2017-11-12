@@ -6,19 +6,51 @@ import { JhiEventManager, JhiParseLinks, JhiLanguageService, JhiAlertService } f
 
 import { Shop } from './shop.model';
 import { ShopService } from './shop.service';
+import { Principal } from '../../shared/index';
 
 @Component({
     selector: 'jhi-shop-user',
     templateUrl: './ra-shop-user.component.html'
-
 })
 export class ShopUserComponent implements OnInit, OnDestroy {
 
-    ngOnDestroy(): void {
-        throw new Error("Method not implemented.");
+    account: Account;
+    shops: Shop[];
+
+    constructor(
+        private shopService: ShopService,
+        private parseLinks: JhiParseLinks,
+        private jhiAlertService: JhiAlertService,
+        private principal: Principal,
+        private activatedRoute: ActivatedRoute,
+        private router: Router,
+        private eventManager: JhiEventManager,
+    ) {
     }
     ngOnInit(): void {
-        throw new Error("Method not implemented.");
+        this.principal.identity().then((account) => {
+            this.account = account;
+            this.loadAll();
+        });
+     //   throw new Error('Method not implemented.');
     }
 
+    loadAll() {
+        this.shopService.findByUser(+this.account.id).subscribe(
+            (res) => this.onSuccess(res),
+            (res) => this.onError(res)
+            );
+    }
+
+    private onSuccess(res: any) {
+        this.shops = res;
+    }
+
+    private onError(error: any) {
+        this.jhiAlertService.error(error.message, null, null);
+    }
+
+    ngOnDestroy(): void {
+    //    throw new Error('Method not implemented.');
+    }
 }

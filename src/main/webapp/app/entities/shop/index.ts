@@ -5,4 +5,6 @@ export * from './shop-dialog.component';
 export * from './shop-delete-dialog.component';
 export * from './shop-detail.component';
 export * from './shop.component';
+export * from './ra-shop-user.component';
+export * from './ra-shop-user-new.component';
 export * from './shop.route';
