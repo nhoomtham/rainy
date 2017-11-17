@@ -13,6 +13,8 @@ import org.springframework.web.context.annotation.RequestScope;
 @Service
 public class GeometryService {
 
+    private static final int SRID = 4326;
+
     private Double lat;
     private Double lng;
 
@@ -41,5 +43,9 @@ public class GeometryService {
             throw new RuntimeException("Not a WKT string:" + wktPoint);
         }
         return geom;
+    }
+
+    public int getSRID() {
+        return SRID;
     }
 }

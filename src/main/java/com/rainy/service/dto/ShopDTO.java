@@ -1,6 +1,7 @@
 package com.rainy.service.dto;
 
 import com.rainy.domain.Shop;
+import com.rainy.domain.User;
 import com.rainy.domain.enumeration.Ra_type;
 import com.vividsolutions.jts.geom.Point;
 import org.hibernate.validator.constraints.NotBlank;
@@ -43,6 +44,16 @@ public class ShopDTO {
     private Point location;
 
     private Short distance;
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    private User user;
 
     public Long getId() {
         return id;
@@ -138,11 +149,12 @@ public class ShopDTO {
 
     public ShopDTO(Shop shop) {
         this(shop.getId(), shop.getName(), shop.getPic_cover(), shop.getTel(), shop.getLine_uname(),
-            shop.getDescription(), shop.getAge(), shop.getCategory(), shop.getPrice(), shop.getLocation() );
+            shop.getDescription(), shop.getAge(), shop.getCategory(), shop.getPrice(), shop.getLocation(),
+            shop.getUser() );
     }
 
     public ShopDTO(Long id, String name, String pic_cover, String tel, String line_uname, String description,
-                   Integer age, Ra_type category, Integer price, Point location) {
+                   Integer age, Ra_type category, Integer price, Point location, User user) {
         this.id = id;
         this.name = name;
         this.pic_cover = pic_cover;
@@ -153,6 +165,7 @@ public class ShopDTO {
         this.category = category;
         this.price = price;
         this.location = location;
+        this.user = user;
     }
     @Override
     public String toString() {
@@ -166,8 +179,8 @@ public class ShopDTO {
             ", age='" + getAge() + "'" +
             ", category='" + getCategory() + "'" +
             ", price='" + getPrice() + "'" +
-            ", location='" + location.getCoordinate().toString() + "'" +
-            ", distance=" + distance +
+            ", location='" + getLocation().getCoordinate().toString() + "'" +
+            ", distance=" + getDistance() +
             "}";
     }
 }

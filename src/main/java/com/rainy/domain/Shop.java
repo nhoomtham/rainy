@@ -397,6 +397,7 @@ public class Shop implements Serializable {
             ", district='" + getDistrict() + "'" +
             ", subdistrict='" + getSubdistrict() + "'" +
             ", province='" + getProvince() + "'" +
+            ", location='" + getLocation().toString() + "'" +
             "}";
     }
 }

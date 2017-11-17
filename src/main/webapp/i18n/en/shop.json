@@ -36,7 +36,9 @@
             "comment": "Comments",
             "map": "Map",
             "distance": "Distance: ~{{param}} km.",
-            "more_detail": "More details"
+            "more_detail": "More details",
+            "required": "This field is required",
+            "invalid-number":  "Invalid information"
         }
     }
 }

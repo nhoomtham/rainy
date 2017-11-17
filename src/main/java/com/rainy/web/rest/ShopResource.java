@@ -37,8 +37,6 @@ import java.util.Optional;
 @RequestMapping("/api")
 public class ShopResource {
 
-    private static final int SRID = 4326;
-
     private final Logger log = LoggerFactory.getLogger(ShopResource.class);
 
     private static final String ENTITY_NAME = "shop";
@@ -64,12 +62,14 @@ public class ShopResource {
      */
     @PostMapping("/shops")
     @Timed
-    public ResponseEntity<Shop> createShop(@Valid @RequestBody Shop shop) throws URISyntaxException {
+    public ResponseEntity<ShopDTO> createShop(@Valid @RequestBody Shop shop) throws URISyntaxException {
         log.debug("REST request to save Shop : {}", shop);
         if (shop.getId() != null) {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert(ENTITY_NAME, "idexists", "A new shop cannot already have an ID")).body(null);
         }
-        Shop result = shopService.save(shop);
+
+        ShopDTO result = shopService.save(shop);
+
         return ResponseEntity.created(new URI("/api/shops/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
             .body(result);
@@ -86,12 +86,12 @@ public class ShopResource {
      */
     @PutMapping("/shops")
     @Timed
-    public ResponseEntity<Shop> updateShop(@Valid @RequestBody Shop shop) throws URISyntaxException {
+    public ResponseEntity<ShopDTO> updateShop(@Valid @RequestBody Shop shop) throws URISyntaxException {
         log.debug("REST request to update Shop : {}", shop);
         if (shop.getId() == null) {
             return createShop(shop);
         }
-        Shop result = shopService.save(shop);
+        ShopDTO result = shopService.save(shop);
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, shop.getId().toString()))
             .body(result);
@@ -117,11 +117,10 @@ public class ShopResource {
             throw new RuntimeException("Geometry must be a point. Got a " + geometry.getGeometryType());
         }
 
+        // sharing user's coordinates
         geometryService.setLat(lat);
         geometryService.setLng(lon);
 
-        final Point newPoint = geometryFactory.createPoint(new Coordinate(geometry.getCoordinate()));
-        newPoint.setSRID(SRID);
         Page<ShopDTO> page;
         if (km == 0.0) {
             page = shopService.findAll(pageable);

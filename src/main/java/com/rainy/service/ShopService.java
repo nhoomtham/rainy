@@ -19,7 +19,7 @@ public interface ShopService {
      * @param shop the entity to save
      * @return the persisted entity
      */
-    Shop save(Shop shop);
+    ShopDTO save(Shop shop);
 
     /**
      *  Get all the shops.
@@ -60,6 +60,5 @@ public interface ShopService {
      */
 
     List<ShopDTO> findByUserId(Long id);
-
 
 }

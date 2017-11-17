@@ -6,9 +6,13 @@ import com.rainy.service.GeometryService;
 import com.rainy.service.ShopService;
 import com.rainy.service.dto.ShopDTO;
 import com.rainy.service.mapper.ShopMapper;
+import com.vividsolutions.jts.geom.Coordinate;
 import com.vividsolutions.jts.geom.Geometry;
+import com.vividsolutions.jts.geom.GeometryFactory;
+import com.vividsolutions.jts.geom.Point;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
@@ -34,6 +38,9 @@ public class ShopServiceImpl implements ShopService{
 
     private final GeometryService geometryService;
 
+    @Autowired
+    private GeometryFactory geometryFactory;
+
     public ShopServiceImpl(ShopRepository shopRepository, ShopMapper shopMapper, GeometryService geometryService) {
         this.shopRepository = shopRepository;
         this.shopMapper = shopMapper;
@@ -47,9 +54,20 @@ public class ShopServiceImpl implements ShopService{
      * @return the persisted entity
      */
     @Override
-    public Shop save(Shop shop) {
+    public ShopDTO save(Shop shop) {
         log.debug("Request to save Shop : {}", shop);
-        return shopRepository.save(shop);
+
+        final Geometry geometry = geometryService.wktToGeometry(shop.getLocation().toText());
+        if (!geometry.getGeometryType().equals("Point")) {
+            throw new RuntimeException("Geometry must be a point. Got a " + geometry.getGeometryType());
+        }
+
+        final Point newPoint = geometryFactory.createPoint(new Coordinate(geometry.getCoordinate()));
+        newPoint.setSRID(geometryService.getSRID());
+        shop.setLocation(newPoint);
+
+        Shop newShop = shopRepository.save(shop);
+        return shopMapper.shopToShopDTO(newShop);
     }
 
     /**
@@ -123,4 +141,5 @@ public class ShopServiceImpl implements ShopService{
         List<Shop> shops = shopRepository.findByUserId(id);
         return  shopMapper.shopsToShopDTOs(shops);
     }
+
 }
