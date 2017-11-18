@@ -9,11 +9,14 @@
                 <mat-error *ngIf="shopForm.get('name').hasError('required')">
                     <span jhiTranslate="rainyApp.shop.required"></span>
                 </mat-error>
+                <mat-error *ngIf="shopForm.get('name').hasError('maxlength')">
+                    <span jhiTranslate="rainyApp.shop.invalid-length"></span>
+                </mat-error>
             </mat-form-field>
         </div>
         <div class="col-12 col-md-6 col-lg-3 pt-1">
             <mat-form-field class='ra-full-width'>
-                <mat-select formControlName="sex" [value]="FEMALE">
+                <mat-select formControlName="category" [value]="FEMALE">
                     <mat-option value="MALE">{{'rainyApp.Ra_type.MALE' | translate}}</mat-option>
                     <mat-option value="FEMALE">{{'rainyApp.Ra_type.FEMALE' | translate}}</mat-option>
                     <mat-option value="LADY_BOY_S">{{'rainyApp.Ra_type.LADY_BOY_S' | translate}}</mat-option>
@@ -21,7 +24,7 @@
                     <mat-option value="TOM">{{'rainyApp.Ra_type.TOM' | translate}}</mat-option>
                 </mat-select>
                 <mat-hint align="start"><strong jhiTranslate="rainyApp.shop.category"></strong></mat-hint>
-                <mat-error *ngIf="shopForm.get('sex').hasError('required')">
+                <mat-error *ngIf="shopForm.get('category').hasError('required')">
                     <span jhiTranslate="rainyApp.shop.required"></span>
                 </mat-error>
             </mat-form-field>
@@ -80,6 +83,37 @@
                 <mat-hint align="start"><strong jhiTranslate="rainyApp.shop.skin"></strong></mat-hint>
             </mat-form-field>
         </div>
+        <div class="col-12 col-md-6 col-lg-3 pt-1">
+            <mat-form-field class='ra-full-width'>
+                <input formControlName="tel" matInput type="text" />
+                <mat-hint align="start"><strong jhiTranslate="rainyApp.shop.tel"></strong></mat-hint>
+                <mat-error *ngIf="shopForm.get('tel').hasError('maxlength')">
+                    <span jhiTranslate="rainyApp.shop.invalid-length"></span>
+                </mat-error>
+            </mat-form-field>
+        </div>
+        <div class="col-12 col-md-6 col-lg-3 pt-1">
+            <mat-form-field class='ra-full-width'>
+                <input formControlName="line_uname" matInput type="text" />
+                <mat-hint align="start"><strong jhiTranslate="rainyApp.shop.line_uname"></strong></mat-hint>
+                <mat-error *ngIf="shopForm.get('line_uname').hasError('maxlength')">
+                    <span jhiTranslate="rainyApp.shop.invalid-length"></span>
+                </mat-error>
+            </mat-form-field>
+        </div>
+
+        <div class="col-12 col-md-6 col-lg-3 pt-1">
+            <mat-form-field class='ra-full-width'>
+                <input formControlName="price" matInput type="number" />
+                <mat-hint align="start"><strong jhiTranslate="rainyApp.shop.price"></strong></mat-hint>
+                <mat-error *ngIf="shopForm.get('price').hasError('required')">
+                    <span jhiTranslate="rainyApp.shop.required"></span>
+                </mat-error>
+                <mat-error *ngIf="shopForm.get('price').hasError('min') || shopForm.get('price').hasError('max')">
+                    <span jhiTranslate="rainyApp.shop.invalid-number"></span>
+                </mat-error>
+            </mat-form-field>
+        </div>
         <div class="col-12 col-md-6 col-lg-6 pt-1">
             <mat-form-field class='ra-full-width'>
                 <input formControlName="description" matInput type="text" />
@@ -91,22 +125,23 @@
 
     <div class="row">
             <div class="col-12 col-md-6 col-lg-6 pt-1">
-                <h5><strong>คลิ๊กบนแผนที่แล้วระบบจะใส่ข้อมูลให้เอง</strong></h5>
-                <agm-map [latitude]="13.8976027"
-                         [longitude]="100.3750329"
+                <h4><strong>คลิ๊กบนแผนที่แล้วระบบจะใส่ข้อมูลให้เอง</strong></h4>
+                <agm-map [latitude]="lat"
+                         [longitude]="lng"
                          [zoom]="17"
                          [disableDefaultUI]="false"
                          [zoomControl]="true"
-                         (mapClick)="onMapClick($event)">
-                    <agm-marker [latitude]="0"
+                         (mapClick)=    "onMapClick($event)">
+                    <!--<agm-marker [latitude]="0"
                                 [longitude]="0">
-                    </agm-marker>
+                    </agm-marker>-->
                     <!--<agm-circle [latitude]="lat" [longitude]="lng"
                                     [radius]="50"
                                     [fillColor]="'red'"
                                     [circleDraggable]="false"
-                                    [editable]="false">
-            </agm-circle> -->
+                                    [editable]="false"
+                                    [clickable]="true">
+                    </agm-circle>--> 
                 </agm-map>
             </div>
             <div class="col-12 col-md-6 col-lg-2 pt-1">

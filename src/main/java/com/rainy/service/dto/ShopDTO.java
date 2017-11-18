@@ -2,6 +2,7 @@ package com.rainy.service.dto;
 
 import com.rainy.domain.Shop;
 import com.rainy.domain.User;
+import com.rainy.domain.enumeration.Ra_skin;
 import com.rainy.domain.enumeration.Ra_type;
 import com.vividsolutions.jts.geom.Point;
 import org.hibernate.validator.constraints.NotBlank;
@@ -44,6 +45,22 @@ public class ShopDTO {
     private Point location;
 
     private Short distance;
+
+    private String shape;
+
+    @Enumerated(EnumType.STRING)
+    private Ra_skin skin;
+
+    private Integer high;
+
+    private Integer weight;
+
+    private String district;
+
+    private String subdistrict;
+
+    private String province;
+
 
     public User getUser() {
         return user;
@@ -150,11 +167,13 @@ public class ShopDTO {
     public ShopDTO(Shop shop) {
         this(shop.getId(), shop.getName(), shop.getPic_cover(), shop.getTel(), shop.getLine_uname(),
             shop.getDescription(), shop.getAge(), shop.getCategory(), shop.getPrice(), shop.getLocation(),
-            shop.getUser() );
+            shop.getShape(), shop.getSkin(), shop.getHigh(), shop.getWeight(), shop.getDistrict(), shop.getSubdistrict()
+            , shop.getProvince(), shop.getUser() );
     }
 
     public ShopDTO(Long id, String name, String pic_cover, String tel, String line_uname, String description,
-                   Integer age, Ra_type category, Integer price, Point location, User user) {
+                   Integer age, Ra_type category, Integer price, Point location, String  shape, Ra_skin skin,
+                   Integer high, Integer weight, String district, String subdistrict, String province, User user) {
         this.id = id;
         this.name = name;
         this.pic_cover = pic_cover;
@@ -165,6 +184,13 @@ public class ShopDTO {
         this.category = category;
         this.price = price;
         this.location = location;
+        this.shape = shape;
+        this.skin = skin;
+        this.high = high;
+        this.weight = weight;
+        this.district = district;
+        this.subdistrict = district;
+        this.province = province;
         this.user = user;
     }
     @Override
@@ -181,6 +207,69 @@ public class ShopDTO {
             ", price='" + getPrice() + "'" +
             ", location='" + getLocation().getCoordinate().toString() + "'" +
             ", distance=" + getDistance() +
+            ", shape" + getShape() + "'" +
+            ", skin" + getSkin() + "'" +
+            ", weight" + getWeight() + "'" +
+            ", high" + getHigh() + "'" +
+            ", district" + getDistrict() + "'" +
+            ", subdistrict" + getSubdistrict() + "'" +
+            ", province" + getProvince() + "'" +
             "}";
+    }
+
+    public String getShape() {
+        return shape;
+    }
+
+    public void setShape(String shape) {
+        this.shape = shape;
+    }
+
+    public Ra_skin getSkin() {
+        return skin;
+    }
+
+    public void setSkin(Ra_skin skin) {
+        this.skin = skin;
+    }
+
+    public Integer getHigh() {
+        return high;
+    }
+
+    public void setHigh(Integer high) {
+        this.high = high;
+    }
+
+    public String getDistrict() {
+        return district;
+    }
+
+    public void setDistrict(String district) {
+        this.district = district;
+    }
+
+    public Integer getWeight() {
+        return weight;
+    }
+
+    public void setWeight(Integer weight) {
+        this.weight= weight;
+    }
+
+    public String getSubdistrict() {
+        return subdistrict;
+    }
+
+    public void setSubdistrict(String subdistrict) {
+        this.subdistrict = subdistrict;
+    }
+
+    public String getProvince() {
+        return province;
+    }
+
+    public void setProvince(String province) {
+        this.province = province;
     }
 }

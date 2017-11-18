@@ -38,7 +38,8 @@
             "distance": "ระยะทาง: ~{{param}} กม.",
             "more_detail": "ดูเพิ่มเติม",
             "required": "กรุณากรอกข้อมูลช่องนี้",
-            "invalid-number":  "ตัวเลขไม่ถูกต้อง"
+            "invalid-number": "ตัวเลขไม่ถูกต้อง",
+            "invalid-length": "ข้อมูลยาวเกินไป"
         }
     }
 }

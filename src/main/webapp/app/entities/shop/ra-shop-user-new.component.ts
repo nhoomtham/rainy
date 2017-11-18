@@ -16,6 +16,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { HttpParams, HttpHeaders } from '@angular/common/http';
 
 import { GeoJson } from '../../geometry/map';
+import { MapService } from '../../geometry/map.service';
 
 require('aws-sdk/dist/aws-sdk');
 
@@ -54,6 +55,11 @@ export class ShopUserNewComponent implements OnInit {
     isSaving: boolean;
     shopForm: FormGroup;
 
+    currentPosition: any;
+    lat: number = 0;
+    lng: number = 0;
+    geolocationPosition: any;
+
     constructor(
         private jhiAlertService: JhiAlertService,
         private shopService: ShopService,
@@ -61,7 +67,8 @@ export class ShopUserNewComponent implements OnInit {
         private eventManager: JhiEventManager,
         private httpClient: HttpClient,
         private principal: Principal,
-        private router: Router
+        private router: Router,
+        // private mapService: MapService
     ) {
     }
 
@@ -69,8 +76,11 @@ export class ShopUserNewComponent implements OnInit {
         this.isSaving = false;
         this.shopForm = new FormGroup({
             name: new FormControl('', [Validators.required, Validators.maxLength(20)]),
-            sex: new FormControl('', Validators.required),
+            category: new FormControl('', Validators.required),
             age: new FormControl('', [Validators.required, Validators.min(1), Validators.max(99)]),
+            tel: new FormControl('', Validators.maxLength(11)),
+            line_uname: new FormControl('', Validators.maxLength(10)),
+            price: new FormControl('', [Validators.required, Validators.min(1), Validators.max(100000)]),
             shape: new FormControl(),
             weight: new FormControl('', [Validators.required, Validators.min(1), Validators.max(199)]),
             high: new FormControl('', [Validators.required, Validators.min(1), Validators.max(199)]),
@@ -82,11 +92,40 @@ export class ShopUserNewComponent implements OnInit {
             province: new FormControl('', Validators.required),
             location: new FormControl(),
             user: new FormControl()
+            
         });
 
         this.principal.identity().then((account) => {
             this.account = account;
         });
+
+        this.getCurrentPosition().then(
+            // able to get current position from browser
+            () => {
+               // console.log('ok');
+                //console.log('geo:' + this.geolocationPosition.coords.latitude);
+                this.lat = this.geolocationPosition.coords.latitude;
+                this.lng = this.geolocationPosition.coords.longitude;
+
+                //console.log('lat:' + this.lat)
+            },
+            // unable to get current position from browser
+            () => console.log('not ok')
+        );
+
+        
+        //this.mapService.getCurrentPosition().then(
+        //        // able to get current position from browser
+        //    (position) => {
+        //        this.currentPosition = position;
+        //        console.log('po:' + this.currentPosition);
+        //    },
+        //    // unable to get current position from browser
+        //    (position) => {
+        //        this.currentPosition.coords.latitude = 0;
+        //        this.currentPosition.coords.longitude = 0;
+        //    }
+        //);
 
     }
 
@@ -123,6 +162,7 @@ export class ShopUserNewComponent implements OnInit {
         });
 
     }
+
 
     onMapClick(event) {
         this.geoResults = this.httpClient
@@ -196,5 +236,34 @@ export class ShopUserNewComponent implements OnInit {
 
     trackUserById(index: number, item: User) {
         return item.id;
+    }
+
+
+    private getCurrentPosition() {
+        return new Promise((resolve, reject) => {
+            if (window.navigator && window.navigator.geolocation) {
+                window.navigator.geolocation.getCurrentPosition(
+                    (position) => {
+                        this.geolocationPosition = position,
+                            console.log(position)
+                        resolve();
+                    },
+                    (error) => {
+                        switch (error.code) {
+                            case 1:
+                                console.log('Permission Denied');
+                                break;
+                            case 2:
+                                console.log('Position Unavailable');
+                                break;
+                            case 3:
+                                console.log('Timeout');
+                                break;
+                        }
+                        reject();
+                    }
+                );
+            };
+        });
     }
 }

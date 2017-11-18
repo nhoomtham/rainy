@@ -1,6 +1,6 @@
 {
     "rainyApp": {
-        "shop" : {
+        "shop": {
             "home": {
                 "title": "Shops",
                 "createLabel": "Create a new Shop",
@@ -38,7 +38,8 @@
             "distance": "Distance: ~{{param}} km.",
             "more_detail": "More details",
             "required": "This field is required",
-            "invalid-number":  "Invalid information"
+            "invalid-number": "Invalid number",
+            "invalid-length": "Too long"
         }
     }
 }
