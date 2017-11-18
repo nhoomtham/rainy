@@ -80,7 +80,8 @@ export class ShopUserNewComponent implements OnInit {
             district: new FormControl('', Validators.required),
             subdistrict: new FormControl('', Validators.required),
             province: new FormControl('', Validators.required),
-            location: new FormControl()
+            location: new FormControl(),
+            user: new FormControl()
         });
 
         this.principal.identity().then((account) => {
@@ -152,6 +153,7 @@ export class ShopUserNewComponent implements OnInit {
                 const user: User = data;
                 console.log('got user');
                 value.user = user;
+                this.shopForm.get('user').setValue(user);
                 this.subscribeToSaveResponse(
                     this.shopService.create(value));
             });
