@@ -5,6 +5,8 @@ import { FormsModule, FormGroup, FormControl, ReactiveFormsModule } from '@angul
 
 import { RainySharedModule } from '../../shared';
 import { RainyAdminModule } from '../../admin/admin.module';
+
+
 import {
     ShopService,
     ShopPopupService,
@@ -25,6 +27,8 @@ import { RainyMaterialModule } from '../../material/rainy-material.module';
 
 import { AgmCoreModule } from '@agm/core';
 
+import { Ng2ImgMaxModule } from 'ng2-img-max';
+
 const ENTITY_STATES = [
     ...shopRoute,
     ...shopPopupRoute,
@@ -40,7 +44,8 @@ const ENTITY_STATES = [
         AgmCoreModule.forRoot({
             apiKey: 'AIzaSyBlk6Nxh8iMaKuhuJK_sv3gFhi_aoeK_Kg'
         }),
-        HttpClientModule
+        HttpClientModule,
+        Ng2ImgMaxModule
     ],
     declarations: [
         ShopComponent,
