@@ -21,7 +21,6 @@ import { Ng2ImgMaxService } from 'ng2-img-max';
 
 require('aws-sdk/dist/aws-sdk');
 
-
 interface Address {
     long_name: string;
     short_name: string;
@@ -57,10 +56,9 @@ export class ShopUserNewComponent implements OnInit {
     isSaving: boolean;
     shopForm: FormGroup;
 
-    lat: number = 0;
-    lng: number = 0;
+    lat: number;
+    lng: number;
     geolocationPosition: any;
-
 
     constructor(
         private jhiAlertService: JhiAlertService,
@@ -87,9 +85,9 @@ export class ShopUserNewComponent implements OnInit {
                 this.lat = this.geolocationPosition.coords.latitude;
                 this.lng = this.geolocationPosition.coords.longitude;
             }
-            // ,
+            ,
             // unable to get current position from browser
-            // () => console.log('not ok')
+            () => { this.lat = 0; this.lng = 0; }
         );
     }
 
@@ -136,7 +134,7 @@ export class ShopUserNewComponent implements OnInit {
                     Body: file,
                     ContentType: file.type
                 };
-                bucket.putObject(params, function (error, res) {
+                bucket.putObject(params, function(error, res) {
                     if (error) {
                         observer.next(defaultPicture);
                     } else {
@@ -150,7 +148,6 @@ export class ShopUserNewComponent implements OnInit {
 
     }
 
-
     onMapClick(event) {
         this.geoResults = this.httpClient
             .get<GeoResult>('https://maps.googleapis.com/maps/api/geocode/json?latlng=' + event.coords.lat + ',' + event.coords.lng +
@@ -163,7 +160,7 @@ export class ShopUserNewComponent implements OnInit {
             this.shopForm.get('district').setValue(this.addresses.results[1].address_components[1].short_name);
             this.shopForm.get('province').setValue(this.addresses.results[1].address_components[2].short_name);
 
-            let coordinates = [];
+            const coordinates = [];
             coordinates.push(event.coords.lat);
             coordinates.push(event.coords.lng);
 
@@ -255,12 +252,12 @@ export class ShopUserNewComponent implements OnInit {
 
     onImageChange(event) {
         // let image = event.target.file[0];
-        let image = this.elFile.nativeElement.files[0];
+        const image = this.elFile.nativeElement.files[0];
         this.ng2ImgMax.resizeImage(image, 128, 128).subscribe((result) => {
             this.uploadImage = new File([result], result.name);
             console.log('resize img done:' + result.name);
         },
-            error => {
+            (error) => {
                 console.log('resize img error:' + error);
             }
         );

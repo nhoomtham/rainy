@@ -16,7 +16,7 @@
         </div>
         <div class="col-12 col-md-6 col-lg-3 pt-1">
             <mat-form-field class='ra-full-width'>
-                <mat-select formControlName="category" [value]="FEMALE">
+                <mat-select formControlName="category" >
                     <mat-option value="MALE">{{'rainyApp.Ra_type.MALE' | translate}}</mat-option>
                     <mat-option value="FEMALE">{{'rainyApp.Ra_type.FEMALE' | translate}}</mat-option>
                     <mat-option value="LADY_BOY_S">{{'rainyApp.Ra_type.LADY_BOY_S' | translate}}</mat-option>
@@ -74,7 +74,7 @@
         </div>
         <div class="col-12 col-md-6 col-lg-3 pt-1">
             <mat-form-field class='ra-full-width'>
-                <mat-select formControlName="skin" [value]="WHITE" role="option">
+                <mat-select formControlName="skin">
                     <mat-option value="WHITE">{{'rainyApp.Ra_skin.WHITE' | translate}}</mat-option>
                     <mat-option value="PALE">{{'rainyApp.Ra_skin.PALE' | translate}}</mat-option>
                     <mat-option value="TAN">{{'rainyApp.Ra_skin.TAN' | translate}}</mat-option>
@@ -122,7 +122,7 @@
         </div>
     </div>
   
-
+    <br />
     <div class="row">
             <div class="col-12 col-md-6 col-lg-6 pt-1">
                 <h4><strong>คลิ๊กบนแผนที่แล้วระบบจะใส่ข้อมูลให้เอง</strong></h4>
@@ -131,7 +131,7 @@
                          [zoom]="17"
                          [disableDefaultUI]="false"
                          [zoomControl]="true"
-                         (mapClick)=    "onMapClick($event)">
+                         (mapClick)= "onMapClick($event)">
                     <!--<agm-marker [latitude]="0"
                                 [longitude]="0">
                     </agm-marker>-->
@@ -169,6 +169,7 @@
                 </mat-form-field>
             </div>-->
         </div>
+        <br />
         <div class="row">
             <div class="col-12 col-md-6 col-lg-6 pt-1">
                 <div class="form-group">
@@ -179,7 +180,7 @@
             </div>
         </div>
 
-        <pre>{{shopForm.value | json}}</pre>
+        <!--<pre>{{shopForm.value | json}}</pre>-->
         <br />
         <button mat-raised-button color="primary" type="submit" [disabled]="shopForm.invalid"><i class="material-icons">save</i><span jhiTranslate="entity.action.save">Save</span></button>
         <button mat-raised-button  type="button"  routerLink="/shop-user"><i class="material-icons">cancel</i><span jhiTranslate="entity.action.cancel">Cancel</span></button>

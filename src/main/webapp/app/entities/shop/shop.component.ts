@@ -108,10 +108,14 @@ export class ShopComponent implements OnInit, OnDestroy {
             {
                 page: this.page,
                 size: this.itemsPerPage,
-                sort: this.predicate + ',' + (this.reverse ? 'asc' : 'desc')
+                // sort: this.predicate + ',' + (this.reverse ? 'asc' : 'desc'),
+                sort: ['price' + ',' + (this.searchForm.get('price').untouched ? 'asc' : this.searchForm.get('price').value)],
+                lat: this.geolocationPosition.coords.latitude,
+                lon: this.geolocationPosition.coords.longitude,
+                km: this.searchForm.get('km').value
             }
         });
-        this.loadAll();
+        this.loadAllWithPosition();
     }
 
     clear() {
@@ -120,7 +124,7 @@ export class ShopComponent implements OnInit, OnDestroy {
             page: this.page,
             sort: this.predicate + ',' + (this.reverse ? 'asc' : 'desc')
         }]);
-        this.loadAll();
+        this.loadAllWithPosition();
     }
 
     private getCurrentPosition() {
