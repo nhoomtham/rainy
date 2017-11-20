@@ -174,12 +174,13 @@
             <div class="col-12 col-md-6 col-lg-6 pt-1">
                 <div class="form-group">
                     <label class="form-control-label" for="field_pic_cover"><span  jhiTranslate="rainyApp.shop.pic_cover"></span></label>
-                    <input type="file" accept="image/*" class="form-control" (change)="onImageChange($event)"
+                    <input type="file" accept="image/*" class="form-control"
                            id="field_pic_cover" #selectedFile />
                 </div>
             </div>
         </div>
 
+    <!--(change)="onImageChange($event)-->
         <!--<pre>{{shopForm.value | json}}</pre>-->
         <br />
         <button mat-raised-button color="primary" type="submit" [disabled]="shopForm.invalid"><i class="material-icons">save</i><span jhiTranslate="entity.action.save">Save</span></button>

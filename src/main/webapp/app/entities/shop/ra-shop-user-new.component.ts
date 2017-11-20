@@ -17,7 +17,7 @@ import { HttpParams, HttpHeaders } from '@angular/common/http';
 
 import { GeoJson } from '../../geometry/map';
 import { MapService } from '../../geometry/map.service';
-import { Ng2ImgMaxService } from 'ng2-img-max';
+// import { Ng2ImgMaxService } from 'ng2-img-max';
 
 require('aws-sdk/dist/aws-sdk');
 
@@ -67,8 +67,9 @@ export class ShopUserNewComponent implements OnInit {
         private eventManager: JhiEventManager,
         private httpClient: HttpClient,
         private principal: Principal,
-        private router: Router,
-        private ng2ImgMax: Ng2ImgMaxService
+        private router: Router
+        // ,
+        // private ng2ImgMax: Ng2ImgMaxService
         // private mapService: MapService
     ) {
     }
@@ -115,8 +116,8 @@ export class ShopUserNewComponent implements OnInit {
 
     private uploadFile(id: number): Observable<any> {
         return new Observable((observer) => {
-            // const file = this.elFile.nativeElement.files[0];
-            const file = this.uploadImage;
+            const file = this.elFile.nativeElement.files[0];
+            // const file = this.uploadImage;
             const defaultBucket = 'https://s3.eu-west-2.amazonaws.com/ra-rainy/';
             const defaultPicture = defaultBucket + 'default/girl-bunny-question-icon.png';
 
@@ -250,16 +251,16 @@ export class ShopUserNewComponent implements OnInit {
         });
     }
 
-    onImageChange(event) {
-        // let image = event.target.file[0];
-        const image = this.elFile.nativeElement.files[0];
-        this.ng2ImgMax.resizeImage(image, 128, 128).subscribe((result) => {
-            this.uploadImage = new File([result], result.name);
-            console.log('resize img done:' + result.name);
-        },
-            (error) => {
-                console.log('resize img error:' + error);
-            }
-        );
-    }
+    //onImageChange(event) {
+    //    // let image = event.target.file[0];
+    //    const image = this.elFile.nativeElement.files[0];
+    //    this.ng2ImgMax.resizeImage(image, 128, 128).subscribe((result) => {
+    //        this.uploadImage = new File([result], result.name);
+    //        console.log('resize img done:' + result.name);
+    //    },
+    //        (error) => {
+    //            console.log('resize img error:' + error);
+    //        }
+    //    );
+    //}
 }
