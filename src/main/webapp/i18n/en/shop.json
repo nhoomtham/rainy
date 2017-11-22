@@ -39,7 +39,8 @@
             "more_detail": "More details",
             "required": "This field is required",
             "invalid-number": "Invalid number",
-            "invalid-length": "Too long"
+            "invalid-length": "Too long",
+            "shape-hint" : "xx-xx-xx"
         }
     }
 }

@@ -5,7 +5,8 @@
         <div class="col-12 col-md-6 col-lg-3 pt-1">
             <mat-form-field class='ra-full-width'>
                 <input matInput formControlName="name" type="text" />
-                <mat-hint align="start"><strong jhiTranslate="rainyApp.shop.name"></strong></mat-hint>
+                <mat-placeholder><label jhiTranslate="rainyApp.shop.name"></label></mat-placeholder>
+                <mat-hint align="start"><strong>เอาไว้โชว์ที่หน้าแรก</strong></mat-hint>
                 <mat-error *ngIf="shopForm.get('name').hasError('required')">
                     <span jhiTranslate="rainyApp.shop.required"></span>
                 </mat-error>
@@ -23,7 +24,7 @@
                     <mat-option value="LADY_BOY">{{'rainyApp.Ra_type.LADY_BOY' | translate}}</mat-option>
                     <mat-option value="TOM">{{'rainyApp.Ra_type.TOM' | translate}}</mat-option>
                 </mat-select>
-                <mat-hint align="start"><strong jhiTranslate="rainyApp.shop.category"></strong></mat-hint>
+                <mat-placeholder><label jhiTranslate="rainyApp.shop.category"></label></mat-placeholder>
                 <mat-error *ngIf="shopForm.get('category').hasError('required')">
                     <span jhiTranslate="rainyApp.shop.required"></span>
                 </mat-error>
@@ -32,7 +33,7 @@
         <div class="col-12 col-md-6 col-lg-3 pt-1">
             <mat-form-field class='ra-full-width'>
                 <input formControlName="age" matInput type="number" />
-                <mat-hint align="start"><strong jhiTranslate="rainyApp.shop.age"></strong></mat-hint>
+                <mat-placeholder><label jhiTranslate="rainyApp.shop.age"></label></mat-placeholder>
                 <mat-error *ngIf="shopForm.get('age').hasError('required')">
                     <span jhiTranslate="rainyApp.shop.required"></span>
                 </mat-error>
@@ -44,13 +45,14 @@
         <div class="col-12 col-md-6 col-lg-3 pt-1">
             <mat-form-field class='ra-full-width'>
                 <input formControlName="shape" matInput type="text" />
-                <mat-hint align="start"><strong jhiTranslate="rainyApp.shop.shape"></strong></mat-hint>
+                <mat-placeholder><label jhiTranslate="rainyApp.shop.shape"></label></mat-placeholder>
+                <mat-hint align="start"><strong jhiTranslate="rainyApp.shop.shape-hint"></strong></mat-hint>
             </mat-form-field>
         </div>
         <div class="col-12 col-md-6 col-lg-3 pt-1">
             <mat-form-field class='ra-full-width'>
                 <input formControlName="weight" matInput type="number" />
-                <mat-hint align="start"><strong jhiTranslate="rainyApp.shop.weight"></strong></mat-hint>
+                <mat-placeholder><label jhiTranslate="rainyApp.shop.weight"></label></mat-placeholder>
                 <mat-error *ngIf="shopForm.get('weight').hasError('required')">
                     <span jhiTranslate="rainyApp.shop.required"></span>
                 </mat-error>
@@ -63,7 +65,7 @@
         <div class="col-12 col-md-6 col-lg-3 pt-1">
             <mat-form-field class='ra-full-width'>
                 <input formControlName="high" matInput type="number" />
-                <mat-hint align="start"><strong jhiTranslate="rainyApp.shop.high"></strong></mat-hint>
+                <mat-placeholder><label jhiTranslate="rainyApp.shop.high"></label></mat-placeholder>
                 <mat-error *ngIf="shopForm.get('high').hasError('required')">
                     <span jhiTranslate="rainyApp.shop.required"></span>
                 </mat-error>
@@ -80,13 +82,13 @@
                     <mat-option value="TAN">{{'rainyApp.Ra_skin.TAN' | translate}}</mat-option>
                     <mat-option value="BLACK">{{'rainyApp.Ra_skin.BLACK' | translate}}</mat-option>
                 </mat-select>
-                <mat-hint align="start"><strong jhiTranslate="rainyApp.shop.skin"></strong></mat-hint>
+                <mat-placeholder><label jhiTranslate="rainyApp.shop.skin"></label></mat-placeholder>
             </mat-form-field>
         </div>
         <div class="col-12 col-md-6 col-lg-3 pt-1">
             <mat-form-field class='ra-full-width'>
                 <input formControlName="tel" matInput type="text" />
-                <mat-hint align="start"><strong jhiTranslate="rainyApp.shop.tel"></strong></mat-hint>
+                <mat-placeholder><label jhiTranslate="rainyApp.shop.tel"></label></mat-placeholder>
                 <mat-error *ngIf="shopForm.get('tel').hasError('maxlength')">
                     <span jhiTranslate="rainyApp.shop.invalid-length"></span>
                 </mat-error>
@@ -95,7 +97,7 @@
         <div class="col-12 col-md-6 col-lg-3 pt-1">
             <mat-form-field class='ra-full-width'>
                 <input formControlName="line_uname" matInput type="text" />
-                <mat-hint align="start"><strong jhiTranslate="rainyApp.shop.line_uname"></strong></mat-hint>
+                <mat-placeholder><label jhiTranslate="rainyApp.shop.line_uname"></label></mat-placeholder>
                 <mat-error *ngIf="shopForm.get('line_uname').hasError('maxlength')">
                     <span jhiTranslate="rainyApp.shop.invalid-length"></span>
                 </mat-error>
@@ -105,7 +107,7 @@
         <div class="col-12 col-md-6 col-lg-3 pt-1">
             <mat-form-field class='ra-full-width'>
                 <input formControlName="price" matInput type="number" />
-                <mat-hint align="start"><strong jhiTranslate="rainyApp.shop.price"></strong></mat-hint>
+                <mat-placeholder><label jhiTranslate="rainyApp.shop.price"></label></mat-placeholder>
                 <mat-error *ngIf="shopForm.get('price').hasError('required')">
                     <span jhiTranslate="rainyApp.shop.required"></span>
                 </mat-error>
@@ -117,11 +119,11 @@
         <div class="col-12 col-md-6 col-lg-6 pt-1">
             <mat-form-field class='ra-full-width'>
                 <input formControlName="description" matInput type="text" />
-                <mat-hint align="start"><strong jhiTranslate="rainyApp.shop.description"></strong></mat-hint>
+                <mat-placeholder><label jhiTranslate="rainyApp.shop.description"></label></mat-placeholder>
             </mat-form-field>
         </div>
     </div>
-  
+
     <br />
     <div class="row">
             <div class="col-12 col-md-6 col-lg-6 pt-1">
@@ -141,25 +143,25 @@
                                     [circleDraggable]="false"
                                     [editable]="false"
                                     [clickable]="true">
-                    </agm-circle>--> 
+                    </agm-circle>-->
                 </agm-map>
             </div>
             <div class="col-12 col-md-6 col-lg-2 pt-1">
                 <mat-form-field class='ra-full-width'>
                     <input formControlName="district" matInput type="text" />
-                    <mat-hint align="start"><strong jhiTranslate="rainyApp.shop.district"></strong></mat-hint>
+                    <mat-placeholder><label jhiTranslate="rainyApp.shop.district"></label></mat-placeholder>
                 </mat-form-field>
             </div>
             <div class="col-12 col-md-6 col-lg-2 pt-1">
                 <mat-form-field class='ra-full-width'>
                     <input formControlName="subdistrict" matInput type="text" />
-                    <mat-hint align="start"><strong jhiTranslate="rainyApp.shop.subdistrict"></strong></mat-hint>
+                    <mat-placeholder><label jhiTranslate="rainyApp.shop.subdistrict"></label></mat-placeholder>
                 </mat-form-field>
             </div>
             <div class="col-12 col-md-6 col-lg-2 pt-1">
                 <mat-form-field class='ra-full-width'>
                     <input formControlName="province" matInput type="text" />
-                    <mat-hint align="start"><strong jhiTranslate="rainyApp.shop.province"></strong></mat-hint>
+                    <mat-placeholder><label jhiTranslate="rainyApp.shop.province"></label></mat-placeholder>
                 </mat-form-field>
             </div>
             <!--<div class="col-12 col-md-6 col-lg-6 pt-1">
