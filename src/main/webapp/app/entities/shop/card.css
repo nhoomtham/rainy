@@ -20,3 +20,8 @@ agm-map {
     max-width: 500px;
     width: 100%;
 }
+
+/* override global setting */
+.ng-invalid:not(form)  {
+  border-left: 0px;
+}
