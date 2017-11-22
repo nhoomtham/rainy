@@ -19,10 +19,13 @@
         <div class="col-12 col-md-6 col-lg-2 pt-1">
                <button mat-raised-button color="primary" type="submit">Search</button>
        </div>
+        <div class="col-12 col-md-6 col-lg-2 pt-1">
+            <jhi-angular-loader></jhi-angular-loader>
+        </div>
     </div>
     <!--<pre>{{searchForm.value | json}}</pre>-->
 </form>
-<div class="row" *ngIf="shops">
+<div class="row" *ngIf="shops">    
     <div class="col-12 col-md-6 col-lg-3 pt-1" *ngFor="let shop of shops ;trackBy: trackDistance">
         <mat-card class="example-card">
             <!--<mat-card-header>
@@ -63,6 +66,7 @@ rd-subtitle>{{shop.tel}}</mat-card-subtitle>
     <div class="row justify-content-center">
         <ngb-pagination [collectionSize]="totalItems" [(page)]="page" (pageChange)="loadPage(page)"></ngb-pagination>
     </div>
+    <mat-spinner hidden></mat-spinner>
 </div>
 <!--<div *ngIf="shops">
     <mat-list>

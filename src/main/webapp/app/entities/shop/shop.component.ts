@@ -6,6 +6,7 @@ import { JhiEventManager, JhiParseLinks, JhiPaginationUtil, JhiLanguageService, 
 
 import { Shop } from './shop.model';
 import { ShopService } from './shop.service';
+import { LoaderService } from './loader.service';
 import { ITEMS_PER_PAGE, Principal, ResponseWrapper } from '../../shared';
 import { PaginationConfig } from '../../blocks/config/uib-pagination.config';
 
@@ -43,7 +44,8 @@ export class ShopComponent implements OnInit, OnDestroy {
         private router: Router,
         private eventManager: JhiEventManager,
         private paginationUtil: JhiPaginationUtil,
-        private paginationConfig: PaginationConfig
+        private paginationConfig: PaginationConfig,
+        private loaderService: LoaderService
     ) {
         this.itemsPerPage = ITEMS_PER_PAGE;
         this.routeData = this.activatedRoute.data.subscribe((data) => {
@@ -54,8 +56,7 @@ export class ShopComponent implements OnInit, OnDestroy {
         });
     }
 
-    ngOnInit() {
-
+    ngOnInit() {        
         this.searchForm = new FormGroup({
             km: new FormControl(),
             price: new FormControl()
@@ -84,6 +85,7 @@ export class ShopComponent implements OnInit, OnDestroy {
     }
 
     loadAllWithPosition() {
+        this.loaderService.show();
         this.shopService.query({
             page: this.page - 1,
             size: this.itemsPerPage,
@@ -189,8 +191,10 @@ export class ShopComponent implements OnInit, OnDestroy {
         this.queryCount = this.totalItems;
         // this.page = pagingParams.page;
         this.shops = data;
+        this.loaderService.hide();
     }
     private onError(error) {
         this.jhiAlertService.error(error.message, null, null);
+        this.loaderService.hide();
     }
 }

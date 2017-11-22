@@ -17,6 +17,7 @@ import { HttpParams, HttpHeaders } from '@angular/common/http';
 
 import { GeoJson } from '../../geometry/map';
 import { MapService } from '../../geometry/map.service';
+import { LoaderService } from './loader.service';
 // import { Ng2ImgMaxService } from 'ng2-img-max';
 
 require('aws-sdk/dist/aws-sdk');
@@ -67,7 +68,8 @@ export class ShopUserNewComponent implements OnInit {
         private eventManager: JhiEventManager,
         private httpClient: HttpClient,
         private principal: Principal,
-        private router: Router
+        private router: Router,
+        private loaderService: LoaderService,
         // ,
         // private ng2ImgMax: Ng2ImgMaxService
         // private mapService: MapService
@@ -172,7 +174,7 @@ export class ShopUserNewComponent implements OnInit {
 
     save({ value, valid }: { value: Shop, valid: boolean }) {
         this.isSaving = true;
-
+        this.loaderService.show();
         this.userService.find(this.account.login)
             .subscribe((data) => {
                 const user: User = data;
@@ -207,12 +209,14 @@ export class ShopUserNewComponent implements OnInit {
     private onSaveSuccess(result: Shop) {
         this.eventManager.broadcast({ name: 'shopListModification', content: 'OK' });
         this.isSaving = false;
+        this.loaderService.hide();
         this.router.navigate(['shop-user']);
 
     }
 
     private onSaveError() {
         this.isSaving = false;
+        this.loaderService.hide();
     }
 
     private onError(error: any) {

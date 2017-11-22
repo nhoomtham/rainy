@@ -25,6 +25,8 @@ import {
 import { RainyMaterialModule } from '../../material/rainy-material.module';
 
 import { AgmCoreModule } from '@agm/core';
+import { LoaderService } from './loader.service';
+import { LoaderComponent } from './loader.component';
 
 // import { Ng2ImgMaxModule } from 'ng2-img-max';
 
@@ -55,6 +57,7 @@ const ENTITY_STATES = [
         ShopDeletePopupComponent,
         ShopUserComponent,
         ShopUserNewComponent,
+        LoaderComponent,
     ],
     entryComponents: [
         ShopComponent,
@@ -69,6 +72,7 @@ const ENTITY_STATES = [
         ShopService,
         ShopPopupService,
         ShopResolvePagingParams,
+        LoaderService,
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
