@@ -56,7 +56,7 @@ export class ShopComponent implements OnInit, OnDestroy {
         });
     }
 
-    ngOnInit() {        
+    ngOnInit() {
         this.searchForm = new FormGroup({
             km: new FormControl(),
             price: new FormControl()

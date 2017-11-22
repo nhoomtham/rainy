@@ -255,7 +255,7 @@ export class ShopUserNewComponent implements OnInit {
         });
     }
 
-    //onImageChange(event) {
+    // onImageChange(event) {
     //    // let image = event.target.file[0];
     //    const image = this.elFile.nativeElement.files[0];
     //    this.ng2ImgMax.resizeImage(image, 128, 128).subscribe((result) => {
@@ -266,5 +266,5 @@ export class ShopUserNewComponent implements OnInit {
     //            console.log('resize img error:' + error);
     //        }
     //    );
-    //}
+    // }
 }
