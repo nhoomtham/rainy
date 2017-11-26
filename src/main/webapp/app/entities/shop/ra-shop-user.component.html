@@ -13,18 +13,43 @@
     </div>
         
     <div class="row" *ngIf="shops">
-        <div class="col-12 col-md-6 col-lg-3 pt-1" *ngFor="let shop of shops">
+        <div class="col-12 col-md-6 col-lg-3 pt-1" *ngFor="let shop of shops ;trackBy: trackId">
             <mat-card class="example-card">
                 <mat-card-title-group>
-                    <mat-card-title>{{shop.name}}</mat-card-title>
-                    <mat-card-subtitle><span jhiTranslate="{{'rainyApp.Ra_type.' + shop.category}}"></span></mat-card-subtitle>
-                    <mat-card-subtitle><span jhiTranslate="rainyApp.shop.price"></span>: {{shop.price}}</mat-card-subtitle>
-                    <!--<mat-card-subtitle><span jhiTranslate="rainyApp.shop.distance" translateValues="{ param: {{shop.distance}}}"></span></mat-card-subtitle>-->
-                    <img mat-card-lg-image src={{shop.pic_cover}}>
+                   
+                    <table width="100%" border="0">
+                        <tr><mat-card-title>{{shop.name}}</mat-card-title></tr>
+                        <tr>
+                            <td width="70%">
+                                <table width="100%" border="0">
+                                    <tr>
+                                        <td><mat-card-subtitle><span jhiTranslate="{{'rainyApp.Ra_type.' + shop.category}}"></span></mat-card-subtitle></td>
+                                        <td><mat-card-subtitle><span jhiTranslate="rainyApp.shop.age"></span>: {{shop.age}}</mat-card-subtitle></td>
+                                    </tr>
+                                    <tr>
+                                        <td><mat-card-subtitle><span jhiTranslate="rainyApp.shop.price"></span>: {{shop.price}}</mat-card-subtitle></td>
+                                        <td><mat-card-subtitle><span jhiTranslate="rainyApp.shop.weight"></span>: {{shop.weight}}</mat-card-subtitle></td>
+                                    </tr>
+                                    <tr>
+                                        <td><mat-card-subtitle><span jhiTranslate="rainyApp.shop.high"></span>: {{shop.high}}</mat-card-subtitle></td>
+                                    </tr>
+                                </table>
+
+                            </td>
+                            <td width="30%"><img mat-card-lg-image src={{shop.pic_cover}}></td>
+                        </tr>
+                    </table>
                 </mat-card-title-group>
                 <mat-card-actions>
-                    <button mat-button type="submit" [routerLink]="['../shop', shop.id ]"><span jhiTranslate="rainyApp.shop.more_detail"></span></button>
-                    <button mat-button>delete</button>
+                    <button mat-button type="submit" [routerLink]="['../shop', shop.id]"><span><mat-icon matPrefix><i class="material-icons">description</i></mat-icon></span></button>
+                    <button mat-button type="submit" [routerLink]="['../shop-user-edit', shop.id]">
+                        <span><mat-icon matPrefix><i class="material-icons">edit</i></mat-icon></span></button>
+                    <button mat-button type="submit"
+                           [routerLink]="['/', { outlets: { popup: 'shop/'+ shop.id + '/delete'} }]"
+                            replaceUrl="true"
+                            color="warn"><span><mat-icon matPrefix><i class="material-icons">delete_forever</i></mat-icon>
+                                </span>
+                    </button>
                 </mat-card-actions>
         </div>
     </div>

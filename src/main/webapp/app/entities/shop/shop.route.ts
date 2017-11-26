@@ -66,6 +66,15 @@ export const shopRoute: Routes = [
             pageTitle: 'rainyApp.shop.home.title'
         },
         canActivate: [UserRouteAccessService]
+    },
+    {
+        path: 'shop-user-edit/:id',
+        component: ShopUserNewComponent,
+        data: {
+            authorities: ['ROLE_USER'],
+            pageTitle: 'rainyApp.shop.home.title'
+        },
+        canActivate: [UserRouteAccessService]
     }
 ];
 

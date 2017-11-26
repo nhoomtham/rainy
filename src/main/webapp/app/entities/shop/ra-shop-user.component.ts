@@ -16,6 +16,7 @@ export class ShopUserComponent implements OnInit, OnDestroy {
 
     account: Account;
     shops: Shop[];
+    eventSubscriber: Subscription;
 
     constructor(
         private shopService: ShopService,
@@ -32,8 +33,13 @@ export class ShopUserComponent implements OnInit, OnDestroy {
             this.account = account;
             this.loadAll();
         });
-     //   throw new Error('Method not implemented.');
+        this.registerChangeInShops();
     }
+
+    registerChangeInShops() {
+        this.eventSubscriber = this.eventManager.subscribe('shopListModification', (response) => this.loadAll());
+    }
+
 
     loadAll() {
         this.shopService.findByUser(+this.account.id).subscribe(
@@ -51,6 +57,11 @@ export class ShopUserComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy(): void {
-    //    throw new Error('Method not implemented.');
+        this.eventManager.destroy(this.eventSubscriber);
     }
+
+    trackId(index: number, item: Shop) {
+        return item.id;
+    }
+
 }

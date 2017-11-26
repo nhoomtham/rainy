@@ -43,7 +43,7 @@ interface GeoResult {
     templateUrl: './ra-shop-user-new.component.html',
     styleUrls: ['card.css'],
 })
-export class ShopUserNewComponent implements OnInit {
+export class ShopUserNewComponent implements OnInit, OnDestroy {
     @ViewChild('selectedFile')
     private elFile: ElementRef;
 
@@ -52,6 +52,9 @@ export class ShopUserNewComponent implements OnInit {
     private address: Address;
     private account: Account;
     private uploadImage: File;
+    private routeSub: any;
+    private paramId: number;
+    private pic_cover_changed: boolean;
 
     shop: Shop;
     isSaving: boolean;
@@ -59,7 +62,7 @@ export class ShopUserNewComponent implements OnInit {
 
     lat: number;
     lng: number;
-    geolocationPosition: any;
+    geoPosition: any;
 
     constructor(
         private jhiAlertService: JhiAlertService,
@@ -70,10 +73,15 @@ export class ShopUserNewComponent implements OnInit {
         private principal: Principal,
         private router: Router,
         private loaderService: LoaderService,
+        private route: ActivatedRoute,
         // ,
         // private ng2ImgMax: Ng2ImgMaxService
         // private mapService: MapService
     ) {
+    }
+
+    ngOnDestroy() {
+        this.routeSub.unsubscribe();
     }
 
     ngOnInit() {
@@ -82,20 +90,51 @@ export class ShopUserNewComponent implements OnInit {
         this.principal.identity().then((account) => {
             this.account = account;
         });
-        this.getCurrentPosition().then(
-            // able to get current position from browser
-            () => {
-                this.lat = this.geolocationPosition.coords.latitude;
-                this.lng = this.geolocationPosition.coords.longitude;
+
+        this.routeSub = this.route.params.subscribe((params) => {
+            if (params['id']) {
+                this.paramId = params['id'];
+                this.shopService.find(this.paramId).subscribe((shop) => {
+                    this.shop = shop;
+                    this.fillForm();
+                });
+            } else {
+                this.getCurrentPosition().then(
+                    // able to get current position from browser
+                    () => {
+                        this.lat = this.geoPosition.coords.latitude;
+                        this.lng = this.geoPosition.coords.longitude;
+                    },
+                    // unable to get current position from browser
+                    () => { this.lat = 0; this.lng = 0; }
+                );
             }
-            ,
-            // unable to get current position from browser
-            () => { this.lat = 0; this.lng = 0; }
-        );
+        });
     }
 
+    private fillForm() {
+        this.shopForm.get('id').setValue(this.shop.id);
+        this.shopForm.get('name').setValue(this.shop.name);
+        this.shopForm.get('category').setValue(this.shop.category);
+        this.shopForm.get('age').setValue(this.shop.age);
+        this.shopForm.get('shape').setValue(this.shop.shape);
+        this.shopForm.get('weight').setValue(this.shop.weight);
+        this.shopForm.get('high').setValue(this.shop.high);
+        this.shopForm.get('skin').setValue(this.shop.skin);
+        this.shopForm.get('tel').setValue(this.shop.tel);
+        this.shopForm.get('line_uname').setValue(this.shop.line_uname);
+        this.shopForm.get('price').setValue(this.shop.price);
+        this.shopForm.get('description').setValue(this.shop.description);
+        this.shopForm.get('district').setValue(this.shop.district);
+        this.shopForm.get('subdistrict').setValue(this.shop.subdistrict);
+        this.shopForm.get('province').setValue(this.shop.province);
+        this.shopForm.get('pic_cover').setValue(this.shop.pic_cover);
+        this.shopForm.get('location').setValue(this.shop.location);
+        this.shopForm.get('user').setValue(this.shop.user);
+    }
     private initForm() {
         this.shopForm = new FormGroup({
+            id: new FormControl(),
             name: new FormControl('', [Validators.required, Validators.maxLength(20)]),
             category: new FormControl('', Validators.required),
             age: new FormControl('', [Validators.required, Validators.min(1), Validators.max(99)]),
@@ -175,15 +214,34 @@ export class ShopUserNewComponent implements OnInit {
     save({ value, valid }: { value: Shop, valid: boolean }) {
         this.isSaving = true;
         this.loaderService.show();
-        this.userService.find(this.account.login)
-            .subscribe((data) => {
-                const user: User = data;
-                console.log('got user');
-                value.user = user;
-                this.shopForm.get('user').setValue(user);
-                this.subscribeToSaveResponse(
-                    this.shopService.create(value));
-            });
+
+        if (this.paramId) {
+            const pic_cover = this.shopForm.get('pic_cover');
+            if (this.pic_cover_changed) {
+                this.uploadFile(value.id).subscribe((filename) => {
+                    console.log('uploated file');
+                    pic_cover.setValue(filename);
+                    value.pic_cover = filename;
+                    this.subscribeToUpdateResponse(
+                        this.shopService.update(value));
+                });
+            } else if (this.shopForm.touched || this.shopForm.dirty) {
+                this.subscribeToUpdateResponse(
+                    this.shopService.update(value));
+            } else {
+                this.router.navigate(['shop-user']);
+            }
+        } else {
+            this.userService.find(this.account.login)
+                .subscribe((data) => {
+                    const user: User = data;
+                    console.log('got user');
+                    value.user = user;
+                    this.shopForm.get('user').setValue(user);
+                    this.subscribeToSaveResponse(
+                        this.shopService.create(value));
+                });
+        }
     }
 
     private subscribeToSaveResponse(result: Observable<Shop>) {
@@ -211,7 +269,6 @@ export class ShopUserNewComponent implements OnInit {
         this.isSaving = false;
         this.loaderService.hide();
         this.router.navigate(['shop-user']);
-
     }
 
     private onSaveError() {
@@ -232,7 +289,7 @@ export class ShopUserNewComponent implements OnInit {
             if (window.navigator && window.navigator.geolocation) {
                 window.navigator.geolocation.getCurrentPosition(
                     (position) => {
-                        this.geolocationPosition = position,
+                        this.geoPosition = position,
                             console.log(position)
                         resolve();
                     },
@@ -253,6 +310,10 @@ export class ShopUserNewComponent implements OnInit {
                 );
             };
         });
+    }
+
+    onImageChange(event) {
+        this.pic_cover_changed = true;
     }
 
     // onImageChange(event) {

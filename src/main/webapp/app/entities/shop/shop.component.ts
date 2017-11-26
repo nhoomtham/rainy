@@ -165,10 +165,6 @@ export class ShopComponent implements OnInit, OnDestroy {
         return item.id;
     }
 
-    trackDistance(index: number, item: Shop) {
-        return item.distance;
-    }
-
     registerChangeInShops() {
         this.eventSubscriber = this.eventManager.subscribe('shopListModification', (response) => this.loadAll());
     }
