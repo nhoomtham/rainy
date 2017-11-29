@@ -40,7 +40,6 @@ export class ShopUserComponent implements OnInit, OnDestroy {
         this.eventSubscriber = this.eventManager.subscribe('shopListModification', (response) => this.loadAll());
     }
 
-
     loadAll() {
         this.shopService.findByUser(+this.account.id).subscribe(
             (res) => this.onSuccess(res),

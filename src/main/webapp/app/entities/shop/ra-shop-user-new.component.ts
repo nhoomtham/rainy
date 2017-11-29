@@ -110,6 +110,7 @@ export class ShopUserNewComponent implements OnInit, OnDestroy {
                 );
             }
         });
+
     }
 
     private fillForm() {
@@ -166,28 +167,29 @@ export class ShopUserNewComponent implements OnInit, OnDestroy {
 
                 const AWSService = (<any>window).AWS;
 
-                AWSService.config.accessKeyId = 'AKIAIRWII44N4AXM23DA';
-                AWSService.config.secretAccessKey = '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';
-                AWSService.config.region = 'eu-west-2';
+                this.shopService.getAwsConfig().subscribe((awsConfig) => {
+                    AWSService.config.accessKeyId = awsConfig.accessKey;
+                    AWSService.config.secretAccessKey = awsConfig.secretKey;
+                    AWSService.config.region = awsConfig.region;
 
-                const bucket = new AWSService.S3({ params: { Bucket: 'ra-rainy' } });
-                const params = {
-                    Key: this.account.login + '/pic_cover_' + id,
-                    Body: file,
-                    ContentType: file.type
-                };
-                bucket.putObject(params, function(error, res) {
-                    if (error) {
-                        observer.next(defaultPicture);
-                    } else {
-                        observer.next(defaultBucket + params.Key);
-                    }
+                    const bucket = new AWSService.S3({ params: { Bucket: awsConfig.bucketName } });
+                    const params = {
+                        Key: awsConfig.rootDir + '/' + this.account.login + '/pic_cover_' + id,
+                        Body: file,
+                        ContentType: file.type
+                    };
+                    bucket.putObject(params, function(error, res) {
+                        if (error) {
+                            observer.next(defaultPicture);
+                        } else {
+                            observer.next(defaultBucket + params.Key);
+                        }
+                    });
                 });
             } else {
                 observer.next(defaultPicture);
             }
         });
-
     }
 
     onMapClick(event) {

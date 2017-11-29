@@ -11,8 +11,13 @@ import { ResponseWrapper, createRequestOption } from '../../shared';
 export class ShopService {
 
     private resourceUrl = SERVER_API_URL + 'api/shops';
+    private awsResUrl = SERVER_API_URL + 'api/aws';
 
     constructor(private http: Http, private httpClient: HttpClient) { }
+
+    getAwsConfig(): Observable<any> {
+        return this.httpClient.get<any>(`${this.awsResUrl}`);
+    }
 
     create(shop: Shop): Observable<Shop> {
         const copy = this.convert(shop);
