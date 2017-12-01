@@ -68,7 +68,7 @@ export const shopRoute: Routes = [
         canActivate: [UserRouteAccessService]
     },
     {
-        path: 'shop-user-edit/:id',
+        path: 'shop-user-edit/:shopId/:userId',
         component: ShopUserNewComponent,
         data: {
             authorities: ['ROLE_USER'],

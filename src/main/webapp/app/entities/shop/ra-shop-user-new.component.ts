@@ -92,12 +92,15 @@ export class ShopUserNewComponent implements OnInit, OnDestroy {
         });
 
         this.routeSub = this.route.params.subscribe((params) => {
-            if (params['id']) {
-                this.paramId = params['id'];
-                this.shopService.find(this.paramId).subscribe((shop) => {
+            if (params['shopId']) {
+                this.paramId = params['shopId'];
+                const userId = params['userId']
+                this.shopService.findShopOwnedByUser(this.paramId, userId).subscribe((shop) => {
                     this.shop = shop;
                     this.fillForm();
-                });
+                }, () => { this.router.navigate(['']); } // bad requese or error happened
+                );
+
             } else {
                 this.getCurrentPosition().then(
                     // able to get current position from browser

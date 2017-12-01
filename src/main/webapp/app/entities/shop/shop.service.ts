@@ -37,20 +37,14 @@ export class ShopService {
 
     find(id: number): Observable<Shop> {
         return this.httpClient.get<Shop>(`${this.resourceUrl}/${id}`);
-
-        // const ab = this.httpClient.get<Shop>(`${this.resourceUrl}/${id}`).subscribe((data) => {
-        //    console.log('xx:' + data);
-        //    return data;
-        // })
-        // return Observable.create(ab);
-        // return this.http.get(`${this.resourceUrl}/${id}`).map((res) => {
-        //    const jsonResponse = res.json();
-        //    return this.convertItemFromServer(jsonResponse);
-        // });
     }
 
     findByUser(id: number): Observable<Shop> {
         return this.httpClient.get<Shop>(`${this.resourceUrl}/shop-user/${id}`);
+    }
+
+    findShopOwnedByUser(shopId: number, userId: number): Observable<Shop> {
+        return this.httpClient.get<Shop>(`${this.resourceUrl}/shop-owned-user/${shopId}/${userId}`);
     }
 
     query(req?: any): Observable<ResponseWrapper> {

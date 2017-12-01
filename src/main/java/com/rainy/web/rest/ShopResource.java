@@ -7,10 +7,8 @@ import com.rainy.service.ShopService;
 import com.rainy.service.dto.ShopDTO;
 import com.rainy.web.rest.util.HeaderUtil;
 import com.rainy.web.rest.util.PaginationUtil;
-import com.vividsolutions.jts.geom.Coordinate;
 import com.vividsolutions.jts.geom.Geometry;
 import com.vividsolutions.jts.geom.GeometryFactory;
-import com.vividsolutions.jts.geom.Point;
 import io.github.jhipster.web.util.ResponseUtil;
 import io.swagger.annotations.ApiParam;
 import org.slf4j.Logger;
@@ -26,7 +24,6 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
-
 import java.util.List;
 import java.util.Optional;
 
@@ -48,6 +45,7 @@ public class ShopResource {
 
     @Autowired
     private GeometryService geometryService;
+
 
     public ShopResource(ShopService shopService) {
         this.shopService = shopService;
@@ -172,4 +170,34 @@ public class ShopResource {
 
         return shopService.findByUserId(id);
     }
+
+    /**
+     * GET  /shop-owned-user : get a shop owned by user id
+     *
+     * @param shopId the user id
+     * @param userId the user id
+     * @return the ResponseEntity with status 200 (OK) and the list of shops in body
+     */
+    @GetMapping("/shops/shop-owned-user/{shopId}/{userId}")
+    @Timed
+    public ResponseEntity<ShopDTO> getShopyOwnedUserId(@PathVariable Long shopId, @PathVariable Long userId) {
+        log.debug("REST request to get Shop owned by User Id");
+        final ShopDTO shop = shopService.findOne(shopId);
+        if (shop == null) {
+            return ResponseEntity.badRequest()
+                .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, "error"))
+                .body(null);
+        }
+        if (shop.getUser().getId().compareTo(userId) != 0) {
+            return ResponseEntity.badRequest()
+                .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, "error"))
+                .body(null);
+        }
+
+        return ResponseEntity.ok()
+            .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, shop.getId().toString()))
+            .body(shop);
+
+    }
+
 }
