@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { Shop } from './shop.model';
 import { ShopService } from './shop.service';
+import { Principal } from '../../shared/index';
 
 @Injectable()
 export class ShopPopupService {
@@ -11,8 +12,8 @@ export class ShopPopupService {
     constructor(
         private modalService: NgbModal,
         private router: Router,
-        private shopService: ShopService
-
+        private shopService: ShopService,
+        private principal: Principal
     ) {
         this.ngbModalRef = null;
     }
@@ -23,19 +24,21 @@ export class ShopPopupService {
             if (isOpen) {
                 resolve(this.ngbModalRef);
             }
-
-            if (id) {
-                this.shopService.find(id).subscribe((shop) => {
-                    this.ngbModalRef = this.shopModalRef(component, shop);
-                    resolve(this.ngbModalRef);
-                });
-            } else {
-                // setTimeout used as a workaround for getting ExpressionChangedAfterItHasBeenCheckedError
-                setTimeout(() => {
-                    this.ngbModalRef = this.shopModalRef(component, new Shop());
-                    resolve(this.ngbModalRef);
-                }, 0);
-            }
+            this.principal.identity().then((acct) => {
+                if (id && acct.id) {
+                    this.shopService.findShopOwnedByUser(id, acct.id).subscribe((shop) => {
+                        this.ngbModalRef = this.shopModalRef(component, shop);
+                        resolve(this.ngbModalRef);
+                    }, () => { this.router.navigate(['']); } // bad requese or error happened
+                    );
+                } else {
+                    // setTimeout used as a workaround for getting ExpressionChangedAfterItHasBeenCheckedError
+                    setTimeout(() => {
+                        this.ngbModalRef = this.shopModalRef(component, new Shop());
+                        resolve(this.ngbModalRef);
+                    }, 0);
+                }
+            });
         });
     }
 

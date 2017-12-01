@@ -113,7 +113,6 @@ export class ShopUserNewComponent implements OnInit, OnDestroy {
                 );
             }
         });
-
     }
 
     private fillForm() {
