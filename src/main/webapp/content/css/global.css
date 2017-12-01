@@ -201,6 +201,13 @@ ui bootstrap tweaks
     outline: none;
 }
 
+.thread-dump-modal-lock {
+    max-width: 450px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+ }
+
 /* ==========================================================================
 Social Buttons
 ========================================================================== */

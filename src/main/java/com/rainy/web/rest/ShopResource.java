@@ -3,6 +3,7 @@ package com.rainy.web.rest;
 import com.codahale.metrics.annotation.Timed;
 import com.rainy.domain.Shop;
 import com.rainy.service.ShopService;
+import com.rainy.web.rest.errors.BadRequestAlertException;
 import com.rainy.web.rest.util.HeaderUtil;
 import com.rainy.web.rest.util.PaginationUtil;
 import io.swagger.annotations.ApiParam;
@@ -52,7 +53,7 @@ public class ShopResource {
     public ResponseEntity<Shop> createShop(@Valid @RequestBody Shop shop) throws URISyntaxException {
         log.debug("REST request to save Shop : {}", shop);
         if (shop.getId() != null) {
-            return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert(ENTITY_NAME, "idexists", "A new shop cannot already have an ID")).body(null);
+            throw new BadRequestAlertException("A new shop cannot already have an ID", ENTITY_NAME, "idexists");
         }
         Shop result = shopService.save(shop);
         return ResponseEntity.created(new URI("/api/shops/" + result.getId()))
