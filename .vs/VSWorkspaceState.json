@@ -1,0 +1,16 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\src",
+    "\\src\\main",
+    "\\src\\main\\webapp",
+    "\\src\\main\\webapp\\app",
+    "\\src\\main\\webapp\\app\\account",
+    "\\src\\main\\webapp\\app\\account\\settings",
+    "\\src\\main\\webapp\\app\\entities",
+    "\\src\\main\\webapp\\app\\entities\\shop",
+    "\\webpack"
+  ],
+  "SelectedNode": "\\src\\main\\webapp\\app\\entities\\shop\\shop-popup.service.ts",
+  "PreviewInSolutionExplorer": false
+}
