@@ -1,0 +1,22 @@
+{
+    "rainyApp": {
+        "shopStatus" : {
+            "home": {
+                "title": "Shop Statuses",
+                "createLabel": "Create a new Shop Status",
+                "createOrEditLabel": "Create or edit a Shop Status"
+            },
+            "created": "A new Shop Status is created with identifier {{ param }}",
+            "updated": "A Shop Status is updated with identifier {{ param }}",
+            "deleted": "A Shop Status is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Shop Status {{ id }}?"
+            },
+            "detail": {
+                "title": "Shop Status"
+            },
+            "message": "Message",
+            "shop": "Shop"
+        }
+    }
+}
