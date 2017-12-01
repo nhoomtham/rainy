@@ -9,6 +9,7 @@
                 "main": "Entities",
                 "shop": "Shop",
                 "album": "Album",
+                "shopStatus": "Shop Status",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {
