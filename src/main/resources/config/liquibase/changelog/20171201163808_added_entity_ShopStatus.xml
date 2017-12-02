@@ -31,7 +31,13 @@
 
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->
         </createTable>
-        
+
     </changeSet>
     <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here, do not remove-->
+
+    <changeSet id="20171201163808-2_add_index_ra_shop_status" author="che">
+        <createIndex tableName="ra_shop_status" indexName="x1_ra_shop_status">
+            <column name="shop_id" type="bigint"></column>
+        </createIndex>
+    </changeSet>
 </databaseChangeLog>

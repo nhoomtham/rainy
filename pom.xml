@@ -31,7 +31,7 @@
         <jacoco-maven-plugin.version>0.7.9</jacoco-maven-plugin.version>
         <java.version>1.8</java.version>
         <jcache.version>1.0.0</jcache.version>
-        <jhipster.server.version>1.1.11</jhipster.server.version>
+        <jhipster.server.version>1.1.13</jhipster.server.version>
         <jjwt.version>0.7.0</jjwt.version>
         <liquibase-hibernate5.version>3.6</liquibase-hibernate5.version>
         <liquibase-spatial.version>1.2.1</liquibase-spatial.version>
@@ -39,20 +39,22 @@
         <logstash-logback-encoder.version>4.11</logstash-logback-encoder.version>
         <m2e.apt.activation>jdt_apt</m2e.apt.activation>
         <mapstruct.version>1.1.0.Final</mapstruct.version>
-        <maven-compiler-plugin.version>3.6.0</maven-compiler-plugin.version>
-        <maven-enforcer-plugin.version>1.4.1</maven-enforcer-plugin.version>
+        <maven-compiler-plugin.version>3.7.0</maven-compiler-plugin.version>
+        <maven-enforcer-plugin.version>3.0.0-M1</maven-enforcer-plugin.version>
         <maven-resources-plugin.version>3.0.1</maven-resources-plugin.version>
         <maven.build.timestamp.format>yyyyMMddHHmmss</maven.build.timestamp.format>
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
         <maven.version>3.0.0</maven.version>
         <metrics-spring.version>3.1.3</metrics-spring.version>
-        <node.version>v6.11.3</node.version>
+        <node.version>v6.11.4</node.version>
         <postgresql.version>9.4.1212</postgresql.version>
         <problem-spring-web.version>0.20.0</problem-spring-web.version>
         <jackson-jts.version>2.4</jackson-jts.version>
         <jts-suite.version>1.13</jts-suite.version>
         <!-- These remain empy unless the corresponding profile is active -->
+        <problem-spring-web.version>0.21.0</problem-spring-web.version>
+        <!-- These remain empty unless the corresponding profile is active -->
         <profile.no-liquibase />
         <profile.swagger />
         <prometheus-simpleclient.version>0.0.20</prometheus-simpleclient.version>
@@ -94,7 +96,7 @@
         <spring-social-google.version>1.0.0.RELEASE</spring-social-google.version>
         <springfox.version>2.7.0</springfox.version>
         <validation-api.version>1.1.0.Final</validation-api.version>
-        <yarn.version>v1.1.0</yarn.version>
+        <yarn.version>v1.2.1</yarn.version>
     </properties>
 
 
@@ -936,7 +938,7 @@
                 To use it, run in 3 terminals:
                 - './mvnw -Pcc scala:cc' for continuous compilation of your classes
                 - './mvnw -Pcc' for hot reload of Spring boot
-                - 'gulp' for hot reload of the HTML/JavaScript assets
+                - 'npm start/yarn start' for hot reload of the HTML/JavaScript asset
                 Everything should hot reload automatically!
             -->
             <id>cc</id>

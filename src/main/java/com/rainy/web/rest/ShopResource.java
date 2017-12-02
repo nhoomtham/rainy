@@ -5,6 +5,7 @@ import com.rainy.domain.Shop;
 import com.rainy.service.GeometryService;
 import com.rainy.service.ShopService;
 import com.rainy.service.dto.ShopDTO;
+import com.rainy.web.rest.errors.BadRequestAlertException;
 import com.rainy.web.rest.util.HeaderUtil;
 import com.rainy.web.rest.util.PaginationUtil;
 import com.vividsolutions.jts.geom.Geometry;
@@ -63,7 +64,7 @@ public class ShopResource {
     public ResponseEntity<ShopDTO> createShop(@Valid @RequestBody Shop shop) throws URISyntaxException {
         log.debug("REST request to save Shop : {}", shop);
         if (shop.getId() != null) {
-            return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert(ENTITY_NAME, "idexists", "A new shop cannot already have an ID")).body(null);
+            throw new BadRequestAlertException("A new shop cannot already have an ID", ENTITY_NAME, "idexists");
         }
 
         ShopDTO result = shopService.save(shop);

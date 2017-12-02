@@ -5,6 +5,7 @@ import com.rainy.domain.Authority;
 import com.rainy.domain.User;
 import com.rainy.repository.AuthorityRepository;
 import com.rainy.repository.UserRepository;
+import com.rainy.security.AuthoritiesConstants;
 import com.rainy.service.MailService;
 
 import org.junit.Before;
@@ -189,7 +190,7 @@ public class SocialServiceIntTest {
         User user = userRepository.findOneByEmailIgnoreCase("mail@mail.com").get();
         assertThat(user.getActivated()).isEqualTo(true);
         assertThat(user.getPassword()).isNotEmpty();
-        Authority userAuthority = authorityRepository.findOne("ROLE_USER");
+        Authority userAuthority = authorityRepository.findOne(AuthoritiesConstants.USER);
         assertThat(user.getAuthorities().toArray()).containsExactly(userAuthority);
 
         // Teardown
