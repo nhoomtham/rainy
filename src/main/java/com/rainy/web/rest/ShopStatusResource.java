@@ -16,6 +16,7 @@ import io.swagger.annotations.ApiParam;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
@@ -43,15 +44,14 @@ public class ShopStatusResource {
 
     private final ShopStatusRepository shopStatusRepository;
 
-    private final ShopRepository shopRepository;
+    @Autowired
+    private ShopRepository shopRepository;
 
-    private final UserRepository userRepository;
+    @Autowired
+    private UserRepository userRepository;
 
-    public ShopStatusResource(ShopStatusRepository shopStatusRepository, ShopRepository shopRepository,
-                              UserRepository userRepository) {
+    public ShopStatusResource(ShopStatusRepository shopStatusRepository) {
         this.shopStatusRepository = shopStatusRepository;
-        this.shopRepository = shopRepository;
-        this.userRepository = userRepository;
     }
 
     /**
