@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Response } from '@angular/http';
+import { FormGroup, FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 
 import { Observable } from 'rxjs/Rx';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
@@ -14,7 +15,8 @@ import { ResponseWrapper } from '../../shared';
 
 @Component({
     selector: 'jhi-shop-status-dialog',
-    templateUrl: './ra-shop-status-dialog.component.html'
+    templateUrl: './ra-shop-status-dialog.component.html',
+    styleUrls: ['card.css']
 })
 export class ShopStatusDialogComponent implements OnInit {
 
@@ -22,7 +24,7 @@ export class ShopStatusDialogComponent implements OnInit {
     isSaving: boolean;
 
     shops: Shop[];
-
+    shopStatusForm: FormGroup;
     constructor(
         public activeModal: NgbActiveModal,
         private jhiAlertService: JhiAlertService,
@@ -34,20 +36,26 @@ export class ShopStatusDialogComponent implements OnInit {
 
     ngOnInit() {
         this.isSaving = false;
+        this.shopStatusForm = new FormGroup({
+            id: new FormControl(),
+            message: new FormControl('', [Validators.required, Validators.minLength(1), Validators.maxLength(128)]),
+            shop: new FormControl()
+        });
+        this.shopStatusForm.get('shop').setValue(this.shopStatus.shop);
     }
 
     clear() {
         this.activeModal.dismiss('cancel');
     }
 
-    save() {
+    save({ value, valid }: { value: ShopStatus, valid: boolean }) {
         this.isSaving = true;
         if (this.shopStatus.id !== undefined) {
             this.subscribeToSaveResponse(
                 this.shopStatusService.update(this.shopStatus));
         } else {
             this.subscribeToSaveResponse(
-                this.shopStatusService.create(this.shopStatus));
+                this.shopStatusService.create(value));
         }
     }
 

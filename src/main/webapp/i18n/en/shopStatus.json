@@ -1,6 +1,6 @@
 {
     "rainyApp": {
-        "shopStatus" : {
+        "shopStatus": {
             "home": {
                 "title": "Shop Statuses",
                 "createLabel": "Create a new Shop Status",
@@ -16,7 +16,8 @@
                 "title": "Shop Status"
             },
             "message": "Message",
-            "shop": "Shop"
+            "shop": "Shop",
+            "invalid-length": "This field to be at least 1 or cannot be longer than 128 characters."
         }
     }
 }

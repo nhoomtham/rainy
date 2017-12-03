@@ -223,7 +223,6 @@ export class ShopUserNewComponent implements OnInit, OnDestroy {
             const pic_cover = this.shopForm.get('pic_cover');
             if (this.pic_cover_changed) {
                 this.uploadFile(value.id).subscribe((filename) => {
-                    console.log('uploated file');
                     pic_cover.setValue(filename);
                     value.pic_cover = filename;
                     this.subscribeToUpdateResponse(
@@ -239,7 +238,6 @@ export class ShopUserNewComponent implements OnInit, OnDestroy {
             this.userService.find(this.account.login)
                 .subscribe((data) => {
                     const user: User = data;
-                    console.log('got user');
                     value.user = user;
                     this.shopForm.get('user').setValue(user);
                     this.subscribeToSaveResponse(
