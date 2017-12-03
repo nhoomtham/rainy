@@ -14,7 +14,7 @@ import { ResponseWrapper } from '../../shared';
 
 @Component({
     selector: 'jhi-shop-status-dialog',
-    templateUrl: './shop-status-dialog.component.html'
+    templateUrl: './ra-shop-status-dialog.component.html'
 })
 export class ShopStatusDialogComponent implements OnInit {
 
@@ -34,8 +34,6 @@ export class ShopStatusDialogComponent implements OnInit {
 
     ngOnInit() {
         this.isSaving = false;
-        this.shopService.query()
-            .subscribe((res: ResponseWrapper) => { this.shops = res.json; }, (res: ResponseWrapper) => this.onError(res.json));
     }
 
     clear() {
@@ -92,7 +90,10 @@ export class ShopStatusPopupComponent implements OnInit, OnDestroy {
 
     ngOnInit() {
         this.routeSub = this.route.params.subscribe((params) => {
-            if ( params['id'] ) {
+            if (params['shopId']) {
+                this.shopStatusPopupService
+                    .open(ShopStatusDialogComponent as Component, params['shopId'], true)
+            } else if ( params['id'] ) {
                 this.shopStatusPopupService
                     .open(ShopStatusDialogComponent as Component, params['id']);
             } else {

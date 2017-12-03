@@ -33,6 +33,7 @@
                 "audits": "Audits",
                 "apidocs": "API",
                 "database": "Database",
+                "entity-audit": "Entity Audit",
                 "jhipster-needle-menu-add-admin-element": "JHipster will add additional menu entries here (do not translate!)"
             },
             "language": "Language"
@@ -130,7 +131,8 @@
         "Size": "Field {{ fieldName }} does not meet min/max size requirements!",
         "userexists": "Login name already used!",
         "emailexists": "Email is already in use!",
-        "idexists": "A new {{ entityName }} cannot already have an ID"
+        "idexists": "A new {{ entityName }} cannot already have an ID",
+        "notAuthorized": "You are not authorized to access this page."
     },
     "footer": "This is your footer"
 }

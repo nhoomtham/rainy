@@ -140,4 +140,4 @@ Desktop.ini
 ######################
 .eslintcache
 
-/.vs/**/*
+.vs/

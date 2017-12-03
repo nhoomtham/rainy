@@ -41,6 +41,8 @@
                     </table>
                 </mat-card-title-group>
                 <mat-card-actions>
+                   
+                    <button mat-button type="submit" [routerLink]= "['/', { outlets: { popup: 'shop-status-update/' + shop.id } }]"><span><mat-icon matPrefix><i class="material-icons">chat</i></mat-icon></span></button>
                     <button mat-button type="submit" [routerLink]="['../shop', shop.id]"><span><mat-icon matPrefix><i class="material-icons">description</i></mat-icon></span></button>
                     <button mat-button type="submit" [routerLink]="['../shop-user-edit', shop.id, account.id]">
                         <span><mat-icon matPrefix><i class="material-icons">edit</i></mat-icon></span></button>

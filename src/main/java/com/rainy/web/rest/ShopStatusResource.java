@@ -1,9 +1,14 @@
 package com.rainy.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
+import com.rainy.domain.Shop;
 import com.rainy.domain.ShopStatus;
 
+import com.rainy.domain.User;
+import com.rainy.repository.ShopRepository;
 import com.rainy.repository.ShopStatusRepository;
+import com.rainy.repository.UserRepository;
+import com.rainy.security.SecurityUtils;
 import com.rainy.web.rest.errors.BadRequestAlertException;
 import com.rainy.web.rest.util.HeaderUtil;
 import com.rainy.web.rest.util.PaginationUtil;
@@ -38,8 +43,15 @@ public class ShopStatusResource {
 
     private final ShopStatusRepository shopStatusRepository;
 
-    public ShopStatusResource(ShopStatusRepository shopStatusRepository) {
+    private final ShopRepository shopRepository;
+
+    private final UserRepository userRepository;
+
+    public ShopStatusResource(ShopStatusRepository shopStatusRepository, ShopRepository shopRepository,
+                              UserRepository userRepository) {
         this.shopStatusRepository = shopStatusRepository;
+        this.shopRepository = shopRepository;
+        this.userRepository = userRepository;
     }
 
     /**
@@ -53,9 +65,19 @@ public class ShopStatusResource {
     @Timed
     public ResponseEntity<ShopStatus> createShopStatus(@Valid @RequestBody ShopStatus shopStatus) throws URISyntaxException {
         log.debug("REST request to save ShopStatus : {}", shopStatus);
+        Optional<User> user = userRepository.findOneByLogin(SecurityUtils.getCurrentUserLogin());
         if (shopStatus.getId() != null) {
             throw new BadRequestAlertException("A new shopStatus cannot already have an ID", ENTITY_NAME, "idexists");
         }
+
+        Shop shop = shopRepository.findOne(shopStatus.getShop().getId());
+
+        if (shop == null) {
+            throw new BadRequestAlertException("A shopStatus should belong to Shop", ENTITY_NAME, "noShopExists");
+        } else if (user.isPresent() && shopStatus.getShop().getUser().getId().compareTo(user.get().getId()) != 0 ) {
+            throw new BadRequestAlertException("A Shop attached should belong to current user", ENTITY_NAME, "notAuthorized");
+        }
+
         ShopStatus result = shopStatusRepository.save(shopStatus);
         return ResponseEntity.created(new URI("/api/shop-statuses/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))

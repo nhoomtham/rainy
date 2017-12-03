@@ -60,6 +60,16 @@ export const shopStatusPopupRoute: Routes = [
         outlet: 'popup'
     },
     {
+        path: 'shop-status-update/:shopId',
+        component: ShopStatusPopupComponent,
+        data: {
+            authorities: ['ROLE_USER'],
+            pageTitle: 'rainyApp.shopStatus.home.title'
+        },
+        canActivate: [UserRouteAccessService],
+        outlet: 'popup'
+    },
+    {
         path: 'shop-status/:id/edit',
         component: ShopStatusPopupComponent,
         data: {

@@ -122,7 +122,11 @@ public class ShopServiceImpl implements ShopService{
     public ShopDTO findOne(Long id) {
         log.debug("Request to get Shop : {}", id);
         Shop shop = shopRepository.findOne(id);
-        return shopMapper.shopToShopDTO(shop);
+        if (shop != null) {
+            return shopMapper.shopToShopDTO(shop);
+        } else {
+            return null;
+        }
     }
 
     /**

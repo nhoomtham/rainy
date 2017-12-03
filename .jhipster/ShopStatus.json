@@ -26,5 +26,6 @@
     "service": "no",
     "entityTableName": "ra_shop_status",
     "jpaMetamodelFiltering": false,
-    "pagination": "pagination"
+    "pagination": "pagination",
+    "enableEntityAudit": true
 }
