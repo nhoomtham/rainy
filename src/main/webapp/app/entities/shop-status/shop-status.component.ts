@@ -9,7 +9,7 @@ import { ITEMS_PER_PAGE, Principal, ResponseWrapper } from '../../shared';
 
 @Component({
     selector: 'jhi-shop-status',
-    templateUrl: './shop-status.component.html'
+    templateUrl: './ra-shop-status.component.html'
 })
 export class ShopStatusComponent implements OnInit, OnDestroy {
 

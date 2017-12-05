@@ -23,7 +23,6 @@ import {
 } from './';
 
 import { RainyMaterialModule } from '../../material/rainy-material.module';
-
 import { AgmCoreModule } from '@agm/core';
 import { LoaderService } from './loader.service';
 import { LoaderComponent } from './loader.component';

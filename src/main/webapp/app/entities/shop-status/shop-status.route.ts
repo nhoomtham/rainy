@@ -38,6 +38,17 @@ export const shopStatusRoute: Routes = [
         },
         canActivate: [UserRouteAccessService]
     }, {
+        path: 'shop-status-all',
+        component: ShopStatusComponent,
+        resolve: {
+            'pagingParams': ShopStatusResolvePagingParams
+        },
+        data: {
+            authorities: ['ROLE_USER'],
+            pageTitle: 'rainyApp.shopStatus.home.title'
+        },
+        canActivate: [UserRouteAccessService]
+    },  {
         path: 'shop-status/:id',
         component: ShopStatusDetailComponent,
         data: {

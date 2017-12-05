@@ -36,7 +36,17 @@
                 "entity-audit": "Entity Audit",
                 "jhipster-needle-menu-add-admin-element": "JHipster will add additional menu entries here (do not translate!)"
             },
-            "language": "ภาษา"
+            "language": "ภาษา",
+            "find-shop": {
+                "main": "หาน้องๆ",
+                "by-distance": "ตามระยะทาง",
+                "by-status": "อัพเดทล่าสุด",
+                "by-faverite" : "ที่บันทึกไว้"
+            },
+            "find-customer": {
+                "main": "หาลูกค้า",
+                "shop" : "ข้อมูลของคุณ"
+            }
         },
         "form": {
             "username": "ชื่อผู้ใช้",
