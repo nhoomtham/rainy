@@ -29,7 +29,7 @@ interface GeoResult {
 
 @Component({
     selector: 'jhi-shop-detail',
-    templateUrl: './ra-shop-detail.component.html',
+    templateUrl: './shop-detail.component.html',
     styleUrls: ['card.css'],
 })
 export class ShopDetailComponent implements OnInit, OnDestroy {

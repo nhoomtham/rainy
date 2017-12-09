@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Http, Response } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Rx';
 import { SERVER_API_URL } from '../../app.constants';
 
@@ -10,8 +11,7 @@ import { ResponseWrapper, createRequestOption } from '../../shared';
 export class ShopStatusService {
 
     private resourceUrl = SERVER_API_URL + 'api/shop-statuses';
-
-    constructor(private http: Http) { }
+    constructor(private http: Http, private httpClient: HttpClient) { }
 
     create(shopStatus: ShopStatus): Observable<ShopStatus> {
         const copy = this.convert(shopStatus);
@@ -34,6 +34,10 @@ export class ShopStatusService {
             const jsonResponse = res.json();
             return this.convertItemFromServer(jsonResponse);
         });
+    }
+
+    findByShop(shopId: number): Observable<ShopStatus> {
+        return this.httpClient.get<ShopStatus>(`${this.resourceUrl}/by-shop/${shopId}`);
     }
 
     query(req?: any): Observable<ResponseWrapper> {

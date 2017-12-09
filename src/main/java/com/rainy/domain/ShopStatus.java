@@ -28,7 +28,7 @@ public class ShopStatus extends AbstractAuditingEntity implements Serializable {
     @Column(name = "message", length = 128, nullable = false)
     private String message;
 
-    @ManyToOne
+    @OneToOne
     private Shop shop;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove

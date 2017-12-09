@@ -3,14 +3,18 @@
     "",
     "\\src",
     "\\src\\main",
+    "\\src\\main\\resources\\i18n",
     "\\src\\main\\webapp",
     "\\src\\main\\webapp\\app",
-    "\\src\\main\\webapp\\app\\account",
-    "\\src\\main\\webapp\\app\\account\\settings",
     "\\src\\main\\webapp\\app\\entities",
     "\\src\\main\\webapp\\app\\entities\\shop",
-    "\\webpack"
+    "\\src\\main\\webapp\\app\\entities\\shop-status",
+    "\\src\\main\\webapp\\i18n\\en",
+    "\\src\\main\\webapp\\i18n\\th",
+    "\\src\\test\\javascript",
+    "\\src\\test\\javascript\\e2e",
+    "\\src\\test\\javascript\\e2e\\page-objects"
   ],
-  "SelectedNode": "\\src\\main\\webapp\\app\\entities\\shop\\shop-popup.service.ts",
+  "SelectedNode": "\\src\\main\\webapp\\app\\entities\\shop-status\\shop-status-dialog.component.ts",
   "PreviewInSolutionExplorer": false
 }

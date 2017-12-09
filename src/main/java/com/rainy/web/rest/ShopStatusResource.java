@@ -116,6 +116,8 @@ public class ShopStatusResource {
     @Timed
     public ResponseEntity<List<ShopStatus>> getAllShopStatuses(@ApiParam Pageable pageable) {
         log.debug("REST request to get a page of ShopStatuses");
+        Optional<User> user = userRepository.findOneByLogin(SecurityUtils.getCurrentUserLogin());
+        log.debug("cuser:" + SecurityUtils.getCurrentUserLogin());
         Page<ShopStatus> page = shopStatusRepository.findAll(pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/shop-statuses");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
@@ -133,6 +135,36 @@ public class ShopStatusResource {
         log.debug("REST request to get ShopStatus : {}", id);
         ShopStatus shopStatus = shopStatusRepository.findOne(id);
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(shopStatus));
+    }
+
+    /**
+     * GET  /shop-statuses/by-shop/:id : get shopStatus by ShopId.
+     *
+     * @param shopId the id of the shop to retrieve
+     * @return the ResponseEntity with status 200 (OK) and with body the shopStatus, or with status 404 (Not Found)
+     */
+    @GetMapping("/shop-statuses/by-shop/{shopId}")
+    @Timed
+    public ResponseEntity<ShopStatus> getShopStatusByShop(@PathVariable Long shopId) {
+        log.debug("REST request to get ShopStatus by ShopId : {}", shopId);
+
+        Shop shop = shopRepository.findOne(shopId);
+        if (shop == null) {
+            throw new BadRequestAlertException("A Shop attached could not be found", ENTITY_NAME, "notAuthorized");
+        }
+
+        ShopStatus shopStatus = shopStatusRepository.findByShop(shop);
+        Optional<User> user = userRepository.findOneByLogin(SecurityUtils.getCurrentUserLogin());
+        log.debug("cuser:" + SecurityUtils.getCurrentUserLogin());
+        if (user.isPresent()) {
+            log.debug("xxxxxxxxxxxxxxxxxxxxxxxxxx");
+        }
+        if (user.isPresent() && shopStatus != null &&
+                !shopStatus.getCreatedBy().equals(user.get().getLogin()) ) {
+            throw new BadRequestAlertException("A Shop attached should belong to current user", ENTITY_NAME, "notAuthorized");
+        }
+
+        return  new ResponseEntity<>(shopStatus, null, HttpStatus.OK);
     }
 
     /**

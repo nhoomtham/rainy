@@ -53,7 +53,7 @@ export const shopRoute: Routes = [
         path: 'shop-user',
         component: ShopUserComponent,
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: [],
             pageTitle: 'rainyApp.shop.home.title'
         },
         canActivate: [UserRouteAccessService]

@@ -1,9 +1,11 @@
 package com.rainy.service.impl;
 
 import com.rainy.domain.Shop;
+import com.rainy.domain.User;
 import com.rainy.repository.ShopRepository;
 import com.rainy.service.GeometryService;
 import com.rainy.service.ShopService;
+import com.rainy.service.UserService;
 import com.rainy.service.dto.ShopDTO;
 import com.rainy.service.mapper.ShopMapper;
 import com.vividsolutions.jts.geom.Coordinate;
@@ -38,13 +40,17 @@ public class ShopServiceImpl implements ShopService{
 
     private final GeometryService geometryService;
 
+    private final UserService userService;
+
     @Autowired
     private GeometryFactory geometryFactory;
 
-    public ShopServiceImpl(ShopRepository shopRepository, ShopMapper shopMapper, GeometryService geometryService) {
+    public ShopServiceImpl(ShopRepository shopRepository, ShopMapper shopMapper, GeometryService geometryService, 
+    		UserService userService) {
         this.shopRepository = shopRepository;
         this.shopMapper = shopMapper;
         this.geometryService = geometryService;
+        this.userService = userService;
     }
 
     /**
@@ -141,9 +147,14 @@ public class ShopServiceImpl implements ShopService{
     }
 
     @Override
-    public List<ShopDTO> findByUserId(Long id) {
-        List<Shop> shops = shopRepository.findByUserId(id);
-        return  shopMapper.shopsToShopDTOs(shops);
+    public List<Shop> findByCurrentUser() {
+    	User user = userService.getUserWithAuthorities();
+    	if (user == null) {
+        	return null;
+        } else {
+        	List<Shop> shops = shopRepository.findByUserId(user.getId());
+            return shops;	
+        }        
     }
 
 }

@@ -6,7 +6,7 @@ import { JhiEventManager, JhiParseLinks, JhiLanguageService, JhiAlertService } f
 
 import { Shop } from './shop.model';
 import { ShopService } from './shop.service';
-import { Principal } from '../../shared/index';
+// import { Principal } from '../../shared/index';
 
 @Component({
     selector: 'jhi-shop-user',
@@ -14,7 +14,7 @@ import { Principal } from '../../shared/index';
 })
 export class ShopUserComponent implements OnInit, OnDestroy {
 
-    account: Account;
+    // account: Account;
     shops: Shop[];
     eventSubscriber: Subscription;
 
@@ -22,17 +22,18 @@ export class ShopUserComponent implements OnInit, OnDestroy {
         private shopService: ShopService,
         private parseLinks: JhiParseLinks,
         private jhiAlertService: JhiAlertService,
-        private principal: Principal,
+        // private principal: Principal,
         private activatedRoute: ActivatedRoute,
         private router: Router,
         private eventManager: JhiEventManager,
     ) {
     }
     ngOnInit(): void {
-        this.principal.identity().then((account) => {
-            this.account = account;
-            this.loadAll();
-        });
+        // this.principal.identity().then((account) => {
+        //    this.account = account;
+        //    this.loadAll();
+        // });
+        this.loadAll();
         this.registerChangeInShops();
     }
 
@@ -41,14 +42,24 @@ export class ShopUserComponent implements OnInit, OnDestroy {
     }
 
     loadAll() {
-        this.shopService.findByUser(+this.account.id).subscribe(
-            (res) => this.onSuccess(res),
+        this.shopService.findByUser().subscribe(
+            (res) => this.onSuccess(res.json, res.headers),
             (res) => this.onError(res)
             );
     }
 
-    private onSuccess(res: any) {
-        this.shops = res;
+    // private onSuccess(res: any) {
+    //    this.shops = res;
+    // }
+
+
+    private onSuccess(data, headers) {
+        // this.links = this.parseLinks.parse(headers.get('link'));
+        // this.totalItems = headers.get('X-Total-Count');
+        // this.queryCount = this.totalItems;
+        // this.page = pagingParams.page;
+        this.shops = data;
+        // this.loaderService.hide();
     }
 
     private onError(error: any) {

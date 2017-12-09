@@ -53,12 +53,11 @@ public interface ShopService {
     void delete(Long id);
 
     /**
-     *  Get the shop by user id
+     *  Get the shop by current user
      *
-     *  @param id the user id
      *  @return the entity
      */
 
-    List<ShopDTO> findByUserId(Long id);
+    List<Shop> findByCurrentUser();
 
 }

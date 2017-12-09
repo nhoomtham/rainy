@@ -11,6 +11,7 @@ import { ResponseWrapper, createRequestOption } from '../../shared';
 export class ShopService {
 
     private resourceUrl = SERVER_API_URL + 'api/shops';
+    private raResourceUrl = SERVER_API_URL + 'api/ra-shops';
     private awsResUrl = SERVER_API_URL + 'api/aws';
 
     constructor(private http: Http, private httpClient: HttpClient) { }
@@ -36,15 +37,21 @@ export class ShopService {
     }
 
     find(id: number): Observable<Shop> {
-        return this.httpClient.get<Shop>(`${this.resourceUrl}/${id}`);
+        // return this.httpClient.get<Shop>(`${this.resourceUrl}/${id}`);
+        return this.http.get(`${this.resourceUrl}/${id}`).map((res: Response) => {
+            const jsonResponse = res.json();
+            return this.convertItemFromServer(jsonResponse);
+        });
     }
 
-    findByUser(id: number): Observable<Shop> {
-        return this.httpClient.get<Shop>(`${this.resourceUrl}/shop-user/${id}`);
+    findByUser(): Observable<ResponseWrapper> {
+        // return this.httpClient.get<Shop>(`${this.resourceUrl}/shop-user`);
+       return this.http.get(`${this.resourceUrl}/shop-user`)
+            .map((res: Response) => this.convertResponse(res));
     }
 
     findShopOwnedByUser(shopId: number, userId: number): Observable<Shop> {
-        return this.httpClient.get<Shop>(`${this.resourceUrl}/shop-owned-user/${shopId}/${userId}`);
+        return this.httpClient.get<Shop>(`${this.raResourceUrl}/shop-owned-user/${shopId}/${userId}`);
     }
 
     query(req?: any): Observable<ResponseWrapper> {

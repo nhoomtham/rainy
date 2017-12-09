@@ -1,7 +1,10 @@
 package com.rainy.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
+import com.rainy.service.UserService;
 import com.rainy.domain.Shop;
+import com.rainy.domain.User;
+import com.rainy.security.SecurityUtils;
 import com.rainy.service.GeometryService;
 import com.rainy.service.ShopService;
 import com.rainy.service.dto.ShopDTO;
@@ -20,8 +23,10 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
+import javax.inject.Inject;
 import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -40,14 +45,14 @@ public class ShopResource {
     private static final String ENTITY_NAME = "shop";
 
     private final ShopService shopService;
-
+    
     @Autowired
     private GeometryFactory geometryFactory;
 
     @Autowired
     private GeometryService geometryService;
-
-
+    
+    
     public ShopResource(ShopService shopService) {
         this.shopService = shopService;
     }
@@ -110,7 +115,7 @@ public class ShopResource {
             @RequestParam(value = "lon", defaultValue = "0.0", required = false) Double lon,
             @RequestParam(value = "km", defaultValue = "0.0", required = false) Double km ) {
         log.debug("REST request to get all Shops near by lat:" + lat +",lon:" + lon.toString()+ ",km:" + km.toString());
-
+        log.debug("curr user:" + SecurityUtils.getCurrentUserLogin());
         final Geometry geometry = geometryService.wktToGeometry("POINT(" + lat.toString() + " " + lon.toString() + ")");
         if (!geometry.getGeometryType().equals("Point")) {
             throw new RuntimeException("Geometry must be a point. Got a " + geometry.getGeometryType());
@@ -140,6 +145,7 @@ public class ShopResource {
     @Timed
     public ResponseEntity<ShopDTO> getShop(@PathVariable Long id) {
         log.debug("REST request to get Shop : {}", id);
+        log.debug("curr user:" + SecurityUtils.getCurrentUserLogin());
         ShopDTO shop = shopService.findOne(id);
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(shop));
     }
@@ -159,19 +165,17 @@ public class ShopResource {
     }
 
     /**
-     * GET  /shop-user : get all the shops by user id
+     * GET  /shops/shop-user : get all the shops which belong to current user
      *
-     * @param id the user id
      * @return the ResponseEntity with status 200 (OK) and the list of shops in body
      */
-    @GetMapping("/shops/shop-user/{id}")
+    @GetMapping("/shops/shop-user")
     @Timed
-    public List<ShopDTO> getAllShopsByUserId(@PathVariable Long id) {
-        log.debug("REST request to get Shops by User Id");
-
-        return shopService.findByUserId(id);
+    public List<Shop> getShopsByUser() {
+    	log.debug("REST request to get Shops by current user");
+		return shopService.findByCurrentUser();
     }
-
+    
     /**
      * GET  /shop-owned-user : get a shop owned by user id
      *
@@ -179,7 +183,7 @@ public class ShopResource {
      * @param userId the user id
      * @return the ResponseEntity with status 200 (OK) and the list of shops in body
      */
-    @GetMapping("/shops/shop-owned-user/{shopId}/{userId}")
+    @GetMapping("/ra-shops/shop-owned-user/{shopId}/{userId}")
     @Timed
     public ResponseEntity<ShopDTO> getShopyOwnedUserId(@PathVariable Long shopId, @PathVariable Long userId) {
         log.debug("REST request to get Shop owned by User Id");
@@ -189,6 +193,8 @@ public class ShopResource {
                 .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, "error"))
                 .body(null);
         }
+
+        log.debug("curr user:" + SecurityUtils.getCurrentUserLogin());
         if (shop.getUser().getId().compareTo(userId) != 0) {
             return ResponseEntity.badRequest()
                 .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, "error"))

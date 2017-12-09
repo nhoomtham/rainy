@@ -50,13 +50,16 @@ export class ShopStatusDialogComponent implements OnInit {
 
     save({ value, valid }: { value: ShopStatus, valid: boolean }) {
         this.isSaving = true;
-        if (this.shopStatus.id !== undefined) {
-            this.subscribeToSaveResponse(
-                this.shopStatusService.update(this.shopStatus));
-        } else {
-            this.subscribeToSaveResponse(
-                this.shopStatusService.create(value));
-        }
+        this.shopStatusService.findByShop(value.shop.id).subscribe((shopStatus) => {
+            if (shopStatus) {
+                value.id = shopStatus.id;
+                this.subscribeToSaveResponse(
+                    this.shopStatusService.update(value));
+            } else {
+                this.subscribeToSaveResponse(
+                    this.shopStatusService.create(value));
+            }
+        });
     }
 
     private subscribeToSaveResponse(result: Observable<ShopStatus>) {

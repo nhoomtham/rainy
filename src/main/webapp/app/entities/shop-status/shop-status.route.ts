@@ -44,7 +44,6 @@ export const shopStatusRoute: Routes = [
             'pagingParams': ShopStatusResolvePagingParams
         },
         data: {
-            authorities: ['ROLE_USER'],
             pageTitle: 'rainyApp.shopStatus.home.title'
         },
         canActivate: [UserRouteAccessService]

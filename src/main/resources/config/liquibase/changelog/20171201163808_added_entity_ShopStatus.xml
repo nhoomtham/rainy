@@ -26,14 +26,14 @@
             </column>
 
             <column name="shop_id" type="bigint">
-                <constraints nullable="true" />
+                <constraints nullable="false" />
             </column>
 
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->
         </createTable>
 
     </changeSet>
-    
+
     <!-- Added the entity audit columns -->
     <changeSet id="20171202233012-audit-1" author="jhipster-entity-audit">
         <addColumn tableName="ra_shop_status">

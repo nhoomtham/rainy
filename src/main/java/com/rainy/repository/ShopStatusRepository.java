@@ -1,9 +1,12 @@
 package com.rainy.repository;
 
+import com.rainy.domain.Shop;
 import com.rainy.domain.ShopStatus;
 import org.springframework.stereotype.Repository;
 
 import org.springframework.data.jpa.repository.*;
+
+import java.util.Optional;
 
 
 /**
@@ -12,5 +15,5 @@ import org.springframework.data.jpa.repository.*;
 @SuppressWarnings("unused")
 @Repository
 public interface ShopStatusRepository extends JpaRepository<ShopStatus, Long> {
-
+    ShopStatus findByShop(Shop shop);
 }

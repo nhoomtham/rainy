@@ -1,18 +1,7 @@
 <div>
     <h2>
         <span jhiTranslate="rainyApp.shopStatus.home.title">Shop Statuses</span>
-        <button class="btn btn-primary float-right jh-create-entity create-shop-status" [routerLink]="['/', { outlets: { popup: ['shop-status-new'] } }]">
-            <span class="fa fa-plus"></span>
-            <span  jhiTranslate="rainyApp.shopStatus.home.createLabel">
-            Create new Shop Status
-            </span>
-        </button>
     </h2>
-    <jhi-alert></jhi-alert>
-    <div class="row">
-    </div>
-    <br/>
-
     <mat-list>
         <mat-list-item *ngFor="let shopStatus of shopStatuses ;trackBy: trackId">
             <img matListAvatar src="{{shopStatus.shop?.pic_cover}}" alt="avatar" />
