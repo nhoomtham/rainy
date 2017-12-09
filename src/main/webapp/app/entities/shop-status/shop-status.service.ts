@@ -37,7 +37,11 @@ export class ShopStatusService {
     }
 
     findByShop(shopId: number): Observable<ShopStatus> {
-        return this.httpClient.get<ShopStatus>(`${this.resourceUrl}/by-shop/${shopId}`);
+        // return this.httpClient.get<ShopStatus>(`${this.resourceUrl}/by-shop/${shopId}`);
+        return this.http.get(`${this.resourceUrl}/by-shop/${shopId}`).map((res: Response) => {
+            const jsonResponse = res.json();
+            return this.convertItemFromServer(jsonResponse);
+        });
     }
 
     query(req?: any): Observable<ResponseWrapper> {

@@ -139,7 +139,6 @@ public class ShopResource {
      */
     @GetMapping("/shops/{id}")
     @Timed
-    @Secured({AuthoritiesConstants.USER,AuthoritiesConstants.ADMIN})
     public ResponseEntity<ShopDTO> getShop(@PathVariable Long id) {
         log.debug("REST request to get Shop : {}", id);
         log.debug("curr user:" + SecurityUtils.getCurrentUserLogin());

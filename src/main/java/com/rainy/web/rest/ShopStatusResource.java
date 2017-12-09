@@ -152,13 +152,14 @@ public class ShopStatusResource {
         if (shop == null) {
             throw new BadRequestAlertException("A Shop attached could not be found", ENTITY_NAME, "notAuthorized");
         }
-
-        ShopStatus shopStatus = shopStatusRepository.findByShop(shop);
+       
         Optional<User> user = userRepository.findOneByLogin(SecurityUtils.getCurrentUserLogin());
-        log.debug("cuser:" + SecurityUtils.getCurrentUserLogin());
-        if (user.isPresent()) {
-            log.debug("xxxxxxxxxxxxxxxxxxxxxxxxxx");
+        if (user.isPresent() && !shop.getUser().equals(user.get())) {
+            throw new BadRequestAlertException("A Shop attached should belong to current user", ENTITY_NAME, "notAuthorized");
         }
+        
+        ShopStatus shopStatus = shopStatusRepository.findByShop(shop);
+       
         if (user.isPresent() && shopStatus != null &&
                 !shopStatus.getCreatedBy().equals(user.get().getLogin()) ) {
             throw new BadRequestAlertException("A Shop attached should belong to current user", ENTITY_NAME, "notAuthorized");

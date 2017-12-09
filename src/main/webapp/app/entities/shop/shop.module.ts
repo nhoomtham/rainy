@@ -1,5 +1,6 @@
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { HttpClientModule } from '@angular/common/http'; 
 import { FormsModule, FormGroup, FormControl, ReactiveFormsModule } from '@angular/forms';
 
 import { RainySharedModule } from '../../shared';
@@ -43,6 +44,7 @@ const ENTITY_STATES = [
         AgmCoreModule.forRoot({
             apiKey: 'AIzaSyBlk6Nxh8iMaKuhuJK_sv3gFhi_aoeK_Kg'
         }),
+        HttpClientModule,
         // Ng2ImgMaxModule
     ],
     declarations: [
