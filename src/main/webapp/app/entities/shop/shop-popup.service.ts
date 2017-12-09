@@ -26,7 +26,7 @@ export class ShopPopupService {
             }
             this.principal.identity().then((acct) => {
                 if (id && acct.id) {
-                    this.shopService.findShopOwnedByUser(id, acct.id).subscribe((shop) => {
+                    this.shopService.findShopOwnedByUser(id).subscribe((shop) => {
                         this.ngbModalRef = this.shopModalRef(component, shop);
                         resolve(this.ngbModalRef);
                     }, () => { this.router.navigate(['']); } // bad requese or error happened

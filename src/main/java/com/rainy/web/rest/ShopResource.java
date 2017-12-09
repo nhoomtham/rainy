@@ -177,34 +177,17 @@ public class ShopResource {
     }
     
     /**
-     * GET  /shop-owned-user : get a shop owned by user id
+     * GET  /shop-shop-user : get a shop  which belong to current user by id
      *
      * @param shopId the user id
-     * @param userId the user id
-     * @return the ResponseEntity with status 200 (OK) and the list of shops in body
+     * @return the ResponseEntity with status 200 (OK) and the shop in body
      */
-    @GetMapping("/ra-shops/shop-owned-user/{shopId}/{userId}")
+    @GetMapping("/shops/shop-user/{shopId}")
     @Timed
-    public ResponseEntity<ShopDTO> getShopyOwnedUserId(@PathVariable Long shopId, @PathVariable Long userId) {
-        log.debug("REST request to get Shop owned by User Id");
-        final ShopDTO shop = shopService.findOne(shopId);
-        if (shop == null) {
-            return ResponseEntity.badRequest()
-                .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, "error"))
-                .body(null);
-        }
-
-        log.debug("curr user:" + SecurityUtils.getCurrentUserLogin());
-        if (shop.getUser().getId().compareTo(userId) != 0) {
-            return ResponseEntity.badRequest()
-                .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, "error"))
-                .body(null);
-        }
-
-        return ResponseEntity.ok()
-            .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, shop.getId().toString()))
-            .body(shop);
-
+    public ResponseEntity<ShopDTO> getShopOwnedUserById(@PathVariable Long shopId) {
+        log.debug("REST request to get Shop owned by current user by Id");
+        ShopDTO shop =  shopService.findOneByCurrentUser(shopId);
+        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(shop));        
     }
 
 }

@@ -157,4 +157,20 @@ public class ShopServiceImpl implements ShopService{
         }        
     }
 
+	@Override
+	public ShopDTO findOneByCurrentUser(Long id) {
+		
+		final Shop shop = shopRepository.findOne(id);
+        
+		if (shop != null) {
+			User user = userService.getUserWithAuthorities();
+			if (user != null) {
+				if (shop.getUser().getId().compareTo(user.getId()) == 0) {
+					return shopMapper.shopToShopDTO(shop);
+				}
+			}
+		}
+		return null;
+	}
+
 }

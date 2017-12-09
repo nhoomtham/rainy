@@ -50,8 +50,12 @@ export class ShopService {
             .map((res: Response) => this.convertResponse(res));
     }
 
-    findShopOwnedByUser(shopId: number, userId: number): Observable<Shop> {
-        return this.httpClient.get<Shop>(`${this.raResourceUrl}/shop-owned-user/${shopId}/${userId}`);
+    findShopOwnedByUser(shopId: number): Observable<Shop> {
+       //  return this.httpClient.get<Shop>(`${this.raResourceUrl}/shop-owned-user/${shopId}/${userId}`);
+        return this.http.get(`${this.resourceUrl}/shop-user/${shopId}`).map((res: Response) => {
+            const jsonResponse = res.json();
+            return this.convertItemFromServer(jsonResponse);
+        });
     }
 
     query(req?: any): Observable<ResponseWrapper> {

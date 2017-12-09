@@ -94,8 +94,7 @@ export class ShopUserNewComponent implements OnInit, OnDestroy {
         this.routeSub = this.route.params.subscribe((params) => {
             if (params['shopId']) {
                 this.paramId = params['shopId'];
-                const userId = params['userId']
-                this.shopService.findShopOwnedByUser(this.paramId, userId).subscribe((shop) => {
+                this.shopService.findShopOwnedByUser(this.paramId).subscribe((shop) => {
                     this.shop = shop;
                     this.fillForm();
                 }, () => { this.router.navigate(['']); } // bad requese or error happened
