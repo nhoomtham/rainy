@@ -1,9 +1,8 @@
 package com.rainy.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
-import com.rainy.service.UserService;
 import com.rainy.domain.Shop;
-import com.rainy.domain.User;
+import com.rainy.security.AuthoritiesConstants;
 import com.rainy.security.SecurityUtils;
 import com.rainy.service.GeometryService;
 import com.rainy.service.ShopService;
@@ -12,7 +11,6 @@ import com.rainy.web.rest.errors.BadRequestAlertException;
 import com.rainy.web.rest.util.HeaderUtil;
 import com.rainy.web.rest.util.PaginationUtil;
 import com.vividsolutions.jts.geom.Geometry;
-import com.vividsolutions.jts.geom.GeometryFactory;
 import io.github.jhipster.web.util.ResponseUtil;
 import io.swagger.annotations.ApiParam;
 import org.slf4j.Logger;
@@ -26,7 +24,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
-import javax.inject.Inject;
 import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -47,9 +44,6 @@ public class ShopResource {
     private final ShopService shopService;
     
     @Autowired
-    private GeometryFactory geometryFactory;
-
-    @Autowired
     private GeometryService geometryService;
     
     
@@ -66,6 +60,7 @@ public class ShopResource {
      */
     @PostMapping("/shops")
     @Timed
+    @Secured({AuthoritiesConstants.USER,AuthoritiesConstants.ADMIN})
     public ResponseEntity<ShopDTO> createShop(@Valid @RequestBody Shop shop) throws URISyntaxException {
         log.debug("REST request to save Shop : {}", shop);
         if (shop.getId() != null) {
@@ -90,6 +85,7 @@ public class ShopResource {
      */
     @PutMapping("/shops")
     @Timed
+    @Secured({AuthoritiesConstants.USER,AuthoritiesConstants.ADMIN})
     public ResponseEntity<ShopDTO> updateShop(@Valid @RequestBody Shop shop) throws URISyntaxException {
         log.debug("REST request to update Shop : {}", shop);
         if (shop.getId() == null) {
@@ -143,6 +139,7 @@ public class ShopResource {
      */
     @GetMapping("/shops/{id}")
     @Timed
+    @Secured({AuthoritiesConstants.USER,AuthoritiesConstants.ADMIN})
     public ResponseEntity<ShopDTO> getShop(@PathVariable Long id) {
         log.debug("REST request to get Shop : {}", id);
         log.debug("curr user:" + SecurityUtils.getCurrentUserLogin());
@@ -158,6 +155,7 @@ public class ShopResource {
      */
     @DeleteMapping("/shops/{id}")
     @Timed
+    @Secured({AuthoritiesConstants.USER,AuthoritiesConstants.ADMIN})
     public ResponseEntity<Void> deleteShop(@PathVariable Long id) {
         log.debug("REST request to delete Shop : {}", id);
         shopService.delete(id);
@@ -171,6 +169,7 @@ public class ShopResource {
      */
     @GetMapping("/shops/shop-user")
     @Timed
+    @Secured({AuthoritiesConstants.USER,AuthoritiesConstants.ADMIN})
     public List<Shop> getShopsByUser() {
     	log.debug("REST request to get Shops by current user");
 		return shopService.findByCurrentUser();
@@ -184,6 +183,7 @@ public class ShopResource {
      */
     @GetMapping("/shops/shop-user/{shopId}")
     @Timed
+    @Secured({AuthoritiesConstants.USER,AuthoritiesConstants.ADMIN})
     public ResponseEntity<ShopDTO> getShopOwnedUserById(@PathVariable Long shopId) {
         log.debug("REST request to get Shop owned by current user by Id");
         ShopDTO shop =  shopService.findOneByCurrentUser(shopId);

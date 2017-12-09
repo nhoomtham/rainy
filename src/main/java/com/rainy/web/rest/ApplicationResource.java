@@ -1,11 +1,14 @@
 package com.rainy.web.rest;
 
 import com.rainy.config.ApplicationProperties;
+import com.rainy.security.AuthoritiesConstants;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -26,6 +29,7 @@ public class ApplicationResource {
     }
 
     @GetMapping("/aws")
+    @Secured(AuthoritiesConstants.USER)
     public ResponseEntity<ApplicationProperties.Aws> getAws(){
         final ApplicationProperties.Aws aws = this.applicationProperties.getAws();
         log.debug("AWS:" + aws.toString());

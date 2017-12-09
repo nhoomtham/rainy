@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { Http, Response } from '@angular/http';
-import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Rx';
 import { SERVER_API_URL } from '../../app.constants';
 
@@ -11,13 +10,16 @@ import { ResponseWrapper, createRequestOption } from '../../shared';
 export class ShopService {
 
     private resourceUrl = SERVER_API_URL + 'api/shops';
-    private raResourceUrl = SERVER_API_URL + 'api/ra-shops';
     private awsResUrl = SERVER_API_URL + 'api/aws';
 
-    constructor(private http: Http, private httpClient: HttpClient) { }
+    constructor(private http: Http) { }
 
     getAwsConfig(): Observable<any> {
-        return this.httpClient.get<any>(`${this.awsResUrl}`);
+        // return this.httpClient.get<any>(`${this.awsResUrl}`);
+        return this.http.get(`${this.awsResUrl}`).map((res: Response) => {
+            const jsonResponse = res.json();
+            return this.convertItemFromServer(jsonResponse);
+        });
     }
 
     create(shop: Shop): Observable<Shop> {
@@ -51,7 +53,7 @@ export class ShopService {
     }
 
     findShopOwnedByUser(shopId: number): Observable<Shop> {
-       //  return this.httpClient.get<Shop>(`${this.raResourceUrl}/shop-owned-user/${shopId}/${userId}`);
+       //  return this.httpClient.get<Shop>(`${this.raResourceUrl}/shop-owned-user/${shopId}`);
         return this.http.get(`${this.resourceUrl}/shop-user/${shopId}`).map((res: Response) => {
             const jsonResponse = res.json();
             return this.convertItemFromServer(jsonResponse);
