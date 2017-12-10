@@ -6,8 +6,8 @@
                 "createLabel": "สร้าง Shop Status",
                 "createOrEditLabel": "สร้างหรือแก้ไข Shop Status"
             },
-            "created": "Shop Status ถูกสร้างด้วย {{ param }}",
-            "updated": "Shop Status ถูกแก้ไขด้วย {{ param }}",
+            "created": "โพสถูกอัพเดทแล้ว {{ param }}",
+            "updated": "โพสถูกอัพเดทแล้ว {{ param }}",
             "deleted": "Shop Status ถูกลบด้วย {{ param }}",
             "delete": {
                 "question": "คุณต้องการที่จะลบ Shop Status {{ id }}?"

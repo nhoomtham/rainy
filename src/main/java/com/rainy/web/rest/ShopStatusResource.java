@@ -80,7 +80,7 @@ public class ShopStatusResource {
 
         ShopStatus result = shopStatusRepository.save(shopStatus);
         return ResponseEntity.created(new URI("/api/shop-statuses/" + result.getId()))
-            .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
+            .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, ""))           
             .body(result);
     }
 
@@ -102,7 +102,8 @@ public class ShopStatusResource {
         }
         ShopStatus result = shopStatusRepository.save(shopStatus);
         return ResponseEntity.ok()
-            .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, shopStatus.getId().toString()))
+            // .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, shopStatus.getId().toString()))
+        		.headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, ""))
             .body(result);
     }
 
@@ -116,9 +117,7 @@ public class ShopStatusResource {
     @Timed
     public ResponseEntity<List<ShopStatus>> getAllShopStatuses(@ApiParam Pageable pageable) {
         log.debug("REST request to get a page of ShopStatuses");
-        Optional<User> user = userRepository.findOneByLogin(SecurityUtils.getCurrentUserLogin());
-        log.debug("cuser:" + SecurityUtils.getCurrentUserLogin());
-        Page<ShopStatus> page = shopStatusRepository.findAll(pageable);
+        Page<ShopStatus> page = shopStatusRepository.findAllByOrderByLastModifiedDateDesc(pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/shop-statuses");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
@@ -145,7 +144,7 @@ public class ShopStatusResource {
      */
     @GetMapping("/shop-statuses/by-shop/{shopId}")
     @Timed
-    public ResponseEntity<ShopStatus> getShopStatusByShop(@PathVariable Long shopId) {
+    public ResponseEntity<ShopStatus> getShopStatusByShop(@PathVariable Long shopId) throws URISyntaxException  {
         log.debug("REST request to get ShopStatus by ShopId : {}", shopId);
 
         Shop shop = shopRepository.findOne(shopId);
@@ -164,8 +163,12 @@ public class ShopStatusResource {
                 !shopStatus.getCreatedBy().equals(user.get().getLogin()) ) {
             throw new BadRequestAlertException("A Shop attached should belong to current user", ENTITY_NAME, "notAuthorized");
         }
-
-        return  new ResponseEntity<>(shopStatus, null, HttpStatus.OK);
+        
+        if (shopStatus == null) {
+        	shopStatus = new ShopStatus();
+        }
+        
+        return  new ResponseEntity<>(shopStatus, null, HttpStatus.OK);                     
     }
 
     /**

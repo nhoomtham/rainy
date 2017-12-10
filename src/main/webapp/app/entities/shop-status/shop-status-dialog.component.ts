@@ -70,7 +70,7 @@ export class ShopStatusDialogComponent implements OnInit {
     private onSaveSuccess(result: ShopStatus) {
         this.eventManager.broadcast({ name: 'shopStatusListModification', content: 'OK'});
         this.isSaving = false;
-        this.activeModal.dismiss(result);
+        // this.activeModal.dismiss(result);
     }
 
     private onSaveError() {

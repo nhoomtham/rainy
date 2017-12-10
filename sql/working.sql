@@ -6,7 +6,8 @@ update shop set location = st_GeomFromText('SRID=4326;POINT(34.774531 -96.678344
 
 update shop set location = null
 
-
+select * from ra_shop_status;
+ 
 
 -- drop ra* tables
 drop table ra_shop_status cascade;

@@ -1,15 +1,15 @@
-<div>
+<div class="card jh-card">
     <h2>
         <span jhiTranslate="rainyApp.shopStatus.home.title">Shop Statuses</span>
     </h2>
     <mat-list>
         <mat-list-item *ngFor="let shopStatus of shopStatuses ;trackBy: trackId">
             <img matListAvatar src="{{shopStatus.shop?.pic_cover}}" alt="avatar" />
-            <a [routerLink]="['../shop', shopStatus.shop?.id ]">            
-            </a>
+            <a [routerLink]="['../shop', shopStatus.shop?.id ]"></a>
             <h3 matLine>{{shopStatus.message}}</h3>
             <p mat-line><a [routerLink]="['../shop', shopStatus.shop?.id ]">{{shopStatus.shop?.name}}</a></p>
-            <mat-divider></mat-divider>
+            <h4 mat-line>{{shopStatus.lastModifiedDate | date: 'short'}}</h4>
+            <p mat-line><mat-divider></mat-divider></p>
         </mat-list-item>
     </mat-list>
 

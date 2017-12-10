@@ -5,6 +5,8 @@ export class ShopStatus implements BaseEntity {
         public id?: number,
         public message?: string,
         public shop?: BaseEntity,
+        public lastModifiedDate?: Date,
+
     ) {
     }
 }
