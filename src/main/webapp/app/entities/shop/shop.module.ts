@@ -1,6 +1,6 @@
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http'; 
 import { FormsModule, FormGroup, FormControl, ReactiveFormsModule } from '@angular/forms';
 
 import { RainySharedModule } from '../../shared';
@@ -23,7 +23,6 @@ import {
 } from './';
 
 import { RainyMaterialModule } from '../../material/rainy-material.module';
-
 import { AgmCoreModule } from '@agm/core';
 import { LoaderService } from './loader.service';
 import { LoaderComponent } from './loader.component';

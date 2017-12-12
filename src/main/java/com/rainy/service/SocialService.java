@@ -4,6 +4,7 @@ import com.rainy.domain.Authority;
 import com.rainy.domain.User;
 import com.rainy.repository.AuthorityRepository;
 import com.rainy.repository.UserRepository;
+import com.rainy.security.AuthoritiesConstants;
 
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -94,7 +95,7 @@ public class SocialService {
         String login = getLoginDependingOnProviderId(userProfile, providerId);
         String encryptedPassword = passwordEncoder.encode(RandomStringUtils.random(10));
         Set<Authority> authorities = new HashSet<>(1);
-        authorities.add(authorityRepository.findOne("ROLE_USER"));
+        authorities.add(authorityRepository.findOne(AuthoritiesConstants.USER));
 
         User newUser = new User();
         newUser.setLogin(login);

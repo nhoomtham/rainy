@@ -37,7 +37,8 @@ public interface ShopService {
      *  @return the list of entities
      */
       Page<ShopDTO> findShopNearby(Pageable pageable, Geometry geometry, Double km);
-    /**
+    
+     /**
      *  Get the "id" shop.
      *
      *  @param id the id of the entity
@@ -53,12 +54,19 @@ public interface ShopService {
     void delete(Long id);
 
     /**
-     *  Get the shop by user id
+     *  Get the shop by current user
      *
-     *  @param id the user id
      *  @return the entity
      */
 
-    List<ShopDTO> findByUserId(Long id);
+    List<Shop> findByCurrentUser();
+
+    /**
+     *  Get the "id" shop.
+     *
+     *  @param id the id of the entity
+     *  @return the entity
+     */
+    ShopDTO findOneByCurrentUser(Long id);
 
 }

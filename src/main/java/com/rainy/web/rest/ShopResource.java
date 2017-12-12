@@ -2,13 +2,15 @@ package com.rainy.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import com.rainy.domain.Shop;
+import com.rainy.security.AuthoritiesConstants;
+import com.rainy.security.SecurityUtils;
 import com.rainy.service.GeometryService;
 import com.rainy.service.ShopService;
 import com.rainy.service.dto.ShopDTO;
+import com.rainy.web.rest.errors.BadRequestAlertException;
 import com.rainy.web.rest.util.HeaderUtil;
 import com.rainy.web.rest.util.PaginationUtil;
 import com.vividsolutions.jts.geom.Geometry;
-import com.vividsolutions.jts.geom.GeometryFactory;
 import io.github.jhipster.web.util.ResponseUtil;
 import io.swagger.annotations.ApiParam;
 import org.slf4j.Logger;
@@ -19,6 +21,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -39,14 +42,11 @@ public class ShopResource {
     private static final String ENTITY_NAME = "shop";
 
     private final ShopService shopService;
-
-    @Autowired
-    private GeometryFactory geometryFactory;
-
+    
     @Autowired
     private GeometryService geometryService;
-
-
+    
+    
     public ShopResource(ShopService shopService) {
         this.shopService = shopService;
     }
@@ -60,10 +60,11 @@ public class ShopResource {
      */
     @PostMapping("/shops")
     @Timed
+    @Secured({AuthoritiesConstants.USER,AuthoritiesConstants.ADMIN})
     public ResponseEntity<ShopDTO> createShop(@Valid @RequestBody Shop shop) throws URISyntaxException {
         log.debug("REST request to save Shop : {}", shop);
         if (shop.getId() != null) {
-            return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert(ENTITY_NAME, "idexists", "A new shop cannot already have an ID")).body(null);
+            throw new BadRequestAlertException("A new shop cannot already have an ID", ENTITY_NAME, "idexists");
         }
 
         ShopDTO result = shopService.save(shop);
@@ -84,6 +85,7 @@ public class ShopResource {
      */
     @PutMapping("/shops")
     @Timed
+    @Secured({AuthoritiesConstants.USER,AuthoritiesConstants.ADMIN})
     public ResponseEntity<ShopDTO> updateShop(@Valid @RequestBody Shop shop) throws URISyntaxException {
         log.debug("REST request to update Shop : {}", shop);
         if (shop.getId() == null) {
@@ -109,7 +111,7 @@ public class ShopResource {
             @RequestParam(value = "lon", defaultValue = "0.0", required = false) Double lon,
             @RequestParam(value = "km", defaultValue = "0.0", required = false) Double km ) {
         log.debug("REST request to get all Shops near by lat:" + lat +",lon:" + lon.toString()+ ",km:" + km.toString());
-
+        log.debug("curr user:" + SecurityUtils.getCurrentUserLogin());
         final Geometry geometry = geometryService.wktToGeometry("POINT(" + lat.toString() + " " + lon.toString() + ")");
         if (!geometry.getGeometryType().equals("Point")) {
             throw new RuntimeException("Geometry must be a point. Got a " + geometry.getGeometryType());
@@ -139,6 +141,7 @@ public class ShopResource {
     @Timed
     public ResponseEntity<ShopDTO> getShop(@PathVariable Long id) {
         log.debug("REST request to get Shop : {}", id);
+        log.debug("curr user:" + SecurityUtils.getCurrentUserLogin());
         ShopDTO shop = shopService.findOne(id);
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(shop));
     }
@@ -151,6 +154,7 @@ public class ShopResource {
      */
     @DeleteMapping("/shops/{id}")
     @Timed
+    @Secured({AuthoritiesConstants.USER,AuthoritiesConstants.ADMIN})
     public ResponseEntity<Void> deleteShop(@PathVariable Long id) {
         log.debug("REST request to delete Shop : {}", id);
         shopService.delete(id);
@@ -158,46 +162,31 @@ public class ShopResource {
     }
 
     /**
-     * GET  /shop-user : get all the shops by user id
+     * GET  /shops/shop-user : get all the shops which belong to current user
      *
-     * @param id the user id
      * @return the ResponseEntity with status 200 (OK) and the list of shops in body
      */
-    @GetMapping("/shops/shop-user/{id}")
+    @GetMapping("/shops/shop-user")
     @Timed
-    public List<ShopDTO> getAllShopsByUserId(@PathVariable Long id) {
-        log.debug("REST request to get Shops by User Id");
-
-        return shopService.findByUserId(id);
+    @Secured({AuthoritiesConstants.USER,AuthoritiesConstants.ADMIN})
+    public List<Shop> getShopsByUser() {
+    	log.debug("REST request to get Shops by current user");
+		return shopService.findByCurrentUser();
     }
-
+    
     /**
-     * GET  /shop-owned-user : get a shop owned by user id
+     * GET  /shop-shop-user : get a shop  which belong to current user by id
      *
      * @param shopId the user id
-     * @param userId the user id
-     * @return the ResponseEntity with status 200 (OK) and the list of shops in body
+     * @return the ResponseEntity with status 200 (OK) and the shop in body
      */
-    @GetMapping("/shops/shop-owned-user/{shopId}/{userId}")
+    @GetMapping("/shops/shop-user/{shopId}")
     @Timed
-    public ResponseEntity<ShopDTO> getShopyOwnedUserId(@PathVariable Long shopId, @PathVariable Long userId) {
-        log.debug("REST request to get Shop owned by User Id");
-        final ShopDTO shop = shopService.findOne(shopId);
-        if (shop == null) {
-            return ResponseEntity.badRequest()
-                .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, "error"))
-                .body(null);
-        }
-        if (shop.getUser().getId().compareTo(userId) != 0) {
-            return ResponseEntity.badRequest()
-                .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, "error"))
-                .body(null);
-        }
-
-        return ResponseEntity.ok()
-            .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, shop.getId().toString()))
-            .body(shop);
-
+    @Secured({AuthoritiesConstants.USER,AuthoritiesConstants.ADMIN})
+    public ResponseEntity<ShopDTO> getShopOwnedUserById(@PathVariable Long shopId) {
+        log.debug("REST request to get Shop owned by current user by Id");
+        ShopDTO shop =  shopService.findOneByCurrentUser(shopId);
+        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(shop));        
     }
 
 }

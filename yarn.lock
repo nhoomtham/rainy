@@ -3382,9 +3382,9 @@ gaze@^1.0.0:
   dependencies:
     globule "^1.0.0"
 
-generator-jhipster@4.9.0:
-  version "4.9.0"
-  resolved "https://registry.yarnpkg.com/generator-jhipster/-/generator-jhipster-4.9.0.tgz#53e5c09c815c19480f00aac0f0a2544bc0947375"
+generator-jhipster@4.10.2:
+  version "4.10.2"
+  resolved "https://registry.yarnpkg.com/generator-jhipster/-/generator-jhipster-4.10.2.tgz#e0ff1d5ba88554b0f11072b89781937ede9237a3"
   dependencies:
     chalk "2.1.0"
     cheerio "0.22.0"
@@ -3394,7 +3394,7 @@ generator-jhipster@4.9.0:
     glob "7.1.2"
     html-wiring "1.2.0"
     insight "0.8.4"
-    jhipster-core "1.3.5"
+    jhipster-core "1.3.7"
     js-yaml "3.10.0"
     lodash "4.17.4"
     meow "3.7.0"
@@ -4558,9 +4558,9 @@ jasminewd2@^2.1.0:
   version "2.2.0"
   resolved "https://registry.yarnpkg.com/jasminewd2/-/jasminewd2-2.2.0.tgz#e37cf0b17f199cce23bea71b2039395246b4ec4e"
 
-jhipster-core@1.3.5:
-  version "1.3.5"
-  resolved "https://registry.yarnpkg.com/jhipster-core/-/jhipster-core-1.3.5.tgz#fb42e8d8c020ea95a06d85d2f8bba404747fe8bd"
+jhipster-core@1.3.7:
+  version "1.3.7"
+  resolved "https://registry.yarnpkg.com/jhipster-core/-/jhipster-core-1.3.7.tgz#5cc5fcb8ed556f67aab74ab18caf2a0c028d32af"
   dependencies:
     lodash "4.17.4"
 
@@ -5707,6 +5707,10 @@ ncname@1.0.x:
 negotiator@0.6.1:
   version "0.6.1"
   resolved "https://registry.yarnpkg.com/negotiator/-/negotiator-0.6.1.tgz#2b327184e8992101177b28563fb5e7102acd0ca9"
+
+ng-diff-match-patch@2.0.6:
+  version "2.0.6"
+  resolved "https://registry.yarnpkg.com/ng-diff-match-patch/-/ng-diff-match-patch-2.0.6.tgz#91a01d44de11eb39475f3efbd249fd7ec2255260"
 
 ng-jhipster@0.2.12:
   version "0.2.12"

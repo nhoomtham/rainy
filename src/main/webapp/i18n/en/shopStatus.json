@@ -1,0 +1,23 @@
+{
+    "rainyApp": {
+        "shopStatus": {
+            "home": {
+                "title": "Shop Statuses",
+                "createLabel": "Create a new Shop Status",
+                "createOrEditLabel": "Create or edit a Shop Status"
+            },
+            "created": "A Shop Status has been updated successfully {{ param }}",
+            "updated": "A Shop Status has been updated successfully {{ param }}",
+            "deleted": "A Shop Status is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Shop Status {{ id }}?"
+            },
+            "detail": {
+                "title": "Shop Status"
+            },
+            "message": "Message",
+            "shop": "Shop",
+            "invalid-length": "This field to be at least 1 or cannot be longer than 128 characters."
+        }
+    }
+}

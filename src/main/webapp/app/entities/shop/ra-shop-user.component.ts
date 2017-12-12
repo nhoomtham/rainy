@@ -1,12 +1,10 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs/Rx';
 import { FormGroup, FormControl, ReactiveFormsModule } from '@angular/forms';
-import { JhiEventManager, JhiParseLinks, JhiLanguageService, JhiAlertService } from 'ng-jhipster';
+import { JhiEventManager, JhiLanguageService, JhiAlertService } from 'ng-jhipster';
 
 import { Shop } from './shop.model';
 import { ShopService } from './shop.service';
-import { Principal } from '../../shared/index';
 
 @Component({
     selector: 'jhi-shop-user',
@@ -14,25 +12,17 @@ import { Principal } from '../../shared/index';
 })
 export class ShopUserComponent implements OnInit, OnDestroy {
 
-    account: Account;
     shops: Shop[];
     eventSubscriber: Subscription;
 
     constructor(
         private shopService: ShopService,
-        private parseLinks: JhiParseLinks,
         private jhiAlertService: JhiAlertService,
-        private principal: Principal,
-        private activatedRoute: ActivatedRoute,
-        private router: Router,
         private eventManager: JhiEventManager,
     ) {
     }
     ngOnInit(): void {
-        this.principal.identity().then((account) => {
-            this.account = account;
-            this.loadAll();
-        });
+        this.loadAll();
         this.registerChangeInShops();
     }
 
@@ -41,14 +31,13 @@ export class ShopUserComponent implements OnInit, OnDestroy {
     }
 
     loadAll() {
-        this.shopService.findByUser(+this.account.id).subscribe(
-            (res) => this.onSuccess(res),
-            (res) => this.onError(res)
-            );
+        this.shopService.findByUser().subscribe(
+            (res) => this.onSuccess(res.json, res.headers),
+            (res) => this.onError(res));
     }
 
-    private onSuccess(res: any) {
-        this.shops = res;
+    private onSuccess(data, headers) {
+        this.shops = data;
     }
 
     private onError(error: any) {

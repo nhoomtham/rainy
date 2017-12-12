@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Resolve, ActivatedRouteSnapshot, RouterStateSnapshot, Routes, CanActivate } from '@angular/router';
+import { Resolve, ActivatedRouteSnapshot, RouterStateSnapshot, Routes } from '@angular/router';
 
 import { UserRouteAccessService } from '../../shared';
 import { JhiPaginationUtil } from 'ng-jhipster';
@@ -68,7 +68,7 @@ export const shopRoute: Routes = [
         canActivate: [UserRouteAccessService]
     },
     {
-        path: 'shop-user-edit/:shopId/:userId',
+        path: 'shop-user-edit/:shopId',
         component: ShopUserNewComponent,
         data: {
             authorities: ['ROLE_USER'],

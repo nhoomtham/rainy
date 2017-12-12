@@ -1,0 +1,23 @@
+.example-card {
+  width: 100%;
+}
+
+mat-grid-tile {
+  background: lightblue;
+}
+
+.ra-full-width {
+    width: 100%;
+}
+
+.ra-full-form {
+    min-width: 150px;
+    max-width: 500px;
+    width: 100%;
+}
+
+/* override global setting */
+.ng-invalid:not(form)  {
+  border-left: 0px;
+}
+

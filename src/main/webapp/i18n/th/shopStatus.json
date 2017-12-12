@@ -1,0 +1,23 @@
+{
+    "rainyApp": {
+        "shopStatus": {
+            "home": {
+                "title": "Shop Statuses",
+                "createLabel": "สร้าง Shop Status",
+                "createOrEditLabel": "สร้างหรือแก้ไข Shop Status"
+            },
+            "created": "โพสถูกอัพเดทแล้ว {{ param }}",
+            "updated": "โพสถูกอัพเดทแล้ว {{ param }}",
+            "deleted": "Shop Status ถูกลบด้วย {{ param }}",
+            "delete": {
+                "question": "คุณต้องการที่จะลบ Shop Status {{ id }}?"
+            },
+            "detail": {
+                "title": "Shop Status"
+            },
+            "message": "ดันโพส",
+            "shop": "Shop",
+            "invalid-length": "ต้องใส่ข้อความและต้องไม่ยาวเกิน 128 ตัวอักษร"
+        }
+    }
+}

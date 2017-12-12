@@ -1,0 +1,31 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipName": "shop",
+            "otherEntityName": "shop",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "name"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "message",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required",
+                "minlength",
+                "maxlength"
+            ],
+            "fieldValidateRulesMinlength": "1",
+            "fieldValidateRulesMaxlength": "128"
+        }
+    ],
+    "changelogDate": "20171201163808",
+    "dto": "no",
+    "service": "no",
+    "entityTableName": "ra_shop_status",
+    "jpaMetamodelFiltering": false,
+    "pagination": "pagination",
+    "enableEntityAudit": true
+}

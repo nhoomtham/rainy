@@ -4,7 +4,7 @@
       "packageName": "com.rainy",
       "nativeLanguage": "en"
     },
-    "jhipsterVersion": "4.9.0",
+    "jhipsterVersion": "4.10.2",
     "baseName": "rainy",
     "packageName": "com.rainy",
     "packageFolder": "com/rainy",
@@ -38,5 +38,8 @@
       "en",
       "th"
     ]
+  },
+  "generator-jhipster-entity-audit": {
+    "auditFramework": "custom"
   }
 }
