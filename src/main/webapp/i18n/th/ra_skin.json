@@ -2,10 +2,10 @@
     "rainyApp": {
         "Ra_skin" : {
             "null": "",
-            "WHITE": "WHITE",
-            "PALE": "PALE",
-            "TAN": "TAN",
-            "BLACK": "BLACK"
+            "WHITE": "ขาว",
+            "PALE": "ขาว-เหลือง",
+            "TAN": "น้ำผึ้ง",
+            "BLACK": "เข้ม"
         }
     }
 }

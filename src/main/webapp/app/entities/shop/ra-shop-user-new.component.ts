@@ -20,6 +20,8 @@ import { MapService } from '../../geometry/map.service';
 import { LoaderService } from './loader.service';
 // import { Ng2ImgMaxService } from 'ng2-img-max';
 
+import { QuillEditorComponent } from 'ngx-quill/src/quill-editor.component';
+
 require('aws-sdk/dist/aws-sdk');
 
 interface Address {
@@ -46,6 +48,8 @@ interface GeoResult {
 export class ShopUserNewComponent implements OnInit, OnDestroy {
     @ViewChild('selectedFile')
     private elFile: ElementRef;
+
+    @ViewChild('editor') editor: QuillEditorComponent
 
     private geoResults: Observable<GeoResult>;
     private addresses: GeoResult;
@@ -112,6 +116,14 @@ export class ShopUserNewComponent implements OnInit, OnDestroy {
                 );
             }
         });
+
+        this.editor
+            .onContentChanged.debounceTime(400)
+            .distinctUntilChanged();
+            // .subscribe(data => {
+            //    console.log('view child + directly subscription', data)
+            // }
+            // );
     }
 
     private fillForm() {
