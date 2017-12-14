@@ -2,8 +2,8 @@
     "rainyApp": {
         "shop": {
             "home": {
-                "title": "ข้อมูลของคุณ",
-                "createLabel": "เพิ่มข้อมูล",
+                "title": "ข้อมูลของฉัน",
+                "createLabel": "เพิ่ม",
                 "createOrEditLabel": "สร้างหรือแก้ไขข้อมูล"
             },
             "created": "ข้อมูล ถูกสร้างด้วย {{ param }}",
@@ -15,22 +15,23 @@
             "detail": {
                 "title": "ข้อมูล"
             },
+            "cover_info": "ข้อมูลสำหรับแสดงหน้าแรก",
             "name": "ชื่อ",
             "pic_cover": "ภาพหน้าปก",
             "tel": "โทร",
-            "line_uname": "ไลน์",
+            "line_uname": "ไลน์ไอดี",
             "description": "รายละเอียดเพิ่มเติม",
             "age": "อายุ",
             "category": "เพศ",
             "price": "ค่าขนม",
             "shape": "สัดส่วน",
             "skin": "สีผิว",
-            "high": "สูง",
+            "high": "ส่วนสูง",
             "weight": "น้ำหนัก",
             "district": "อำเภอ/เขต",
             "subdistrict": "ตำบล/แขวง",
             "province": "จังหวัด",
-            "album": "Album",
+            "album": "อัลบั้มรูป",
             "type": "เพศ",
             "details": "รายละเอียด",
             "comment": "การบ้าน",

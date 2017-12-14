@@ -27,16 +27,17 @@
     "font-awesome": "4.7.0",
     "jquery": "3.2.1",
     "mapbox-gl": "^0.41.0",
+    "ng-diff-match-patch": "2.0.6",
     "ng-jhipster": "0.2.12",
     "ng2-webstorage": "1.8.0",
     "ngx-cookie": "1.0.0",
     "ngx-infinite-scroll": "0.5.1",
+    "ngx-quill": "^1.6.0",
     "reflect-metadata": "0.1.10",
     "rxjs": "5.4.2",
     "swagger-ui": "2.2.10",
     "tether": "1.4.0",
-    "zone.js": "0.8.16",
-    "ng-diff-match-patch": "2.0.6"
+    "zone.js": "0.8.16"
   },
   "devDependencies": {
     "@angular/cli": "1.4.2",

@@ -1,6 +1,6 @@
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { HttpClientModule } from '@angular/common/http'; 
+import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, FormGroup, FormControl, ReactiveFormsModule } from '@angular/forms';
 
 import { RainySharedModule } from '../../shared';
@@ -27,6 +27,7 @@ import { AgmCoreModule } from '@agm/core';
 import { LoaderService } from './loader.service';
 import { LoaderComponent } from './loader.component';
 
+import { QuillModule } from 'ngx-quill';
 // import { Ng2ImgMaxModule } from 'ng2-img-max';
 
 const ENTITY_STATES = [
@@ -45,6 +46,7 @@ const ENTITY_STATES = [
             apiKey: 'AIzaSyBlk6Nxh8iMaKuhuJK_sv3gFhi_aoeK_Kg'
         }),
         HttpClientModule,
+        QuillModule,
         // Ng2ImgMaxModule
     ],
     declarations: [

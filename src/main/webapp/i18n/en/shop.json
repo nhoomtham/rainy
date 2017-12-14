@@ -2,7 +2,7 @@
     "rainyApp": {
         "shop": {
             "home": {
-                "title": "Shops",
+                "title": "My Info",
                 "createLabel": "Create a new Shop",
                 "createOrEditLabel": "Create or edit a Shop"
             },
@@ -15,6 +15,7 @@
             "detail": {
                 "title": "Shop"
             },
+            "cover_info": "Info for cover page",
             "name": "Name",
             "pic_cover": "Pic Cover",
             "tel": "Tel",
@@ -40,7 +41,7 @@
             "required": "This field is required",
             "invalid-number": "Invalid number",
             "invalid-length": "Too long",
-            "shape-hint" : "xx-xx-xx"
+            "shape-hint": "xx-xx-xx"
         }
     }
 }
