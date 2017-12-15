@@ -24,7 +24,7 @@ import {
 @NgModule({
     imports: [
         RainySharedModule,
-        RouterModule.forChild(accountState)
+        RouterModule.forRoot(accountState, { useHash: true })
     ],
     declarations: [
         SocialRegisterComponent,

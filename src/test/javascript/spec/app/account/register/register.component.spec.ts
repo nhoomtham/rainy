@@ -1,10 +1,10 @@
 import { ComponentFixture, TestBed, async, inject, tick, fakeAsync } from '@angular/core/testing';
+import { Renderer, ElementRef } from '@angular/core';
 import { Observable } from 'rxjs/Rx';
-
 import { JhiLanguageService } from 'ng-jhipster';
 import { MockLanguageService } from '../../../helpers/mock-language.service';
 import { RainyTestModule } from '../../../test.module';
-import { EMAIL_ALREADY_USED_TYPE, LOGIN_ALREADY_USED_TYPE } from '../../../../../../main/webapp/app/shared';
+import { LoginModalService, EMAIL_ALREADY_USED_TYPE, LOGIN_ALREADY_USED_TYPE } from '../../../../../../main/webapp/app/shared';
 import { Register } from '../../../../../../main/webapp/app/account/register/register.service';
 import { RegisterComponent } from '../../../../../../main/webapp/app/account/register/register.component';
 
@@ -19,10 +19,21 @@ describe('Component Tests', () => {
                 imports: [RainyTestModule],
                 declarations: [RegisterComponent],
                 providers: [
-                    Register
+                    Register,
+                    {
+                        provide: LoginModalService,
+                        useValue: null
+                    },
+                    {
+                        provide: Renderer,
+                        useValue: null
+                    },
+                    {
+                        provide: ElementRef,
+                        useValue: null
+                    }
                 ]
-            })
-            .overrideTemplate(RegisterComponent, '')
+            }).overrideTemplate(RegisterComponent, '')
             .compileComponents();
         }));
 
@@ -52,10 +63,10 @@ describe('Component Tests', () => {
 
                     expect(service.save).toHaveBeenCalledWith({
                         password: 'password',
-                        langKey: 'th'
+                        langKey: 'en'
                     });
                     expect(comp.success).toEqual(true);
-                    expect(comp.registerAccount.langKey).toEqual('th');
+                    expect(comp.registerAccount.langKey).toEqual('en');
                     expect(mockTranslate.getCurrentSpy).toHaveBeenCalled();
                     expect(comp.errorUserExists).toBeNull();
                     expect(comp.errorEmailExists).toBeNull();

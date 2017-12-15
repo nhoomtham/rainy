@@ -74,7 +74,9 @@ public class CustomSocialUsersConnectionRepositoryIntTest {
         insertFacebookConnection();
         insertFacebookConnectionSameFacebookUser();
         List<String> localUserIds = usersConnectionRepository.findUserIdsWithConnection(connectionRepository.getPrimaryConnection(TestFacebookApi.class));
-        assertThat(localUserIds).containsExactly("1", "2");
+        assertEquals(2, localUserIds.size());
+        assertEquals("1", localUserIds.get(0));
+        assertEquals("2", localUserIds.get(1));
     }
 
     @Test

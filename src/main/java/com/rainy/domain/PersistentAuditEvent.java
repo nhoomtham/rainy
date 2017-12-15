@@ -8,8 +8,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Persist AuditEvent managed by the Spring Boot actuator.
- *
+ * Persist AuditEvent managed by the Spring Boot actuator
  * @see org.springframework.boot.actuate.audit.AuditEvent
  */
 @Entity
@@ -28,7 +27,6 @@ public class PersistentAuditEvent implements Serializable {
 
     @Column(name = "event_date")
     private Instant auditEventDate;
-
     @Column(name = "event_type")
     private String auditEventType;
 

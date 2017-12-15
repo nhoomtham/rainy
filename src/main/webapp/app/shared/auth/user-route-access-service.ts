@@ -32,12 +32,14 @@ export class UserRouteAccessService implements CanActivate {
             }
 
             if (account) {
-                return principal.hasAnyAuthority(authorities).then((response) => {
-                    if (response) {
-                        return true;
-                    }
-                    return false;
-                });
+              return principal.hasAnyAuthority(authorities).then(
+                (response) => {
+                  if (response) {
+                    return true;
+                  }
+                  return false;
+                }
+              );
             }
 
             this.stateStorageService.storeUrl(url);

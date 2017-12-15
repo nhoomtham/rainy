@@ -1,6 +1,5 @@
 import { ComponentFixture, TestBed, async } from '@angular/core/testing';
 import { Observable } from 'rxjs/Rx';
-
 import { RainyTestModule } from '../../../test.module';
 import { PasswordComponent } from '../../../../../../main/webapp/app/account/password/password.component';
 import { PasswordService } from '../../../../../../main/webapp/app/account/password/password.service';
@@ -24,8 +23,7 @@ describe('Component Tests', () => {
                     AccountService,
                     PasswordService
                 ]
-            })
-            .overrideTemplate(PasswordComponent, '')
+            }).overrideTemplate(PasswordComponent, '')
             .compileComponents();
         }));
 

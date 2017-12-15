@@ -8,7 +8,7 @@ import { HOME_ROUTE, HomeComponent } from './';
 @NgModule({
     imports: [
         RainySharedModule,
-        RouterModule.forChild([ HOME_ROUTE ])
+        RouterModule.forRoot([ HOME_ROUTE ], { useHash: true })
     ],
     declarations: [
         HomeComponent,

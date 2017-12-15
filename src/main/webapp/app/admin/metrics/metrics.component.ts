@@ -35,12 +35,12 @@ export class JhiMetricsMonitoringComponent implements OnInit {
             this.cachesStats = {};
             Object.keys(metrics.timers).forEach((key) => {
                 const value = metrics.timers[key];
-                if (key.includes('web.rest') || key.includes('service')) {
+                if (key.indexOf('web.rest') !== -1 || key.indexOf('service') !== -1) {
                     this.servicesStats[key] = value;
                 }
             });
             Object.keys(metrics.gauges).forEach((key) => {
-                if (key.includes('jcache.statistics')) {
+                if (key.indexOf('jcache.statistics') !== -1) {
                     const value = metrics.gauges[key].value;
                     // remove gets or puts
                     const index = key.lastIndexOf('.');

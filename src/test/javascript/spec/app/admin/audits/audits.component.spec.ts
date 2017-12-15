@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed, async } from '@angular/core/testing';
+import { DatePipe } from '@angular/common';
 import { NgbPaginationConfig} from '@ng-bootstrap/ng-bootstrap';
-
+import { JhiParseLinks } from 'ng-jhipster';
 import { RainyTestModule } from '../../../test.module';
 import { PaginationConfig } from '../../../../../../main/webapp/app/blocks/config/uib-pagination.config'
 import { AuditsComponent } from '../../../../../../main/webapp/app/admin/audits/audits.component';
@@ -20,8 +21,7 @@ function getDate(isToday= true) {
         date = new Date(date.getFullYear(), date.getMonth() - 1, date.getDate());
       }
     }
-    const dateString = date.getDate() < 10 ? '0' + date.getDate() : '' + date.getDate();
-    return `${date.getFullYear()}-${date.getMonth() + 1}-${dateString}`;
+    return `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
 }
 
 describe('Component Tests', () => {
@@ -39,10 +39,11 @@ describe('Component Tests', () => {
                 providers: [
                     AuditsService,
                     NgbPaginationConfig,
-                    PaginationConfig
+                    JhiParseLinks,
+                    PaginationConfig,
+                    DatePipe
                 ]
-            })
-            .overrideTemplate(AuditsComponent, '')
+            }).overrideTemplate(AuditsComponent, '')
             .compileComponents();
         }));
 

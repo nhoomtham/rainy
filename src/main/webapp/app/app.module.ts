@@ -2,14 +2,18 @@ import './vendor.ts';
 
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { Ng2Webstorage } from 'ngx-webstorage';
+import { Ng2Webstorage } from 'ng2-webstorage';
+
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 import { RainySharedModule, UserRouteAccessService } from './shared';
-import { RainyAppRoutingModule} from './app-routing.module';
 import { RainyHomeModule } from './home/home.module';
 import { RainyAdminModule } from './admin/admin.module';
 import { RainyAccountModule } from './account/account.module';
 import { RainyEntityModule } from './entities/entity.module';
+
+import { MaterialModule } from './material/material.module';
+
 import { customHttpProvider } from './blocks/interceptor/http.provider';
 import { PaginationConfig } from './blocks/config/uib-pagination.config';
 
@@ -17,6 +21,7 @@ import { PaginationConfig } from './blocks/config/uib-pagination.config';
 
 import {
     JhiMainComponent,
+    LayoutRoutingModule,
     NavbarComponent,
     FooterComponent,
     ProfileService,
@@ -28,7 +33,10 @@ import {
 @NgModule({
     imports: [
         BrowserModule,
-        RainyAppRoutingModule,
+        // Material
+        BrowserAnimationsModule,
+        // Material
+        LayoutRoutingModule,
         Ng2Webstorage.forRoot({ prefix: 'jhi', separator: '-'}),
         RainySharedModule,
         RainyHomeModule,
@@ -36,6 +44,8 @@ import {
         RainyAccountModule,
         RainyEntityModule,
         // jhipster-needle-angular-add-module JHipster will add new module here
+
+        MaterialModule,
     ],
     declarations: [
         JhiMainComponent,

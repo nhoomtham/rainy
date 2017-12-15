@@ -89,9 +89,9 @@ jhipster:
     # By default CORS is disabled. Uncomment to enable.
     #cors:
         #allowed-origins: "*"
-        #allowed-methods: "*"
+        #allowed-methods: GET, PUT, POST, DELETE, OPTIONS
         #allowed-headers: "*"
-        #exposed-headers: "Authorization,Link,X-Total-Count"
+        #exposed-headers:
         #allow-credentials: true
         #max-age: 1800
     mail:
@@ -122,3 +122,10 @@ jhipster:
 # ===================================================================
 
 application:
+    aws:
+        access-key: AWS_ACCESS_KEY
+        secret-key: AWS_SECRET_KEY
+        region: eu-west-2
+        root-dir: prod
+        bucket-name: ra-rainy
+

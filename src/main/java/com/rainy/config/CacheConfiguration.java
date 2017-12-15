@@ -42,6 +42,11 @@ public class CacheConfiguration {
             cm.createCache(com.rainy.domain.Authority.class.getName(), jcacheConfiguration);
             cm.createCache(com.rainy.domain.User.class.getName() + ".authorities", jcacheConfiguration);
             cm.createCache(com.rainy.domain.SocialUserConnection.class.getName(), jcacheConfiguration);
+            cm.createCache(com.rainy.domain.Shop.class.getName(), jcacheConfiguration);
+            cm.createCache(com.rainy.domain.Album.class.getName(), jcacheConfiguration);
+            cm.createCache(com.rainy.domain.Shop.class.getName() + ".albums", jcacheConfiguration);
+            cm.createCache(com.rainy.domain.ShopStatus.class.getName(), jcacheConfiguration);
+            cm.createCache(com.rainy.domain.EntityAuditEvent.class.getName(), jcacheConfiguration);
             // jhipster-needle-ehcache-add-entry
         };
     }

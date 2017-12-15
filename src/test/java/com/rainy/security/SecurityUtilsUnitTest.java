@@ -9,7 +9,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -25,8 +24,8 @@ public class SecurityUtilsUnitTest {
         SecurityContext securityContext = SecurityContextHolder.createEmptyContext();
         securityContext.setAuthentication(new UsernamePasswordAuthenticationToken("admin", "admin"));
         SecurityContextHolder.setContext(securityContext);
-        Optional<String> login = SecurityUtils.getCurrentUserLogin();
-        assertThat(login).contains("admin");
+        String login = SecurityUtils.getCurrentUserLogin();
+        assertThat(login).isEqualTo("admin");
     }
 
     @Test
@@ -34,8 +33,8 @@ public class SecurityUtilsUnitTest {
         SecurityContext securityContext = SecurityContextHolder.createEmptyContext();
         securityContext.setAuthentication(new UsernamePasswordAuthenticationToken("admin", "token"));
         SecurityContextHolder.setContext(securityContext);
-        Optional<String> jwt = SecurityUtils.getCurrentUserJWT();
-        assertThat(jwt).contains("token");
+        String jwt = SecurityUtils.getCurrentUserJWT();
+        assertThat(jwt).isEqualTo("token");
     }
 
     @Test

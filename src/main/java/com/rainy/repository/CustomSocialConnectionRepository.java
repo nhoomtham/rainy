@@ -118,9 +118,9 @@ public class CustomSocialConnectionRepository implements ConnectionRepository {
     public void updateConnection(Connection<?> connection) {
         SocialUserConnection socialUserConnection = socialUserConnectionRepository.findOneByUserIdAndProviderIdAndProviderUserId(userId, connection.getKey().getProviderId(), connection.getKey().getProviderUserId());
         if (socialUserConnection != null) {
-            SocialUserConnection socialUserConnectionToUpdate = connectionToUserSocialConnection(connection, socialUserConnection.getRank());
-            socialUserConnectionToUpdate.setId(socialUserConnection.getId());
-            socialUserConnectionRepository.save(socialUserConnectionToUpdate);
+            SocialUserConnection socialUserConnectionToUdpate =  connectionToUserSocialConnection(connection, socialUserConnection.getRank());
+            socialUserConnectionToUdpate.setId(socialUserConnection.getId());
+            socialUserConnectionRepository.save(socialUserConnectionToUdpate);
         }
     }
 
