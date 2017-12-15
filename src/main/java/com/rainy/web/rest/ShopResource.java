@@ -6,7 +6,6 @@ import com.rainy.service.ShopService;
 import com.rainy.web.rest.errors.BadRequestAlertException;
 import com.rainy.web.rest.util.HeaderUtil;
 import com.rainy.web.rest.util.PaginationUtil;
-import io.swagger.annotations.ApiParam;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -91,7 +90,7 @@ public class ShopResource {
      */
     @GetMapping("/shops")
     @Timed
-    public ResponseEntity<List<Shop>> getAllShops(@ApiParam Pageable pageable) {
+    public ResponseEntity<List<Shop>> getAllShops(Pageable pageable) {
         log.debug("REST request to get a page of Shops");
         Page<Shop> page = shopService.findAll(pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/shops");

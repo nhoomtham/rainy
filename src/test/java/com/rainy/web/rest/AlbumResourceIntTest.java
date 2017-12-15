@@ -188,6 +188,8 @@ public class AlbumResourceIntTest {
 
         // Update the album
         Album updatedAlbum = albumRepository.findOne(album.getId());
+        // Disconnect from session so that the updates on updatedAlbum are not directly saved in db
+        em.detach(updatedAlbum);
         updatedAlbum
             .url(UPDATED_URL);
 

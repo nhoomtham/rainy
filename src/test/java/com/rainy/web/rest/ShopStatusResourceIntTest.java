@@ -188,6 +188,8 @@ public class ShopStatusResourceIntTest {
 
         // Update the shopStatus
         ShopStatus updatedShopStatus = shopStatusRepository.findOne(shopStatus.getId());
+        // Disconnect from session so that the updates on updatedShopStatus are not directly saved in db
+        em.detach(updatedShopStatus);
         updatedShopStatus
             .message(UPDATED_MESSAGE);
 

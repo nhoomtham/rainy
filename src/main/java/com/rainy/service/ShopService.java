@@ -18,25 +18,25 @@ public interface ShopService {
     Shop save(Shop shop);
 
     /**
-     *  Get all the shops.
+     * Get all the shops.
      *
-     *  @param pageable the pagination information
-     *  @return the list of entities
+     * @param pageable the pagination information
+     * @return the list of entities
      */
     Page<Shop> findAll(Pageable pageable);
 
     /**
-     *  Get the "id" shop.
+     * Get the "id" shop.
      *
-     *  @param id the id of the entity
-     *  @return the entity
+     * @param id the id of the entity
+     * @return the entity
      */
     Shop findOne(Long id);
 
     /**
-     *  Delete the "id" shop.
+     * Delete the "id" shop.
      *
-     *  @param id the id of the entity
+     * @param id the id of the entity
      */
     void delete(Long id);
 }

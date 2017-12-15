@@ -44,7 +44,7 @@ public class User extends AbstractAuditingEntity implements Serializable {
     @JsonIgnore
     @NotNull
     @Size(min = 60, max = 60)
-    @Column(name = "password_hash",length = 60)
+    @Column(name = "password_hash", length = 60)
     private String password;
 
     @Size(max = 50)
@@ -107,7 +107,7 @@ public class User extends AbstractAuditingEntity implements Serializable {
         return login;
     }
 
-    //Lowercase the login before saving it in database
+    // Lowercase the login before saving it in database
     public void setLogin(String login) {
         this.login = StringUtils.lowerCase(login, Locale.ENGLISH);
     }
@@ -177,11 +177,11 @@ public class User extends AbstractAuditingEntity implements Serializable {
     }
 
     public Instant getResetDate() {
-       return resetDate;
+        return resetDate;
     }
 
     public void setResetDate(Instant resetDate) {
-       this.resetDate = resetDate;
+        this.resetDate = resetDate;
     }
 
     public String getLangKey() {

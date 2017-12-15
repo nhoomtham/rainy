@@ -1,11 +1,8 @@
 /* tslint:disable max-line-length */
 import { ComponentFixture, TestBed, async } from '@angular/core/testing';
-import { DatePipe } from '@angular/common';
-import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs/Rx';
-import { JhiDateUtils, JhiDataUtils, JhiEventManager } from 'ng-jhipster';
+
 import { RainyTestModule } from '../../../test.module';
-import { MockActivatedRoute } from '../../../helpers/mock-route.service';
 import { ShopStatusDetailComponent } from '../../../../../../main/webapp/app/entities/shop-status/shop-status-detail.component';
 import { ShopStatusService } from '../../../../../../main/webapp/app/entities/shop-status/shop-status.service';
 import { ShopStatus } from '../../../../../../main/webapp/app/entities/shop-status/shop-status.model';
@@ -22,17 +19,10 @@ describe('Component Tests', () => {
                 imports: [RainyTestModule],
                 declarations: [ShopStatusDetailComponent],
                 providers: [
-                    JhiDateUtils,
-                    JhiDataUtils,
-                    DatePipe,
-                    {
-                        provide: ActivatedRoute,
-                        useValue: new MockActivatedRoute({id: 123})
-                    },
-                    ShopStatusService,
-                    JhiEventManager
+                    ShopStatusService
                 ]
-            }).overrideTemplate(ShopStatusDetailComponent, '')
+            })
+            .overrideTemplate(ShopStatusDetailComponent, '')
             .compileComponents();
         }));
 
@@ -44,16 +34,16 @@ describe('Component Tests', () => {
 
         describe('OnInit', () => {
             it('Should call load all on init', () => {
-            // GIVEN
+                // GIVEN
 
-            spyOn(service, 'find').and.returnValue(Observable.of(new ShopStatus(10)));
+                spyOn(service, 'find').and.returnValue(Observable.of(new ShopStatus(123)));
 
-            // WHEN
-            comp.ngOnInit();
+                // WHEN
+                comp.ngOnInit();
 
-            // THEN
-            expect(service.find).toHaveBeenCalledWith(123);
-            expect(comp.shopStatus).toEqual(jasmine.objectContaining({id: 10}));
+                // THEN
+                expect(service.find).toHaveBeenCalledWith(123);
+                expect(comp.shopStatus).toEqual(jasmine.objectContaining({id: 123}));
             });
         });
     });

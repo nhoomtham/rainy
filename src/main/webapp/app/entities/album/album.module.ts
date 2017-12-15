@@ -23,7 +23,7 @@ const ENTITY_STATES = [
 @NgModule({
     imports: [
         RainySharedModule,
-        RouterModule.forRoot(ENTITY_STATES, { useHash: true })
+        RouterModule.forChild(ENTITY_STATES)
     ],
     declarations: [
         AlbumComponent,

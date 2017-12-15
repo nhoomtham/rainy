@@ -39,10 +39,10 @@ public class ShopServiceImpl implements ShopService{
     }
 
     /**
-     *  Get all the shops.
+     * Get all the shops.
      *
-     *  @param pageable the pagination information
-     *  @return the list of entities
+     * @param pageable the pagination information
+     * @return the list of entities
      */
     @Override
     @Transactional(readOnly = true)
@@ -52,10 +52,10 @@ public class ShopServiceImpl implements ShopService{
     }
 
     /**
-     *  Get one shop by id.
+     * Get one shop by id.
      *
-     *  @param id the id of the entity
-     *  @return the entity
+     * @param id the id of the entity
+     * @return the entity
      */
     @Override
     @Transactional(readOnly = true)
@@ -65,9 +65,9 @@ public class ShopServiceImpl implements ShopService{
     }
 
     /**
-     *  Delete the  shop by id.
+     * Delete the shop by id.
      *
-     *  @param id the id of the entity
+     * @param id the id of the entity
      */
     @Override
     public void delete(Long id) {

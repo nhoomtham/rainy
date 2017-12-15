@@ -6,6 +6,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
+
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
@@ -369,13 +370,13 @@ public class Shop implements Serializable {
             ", tel='" + getTel() + "'" +
             ", line_uname='" + getLine_uname() + "'" +
             ", description='" + getDescription() + "'" +
-            ", age='" + getAge() + "'" +
+            ", age=" + getAge() +
             ", category='" + getCategory() + "'" +
-            ", price='" + getPrice() + "'" +
+            ", price=" + getPrice() +
             ", shape='" + getShape() + "'" +
             ", skin='" + getSkin() + "'" +
-            ", high='" + getHigh() + "'" +
-            ", weight='" + getWeight() + "'" +
+            ", high=" + getHigh() +
+            ", weight=" + getWeight() +
             ", district='" + getDistrict() + "'" +
             ", subdistrict='" + getSubdistrict() + "'" +
             ", province='" + getProvince() + "'" +

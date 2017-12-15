@@ -1,9 +1,6 @@
-import { Injectable } from '@angular/core';
-import { Resolve, ActivatedRouteSnapshot, RouterStateSnapshot, Routes } from '@angular/router';
+import { Routes } from '@angular/router';
 
 import { UserRouteAccessService } from '../../shared';
-import { JhiPaginationUtil } from 'ng-jhipster';
-
 import { AlbumComponent } from './album.component';
 import { AlbumDetailComponent } from './album-detail.component';
 import { AlbumPopupComponent } from './album-dialog.component';
