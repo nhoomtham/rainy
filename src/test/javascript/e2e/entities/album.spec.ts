@@ -1,15 +1,11 @@
-import { browser, element, by, $ } from 'protractor';
+import { browser, element, by } from 'protractor';
 import { NavBarPage } from './../page-objects/jhi-page-objects';
-const path = require('path');
 
 describe('Album e2e test', () => {
 
     let navBarPage: NavBarPage;
     let albumDialogPage: AlbumDialogPage;
     let albumComponentsPage: AlbumComponentsPage;
-    const fileToUpload = '../../../../main/webapp/content/images/logo-jhipster.png';
-    const absolutePath = path.resolve(__dirname, fileToUpload);
-    
 
     beforeAll(() => {
         browser.get('/');
@@ -40,7 +36,7 @@ describe('Album e2e test', () => {
         albumDialogPage.shopSelectLastOption();
         albumDialogPage.save();
         expect(albumDialogPage.getSaveButton().isPresent()).toBeFalsy();
-    }); 
+    });
 
     afterAll(() => {
         navBarPage.autoSignOut();
@@ -71,27 +67,27 @@ export class AlbumDialogPage {
         return this.modalTitle.getAttribute('jhiTranslate');
     }
 
-    setUrlInput = function (url) {
+    setUrlInput = function(url) {
         this.urlInput.sendKeys(url);
     }
 
-    getUrlInput = function () {
+    getUrlInput = function() {
         return this.urlInput.getAttribute('value');
     }
 
-    shopSelectLastOption = function () {
+    shopSelectLastOption = function() {
         this.shopSelect.all(by.tagName('option')).last().click();
     }
 
-    shopSelectOption = function (option) {
+    shopSelectOption = function(option) {
         this.shopSelect.sendKeys(option);
     }
 
-    getShopSelect = function () {
+    getShopSelect = function() {
         return this.shopSelect;
     }
 
-    getShopSelectedOption = function () {
+    getShopSelectedOption = function() {
         return this.shopSelect.element(by.css('option:checked')).getText();
     }
 

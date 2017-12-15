@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Resolve, ActivatedRouteSnapshot, RouterStateSnapshot, Routes } from '@angular/router';
-
-import { UserRouteAccessService } from '../../shared';
 import { JhiPaginationUtil } from 'ng-jhipster';
 
+import { UserRouteAccessService } from '../../shared';
 import { ShopStatusComponent } from './shop-status.component';
 import { ShopStatusDetailComponent } from './shop-status-detail.component';
 import { ShopStatusPopupComponent } from './shop-status-dialog.component';
