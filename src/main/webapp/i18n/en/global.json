@@ -7,9 +7,6 @@
             "jhipster-needle-menu-add-element": "JHipster will add additional menu entries here (do not translate!)",
             "entities": {
                 "main": "Entities",
-                "shop": "Shop",
-                "album": "Album",
-                "shopStatus": "Shop Status",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {
@@ -19,8 +16,7 @@
                 "sessions": "Sessions",
                 "login": "Sign in",
                 "logout": "Sign out",
-                "register": "Register",
-                "myinfo": "Personal"
+                "register": "Register"
             },
             "admin": {
                 "main": "Administration",
@@ -33,20 +29,9 @@
                 "audits": "Audits",
                 "apidocs": "API",
                 "database": "Database",
-                "entity-audit": "Entity Audit",
                 "jhipster-needle-menu-add-admin-element": "JHipster will add additional menu entries here (do not translate!)"
             },
-            "language": "Language",
-            "find-shop": {
-                "main": "Find Shop",
-                "by-distance": "By Distance",
-                "by-status": "By Status",
-                "by-faverite": "By Faverite"
-            },
-            "find-customer": {
-                "main": "Find Customer",
-                "shop": "Shop Info."
-            }
+            "language": "Language"
         },
         "form": {
             "username": "Username",
@@ -141,8 +126,7 @@
         "Size": "Field {{ fieldName }} does not meet min/max size requirements!",
         "userexists": "Login name already used!",
         "emailexists": "Email is already in use!",
-        "idexists": "A new {{ entityName }} cannot already have an ID",
-        "notAuthorized": "You are not authorized to access this page."
+        "idexists": "A new {{ entityName }} cannot already have an ID"
     },
     "footer": "This is your footer"
 }

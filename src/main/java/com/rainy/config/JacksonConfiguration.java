@@ -1,6 +1,5 @@
 package com.rainy.config;
 
-import com.bedatadriven.jackson.datatype.jts.JtsModule;
 import com.fasterxml.jackson.datatype.hibernate5.Hibernate5Module;
 import com.fasterxml.jackson.module.afterburner.AfterburnerModule;
 
@@ -44,11 +43,4 @@ public class JacksonConfiguration {
         return new ConstraintViolationProblemModule();
     }
 
-    /*
-    * Add-on module for Jackson (http://jackson.codehaus.org) to support JTS geometry types using the GeoJSON standard.
-    */
-    @Bean
-    public JtsModule jtsModule() {
-        return new JtsModule();
-    }
 }

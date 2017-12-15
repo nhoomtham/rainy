@@ -10,16 +10,7 @@ export const createRequestOption = (req?: any): BaseRequestOptions => {
             params.paramsMap.set('sort', req.sort);
         }
         params.set('query', req.query);
-
-        if (req.lat) {
-            params.set('lat', req.lat);
-        }
-        if (req.lon) {
-            params.set('lon', req.lon);
-        }
-        if (req.km) {
-            params.set('km', req.km);
-        }
+        params.set('filter', req.filter);
 
         options.params = params;
     }

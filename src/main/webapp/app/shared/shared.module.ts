@@ -26,7 +26,7 @@ import {
     declarations: [
         JhiSocialComponent,
         JhiLoginModalComponent,
-        HasAnyAuthorityDirective,
+        HasAnyAuthorityDirective
     ],
     providers: [
         LoginService,
@@ -38,7 +38,7 @@ import {
         AuthServerProvider,
         SocialService,
         UserService,
-        DatePipe,
+        DatePipe
     ],
     entryComponents: [JhiLoginModalComponent],
     exports: [
@@ -46,7 +46,7 @@ import {
         JhiSocialComponent,
         JhiLoginModalComponent,
         HasAnyAuthorityDirective,
-        DatePipe,
+        DatePipe
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
 

@@ -3,7 +3,6 @@ package com.rainy.config;
 import com.rainy.security.*;
 import com.rainy.security.jwt.*;
 
-
 import org.springframework.beans.factory.BeanInitializationException;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -42,8 +41,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     private final SecurityProblemSupport problemSupport;
 
-    public SecurityConfiguration(AuthenticationManagerBuilder authenticationManagerBuilder, UserDetailsService userDetailsService,
-            TokenProvider tokenProvider,CorsFilter corsFilter, SecurityProblemSupport problemSupport) {
+    public SecurityConfiguration(AuthenticationManagerBuilder authenticationManagerBuilder, UserDetailsService userDetailsService,TokenProvider tokenProvider,CorsFilter corsFilter, SecurityProblemSupport problemSupport) {
         this.authenticationManagerBuilder = authenticationManagerBuilder;
         this.userDetailsService = userDetailsService;
         this.tokenProvider = tokenProvider;
@@ -102,16 +100,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
             .antMatchers("/api/account/reset-password/init").permitAll()
             .antMatchers("/api/account/reset-password/finish").permitAll()
             .antMatchers("/api/profile-info").permitAll()
-            .antMatchers("/api/shops").permitAll()
-            .antMatchers("/api/shops/*").permitAll()
-            // .antMatchers("/api/shops/shop-user").permitAll()
-            .antMatchers("/api/albums/shop/*").permitAll()
-            .antMatchers("/api/shop-statuses").permitAll()
-            /// .antMatchers("/api/shop-statuses/by-shop/**").permitAll()
-            // .antMatchers("/api/aws").authenticated()
-            // .antMatchers("/api/shop-statuses/by-shop/**").authenticated()
-            // .antMatchers("/api/ra-shops/shop-user").authenticated()
-            // .antMatchers("/api/ra-shops/shop-owned-user").authenticated()
             .antMatchers("/api/**").authenticated()
             .antMatchers("/management/health").permitAll()
             .antMatchers("/management/**").hasAuthority(AuthoritiesConstants.ADMIN)

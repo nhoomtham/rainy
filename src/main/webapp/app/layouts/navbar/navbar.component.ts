@@ -8,8 +8,6 @@ import { JhiLanguageHelper, Principal, LoginModalService, LoginService } from '.
 
 import { VERSION } from '../../app.constants';
 
-import { ShopService } from '../../entities/shop/shop.service';
-
 @Component({
     selector: 'jhi-navbar',
     templateUrl: './navbar.component.html',
@@ -32,8 +30,7 @@ export class NavbarComponent implements OnInit {
         private principal: Principal,
         private loginModalService: LoginModalService,
         private profileService: ProfileService,
-        private router: Router,
-        private shopService: ShopService,
+        private router: Router
     ) {
         this.version = VERSION ? 'v' + VERSION : '';
         this.isNavbarCollapsed = true;
@@ -44,7 +41,7 @@ export class NavbarComponent implements OnInit {
             this.languages = languages;
         });
 
-        this.profileService.getProfileInfo().subscribe((profileInfo) => {
+        this.profileService.getProfileInfo().then((profileInfo) => {
             this.inProduction = profileInfo.inProduction;
             this.swaggerEnabled = profileInfo.swaggerEnabled;
         });
@@ -79,5 +76,4 @@ export class NavbarComponent implements OnInit {
     getImageUrl() {
         return this.isAuthenticated() ? this.principal.getImageUrl() : null;
     }
-
 }
