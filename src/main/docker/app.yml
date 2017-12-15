@@ -1,0 +1,14 @@
+version: '2'
+services:
+    rainy-app:
+        image: rainy
+        environment:
+            - SPRING_PROFILES_ACTIVE=prod,swagger
+            - SPRING_DATASOURCE_URL=jdbc:postgresql://rainy-postgresql:5432/rainy
+            - JHIPSTER_SLEEP=10 # gives time for the database to boot before the application
+        ports:
+            - 8080:8080
+    rainy-postgresql:
+        extends:
+            file: postgresql.yml
+            service: rainy-postgresql

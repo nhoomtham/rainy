@@ -1,0 +1,96 @@
+<div>
+    <h2>
+        <span jhiTranslate="rainyApp.shop.home.title">Shops</span>
+        <button class="btn btn-primary float-right jh-create-entity create-shop" [routerLink]="['/', { outlets: { popup: ['shop-new'] } }]">
+            <span class="fa fa-plus"></span>
+            <span  jhiTranslate="rainyApp.shop.home.createLabel">
+            Create new Shop
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <div class="row">
+    </div>
+    <br/>
+    <div class="table-responsive" *ngIf="shops">
+        <table class="table table-striped">
+            <thead>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
+            <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="name"><span jhiTranslate="rainyApp.shop.name">Name</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="pic_cover"><span jhiTranslate="rainyApp.shop.pic_cover">Pic Cover</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="tel"><span jhiTranslate="rainyApp.shop.tel">Tel</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="line_uname"><span jhiTranslate="rainyApp.shop.line_uname">Line Uname</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="description"><span jhiTranslate="rainyApp.shop.description">Description</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="age"><span jhiTranslate="rainyApp.shop.age">Age</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="category"><span jhiTranslate="rainyApp.shop.category">Category</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="price"><span jhiTranslate="rainyApp.shop.price">Price</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="shape"><span jhiTranslate="rainyApp.shop.shape">Shape</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="skin"><span jhiTranslate="rainyApp.shop.skin">Skin</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="high"><span jhiTranslate="rainyApp.shop.high">High</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="weight"><span jhiTranslate="rainyApp.shop.weight">Weight</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="district"><span jhiTranslate="rainyApp.shop.district">District</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="subdistrict"><span jhiTranslate="rainyApp.shop.subdistrict">Subdistrict</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="province"><span jhiTranslate="rainyApp.shop.province">Province</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="user.login"><span jhiTranslate="rainyApp.shop.user">User</span> <span class="fa fa-sort"></span></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let shop of shops ;trackBy: trackId">
+                <td><a [routerLink]="['../shop', shop.id ]">{{shop.id}}</a></td>
+                <td>{{shop.name}}</td>
+                <td>{{shop.pic_cover}}</td>
+                <td>{{shop.tel}}</td>
+                <td>{{shop.line_uname}}</td>
+                <td>{{shop.description}}</td>
+                <td>{{shop.age}}</td>
+                <td jhiTranslate="{{'rainyApp.Ra_type.' + shop.category}}">{{shop.category}}</td>
+                <td>{{shop.price}}</td>
+                <td>{{shop.shape}}</td>
+                <td jhiTranslate="{{'rainyApp.Ra_skin.' + shop.skin}}">{{shop.skin}}</td>
+                <td>{{shop.high}}</td>
+                <td>{{shop.weight}}</td>
+                <td>{{shop.district}}</td>
+                <td>{{shop.subdistrict}}</td>
+                <td>{{shop.province}}</td>
+                <td>
+                    {{shop.user?.login}}
+                </td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['../shop', shop.id ]"
+                                class="btn btn-info btn-sm">
+                            <span class="fa fa-eye"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'shop/'+ shop.id + '/edit'} }]"
+                                replaceUrl="true"
+                                class="btn btn-primary btn-sm">
+                            <span class="fa fa-pencil"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'shop/'+ shop.id + '/delete'} }]"
+                                replaceUrl="true"
+                                class="btn btn-danger btn-sm">
+                            <span class="fa fa-remove"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+        <div *ngIf="shops && shops.length">
+            <div class="row justify-content-center">
+                <jhi-item-count [page]="page" [total]="queryCount" [maxSize]="5" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+            </div>
+            <div class="row justify-content-center">
+                <ngb-pagination [collectionSize]="totalItems" [maxSize]="5" [pageSize]="itemsPerPage" [(page)]="page" (pageChange)="loadPage(page)"></ngb-pagination>
+            </div>
+        </div>
+</div>

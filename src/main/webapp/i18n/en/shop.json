@@ -1,0 +1,37 @@
+{
+    "rainyApp": {
+        "shop" : {
+            "home": {
+                "title": "Shops",
+                "createLabel": "Create a new Shop",
+                "createOrEditLabel": "Create or edit a Shop"
+            },
+            "created": "A new Shop is created with identifier {{ param }}",
+            "updated": "A Shop is updated with identifier {{ param }}",
+            "deleted": "A Shop is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Shop {{ id }}?"
+            },
+            "detail": {
+                "title": "Shop"
+            },
+            "name": "Name",
+            "pic_cover": "Pic Cover",
+            "tel": "Tel",
+            "line_uname": "Line Uname",
+            "description": "Description",
+            "age": "Age",
+            "category": "Category",
+            "price": "Price",
+            "shape": "Shape",
+            "skin": "Skin",
+            "high": "High",
+            "weight": "Weight",
+            "district": "District",
+            "subdistrict": "Subdistrict",
+            "province": "Province",
+            "album": "Album",
+            "user": "User"
+        }
+    }
+}

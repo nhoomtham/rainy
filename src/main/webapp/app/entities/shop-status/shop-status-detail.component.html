@@ -1,0 +1,31 @@
+
+<div *ngIf="shopStatus">
+    <h2><span jhiTranslate="rainyApp.shopStatus.detail.title">Shop Status</span> {{shopStatus.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="rainyApp.shopStatus.message">Message</span></dt>
+        <dd>
+            <span>{{shopStatus.message}}</span>
+        </dd>
+        <dt><span jhiTranslate="rainyApp.shopStatus.shop">Shop</span></dt>
+        <dd>
+            <div *ngIf="shopStatus.shop">
+                <a [routerLink]="['/shop', shopStatus.shop?.id]">{{shopStatus.shop?.name}}</a>
+            </div>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'shop-status/'+ shopStatus.id + '/edit'} }]"
+            replaceUrl="true"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+    </button>
+</div>

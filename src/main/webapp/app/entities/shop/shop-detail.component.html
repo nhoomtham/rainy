@@ -1,0 +1,85 @@
+
+<div *ngIf="shop">
+    <h2><span jhiTranslate="rainyApp.shop.detail.title">Shop</span> {{shop.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="rainyApp.shop.name">Name</span></dt>
+        <dd>
+            <span>{{shop.name}}</span>
+        </dd>
+        <dt><span jhiTranslate="rainyApp.shop.pic_cover">Pic Cover</span></dt>
+        <dd>
+            <span>{{shop.pic_cover}}</span>
+        </dd>
+        <dt><span jhiTranslate="rainyApp.shop.tel">Tel</span></dt>
+        <dd>
+            <span>{{shop.tel}}</span>
+        </dd>
+        <dt><span jhiTranslate="rainyApp.shop.line_uname">Line Uname</span></dt>
+        <dd>
+            <span>{{shop.line_uname}}</span>
+        </dd>
+        <dt><span jhiTranslate="rainyApp.shop.description">Description</span></dt>
+        <dd>
+            <span>{{shop.description}}</span>
+        </dd>
+        <dt><span jhiTranslate="rainyApp.shop.age">Age</span></dt>
+        <dd>
+            <span>{{shop.age}}</span>
+        </dd>
+        <dt><span jhiTranslate="rainyApp.shop.category">Category</span></dt>
+        <dd>
+            <span jhiTranslate="{{'rainyApp.Ra_type.' + shop.category}}">{{shop.category}}</span>
+        </dd>
+        <dt><span jhiTranslate="rainyApp.shop.price">Price</span></dt>
+        <dd>
+            <span>{{shop.price}}</span>
+        </dd>
+        <dt><span jhiTranslate="rainyApp.shop.shape">Shape</span></dt>
+        <dd>
+            <span>{{shop.shape}}</span>
+        </dd>
+        <dt><span jhiTranslate="rainyApp.shop.skin">Skin</span></dt>
+        <dd>
+            <span jhiTranslate="{{'rainyApp.Ra_skin.' + shop.skin}}">{{shop.skin}}</span>
+        </dd>
+        <dt><span jhiTranslate="rainyApp.shop.high">High</span></dt>
+        <dd>
+            <span>{{shop.high}}</span>
+        </dd>
+        <dt><span jhiTranslate="rainyApp.shop.weight">Weight</span></dt>
+        <dd>
+            <span>{{shop.weight}}</span>
+        </dd>
+        <dt><span jhiTranslate="rainyApp.shop.district">District</span></dt>
+        <dd>
+            <span>{{shop.district}}</span>
+        </dd>
+        <dt><span jhiTranslate="rainyApp.shop.subdistrict">Subdistrict</span></dt>
+        <dd>
+            <span>{{shop.subdistrict}}</span>
+        </dd>
+        <dt><span jhiTranslate="rainyApp.shop.province">Province</span></dt>
+        <dd>
+            <span>{{shop.province}}</span>
+        </dd>
+        <dt><span jhiTranslate="rainyApp.shop.user">User</span></dt>
+        <dd>
+            {{shop.user?.login}}
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'shop/'+ shop.id + '/edit'} }]"
+            replaceUrl="true"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+    </button>
+</div>

@@ -1,0 +1,27 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipName": "shop",
+            "otherEntityName": "shop",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "url",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        }
+    ],
+    "changelogDate": "20171023150328",
+    "dto": "no",
+    "service": "no",
+    "entityTableName": "ra_album",
+    "jpaMetamodelFiltering": false,
+    "pagination": "no",
+	"enableEntityAudit": false
+}
