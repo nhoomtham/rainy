@@ -82,12 +82,15 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-12 pt-1">
+            <div class="col-12  col-md-6 col-lg-6 pt-1">
                 <div class="form-group">
                     <label class="form-control-label" for="field_pic_cover">*<span jhiTranslate="rainyApp.shop.pic_cover"></span></label>
                     <input type="file" accept="image/*" class="form-control"
                            id="field_pic_cover" (change)="onImageChange($event)" #selectedFile />
                 </div>
+            </div>
+            <div class="col-12  col-md-6 col-lg-6 pt-1">
+                <img src="{{shopForm.get('pic_cover').value}}" alt="no pic" />
             </div>
         </div>
         <hr />

@@ -28,7 +28,7 @@ import { LoaderService } from './loader.service';
 import { LoaderComponent } from './loader.component';
 
 import { QuillModule } from 'ngx-quill';
-// import { Ng2ImgMaxModule } from 'ng2-img-max';
+import { Ng2ImgMaxModule } from 'ng2-img-max';
 
 const ENTITY_STATES = [
     ...shopRoute,
@@ -47,7 +47,7 @@ const ENTITY_STATES = [
         }),
         HttpClientModule,
         QuillModule,
-        // Ng2ImgMaxModule
+        Ng2ImgMaxModule
     ],
     declarations: [
         ShopComponent,
