@@ -45,11 +45,12 @@ describe('Component Tests', () => {
                 inject([],
                     fakeAsync(() => {
                         // GIVEN
-                        const entity = new ShopStatus(123);
+                        let entity = new ShopStatus(123);
+                        let param = { value: entity, valid: true };
                         spyOn(service, 'update').and.returnValue(Observable.of(entity));
                         comp.shopStatus = entity;
                         // WHEN
-                        comp.save();
+                        comp.save(param);
                         tick(); // simulate async
 
                         // THEN
@@ -66,10 +67,11 @@ describe('Component Tests', () => {
                     fakeAsync(() => {
                         // GIVEN
                         const entity = new ShopStatus();
+                        let param = { value: entity, valid: true };
                         spyOn(service, 'create').and.returnValue(Observable.of(entity));
                         comp.shopStatus = entity;
                         // WHEN
-                        comp.save();
+                        comp.save(param);
                         tick(); // simulate async
 
                         // THEN
