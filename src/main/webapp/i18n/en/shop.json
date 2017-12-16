@@ -2,7 +2,7 @@
     "rainyApp": {
         "shop": {
             "home": {
-                "title": "My Info",
+                "title": "My Profile",
                 "createLabel": "Create a new Shop",
                 "createOrEditLabel": "Create or edit a Shop"
             },
@@ -15,7 +15,9 @@
             "detail": {
                 "title": "Shop"
             },
-            "cover_info": "Info for cover page",
+            "cover_info": "Cover Page",
+            "detail_page": "More Info Page",
+            "album_page": "Album",
             "name": "Name",
             "pic_cover": "Pic Cover",
             "tel": "Tel",
