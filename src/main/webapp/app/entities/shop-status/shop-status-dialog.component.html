@@ -15,7 +15,7 @@
         <div class="form-group">
             <label class="form-control-label" jhiTranslate="rainyApp.shopStatus.message" for="field_message">Message</label>
             <input type="text" class="form-control" name="message" id="field_message"
-                [(ngModel)]="shopStatus.message" required minlength="1" maxlength="128" />
+                [(ngModel)]="shopStatus.message" required minlength="1" maxlength="128"/>
             <div [hidden]="!(editForm.controls.message?.dirty && editForm.controls.message?.invalid)">
                 <small class="form-text text-danger"
                    [hidden]="!editForm.controls.message?.errors?.required" jhiTranslate="entity.validation.required">

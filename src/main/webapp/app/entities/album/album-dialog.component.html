@@ -15,7 +15,7 @@
         <div class="form-group">
             <label class="form-control-label" jhiTranslate="rainyApp.album.url" for="field_url">Url</label>
             <input type="text" class="form-control" name="url" id="field_url"
-                [(ngModel)]="album.url" required />
+                [(ngModel)]="album.url" required/>
             <div [hidden]="!(editForm.controls.url?.dirty && editForm.controls.url?.invalid)">
                 <small class="form-text text-danger"
                    [hidden]="!editForm.controls.url?.errors?.required" jhiTranslate="entity.validation.required">

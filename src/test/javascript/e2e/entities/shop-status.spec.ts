@@ -1,15 +1,11 @@
-import { browser, element, by, $ } from 'protractor';
+import { browser, element, by } from 'protractor';
 import { NavBarPage } from './../page-objects/jhi-page-objects';
-const path = require('path');
 
 describe('ShopStatus e2e test', () => {
 
     let navBarPage: NavBarPage;
     let shopStatusDialogPage: ShopStatusDialogPage;
     let shopStatusComponentsPage: ShopStatusComponentsPage;
-    const fileToUpload = '../../../../main/webapp/content/images/logo-jhipster.png';
-    const absolutePath = path.resolve(__dirname, fileToUpload);
-    
 
     beforeAll(() => {
         browser.get('/');
@@ -40,7 +36,7 @@ describe('ShopStatus e2e test', () => {
         shopStatusDialogPage.shopSelectLastOption();
         shopStatusDialogPage.save();
         expect(shopStatusDialogPage.getSaveButton().isPresent()).toBeFalsy();
-    }); 
+    });
 
     afterAll(() => {
         navBarPage.autoSignOut();
@@ -71,27 +67,27 @@ export class ShopStatusDialogPage {
         return this.modalTitle.getAttribute('jhiTranslate');
     }
 
-    setMessageInput = function (message) {
+    setMessageInput = function(message) {
         this.messageInput.sendKeys(message);
     }
 
-    getMessageInput = function () {
+    getMessageInput = function() {
         return this.messageInput.getAttribute('value');
     }
 
-    shopSelectLastOption = function () {
+    shopSelectLastOption = function() {
         this.shopSelect.all(by.tagName('option')).last().click();
     }
 
-    shopSelectOption = function (option) {
+    shopSelectOption = function(option) {
         this.shopSelect.sendKeys(option);
     }
 
-    getShopSelect = function () {
+    getShopSelect = function() {
         return this.shopSelect;
     }
 
-    getShopSelectedOption = function () {
+    getShopSelectedOption = function() {
         return this.shopSelect.element(by.css('option:checked')).getText();
     }
 

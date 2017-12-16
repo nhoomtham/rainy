@@ -1,15 +1,11 @@
-import { browser, element, by, $ } from 'protractor';
+import { browser, element, by } from 'protractor';
 import { NavBarPage } from './../page-objects/jhi-page-objects';
-const path = require('path');
 
 describe('Shop e2e test', () => {
 
     let navBarPage: NavBarPage;
     let shopDialogPage: ShopDialogPage;
     let shopComponentsPage: ShopComponentsPage;
-    const fileToUpload = '../../../../main/webapp/content/images/logo-jhipster.png';
-    const absolutePath = path.resolve(__dirname, fileToUpload);
-    
 
     beforeAll(() => {
         browser.get('/');
@@ -66,7 +62,7 @@ describe('Shop e2e test', () => {
         shopDialogPage.userSelectLastOption();
         shopDialogPage.save();
         expect(shopDialogPage.getSaveButton().isPresent()).toBeFalsy();
-    }); 
+    });
 
     afterAll(() => {
         navBarPage.autoSignOut();
@@ -111,145 +107,145 @@ export class ShopDialogPage {
         return this.modalTitle.getAttribute('jhiTranslate');
     }
 
-    setNameInput = function (name) {
+    setNameInput = function(name) {
         this.nameInput.sendKeys(name);
     }
 
-    getNameInput = function () {
+    getNameInput = function() {
         return this.nameInput.getAttribute('value');
     }
 
-    setPic_coverInput = function (pic_cover) {
+    setPic_coverInput = function(pic_cover) {
         this.pic_coverInput.sendKeys(pic_cover);
     }
 
-    getPic_coverInput = function () {
+    getPic_coverInput = function() {
         return this.pic_coverInput.getAttribute('value');
     }
 
-    setTelInput = function (tel) {
+    setTelInput = function(tel) {
         this.telInput.sendKeys(tel);
     }
 
-    getTelInput = function () {
+    getTelInput = function() {
         return this.telInput.getAttribute('value');
     }
 
-    setLine_unameInput = function (line_uname) {
+    setLine_unameInput = function(line_uname) {
         this.line_unameInput.sendKeys(line_uname);
     }
 
-    getLine_unameInput = function () {
+    getLine_unameInput = function() {
         return this.line_unameInput.getAttribute('value');
     }
 
-    setDescriptionInput = function (description) {
+    setDescriptionInput = function(description) {
         this.descriptionInput.sendKeys(description);
     }
 
-    getDescriptionInput = function () {
+    getDescriptionInput = function() {
         return this.descriptionInput.getAttribute('value');
     }
 
-    setAgeInput = function (age) {
+    setAgeInput = function(age) {
         this.ageInput.sendKeys(age);
     }
 
-    getAgeInput = function () {
+    getAgeInput = function() {
         return this.ageInput.getAttribute('value');
     }
 
-    setCategorySelect = function (category) {
+    setCategorySelect = function(category) {
         this.categorySelect.sendKeys(category);
     }
 
-    getCategorySelect = function () {
+    getCategorySelect = function() {
         return this.categorySelect.element(by.css('option:checked')).getText();
     }
 
-    categorySelectLastOption = function () {
+    categorySelectLastOption = function() {
         this.categorySelect.all(by.tagName('option')).last().click();
     }
-    setPriceInput = function (price) {
+    setPriceInput = function(price) {
         this.priceInput.sendKeys(price);
     }
 
-    getPriceInput = function () {
+    getPriceInput = function() {
         return this.priceInput.getAttribute('value');
     }
 
-    setShapeInput = function (shape) {
+    setShapeInput = function(shape) {
         this.shapeInput.sendKeys(shape);
     }
 
-    getShapeInput = function () {
+    getShapeInput = function() {
         return this.shapeInput.getAttribute('value');
     }
 
-    setSkinSelect = function (skin) {
+    setSkinSelect = function(skin) {
         this.skinSelect.sendKeys(skin);
     }
 
-    getSkinSelect = function () {
+    getSkinSelect = function() {
         return this.skinSelect.element(by.css('option:checked')).getText();
     }
 
-    skinSelectLastOption = function () {
+    skinSelectLastOption = function() {
         this.skinSelect.all(by.tagName('option')).last().click();
     }
-    setHighInput = function (high) {
+    setHighInput = function(high) {
         this.highInput.sendKeys(high);
     }
 
-    getHighInput = function () {
+    getHighInput = function() {
         return this.highInput.getAttribute('value');
     }
 
-    setWeightInput = function (weight) {
+    setWeightInput = function(weight) {
         this.weightInput.sendKeys(weight);
     }
 
-    getWeightInput = function () {
+    getWeightInput = function() {
         return this.weightInput.getAttribute('value');
     }
 
-    setDistrictInput = function (district) {
+    setDistrictInput = function(district) {
         this.districtInput.sendKeys(district);
     }
 
-    getDistrictInput = function () {
+    getDistrictInput = function() {
         return this.districtInput.getAttribute('value');
     }
 
-    setSubdistrictInput = function (subdistrict) {
+    setSubdistrictInput = function(subdistrict) {
         this.subdistrictInput.sendKeys(subdistrict);
     }
 
-    getSubdistrictInput = function () {
+    getSubdistrictInput = function() {
         return this.subdistrictInput.getAttribute('value');
     }
 
-    setProvinceInput = function (province) {
+    setProvinceInput = function(province) {
         this.provinceInput.sendKeys(province);
     }
 
-    getProvinceInput = function () {
+    getProvinceInput = function() {
         return this.provinceInput.getAttribute('value');
     }
 
-    userSelectLastOption = function () {
+    userSelectLastOption = function() {
         this.userSelect.all(by.tagName('option')).last().click();
     }
 
-    userSelectOption = function (option) {
+    userSelectOption = function(option) {
         this.userSelect.sendKeys(option);
     }
 
-    getUserSelect = function () {
+    getUserSelect = function() {
         return this.userSelect;
     }
 
-    getUserSelectedOption = function () {
+    getUserSelectedOption = function() {
         return this.userSelect.element(by.css('option:checked')).getText();
     }
 

@@ -23,6 +23,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 
 /**
@@ -77,10 +78,10 @@ public class ShopServiceImpl implements ShopService{
     }
 
     /**
-     *  Get all the shops.
+     * Get all the shops.
      *
-     *  @param pageable the pagination information
-     *  @return the list of entities
+     * @param pageable the pagination information
+     * @return the list of entities
      */
     @Override
     @Transactional(readOnly = true)
@@ -118,10 +119,10 @@ public class ShopServiceImpl implements ShopService{
     }
 
     /**
-     *  Get one shop by id.
+     * Get one shop by id.
      *
-     *  @param id the id of the entity
-     *  @return the entity
+     * @param id the id of the entity
+     * @return the entity
      */
     @Override
     @Transactional(readOnly = true)
@@ -136,9 +137,9 @@ public class ShopServiceImpl implements ShopService{
     }
 
     /**
-     *  Delete the  shop by id.
+     * Delete the shop by id.
      *
-     *  @param id the id of the entity
+     * @param id the id of the entity
      */
     @Override
     public void delete(Long id) {
@@ -148,13 +149,15 @@ public class ShopServiceImpl implements ShopService{
 
     @Override
     public List<Shop> findByCurrentUser() {
-    	User user = userService.getUserWithAuthorities();
-    	if (user == null) {
-        	return null;
-        } else {
-        	List<Shop> shops = shopRepository.findByUserId(user.getId());
-            return shops;	
-        }        
+    	Optional<User> user = userService.getUserWithAuthorities();
+    	
+    	if (user.isPresent()) {
+    		List<Shop> shops = shopRepository.findByUserId(user.get().getId());
+            return shops;
+    	} else {
+    		return null;
+    	}
+    	        
     }
 
 	@Override
@@ -163,9 +166,9 @@ public class ShopServiceImpl implements ShopService{
 		final Shop shop = shopRepository.findOne(id);
         
 		if (shop != null) {
-			User user = userService.getUserWithAuthorities();
-			if (user != null) {
-				if (shop.getUser().getId().compareTo(user.getId()) == 0) {
+			Optional<User> user = userService.getUserWithAuthorities();
+			if (user.isPresent()) {
+				if (shop.getUser().getId().compareTo(user.get().getId()) == 0) {
 					return shopMapper.shopToShopDTO(shop);
 				}
 			}

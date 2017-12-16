@@ -293,6 +293,8 @@ public class ShopResourceIntTest {
 
         // Update the shop
         Shop updatedShop = shopRepository.findOne(shop.getId());
+        // Disconnect from session so that the updates on updatedShop are not directly saved in db
+        em.detach(updatedShop);
         updatedShop
             .name(UPDATED_NAME)
             .pic_cover(UPDATED_PIC_COVER)

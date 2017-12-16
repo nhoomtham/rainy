@@ -12,7 +12,6 @@ import com.rainy.security.SecurityUtils;
 import com.rainy.web.rest.errors.BadRequestAlertException;
 import com.rainy.web.rest.util.HeaderUtil;
 import com.rainy.web.rest.util.PaginationUtil;
-import io.swagger.annotations.ApiParam;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -65,7 +64,11 @@ public class ShopStatusResource {
     @Timed
     public ResponseEntity<ShopStatus> createShopStatus(@Valid @RequestBody ShopStatus shopStatus) throws URISyntaxException {
         log.debug("REST request to save ShopStatus : {}", shopStatus);
-        Optional<User> user = userRepository.findOneByLogin(SecurityUtils.getCurrentUserLogin());
+        Optional<String> login = SecurityUtils.getCurrentUserLogin();
+        Optional<User> user = null;
+        if (login.isPresent()) {
+        	user = userRepository.findOneByLogin(login.get());        	
+        }
         if (shopStatus.getId() != null) {
             throw new BadRequestAlertException("A new shopStatus cannot already have an ID", ENTITY_NAME, "idexists");
         }
@@ -115,7 +118,7 @@ public class ShopStatusResource {
      */
     @GetMapping("/shop-statuses")
     @Timed
-    public ResponseEntity<List<ShopStatus>> getAllShopStatuses(@ApiParam Pageable pageable) {
+    public ResponseEntity<List<ShopStatus>> getAllShopStatuses(Pageable pageable) {
         log.debug("REST request to get a page of ShopStatuses");
         Page<ShopStatus> page = shopStatusRepository.findAllByOrderByLastModifiedDateDesc(pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/shop-statuses");
@@ -151,12 +154,17 @@ public class ShopStatusResource {
         if (shop == null) {
             throw new BadRequestAlertException("A Shop attached could not be found", ENTITY_NAME, "notAuthorized");
         }
-       
-        Optional<User> user = userRepository.findOneByLogin(SecurityUtils.getCurrentUserLogin());
-        if (user.isPresent() && !shop.getUser().equals(user.get())) {
-            throw new BadRequestAlertException("A Shop attached should belong to current user", ENTITY_NAME, "notAuthorized");
+        Optional<User> user;
+        Optional<String> login = SecurityUtils.getCurrentUserLogin();
+        if (login.isPresent()) {
+        	user = userRepository.findOneByLogin(login.get());
+            if (user.isPresent() && !shop.getUser().equals(user.get())) {
+                throw new BadRequestAlertException("A Shop attached should belong to current user", ENTITY_NAME, "notAuthorized");
+            }	
+        } else {
+        	 throw new BadRequestAlertException("A Shop attached should belong to current user", ENTITY_NAME, "notAuthorized");
         }
-        
+                
         ShopStatus shopStatus = shopStatusRepository.findByShop(shop);
        
         if (user.isPresent() && shopStatus != null &&

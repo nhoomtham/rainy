@@ -15,7 +15,7 @@
         <div class="form-group">
             <label class="form-control-label" jhiTranslate="rainyApp.shop.name" for="field_name">Name</label>
             <input type="text" class="form-control" name="name" id="field_name"
-                [(ngModel)]="shop.name" required maxlength="30" />
+                [(ngModel)]="shop.name" required maxlength="30"/>
             <div [hidden]="!(editForm.controls.name?.dirty && editForm.controls.name?.invalid)">
                 <small class="form-text text-danger"
                    [hidden]="!editForm.controls.name?.errors?.required" jhiTranslate="entity.validation.required">
@@ -30,12 +30,12 @@
         <div class="form-group">
             <label class="form-control-label" jhiTranslate="rainyApp.shop.pic_cover" for="field_pic_cover">Pic Cover</label>
             <input type="text" class="form-control" name="pic_cover" id="field_pic_cover"
-                [(ngModel)]="shop.pic_cover"  />
+                [(ngModel)]="shop.pic_cover" />
         </div>
         <div class="form-group">
             <label class="form-control-label" jhiTranslate="rainyApp.shop.tel" for="field_tel">Tel</label>
             <input type="text" class="form-control" name="tel" id="field_tel"
-                [(ngModel)]="shop.tel" maxlength="20" />
+                [(ngModel)]="shop.tel" maxlength="20"/>
             <div [hidden]="!(editForm.controls.tel?.dirty && editForm.controls.tel?.invalid)">
                 <small class="form-text text-danger"
                    [hidden]="!editForm.controls.tel?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 20 }">
@@ -46,7 +46,7 @@
         <div class="form-group">
             <label class="form-control-label" jhiTranslate="rainyApp.shop.line_uname" for="field_line_uname">Line Uname</label>
             <input type="text" class="form-control" name="line_uname" id="field_line_uname"
-                [(ngModel)]="shop.line_uname" maxlength="10" />
+                [(ngModel)]="shop.line_uname" maxlength="10"/>
             <div [hidden]="!(editForm.controls.line_uname?.dirty && editForm.controls.line_uname?.invalid)">
                 <small class="form-text text-danger"
                    [hidden]="!editForm.controls.line_uname?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 10 }">
@@ -57,7 +57,7 @@
         <div class="form-group">
             <label class="form-control-label" jhiTranslate="rainyApp.shop.description" for="field_description">Description</label>
             <input type="text" class="form-control" name="description" id="field_description"
-                [(ngModel)]="shop.description" maxlength="1000" />
+                [(ngModel)]="shop.description" maxlength="1000"/>
             <div [hidden]="!(editForm.controls.description?.dirty && editForm.controls.description?.invalid)">
                 <small class="form-text text-danger"
                    [hidden]="!editForm.controls.description?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 1000 }">
@@ -68,7 +68,7 @@
         <div class="form-group">
             <label class="form-control-label" jhiTranslate="rainyApp.shop.age" for="field_age">Age</label>
             <input type="number" class="form-control" name="age" id="field_age"
-                [(ngModel)]="shop.age" max="99" />
+                [(ngModel)]="shop.age" max="99"/>
             <div [hidden]="!(editForm.controls.age?.dirty && editForm.controls.age?.invalid)">
                 <small class="form-text text-danger"
                     [hidden]="!editForm.controls.age?.errors?.max" jhiTranslate="entity.validation.max" translateValues="{ max: 99 }">
@@ -93,12 +93,12 @@
         <div class="form-group">
             <label class="form-control-label" jhiTranslate="rainyApp.shop.price" for="field_price">Price</label>
             <input type="number" class="form-control" name="price" id="field_price"
-                [(ngModel)]="shop.price"  />
+                [(ngModel)]="shop.price" />
         </div>
         <div class="form-group">
             <label class="form-control-label" jhiTranslate="rainyApp.shop.shape" for="field_shape">Shape</label>
             <input type="text" class="form-control" name="shape" id="field_shape"
-                [(ngModel)]="shop.shape" maxlength="20" />
+                [(ngModel)]="shop.shape" maxlength="20"/>
             <div [hidden]="!(editForm.controls.shape?.dirty && editForm.controls.shape?.invalid)">
                 <small class="form-text text-danger"
                    [hidden]="!editForm.controls.shape?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 20 }">
@@ -118,7 +118,7 @@
         <div class="form-group">
             <label class="form-control-label" jhiTranslate="rainyApp.shop.high" for="field_high">High</label>
             <input type="number" class="form-control" name="high" id="field_high"
-                [(ngModel)]="shop.high" max="200" />
+                [(ngModel)]="shop.high" max="200"/>
             <div [hidden]="!(editForm.controls.high?.dirty && editForm.controls.high?.invalid)">
                 <small class="form-text text-danger"
                     [hidden]="!editForm.controls.high?.errors?.max" jhiTranslate="entity.validation.max" translateValues="{ max: 200 }">
@@ -133,7 +133,7 @@
         <div class="form-group">
             <label class="form-control-label" jhiTranslate="rainyApp.shop.weight" for="field_weight">Weight</label>
             <input type="number" class="form-control" name="weight" id="field_weight"
-                [(ngModel)]="shop.weight" max="200" />
+                [(ngModel)]="shop.weight" max="200"/>
             <div [hidden]="!(editForm.controls.weight?.dirty && editForm.controls.weight?.invalid)">
                 <small class="form-text text-danger"
                     [hidden]="!editForm.controls.weight?.errors?.max" jhiTranslate="entity.validation.max" translateValues="{ max: 200 }">
@@ -148,7 +148,7 @@
         <div class="form-group">
             <label class="form-control-label" jhiTranslate="rainyApp.shop.district" for="field_district">District</label>
             <input type="text" class="form-control" name="district" id="field_district"
-                [(ngModel)]="shop.district" maxlength="50" />
+                [(ngModel)]="shop.district" maxlength="50"/>
             <div [hidden]="!(editForm.controls.district?.dirty && editForm.controls.district?.invalid)">
                 <small class="form-text text-danger"
                    [hidden]="!editForm.controls.district?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 50 }">
@@ -159,7 +159,7 @@
         <div class="form-group">
             <label class="form-control-label" jhiTranslate="rainyApp.shop.subdistrict" for="field_subdistrict">Subdistrict</label>
             <input type="text" class="form-control" name="subdistrict" id="field_subdistrict"
-                [(ngModel)]="shop.subdistrict" maxlength="50" />
+                [(ngModel)]="shop.subdistrict" maxlength="50"/>
             <div [hidden]="!(editForm.controls.subdistrict?.dirty && editForm.controls.subdistrict?.invalid)">
                 <small class="form-text text-danger"
                    [hidden]="!editForm.controls.subdistrict?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 50 }">
@@ -170,7 +170,7 @@
         <div class="form-group">
             <label class="form-control-label" jhiTranslate="rainyApp.shop.province" for="field_province">Province</label>
             <input type="text" class="form-control" name="province" id="field_province"
-                [(ngModel)]="shop.province" maxlength="30" />
+                [(ngModel)]="shop.province" maxlength="30"/>
             <div [hidden]="!(editForm.controls.province?.dirty && editForm.controls.province?.invalid)">
                 <small class="form-text text-danger"
                    [hidden]="!editForm.controls.province?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 30 }">

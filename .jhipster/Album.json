@@ -22,5 +22,6 @@
     "service": "no",
     "entityTableName": "ra_album",
     "jpaMetamodelFiltering": false,
-    "pagination": "no"
+    "pagination": "no",
+	"enableEntityAudit": false
 }

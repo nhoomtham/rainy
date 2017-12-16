@@ -2,11 +2,12 @@ import './vendor.ts';
 
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { Ng2Webstorage } from 'ng2-webstorage';
+import { Ng2Webstorage } from 'ngx-webstorage';
 
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 import { RainySharedModule, UserRouteAccessService } from './shared';
+import { RainyAppRoutingModule} from './app-routing.module';
 import { RainyHomeModule } from './home/home.module';
 import { RainyAdminModule } from './admin/admin.module';
 import { RainyAccountModule } from './account/account.module';
@@ -21,7 +22,6 @@ import { PaginationConfig } from './blocks/config/uib-pagination.config';
 
 import {
     JhiMainComponent,
-    LayoutRoutingModule,
     NavbarComponent,
     FooterComponent,
     ProfileService,
@@ -36,7 +36,8 @@ import {
         // Material
         BrowserAnimationsModule,
         // Material
-        LayoutRoutingModule,
+        // LayoutRoutingModule,
+        RainyAppRoutingModule,
         Ng2Webstorage.forRoot({ prefix: 'jhi', separator: '-'}),
         RainySharedModule,
         RainyHomeModule,
