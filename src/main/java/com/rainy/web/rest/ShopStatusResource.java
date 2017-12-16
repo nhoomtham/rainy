@@ -64,7 +64,11 @@ public class ShopStatusResource {
     @Timed
     public ResponseEntity<ShopStatus> createShopStatus(@Valid @RequestBody ShopStatus shopStatus) throws URISyntaxException {
         log.debug("REST request to save ShopStatus : {}", shopStatus);
-        Optional<User> user = userRepository.findOneByLogin(SecurityUtils.getCurrentUserLogin());
+        Optional<String> login = SecurityUtils.getCurrentUserLogin();
+        Optional<User> user = null;
+        if (login.isPresent()) {
+        	user = userRepository.findOneByLogin(login.get());        	
+        }
         if (shopStatus.getId() != null) {
             throw new BadRequestAlertException("A new shopStatus cannot already have an ID", ENTITY_NAME, "idexists");
         }
@@ -150,12 +154,17 @@ public class ShopStatusResource {
         if (shop == null) {
             throw new BadRequestAlertException("A Shop attached could not be found", ENTITY_NAME, "notAuthorized");
         }
-       
-        Optional<User> user = userRepository.findOneByLogin(SecurityUtils.getCurrentUserLogin());
-        if (user.isPresent() && !shop.getUser().equals(user.get())) {
-            throw new BadRequestAlertException("A Shop attached should belong to current user", ENTITY_NAME, "notAuthorized");
+        Optional<User> user;
+        Optional<String> login = SecurityUtils.getCurrentUserLogin();
+        if (login.isPresent()) {
+        	user = userRepository.findOneByLogin(login.get());
+            if (user.isPresent() && !shop.getUser().equals(user.get())) {
+                throw new BadRequestAlertException("A Shop attached should belong to current user", ENTITY_NAME, "notAuthorized");
+            }	
+        } else {
+        	 throw new BadRequestAlertException("A Shop attached should belong to current user", ENTITY_NAME, "notAuthorized");
         }
-        
+                
         ShopStatus shopStatus = shopStatusRepository.findByShop(shop);
        
         if (user.isPresent() && shopStatus != null &&

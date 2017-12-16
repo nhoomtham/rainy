@@ -36,7 +36,8 @@ import {
         // Material
         BrowserAnimationsModule,
         // Material
-        LayoutRoutingModule,
+        // LayoutRoutingModule,
+        RainyAppRoutingModule,
         Ng2Webstorage.forRoot({ prefix: 'jhi', separator: '-'}),
         RainySharedModule,
         RainyHomeModule,

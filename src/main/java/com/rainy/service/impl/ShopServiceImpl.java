@@ -23,6 +23,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 
 /**
@@ -148,13 +149,15 @@ public class ShopServiceImpl implements ShopService{
 
     @Override
     public List<Shop> findByCurrentUser() {
-    	User user = userService.getUserWithAuthorities();
-    	if (user == null) {
-        	return null;
-        } else {
-        	List<Shop> shops = shopRepository.findByUserId(user.getId());
-            return shops;	
-        }        
+    	Optional<User> user = userService.getUserWithAuthorities();
+    	
+    	if (user.isPresent()) {
+    		List<Shop> shops = shopRepository.findByUserId(user.get().getId());
+            return shops;
+    	} else {
+    		return null;
+    	}
+    	        
     }
 
 	@Override
@@ -163,9 +166,9 @@ public class ShopServiceImpl implements ShopService{
 		final Shop shop = shopRepository.findOne(id);
         
 		if (shop != null) {
-			User user = userService.getUserWithAuthorities();
-			if (user != null) {
-				if (shop.getUser().getId().compareTo(user.getId()) == 0) {
+			Optional<User> user = userService.getUserWithAuthorities();
+			if (user.isPresent()) {
+				if (shop.getUser().getId().compareTo(user.get().getId()) == 0) {
 					return shopMapper.shopToShopDTO(shop);
 				}
 			}
