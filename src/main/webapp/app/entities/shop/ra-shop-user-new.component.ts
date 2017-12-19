@@ -186,7 +186,7 @@ export class ShopUserNewComponent implements OnInit, OnDestroy {
 
                     const bucket = new AWSService.S3({ params: { Bucket: awsConfig.bucketName } });
                     const params = {
-                        Key: awsConfig.rootDir + '/' + this.account.login + '/pic_cover_' + id,
+                        Key: awsConfig.rootDir + '/' + this.account.login + '/' + id.toString() + '/cover/' + file.name,
                         Body: file,
                         ContentType: file.type
                     };
@@ -325,15 +325,18 @@ export class ShopUserNewComponent implements OnInit, OnDestroy {
     }
 
     onImageChange(event) {
+        this.loaderService.show();
         this.pic_cover_changed = true;
     // let image = event.target.file[0];
         const image = this.elFile.nativeElement.files[0];
-        this.ng2ImgMax.resizeImage(image, 128, 128).subscribe((result) => {
-        this.uploadImage = new File([result], result.name);
-        console.log('resize img done:' + result.name);
-        },
-        (error) => {
-            console.log('resize img error:' + error);
-        });
+        this.ng2ImgMax.resizeImage(image, 128, 10000).subscribe((result) => {
+            this.uploadImage = new File([result], result.name);
+            // console.log('resize img done:' + result.name);
+            this.loaderService.hide()
+            },
+            (error) => {
+                console.log('resize img error:' + error);
+                () => this.loaderService.hide()
+            }, () => this.loaderService.hide());
     }
 }

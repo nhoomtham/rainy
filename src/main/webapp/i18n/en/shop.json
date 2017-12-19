@@ -8,9 +8,9 @@
             },
             "created": "A new Shop is created with identifier {{ param }}",
             "updated": "A Shop is updated with identifier {{ param }}",
-            "deleted": "A Shop is deleted with identifier {{ param }}",
+            "deleted": "A Shop is deleted",
             "delete": {
-                "question": "Are you sure you want to delete Shop {{ id }}?"
+                "question": "Are you sure you want to delete Shop?"
             },
             "detail": {
                 "title": "Shop"

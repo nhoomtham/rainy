@@ -1,4 +1,5 @@
-select * from shop
+select * from ra_album;
+select * from ra_shop;
 
 update shop set location = ST_SetSRID(ST_MakePoint(23,-44.5),4326)
 
@@ -13,9 +14,6 @@ select * from ra_shop_status;
 drop table ra_shop_status cascade;
 drop table ra_album cascade;
 drop table ra_shop cascade;
-
-drop table databasechangelog;
-drop table databasechangeloglock;
 
 drop table jhi_entity_audit_event;
 drop table jhi_persistent_audit_evt_data cascade;

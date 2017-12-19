@@ -1,42 +1,193 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ElementRef, ViewChild } from '@angular/core';
 import { Subscription } from 'rxjs/Rx';
+import { ActivatedRoute } from '@angular/router';
 import { JhiEventManager, JhiAlertService } from 'ng-jhipster';
 
 import { Album } from './album.model';
 import { AlbumService } from './album.service';
-import { Principal, ResponseWrapper } from '../../shared';
+import { Principal, ResponseWrapper, Account} from '../../shared';
+import { FormBuilder, FormGroup, FormArray, FormControl, Validators } from '@angular/forms';
+import { ShopService } from '../shop/shop.service';
+import { Shop } from '../shop/shop.model';
+
+import { Ng2ImgMaxService } from 'ng2-img-max';
+import { Observable } from 'rxjs/Observable';
+
+require('aws-sdk/dist/aws-sdk');
 
 @Component({
     selector: 'jhi-album',
-    templateUrl: './album.component.html'
+    templateUrl: './ra-album.component.html'
 })
 export class AlbumComponent implements OnInit, OnDestroy {
-albums: Album[];
-    currentAccount: any;
+    
+    private account: Account;
+    private subscription: Subscription;
+    private shopId: number;
+    private formBuilder: FormBuilder;
+    private shop: Shop;
+    private uploadImage: File;
+    private uploadImage_320: File;
+    private uploadImage_640: File;
+
+    @ViewChild('selectedFile')
+    private elFile: ElementRef;
+
+    albums: Album[];
     eventSubscriber: Subscription;
+    albumForm: FormGroup;
 
     constructor(
         private albumService: AlbumService,
         private jhiAlertService: JhiAlertService,
         private eventManager: JhiEventManager,
-        private principal: Principal
-    ) {
-    }
+        private principal: Principal,
+        private route: ActivatedRoute,
+        private shopService: ShopService,
+        private ng2ImgMax: Ng2ImgMaxService
+    ) {}
 
-    loadAll() {
-        this.albumService.query().subscribe(
-            (res: ResponseWrapper) => {
+    loadByShop(shopId: number) {
+        this.albumService.findByShop(shopId).subscribe((res: ResponseWrapper) =>
+            {
                 this.albums = res.json;
-            },
-            (res: ResponseWrapper) => this.onError(res.json)
+            }
         );
     }
+
     ngOnInit() {
-        this.loadAll();
-        this.principal.identity().then((account) => {
-            this.currentAccount = account;
+        this.subscription = this.route.params.subscribe((params) => {
+            this.shopId = params['shopId'];
+            this.loadByShop(this.shopId);
+            this.shopService.find(this.shopId).subscribe((shop) =>
+            {
+                this.shop = shop;
+            });
         });
+
+        this.albumForm = new FormGroup({
+            id: new FormControl(),
+            url: new FormControl('', Validators.required),
+            shop: new FormControl()
+        });
+
+        this.principal.identity().then((account) => {
+            this.account = account;
+        });
+
         this.registerChangeInAlbums();
+    }
+
+    save({ value, valid }: { value: Album, valid: boolean }): void {
+        this.uploadFile(this.shop.id).subscribe((filename) => {
+            this.albumForm.get("url").setValue(filename);
+            value.url = filename;
+            value.shop = this.shop;
+            this.subscribeToSaveResponse(
+                this.albumService.create(value));
+        });
+    }
+
+    private subscribeToSaveResponse(result: Observable<Album>) {
+        result.subscribe((res: Album) =>
+            this.onSaveSuccess(res), (res: Response) => this.onSaveError(res));
+    }
+
+    private onSaveSuccess(result: Album) {
+        this.eventManager.broadcast({ name: 'albumListModification', content: 'OK' });
+        this.albumForm.get('url').setValue(null);
+    }
+
+    private uploadFile(id: number): Observable<any> {
+        return new Observable((observer) => {
+            const file = this.uploadImage;
+            const defaultBucket = 'https://s3.eu-west-2.amazonaws.com/ra-rainy/';
+
+            if (file !== undefined) {
+                const fileName = file.name;
+                const splitted = fileName.split('.');
+                this.shopService.getAwsConfig().subscribe((awsConfig) => {
+                    this.putFile(awsConfig, this.uploadImage_640, splitted[0] + '_640' + '.' + splitted[1], id).subscribe((r_fileName) => {
+                        console.log('uploaded:' + r_fileName)
+                    });
+                    
+                    this.putFile(awsConfig, this.uploadImage_320, splitted[0] + '_320' + '.' + splitted[1], id).subscribe((r_fileName) => {
+                        console.log('uploaded:' + r_fileName)
+                    });
+
+                    this.putFile(awsConfig, this.uploadImage, fileName, id).subscribe((r_fileName) => {
+                        console.log('uploaded:' + r_fileName)
+                        observer.next(defaultBucket + r_fileName);
+                    });
+                });
+            } 
+        });
+    }
+
+    private putFile(awsConfig: any, file: File, fileName: string, shopId: number): Observable<any> {
+        return new Observable((observer) => {
+            const AWSService = (<any>window).AWS;
+            AWSService.config.accessKeyId = awsConfig.accessKey;
+            AWSService.config.secretAccessKey = awsConfig.secretKey;
+            AWSService.config.region = awsConfig.region;
+
+            const bucket = new AWSService.S3({ params: { Bucket: awsConfig.bucketName } });
+            const params = {
+                Key: awsConfig.rootDir + '/' + this.account.login + '/' + shopId.toString() + '/album/' + fileName,
+                Body: file,
+                ContentType: file.type
+            };
+
+            bucket.putObject(params, function (error, res) {
+                if (error) {
+                    // console.log(error);
+                    observer.next();
+                } else {
+                    observer.next(params.Key);
+                }
+            });
+        });
+    }
+
+    onImageChange(event) {
+        const image = this.elFile.nativeElement.files[0];
+        this.resizeImage64(image);
+        this.resizeImage320(image);
+        this.resizeImage640(image);
+    }
+
+    private resizeImage64(image: any): void {
+        this.ng2ImgMax.resizeImage(image, 64, 10000).subscribe((result) => {
+            this.albumForm.get('url').setValue(result.name);
+            console.log('resize img with size 64 done:' + result.name);
+            this.uploadImage = new File([result], result.name);
+        },
+            (error) => {
+                console.log('resize img with size 64 error:' + error);
+            }
+        );
+    }
+
+    private resizeImage320(image: any): void {
+        this.ng2ImgMax.resizeImage(image, 320, 10000).subscribe((result) => {
+            console.log('resize img with size 320 done:' + result.name);
+            this.uploadImage_320 = new File([result], result.name);
+        },
+            (error) => {
+                console.log('resize img with size 320 error:' + error);
+            }
+        );
+    }
+
+    private resizeImage640(image: any): void {
+        this.ng2ImgMax.resizeImage(image, 640, 10000).subscribe((result) => {
+            console.log('resize img with size 640 done:' + result.name);
+            this.uploadImage_640 = new File([result], result.name);
+        },
+            (error) => {
+                console.log('resize img with size 640 error:' + error);
+            }
+        );
     }
 
     ngOnDestroy() {
@@ -46,11 +197,13 @@ albums: Album[];
     trackId(index: number, item: Album) {
         return item.id;
     }
+
     registerChangeInAlbums() {
-        this.eventSubscriber = this.eventManager.subscribe('albumListModification', (response) => this.loadAll());
+        this.eventSubscriber = this.eventManager.subscribe('albumListModification', (response) => this.loadByShop(this.shopId));
     }
 
-    private onError(error) {
+    private onSaveError(error) {
         this.jhiAlertService.error(error.message, null, null);
     }
+
 }

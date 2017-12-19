@@ -62,9 +62,12 @@ export class ShopDeleteDialogComponent {
                 AWSService.config.region = awsConfig.region;
 
                 const bucket = new AWSService.S3({ params: { Bucket: awsConfig.bucketName } });
+                const splitter = this.shop.pic_cover.split('/');
                 const params = {
-                    Key: awsConfig.rootDir + '/' + this.account.login + '/pic_cover_' + id,
+                    // Key: awsConfig.rootDir + '/' + this.account.login + '/pic_cover_' + id,
+                    Key: awsConfig.rootDir + '/' + this.account.login + '/' + id.toString() + '/cover/' + splitter[8]
                 };
+                console.log('key:' + params.Key);
                 bucket.deleteObject(params, function(error, res) {
                     if (error) {
                         observer.next();
