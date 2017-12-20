@@ -1,5 +1,6 @@
 import { Component, OnInit, OnDestroy, ElementRef, ViewChild } from '@angular/core';
 import { Subscription } from 'rxjs/Rx';
+import { Observable } from 'rxjs/Observable';
 import { ActivatedRoute } from '@angular/router';
 import { JhiEventManager, JhiAlertService } from 'ng-jhipster';
 
@@ -9,9 +10,9 @@ import { Principal, ResponseWrapper, Account} from '../../shared';
 import { FormBuilder, FormGroup, FormArray, FormControl, Validators } from '@angular/forms';
 import { ShopService } from '../shop/shop.service';
 import { Shop } from '../shop/shop.model';
+import { LoaderService } from '../shop/loader.service';
 
 import { Ng2ImgMaxService } from 'ng2-img-max';
-import { Observable } from 'rxjs/Observable';
 
 require('aws-sdk/dist/aws-sdk');
 
@@ -36,6 +37,7 @@ export class AlbumComponent implements OnInit, OnDestroy {
     albums: Album[];
     eventSubscriber: Subscription;
     albumForm: FormGroup;
+    isProgressing: boolean;
 
     constructor(
         private albumService: AlbumService,
@@ -44,7 +46,8 @@ export class AlbumComponent implements OnInit, OnDestroy {
         private principal: Principal,
         private route: ActivatedRoute,
         private shopService: ShopService,
-        private ng2ImgMax: Ng2ImgMaxService
+        private ng2ImgMax: Ng2ImgMaxService,
+        private loaderService: LoaderService,
     ) {}
 
     loadByShop(shopId: number) {
@@ -60,11 +63,13 @@ export class AlbumComponent implements OnInit, OnDestroy {
 
     ngOnInit() {
         this.subscription = this.route.params.subscribe((params) => {
+            this.isProgressing = true;
             this.shopId = params['shopId'];
             this.loadByShop(this.shopId);
             this.shopService.find(this.shopId).subscribe((shop) =>
             {
                 this.shop = shop;
+                this.isProgressing = false;
             });
         });
 
@@ -82,6 +87,7 @@ export class AlbumComponent implements OnInit, OnDestroy {
     }
 
     save({ value, valid }: { value: Album, valid: boolean }): void {
+        this.isProgressing = true;
         this.uploadFile(this.shop.id).subscribe((filename) => {
             this.albumForm.get("url").setValue(filename);
             value.url = filename;
@@ -101,6 +107,7 @@ export class AlbumComponent implements OnInit, OnDestroy {
         // this.albumForm.get('url').setValue(null);
         this.elFile.nativeElement.value = '';
         this.albumForm.reset();
+        this.isProgressing = false;
     }
 
     private uploadFile(id: number): Observable<any> {
@@ -167,10 +174,12 @@ export class AlbumComponent implements OnInit, OnDestroy {
     }
 
     private resizeImage64(image: any): void {
+        this.isProgressing = true;
         this.ng2ImgMax.resizeImage(image, 64, 10000).subscribe((result) => {
             this.albumForm.get('url').setValue(result.name);
             console.log('resize img with size 64 done:' + result.name);
             this.uploadImage = new File([result], result.name);
+            this.isProgressing = false;
         },
             (error) => {
                 console.log('resize img with size 64 error:' + error);
@@ -179,9 +188,11 @@ export class AlbumComponent implements OnInit, OnDestroy {
     }
 
     private resizeImage320(image: any): void {
+        this.isProgressing = true;
         this.ng2ImgMax.resizeImage(image, 320, 10000).subscribe((result) => {
             console.log('resize img with size 320 done:' + result.name);
             this.uploadImage_320 = new File([result], result.name);
+            this.isProgressing = false;
         },
             (error) => {
                 console.log('resize img with size 320 error:' + error);
@@ -190,9 +201,11 @@ export class AlbumComponent implements OnInit, OnDestroy {
     }
 
     private resizeImage640(image: any): void {
+        this.isProgressing = true;
         this.ng2ImgMax.resizeImage(image, 640, 10000).subscribe((result) => {
             console.log('resize img with size 640 done:' + result.name);
             this.uploadImage_640 = new File([result], result.name);
+            this.isProgressing = false;
         },
             (error) => {
                 console.log('resize img with size 640 error:' + error);
@@ -214,6 +227,7 @@ export class AlbumComponent implements OnInit, OnDestroy {
 
     private onSaveError(error) {
         this.jhiAlertService.error(error.message, null, null);
+        this.isProgressing = false;
     }
 
 }

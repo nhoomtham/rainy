@@ -2,7 +2,7 @@
     "rainyApp": {
         "shop": {
             "home": {
-                "title": "โปรไฟล์ของฉัน",
+                "title": "โปรไฟล์",
                 "createLabel": "เพิ่ม",
                 "createOrEditLabel": "สร้างหรือแก้ไขข้อมูล"
             },
