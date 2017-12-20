@@ -1,0 +1,20 @@
+<div *ngIf="album" class="card jh-card">
+    <h2><span jhiTranslate="rainyApp.album.detail.title">Album</span></h2>
+    <div class="row">
+        <div class="col-12 col-md-6 col-lg-2 pt-1">
+            <button mat-icon-button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <span class="fa fa-arrow-left"></span>
+            </button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 col-md-6 col-lg-2 pt-1">
+            <img sizes="100vw"
+                 srcset="{{album.url_large}} 1100w, {{album.url_medium}} 800w,
+                          {{album.url_medium}} 400w" alt="picture">
+        </div>
+    </div>
+
+</div>

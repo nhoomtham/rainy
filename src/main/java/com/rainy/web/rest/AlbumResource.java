@@ -5,6 +5,7 @@ import com.rainy.domain.Album;
 import com.rainy.domain.Shop;
 import com.rainy.repository.AlbumRepository;
 import com.rainy.repository.ShopRepository;
+import com.rainy.service.dto.AlbumDTO;
 import com.rainy.web.rest.errors.BadRequestAlertException;
 import com.rainy.web.rest.util.HeaderUtil;
 import io.github.jhipster.web.util.ResponseUtil;
@@ -102,10 +103,13 @@ public class AlbumResource {
      */
     @GetMapping("/albums/{id}")
     @Timed
-    public ResponseEntity<Album> getAlbum(@PathVariable Long id) {
+    public ResponseEntity<AlbumDTO> getAlbum(@PathVariable Long id) {
         log.debug("REST request to get Album : {}", id);
         Album album = albumRepository.findOne(id);
-        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(album));
+        
+        AlbumDTO albumDTO = new AlbumDTO(album.getId(),album.getUrl());
+        
+        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(albumDTO));
     }
 
     /**
@@ -131,7 +135,7 @@ public class AlbumResource {
      */
     @GetMapping("/albums/shop/{id}")
     @Timed
-    public List<Album> getAlbumByShop(@PathVariable Long id) {
+    public List<AlbumDTO> getAlbumByShop(@PathVariable Long id) {
         log.debug("REST request to get Album of Shop id : {}", id);
         Shop shop = shopRepository.findOne(id);
         return albumRepository.findByShop(shop);

@@ -42,7 +42,8 @@
                 </mat-card-title-group>
                 <mat-card-actions>
                    
-                    <button mat-icon-button type="submit" [routerLink]= "['/', { outlets: { popup: 'shop-status-update/' + shop.id } }]"><span><mat-icon matPrefix><i class="material-icons">chat</i></mat-icon></span></button>
+                    <button mat-icon-button type="submit" [routerLink]= "['/', { outlets: { popup: 'shop-status-update/' + shop.id } }]">
+                        <span><mat-icon matPrefix><i class="material-icons">chat</i></mat-icon></span></button>
                     <button mat-icon-button type="submit" [routerLink]="['../shop-user-edit', shop.id]">
                         <span><mat-icon matPrefix><i class="material-icons">border_color</i></mat-icon></span></button>
                     <button mat-icon-button type="submit" [routerLink]="['../album-shop', shop.id]">

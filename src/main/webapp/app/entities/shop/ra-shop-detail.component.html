@@ -8,9 +8,17 @@
             <div *ngIf="albums">
                 <mat-grid-list cols="3" rowHeight="2:1">
                     <div *ngFor="let album of albums">
-                        <mat-grid-tile><a>
-                            <img src="https://s3.eu-west-2.amazonaws.com/ra-rainy/dev/admin/1251/album/1466266505215_320.jpg">
-                             
+                        <mat-grid-tile><a [routerLink]="['/album', album.id ]" >
+                            <!--<picture>
+                                <source media="(min-width: 1024px)" srcset="{{album.url_large}}">
+                                <source media="(min-width: 600px)" srcset="{{album.url_medium}}"> 
+                                <source media="(min-width: 360px)" srcset="{{album.url}}">
+                                <img />
+                            </picture>-->
+                            <img sizes="100vw"
+                                srcset="{{album.url_medium}} 1100w, {{album.url_medium}} 600w,
+                                {{album.url}} 400w" alt="picture">
+                            
                             </a></mat-grid-tile>
                     </div>
                 </mat-grid-list>

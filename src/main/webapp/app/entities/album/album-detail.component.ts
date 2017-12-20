@@ -8,7 +8,7 @@ import { AlbumService } from './album.service';
 
 @Component({
     selector: 'jhi-album-detail',
-    templateUrl: './album-detail.component.html'
+    templateUrl: './ra-album-detail.component.html'
 })
 export class AlbumDetailComponent implements OnInit, OnDestroy {
 
