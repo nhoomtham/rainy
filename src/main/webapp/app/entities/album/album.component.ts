@@ -48,11 +48,14 @@ export class AlbumComponent implements OnInit, OnDestroy {
     ) {}
 
     loadByShop(shopId: number) {
-        this.albumService.findByShop(shopId).subscribe((res: ResponseWrapper) =>
-            {
-                this.albums = res.json;
+        this.albumService.findByShop(shopId).subscribe((res: ResponseWrapper) => {
+            this.albums = res.json;
+            if (this.albums.length !== 6) {
+                this.elFile.nativeElement.disabled = false;
+            } else {
+                this.elFile.nativeElement.disabled = true;
             }
-        );
+        });
     }
 
     ngOnInit() {
@@ -95,7 +98,9 @@ export class AlbumComponent implements OnInit, OnDestroy {
 
     private onSaveSuccess(result: Album) {
         this.eventManager.broadcast({ name: 'albumListModification', content: 'OK' });
-        this.albumForm.get('url').setValue(null);
+        // this.albumForm.get('url').setValue(null);
+        this.elFile.nativeElement.value = '';
+        this.albumForm.reset();
     }
 
     private uploadFile(id: number): Observable<any> {
@@ -150,10 +155,15 @@ export class AlbumComponent implements OnInit, OnDestroy {
     }
 
     onImageChange(event) {
+        this.albumForm.reset();
         const image = this.elFile.nativeElement.files[0];
         this.resizeImage64(image);
         this.resizeImage320(image);
         this.resizeImage640(image);
+    }
+
+    previousState() {
+        window.history.back();
     }
 
     private resizeImage64(image: any): void {

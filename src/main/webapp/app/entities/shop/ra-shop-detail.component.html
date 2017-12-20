@@ -3,6 +3,11 @@
     <div class ="row">
         <div class="col"></div>
         <div class="col-12 col-md-10 col-lg-8">
+            <button mat-icon-button type="submit"
+                    (click)="previousState()">
+                <span><mat-icon matPrefix><i class="material-icons">arrow_back</i></mat-icon></span>
+            </button>
+
             <h2>{{shop.name}}</h2>
             <hr>
             <div *ngIf="albums">
@@ -61,8 +66,8 @@
                             <span>{{shop.description}}</span>
                         </dd>
                     </dl>
-</mat-tab>
-                <mat-tab label="การบ้าน">น้องๆ ยังรอการบ้านพี่ๆ อยู่นะ</mat-tab>
+                </mat-tab>
+                <mat-tab label="การบ้าน"></mat-tab>
             </mat-tab-group>
             <hr />
             <h3>แผนที่</h3>
@@ -84,21 +89,15 @@
                 </agm-circle> -->
             </agm-map>
             <hr />
-            <div *ngIf="address">
+            <!--<div *ngIf="address">
                 <h5>{{address.results[0].address_components[2].short_name}} {{address.results[0].address_components[3].short_name}} {{address.results[0].address_components[4].short_name}}
                 {{address.results[0].address_components[5].short_name}}</h5>
-            </div>
-
-
+            </div>-->
         </div>
         <div class="col"></div>
     </div>
 
-    <button  mat-button type="submit"
-            (click)="previousState()"
-            class="btn btn-info">
-        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
-    </button>
+ 
 
     <!--<button type="button"
             [routerLink]="['/', { outlets: { popup: 'shop/'+ shop.id + '/edit'} }]"

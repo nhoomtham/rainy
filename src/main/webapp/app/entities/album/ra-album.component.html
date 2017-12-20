@@ -1,36 +1,34 @@
-<div class="card jh-card">
-    <h2>
-        <span jhiTranslate="rainyApp.album.home.title">Albums</span>
-    </h2>
-    <jhi-alert-error></jhi-alert-error>
-    <jhi-alert></jhi-alert>
+<div class="row">
     <div class="col"></div>
     <div class="col-12 col-md-10 col-lg-8">
+        <div class="card jh-card">
+        <button mat-icon-button type="submit"
+                (click)="previousState()">
+            <span><mat-icon matPrefix><i class="material-icons">arrow_back</i></mat-icon></span>
+        </button>
+        <h2>
+            <span jhiTranslate="rainyApp.album.home.title">Albums</span>
+        </h2>
+        <jhi-alert-error></jhi-alert-error>
+        <jhi-alert></jhi-alert>
+
         <form novalidate [formGroup]='albumForm' (ngSubmit)="save(albumForm)">
-            <div class="row">
                 <div class="form-group">
                     <label class="form-control-label" for="field_pic_album">*<span jhiTranslate="rainyApp.album.home.createLabel"></span></label>
                     <input type="file" accept="image/*" class="form-control"
-                           id="field_pic_album" (change)="onImageChange($event)" #selectedFile />
+                            id="field_pic_album" (change)="onImageChange($event)" #selectedFile />
                 </div>
-            </div>
-            <button mat-raised-button color="primary" type="submit" [disabled]="albumForm.invalid"><i class="material-icons">save</i><span jhiTranslate="entity.action.save">Save</span></button>
+            <button mat-raised-button color="primary" type="submit" [disabled]="albumForm.invalid || albums.length === 6"><i class="material-icons">save</i><span jhiTranslate="entity.action.save">Save</span></button>
 
         </form>
-
-
+        <hr />
         <div class="table-responsive" *ngIf="albums">
             <table class="table table-striped">
-                <thead>
-                    <tr>
-                        <th></th>
-                    </tr>
-                </thead>
                 <tbody>
                     <tr *ngFor="let album of albums ;trackBy: trackId">
                         <td>
                             <img src="{{album.url}}" alt="image" class="img-thumbnail" />
-                            <button mat-button type="submit"
+                            <button mat-icon-button type="submit"
                                     [routerLink]="['/', { outlets: { popup: 'album/'+ album.id + '/delete'} }]"
                                     replaceUrl="true"
                                     queryParamsHandling="merge"
@@ -44,30 +42,34 @@
                 </tbody>
             </table>
             <!--
-                <div *ngIf="albums">
-                    <mat-list>
-                        <mat-list-item *ngFor="let album of albums ;trackBy: trackId">
-                             <p mat-line>{{album.url}}</p>
-                            <p mat-line>
-                                <img src="{{album.url}}" alt="avatar"  class="img-thumbnail"/> </p>
-                                <!--<h3 matLine>{{shopStatus.message}}</h3>
-                <p mat-line><a [routerLink]="['../shop', shopStatus.shop?.id ]">{{shopStatus.shop?.name}}</a></p>
-                <h4 mat-line>{{shopStatus.lastModifiedDate | date: 'short'}}</h4>
-                <a [routerLink]="['../shop', shopStatus.shop?.id ]"></a>
-                <p mat-line><mat-divider></mat-divider></p>
-        </mat-list-item>
-                    </mat-list>
+                    <div *ngIf="albums">
+                        <mat-list>
+                            <mat-list-item *ngFor="let album of albums ;trackBy: trackId">
+                                    <p mat-line>{{album.url}}</p>
+                                <p mat-line>
+                                    <img src="{{album.url}}" alt="avatar"  class="img-thumbnail"/> </p>
+                                    <!--<h3 matLine>{{shopStatus.message}}</h3>
+                    <p mat-line><a [routerLink]="['../shop', shopStatus.shop?.id ]">{{shopStatus.shop?.name}}</a></p>
+                    <h4 mat-line>{{shopStatus.lastModifiedDate | date: 'short'}}</h4>
+                    <a [routerLink]="['../shop', shopStatus.shop?.id ]"></a>
+                    <p mat-line><mat-divider></mat-divider></p>
+            </mat-list-item>
+                        </mat-list>
 
-                </div>
-            -->
+                    </div>
+                -->
             <!--<div *ngIf="albums">
-            <mat-grid-list cols="3" rowHeight="2:1">
-                <div *ngFor="let album of albums">
-                    <mat-grid-tile><img src="{{album.url}}"></mat-grid-tile>
-                </div>
-            </mat-grid-list>
-        </div>-->
+                <mat-grid-list cols="3" rowHeight="2:1">
+                    <div *ngFor="let album of albums">
+                        <mat-grid-tile><img src="{{album.url}}"></mat-grid-tile>
+                    </div>
+                </mat-grid-list>
+            </div>-->
         </div>
+        <div class="col"></div>
+    </div>
+    <div class="col"></div>
+</div>
     <div class="col"></div>
 </div>
 <!--<div>

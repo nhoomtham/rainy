@@ -38,7 +38,7 @@ export class AlbumDeleteDialogComponent {
 
         this.principal.identity().then((account) => {
             this.account = account;
-            this.deleteFile(this.album.shop.id).subscribe(() => {
+            this.deleteFile(id).subscribe(() => {
                 this.albumService.delete(id).subscribe((response) => {
                     this.eventManager.broadcast({
                         name: 'albumListModification',

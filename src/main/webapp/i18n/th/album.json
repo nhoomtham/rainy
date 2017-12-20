@@ -2,8 +2,8 @@
     "rainyApp": {
         "album" : {
             "home": {
-                "title": "Albums",
-                "createLabel": "เพิ่มรูปลงในอัลบั้ม",
+                "title": "อัลบั้ม",
+                "createLabel": "เพิ่มรูปลงในอัลบั้ม (ไม่เกิน 6 รูป)",
                 "createOrEditLabel": "สร้างหรือแก้ไข Album"
             },
             "created": "รูปของคุณได้ถูกเพิ่มลงในอัลบั้มเรียบร้อยแล้ว",
