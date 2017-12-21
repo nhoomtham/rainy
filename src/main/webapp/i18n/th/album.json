@@ -2,15 +2,15 @@
     "rainyApp": {
         "album" : {
             "home": {
-                "title": "Albums",
-                "createLabel": "สร้าง Album",
+                "title": "อัลบั้ม",
+                "createLabel": "เพิ่มรูปลงในอัลบั้ม (ไม่เกิน 6 รูป)",
                 "createOrEditLabel": "สร้างหรือแก้ไข Album"
             },
-            "created": "Album ถูกสร้างด้วย {{ param }}",
+            "created": "รูปของคุณได้ถูกเพิ่มลงในอัลบั้มเรียบร้อยแล้ว",
             "updated": "Album ถูกแก้ไขด้วย {{ param }}",
-            "deleted": "Album ถูกลบด้วย {{ param }}",
+            "deleted": "รูปถูกลบออกจากอัลบั้มเรียบร้อยแล้ว",
             "delete": {
-                "question": "คุณต้องการที่จะลบ Album {{ id }}?"
+                "question": "คุณต้องการที่จะลบรูปออกจากอัลบั้ม ?"
             },
             "detail": {
                 "title": "Album"

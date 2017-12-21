@@ -94,7 +94,7 @@
             </div>
         </div>
         <hr />
-        <h3>รายละเอียดเพิ่มเติม</h3>
+        <h3 jhiTranslate="rainyApp.shop.detail_page"></h3>
         <div class="row">                            
             <div class="col-12 col-md-6 col-lg-3 pt-1">
                 <mat-form-field class='ra-full-width'>
@@ -112,7 +112,7 @@
                         <mat-option value="TAN">{{'rainyApp.Ra_skin.TAN' | translate}}</mat-option>
                         <mat-option value="BLACK">{{'rainyApp.Ra_skin.BLACK' | translate}}</mat-option>
                     </mat-select>
-                    <mat-placeholder><label jhiTranslate="rainyApp.shop.skin"></label></mat-placeholder>
+                    <mat-placeholder>*<label jhiTranslate="rainyApp.shop.skin"></label></mat-placeholder>
                 </mat-form-field>
             </div>
             <div class="col-12 col-md-6 col-lg-3 pt-1">
@@ -137,7 +137,18 @@
         <div class="row">
             <div class="col-12 pt-1">
                 <label class="form-control-label" for="description"><span jhiTranslate="rainyApp.shop.description"></span></label>
-                <quill-editor [style]="{height: '200px'}" #editor formControlName="description"></quill-editor>
+                <quill-editor [style]="{height: '200px'}" [modules]="
+                              {
+                              toolbar: [ ['bold', 'italic', 'underline', 'strike'], ['blockquote', 'code-block'],
+                               [{ 'header': 1 }, { 'header': 2 }],               
+                               [{ 'list': 'ordered'}, { 'list': 'bullet' }],                                   
+                               [{ 'indent': '-1'}, { 'indent': '+1' }],
+                               [{ 'size': ['small', false, 'large', 'huge'] }],                                
+                               [{ 'color': [] }, { 'background': [] }],          
+                               [{ 'font': [] }],
+                               [{ 'align': [] }],
+                               ['clean'] ]
+                              }" #editor formControlName="description"></quill-editor>
             </div>
         </div>
         <br />
@@ -197,7 +208,7 @@
             </mat-form-field>
         </div>-->
         </div>
-            
+        <br />
         <!--(change)="onImageChange($event)-->
         <!--<pre>{{shopForm.value | json}}</pre>-->
         <hr />

@@ -3,12 +3,28 @@
     <div class ="row">
         <div class="col"></div>
         <div class="col-12 col-md-10 col-lg-8">
+            <button mat-icon-button type="submit"
+                    (click)="previousState()">
+                <span><mat-icon matPrefix><i class="material-icons">arrow_back</i></mat-icon></span>
+            </button>
+
             <h2>{{shop.name}}</h2>
             <hr>
             <div *ngIf="albums">
                 <mat-grid-list cols="3" rowHeight="2:1">
                     <div *ngFor="let album of albums">
-                        <mat-grid-tile><img src="{{album.url}}"></mat-grid-tile>
+                        <mat-grid-tile><a [routerLink]="['/album', album.id ]" >
+                            <!--<picture>
+                                <source media="(min-width: 1024px)" srcset="{{album.url_large}}">
+                                <source media="(min-width: 600px)" srcset="{{album.url_medium}}"> 
+                                <source media="(min-width: 360px)" srcset="{{album.url}}">
+                                <img />
+                            </picture>-->
+                            <img sizes="100vw"
+                                srcset="{{album.url_medium}} 1100w, {{album.url_medium}} 600w,
+                                {{album.url}} 400w" alt="picture">
+                            
+                            </a></mat-grid-tile>
                     </div>
                 </mat-grid-list>
             </div>
@@ -50,8 +66,8 @@
                             <span>{{shop.description}}</span>
                         </dd>
                     </dl>
-</mat-tab>
-                <mat-tab label="การบ้าน">น้องๆ ยังรอการบ้านพี่ๆ อยู่นะ</mat-tab>
+                </mat-tab>
+                <mat-tab label="การบ้าน"></mat-tab>
             </mat-tab-group>
             <hr />
             <h3>แผนที่</h3>
@@ -73,21 +89,15 @@
                 </agm-circle> -->
             </agm-map>
             <hr />
-            <div *ngIf="address">
+            <!--<div *ngIf="address">
                 <h5>{{address.results[0].address_components[2].short_name}} {{address.results[0].address_components[3].short_name}} {{address.results[0].address_components[4].short_name}}
                 {{address.results[0].address_components[5].short_name}}</h5>
-            </div>
-
-
+            </div>-->
         </div>
         <div class="col"></div>
     </div>
 
-    <button  mat-button type="submit"
-            (click)="previousState()"
-            class="btn btn-info">
-        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
-    </button>
+ 
 
     <!--<button type="button"
             [routerLink]="['/', { outlets: { popup: 'shop/'+ shop.id + '/edit'} }]"

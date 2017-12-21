@@ -3,14 +3,14 @@
         "album" : {
             "home": {
                 "title": "Albums",
-                "createLabel": "Create a new Album",
+                "createLabel": "Add picture into your album (maximum is 6)",
                 "createOrEditLabel": "Create or edit a Album"
             },
-            "created": "A new Album is created with identifier {{ param }}",
+            "created": "A new picture has been added in your album",
             "updated": "A Album is updated with identifier {{ param }}",
-            "deleted": "A Album is deleted with identifier {{ param }}",
+            "deleted": "A picture has been deleted from album",
             "delete": {
-                "question": "Are you sure you want to delete Album {{ id }}?"
+                "question": "Are you sure you want to delete picture from your album?"
             },
             "detail": {
                 "title": "Album"

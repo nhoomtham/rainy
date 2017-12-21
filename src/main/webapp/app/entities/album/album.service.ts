@@ -36,6 +36,15 @@ export class AlbumService {
         });
     }
 
+    findByShop(shopId: number): Observable<ResponseWrapper> {
+        return this.http.get(`${this.resourceUrl}/shop/${shopId}`)
+            .map((res: Response) => this.convertResponse(res));
+       // return this.http.get(`${this.resourceUrl}/shop/${shopId}`).map((res: Response) => {
+       //     const jsonResponse = res.json();
+       //     return this.convertItemFromServer(jsonResponse);
+       // });
+    }
+
     query(req?: any): Observable<ResponseWrapper> {
         const options = createRequestOption(req);
         return this.http.get(this.resourceUrl, options)
@@ -47,7 +56,7 @@ export class AlbumService {
     }
 
     loadAlbumByShop(id: number): Observable<ResponseWrapper> {
-        return this.http.get(`${this.resourceUrl}/shop/1001`).map((res: Response) => this.convertResponse(res));
+        return this.http.get(`${this.resourceUrl}/shop/${id}`).map((res: Response) => this.convertResponse(res));
     }
 
     private convertResponse(res: Response): ResponseWrapper {

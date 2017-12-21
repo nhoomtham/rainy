@@ -20,7 +20,7 @@
                 "login": "Sign in",
                 "logout": "Sign out",
                 "register": "Register",
-                "myinfo": "Personal"
+                "myinfo": "My Profile"
             },
             "admin": {
                 "main": "Administration",

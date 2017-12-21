@@ -3,7 +3,7 @@
         <h2>
             <span jhiTranslate="rainyApp.shop.home.title">Shops</span>
             <button mat-raised-button color="primary" class="float-right" [routerLink]="['/shop-user-new']">
-                <span class="fa fa-plus"></span>
+                <i class="material-icons">person_add</i>&nbsp;
                 <span jhiTranslate="rainyApp.shop.home.createLabel">
                     Create new Shop
                 </span>
@@ -42,10 +42,15 @@
                 </mat-card-title-group>
                 <mat-card-actions>
                    
-                    <button mat-icon-button type="submit" [routerLink]= "['/', { outlets: { popup: 'shop-status-update/' + shop.id } }]"><span><mat-icon matPrefix><i class="material-icons">chat</i></mat-icon></span></button>
-                    <button mat-icon-button type="submit" [routerLink]="['../shop', shop.id]"><span><mat-icon matPrefix><i class="material-icons">description</i></mat-icon></span></button>
+                    <button mat-icon-button type="submit" [routerLink]= "['/', { outlets: { popup: 'shop-status-update/' + shop.id } }]">
+                        <span><mat-icon matPrefix><i class="material-icons">chat</i></mat-icon></span></button>
                     <button mat-icon-button type="submit" [routerLink]="['../shop-user-edit', shop.id]">
-                        <span><mat-icon matPrefix><i class="material-icons">edit</i></mat-icon></span></button>
+                        <span><mat-icon matPrefix><i class="material-icons">border_color</i></mat-icon></span></button>
+                    <button mat-icon-button type="submit" [routerLink]="['../album-shop', shop.id]">
+                        <span><mat-icon matPrefix><i class="material-icons">add_a_photo</i></mat-icon></span>
+                    </button>
+                    <button mat-icon-button type="submit" [routerLink]="['../shop', shop.id]"><span>
+                        <mat-icon matPrefix><i class="material-icons">account_circle</i></mat-icon></span></button>
                     <button mat-icon-button type="submit"
                            [routerLink]="['/', { outlets: { popup: 'shop/'+ shop.id + '/delete'} }]"
                             replaceUrl="true"

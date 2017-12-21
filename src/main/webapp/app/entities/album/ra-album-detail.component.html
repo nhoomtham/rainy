@@ -1,0 +1,16 @@
+<div *ngIf="album" class="card jh-card">
+    <div class="row">
+        <div class="col"></div>
+        <div class="col-12 col-md-10 col-lg-8">
+            <button mat-icon-button type="submit"
+                    (click)="previousState()">
+                <span><mat-icon matPrefix><i class="material-icons">arrow_back</i></mat-icon></span>
+            </button>
+           <br />
+            <img sizes="100vw"
+                 srcset="{{album.url_large}} 1100w, {{album.url_medium}} 800w,
+                          {{album.url_medium}} 400w" alt="picture">
+        </div>
+        <div class="col"></div>
+    </div>
+</div>

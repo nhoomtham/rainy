@@ -23,6 +23,14 @@ export const albumRoute: Routes = [
             pageTitle: 'rainyApp.album.home.title'
         },
         canActivate: [UserRouteAccessService]
+    }, {
+        path: 'album-shop/:shopId',
+        component: AlbumComponent,
+        data: {
+            authorities: ['ROLE_USER'],
+            pageTitle: 'rainyApp.album.home.title'
+        },
+        canActivate: [UserRouteAccessService]
     }
 ];
 
