@@ -27,8 +27,7 @@ export class ShopDeleteDialogComponent {
         private eventManager: JhiEventManager,
         private principal: Principal,
         private loaderService: LoaderService
-    ) {
-    }
+    ) {}
 
     clear() {
         this.activeModal.dismiss('cancel');
@@ -38,7 +37,9 @@ export class ShopDeleteDialogComponent {
         this.loaderService.show();
         this.principal.identity().then((account) => {
             this.account = account;
+            // 1. delete pic_cover on AWS
             this.deleteFile(id).subscribe(() => {
+                // 2. delete Shop and Shop-Status and Album (AWS) by back-end service
                 this.shopService.delete(id).subscribe((response) => {
                     this.eventManager.broadcast({
                         name: 'shopListModification',
