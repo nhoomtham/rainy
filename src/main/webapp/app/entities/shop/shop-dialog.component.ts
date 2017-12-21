@@ -20,7 +20,6 @@ export class ShopDialogComponent implements OnInit {
 
     shop: Shop;
     isSaving: boolean;
-
     users: User[];
 
     constructor(
