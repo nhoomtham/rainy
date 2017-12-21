@@ -59,7 +59,7 @@ export class AlbumDeleteDialogComponent {
                 AWSService.config.accessKeyId = awsConfig.accessKey;
                 AWSService.config.secretAccessKey = awsConfig.secretKey;
                 AWSService.config.region = awsConfig.region;
-            
+
                 const bucket = new AWSService.S3({ params: { Bucket: awsConfig.bucketName } });
                 const file = this.album.url.split('/');
                 const fileName = file[8].split('.');
@@ -67,21 +67,21 @@ export class AlbumDeleteDialogComponent {
                 const params = {
                     Key: awsConfig.rootDir + '/' + this.account.login + '/' + id.toString() + '/album/' + file[8],
                 };
-                bucket.deleteObject(params, function (error, res) {
+                bucket.deleteObject(params, function(error, res) {
                     console.log('deleted1:' + res);
                 });
 
                 const param2 = {
                     Key: awsConfig.rootDir + '/' + this.account.login + '/' + id.toString() + '/album/' + fileName[0] + '_320.' + fileName[1],
                 };
-                bucket.deleteObject(param2, function (error, res) {
+                bucket.deleteObject(param2, function(error, res) {
                     console.log('deleted2:' + res);
                 });
 
                 const param3 = {
                     Key: awsConfig.rootDir + '/' + this.account.login + '/' + id.toString() + '/album/' + fileName[0] + '_640.' + fileName[1],
                 };
-                bucket.deleteObject(param3, function (error, res) {
+                bucket.deleteObject(param3, function(error, res) {
                     console.log('deleted3:' + res);
                     observer.next();
                 });

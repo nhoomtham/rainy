@@ -63,7 +63,6 @@ export class ShopUserNewComponent implements OnInit, OnDestroy {
     shop: Shop;
     isSaving: boolean;
     shopForm: FormGroup;
-
     lat: number;
     lng: number;
     geoPosition: any;
@@ -327,7 +326,7 @@ export class ShopUserNewComponent implements OnInit, OnDestroy {
     onImageChange(event) {
         this.loaderService.show();
         this.pic_cover_changed = true;
-    // let image = event.target.file[0];
+        // let image = event.target.file[0];
         const image = this.elFile.nativeElement.files[0];
         this.ng2ImgMax.resizeImage(image, 128, 10000).subscribe((result) => {
             this.uploadImage = new File([result], result.name);
@@ -336,7 +335,7 @@ export class ShopUserNewComponent implements OnInit, OnDestroy {
             },
             (error) => {
                 console.log('resize img error:' + error);
-                () => this.loaderService.hide()
-            }, () => this.loaderService.hide());
+                this.loaderService.hide()
+            });
     }
 }

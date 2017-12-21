@@ -21,7 +21,7 @@ require('aws-sdk/dist/aws-sdk');
     templateUrl: './ra-album.component.html'
 })
 export class AlbumComponent implements OnInit, OnDestroy {
-    
+
     private account: Account;
     private subscription: Subscription;
     private shopId: number;
@@ -66,8 +66,7 @@ export class AlbumComponent implements OnInit, OnDestroy {
             this.isProgressing = true;
             this.shopId = params['shopId'];
             this.loadByShop(this.shopId);
-            this.shopService.find(this.shopId).subscribe((shop) =>
-            {
+            this.shopService.find(this.shopId).subscribe((shop) => {
                 this.shop = shop;
                 this.isProgressing = false;
             });
@@ -89,7 +88,7 @@ export class AlbumComponent implements OnInit, OnDestroy {
     save({ value, valid }: { value: Album, valid: boolean }): void {
         this.isProgressing = true;
         this.uploadFile(this.shop.id).subscribe((filename) => {
-            this.albumForm.get("url").setValue(filename);
+            this.albumForm.get('url').setValue(filename);
             value.url = filename;
             value.shop = this.shop;
             this.subscribeToSaveResponse(
@@ -122,7 +121,6 @@ export class AlbumComponent implements OnInit, OnDestroy {
                     this.putFile(awsConfig, this.uploadImage_640, splitted[0] + '_640' + '.' + splitted[1], id).subscribe((r_fileName) => {
                         console.log('uploaded:' + r_fileName)
                     });
-                    
                     this.putFile(awsConfig, this.uploadImage_320, splitted[0] + '_320' + '.' + splitted[1], id).subscribe((r_fileName) => {
                         console.log('uploaded:' + r_fileName)
                     });
@@ -132,7 +130,7 @@ export class AlbumComponent implements OnInit, OnDestroy {
                         observer.next(defaultBucket + r_fileName);
                     });
                 });
-            } 
+            }
         });
     }
 
@@ -150,7 +148,7 @@ export class AlbumComponent implements OnInit, OnDestroy {
                 ContentType: file.type
             };
 
-            bucket.putObject(params, function (error, res) {
+            bucket.putObject(params, function(error, res) {
                 if (error) {
                     // console.log(error);
                     observer.next();
