@@ -137,7 +137,18 @@
         <div class="row">
             <div class="col-12 pt-1">
                 <label class="form-control-label" for="description"><span jhiTranslate="rainyApp.shop.description"></span></label>
-                <quill-editor [style]="{height: '200px'}" #editor formControlName="description"></quill-editor>
+                <quill-editor [style]="{height: '200px'}" [modules]="
+                              {
+                              toolbar: [ ['bold', 'italic', 'underline', 'strike'], ['blockquote', 'code-block'],
+                               [{ 'header': 1 }, { 'header': 2 }],               
+                               [{ 'list': 'ordered'}, { 'list': 'bullet' }],                                   
+                               [{ 'indent': '-1'}, { 'indent': '+1' }],
+                               [{ 'size': ['small', false, 'large', 'huge'] }],                                
+                               [{ 'color': [] }, { 'background': [] }],          
+                               [{ 'font': [] }],
+                               [{ 'align': [] }],
+                               ['clean'] ]
+                              }" #editor formControlName="description"></quill-editor>
             </div>
         </div>
         <br />
@@ -198,8 +209,6 @@
         </div>-->
         </div>
         <br />
-        <h3 jhiTranslate="rainyApp.shop.album_page"></h3>
-
         <!--(change)="onImageChange($event)-->
         <!--<pre>{{shopForm.value | json}}</pre>-->
         <hr />
