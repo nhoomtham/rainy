@@ -125,7 +125,7 @@ application:
     aws:
         access-key: AWS_ACCESS_KEY
         secret-key: AWS_SECRET_KEY
-        region: eu-west-2
+        region: AWS_REGION
         root-dir: prod
         bucket-name: ra-rainy
 

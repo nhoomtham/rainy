@@ -16,7 +16,10 @@ import java.util.Optional;
 @SuppressWarnings("unused")
 @Repository
 public interface ShopStatusRepository extends JpaRepository<ShopStatus, Long> {
-    ShopStatus findByShop(Shop shop);
+    
+	ShopStatus findByShop(Shop shop);
 
 	Page<ShopStatus> findAllByOrderByLastModifiedDateDesc(Pageable pageable);
+	
+	void deleteByShop(Shop shop);
 }

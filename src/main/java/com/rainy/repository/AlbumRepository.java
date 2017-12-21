@@ -19,5 +19,7 @@ import java.util.List;
 public interface AlbumRepository extends JpaRepository<Album, Long> {
 
     List<AlbumDTO> findByShop(Shop shop);
+    
+    void deleteByShop(Shop shop);
 
 }

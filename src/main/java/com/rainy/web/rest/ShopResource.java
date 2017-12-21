@@ -2,6 +2,7 @@ package com.rainy.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import com.rainy.domain.Shop;
+import com.rainy.repository.ShopStatusRepository;
 import com.rainy.security.AuthoritiesConstants;
 import com.rainy.security.SecurityUtils;
 import com.rainy.service.GeometryService;
@@ -45,7 +46,6 @@ public class ShopResource {
     
     @Autowired
     private GeometryService geometryService;
-    
     
     public ShopResource(ShopService shopService) {
         this.shopService = shopService;

@@ -103,6 +103,8 @@
         <sonar.tests>${project.basedir}/src/test/</sonar.tests>
 
         <!-- jhipster-needle-maven-property -->
+        
+        <aws-s3.version>1.11.252</aws-s3.version>
     </properties>
 
     <dependencyManagement>
@@ -182,8 +184,13 @@
             <artifactId>jts</artifactId>
             <version>${jts-suite.version}</version>
         </dependency>
-
-
+	
+		<!-- https://mvnrepository.com/artifact/com.amazonaws/aws-java-sdk -->
+		<dependency>
+			<groupId>com.amazonaws</groupId>
+			<artifactId>aws-java-sdk</artifactId>
+			<version>${aws-s3.version}</version>
+		</dependency>
 
         <dependency>
             <groupId>com.h2database</groupId>

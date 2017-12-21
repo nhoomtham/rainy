@@ -26,7 +26,7 @@ public class ApplicationProperties {
         private String bucketName;
 
         public String getRegion() {
-            return region;
+            return System.getenv(region);
         }
 
         public void setRegion(String region) {

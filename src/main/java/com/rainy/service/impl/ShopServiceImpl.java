@@ -1,11 +1,18 @@
 package com.rainy.service.impl;
 
+import com.amazonaws.AmazonServiceException;
+import com.amazonaws.services.s3.AmazonS3;
+import com.amazonaws.services.s3.AmazonS3ClientBuilder;
+import com.amazonaws.services.s3.model.DeleteObjectsRequest;
 import com.rainy.domain.Shop;
 import com.rainy.domain.User;
+import com.rainy.repository.AlbumRepository;
 import com.rainy.repository.ShopRepository;
+import com.rainy.repository.ShopStatusRepository;
 import com.rainy.service.GeometryService;
 import com.rainy.service.ShopService;
 import com.rainy.service.UserService;
+import com.rainy.service.dto.AlbumDTO;
 import com.rainy.service.dto.ShopDTO;
 import com.rainy.service.mapper.ShopMapper;
 import com.vividsolutions.jts.geom.Coordinate;
@@ -32,6 +39,8 @@ import java.util.Optional;
 @Service
 @Transactional
 public class ShopServiceImpl implements ShopService{
+	
+	private static String AWS_S3_BUCKET = "ra-rainy";
 
     private final Logger log = LoggerFactory.getLogger(ShopServiceImpl.class);
 
@@ -46,6 +55,12 @@ public class ShopServiceImpl implements ShopService{
     @Autowired
     private GeometryFactory geometryFactory;
 
+    @Autowired
+    private ShopStatusRepository shopStatusRepository;
+    
+    @Autowired
+    private AlbumRepository albumRepository;
+    
     public ShopServiceImpl(ShopRepository shopRepository, ShopMapper shopMapper, GeometryService geometryService, 
     		UserService userService) {
         this.shopRepository = shopRepository;
@@ -143,10 +158,51 @@ public class ShopServiceImpl implements ShopService{
      */
     @Override
     public void delete(Long id) {
+        Shop shop = shopRepository.findOne(id);
+        
+        log.debug("Request to delete ShopStatus by ShopId : {}", id);
+        shopStatusRepository.deleteByShop(shop);
+        
+        log.debug("Request to delete files on AWS by ShopId : {}", id);
+        List<String> files = new ArrayList<String>();
+        List<AlbumDTO> albums = albumRepository.findByShop(shop);
+        log.debug("Deleting objects from S3 bucket : {}", AWS_S3_BUCKET);
+        for (AlbumDTO album : albums) {
+        	log.debug("Deleting object : {}", extractFileName(album.getUrl()));
+        	files.add(extractFileName(album.getUrl()));
+        	files.add(extractFileName(album.getUrl_medium()));
+        	files.add(extractFileName(album.getUrl_large()));
+        }
+        String[] object_keys = new String[files.size()];
+        object_keys = files.toArray(object_keys);
+        
+        final AmazonS3 s3 = AmazonS3ClientBuilder.defaultClient();
+        try {
+            DeleteObjectsRequest dor = new DeleteObjectsRequest(AWS_S3_BUCKET)
+                .withKeys(object_keys);
+            s3.deleteObjects(dor);
+        } catch (AmazonServiceException e) {
+            System.err.println(e.getErrorMessage());
+        }
+        
+        log.debug("Request to delete albums by ShopId : {}", id);
+        albumRepository.deleteByShop(shop);
+        
         log.debug("Request to delete Shop : {}", id);
         shopRepository.delete(id);
     }
 
+    private String extractFileName(String url) {
+		String splittedUrl[] = url.split("/");		
+		String fileAndExtension = "";
+		
+		if (splittedUrl.length > 0) {
+			fileAndExtension = splittedUrl[4] + "/" + splittedUrl[5] + "/" + splittedUrl[6]+ "/" +splittedUrl[7] + "/" + splittedUrl[8];			
+		}
+		
+		return fileAndExtension;
+	}
+    
     @Override
     public List<Shop> findByCurrentUser() {
     	Optional<User> user = userService.getUserWithAuthorities();
