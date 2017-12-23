@@ -1,6 +1,6 @@
 {
     "global": {
-        "title": "Rainy",
+        "title": "NongClub",
         "browsehappy": "เบราว์เซอร์ที่คุณใช้<strong>เก่าเกินไป</strong>. กรุณา <a href=\"http://browsehappy.com/?locale=en\">อัพเกรดเบราว์เซอร์</a> เพื่อสัมผัสประสบการณ์ที่ดีสำหรับคุณ.",
         "menu": {
             "home": "หน้าหลัก",
@@ -20,7 +20,7 @@
                 "login": "เข้าระบบ",
                 "logout": "ออกระบบ",
                 "register": "ลงทะเบียน",
-                "myinfo" :  "โปรไฟล์ของฉัน"
+                "myinfo": "โปรไฟล์ของฉัน"
             },
             "admin": {
                 "main": "ผู้ดูแลระบบ",
@@ -41,11 +41,11 @@
                 "main": "หาน้องๆ",
                 "by-distance": "ตามระยะทาง",
                 "by-status": "อัพเดทล่าสุด",
-                "by-faverite" : "ที่บันทึกไว้"
+                "by-faverite": "ที่บันทึกไว้"
             },
             "find-customer": {
                 "main": "หาลูกค้า",
-                "shop" : "โปรไฟล์"
+                "shop": "โปรไฟล์"
             }
         },
         "form": {
@@ -97,9 +97,11 @@
             "id": "รหัส"
         },
         "ribbon": {
-            "dev":"Development"
+            "dev": "Development"
         },
-        "item-count": "Showing {{first}} - {{second}} of {{total}} items."
+        "item-count": "Showing {{first}} - {{second}} of {{total}} items.",
+        "copyright": "Copyright © 2018-2019 NongClub Team, All Rights Reserved."
+
     },
     "entity": {
         "action": {
