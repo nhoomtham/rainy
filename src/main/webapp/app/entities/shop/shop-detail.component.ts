@@ -1,17 +1,17 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/Rx';
 import { HttpClient } from '@angular/common/http';
 import { JhiEventManager } from 'ng-jhipster';
-
 import { ResponseWrapper } from '../../shared';
-
 import { Observable } from 'rxjs/Observable';
-
 import { Shop } from './shop.model';
 import { ShopService } from './shop.service';
 import { Album } from '../album/album.model';
 import { AlbumService } from '../album/album.service';
+
+import { QuillEditorComponent } from 'ngx-quill/src/quill-editor.component';
+import { FormGroup, FormBuilder } from '@angular/forms';
 
 interface Address {
     long_name: string;
@@ -40,13 +40,20 @@ export class ShopDetailComponent implements OnInit, OnDestroy {
     albums: Album[];
     courses: Observable<GeoResult[]>;
     address: GeoResult[];
+    form: FormGroup;
+    @ViewChild('editor') editor: QuillEditorComponent
+
     constructor(
         private eventManager: JhiEventManager,
         private shopService: ShopService,
         private route: ActivatedRoute,
         private albumService: AlbumService,
-        private httpClient: HttpClient
+        private httpClient: HttpClient,
+        private fb: FormBuilder
     ) {
+        this.form = fb.group({
+            editor: ['No description']
+        });
     }
 
     onMapClick(event) {
@@ -75,6 +82,7 @@ export class ShopDetailComponent implements OnInit, OnDestroy {
     load(id) {
         this.shopService.find(id).subscribe((shop) => {
             this.shop = shop;
+            this.patchValue(this.shop.description.length !== 0 ? this.shop.description : ' ');
         });
     }
 
@@ -84,6 +92,10 @@ export class ShopDetailComponent implements OnInit, OnDestroy {
             this.albums = res.json;
          },
         );
+    }
+
+    private patchValue(value: string): void {
+        this.form.controls['editor'].patchValue(value);
     }
 
     previousState() {
