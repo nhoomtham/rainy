@@ -1,108 +1,107 @@
-<div *ngIf="shop" class="card jh-card">
-    <jhi-alert-error></jhi-alert-error>
-    <div class ="row">
-        <div class="col"></div>
-        <div class="col-12 col-md-10 col-lg-8">
-            <button mat-icon-button type="submit"
-                    (click)="previousState()">
-                <span><mat-icon matPrefix><i class="material-icons">arrow_back</i></mat-icon></span>
-            </button>
+<div class="row">
+    <div class="col"></div>
+    <div class="col-12 col-md-10 col-lg-8">
 
-            <h2>{{shop.name}}</h2>
-            <hr>
-            <div *ngIf="albums">
-                <mat-grid-list cols="3" rowHeight="2:1">
-                    <div *ngFor="let album of albums">
-                        <mat-grid-tile><a [routerLink]="['/album', album.id ]" >
-                            <!--<picture>
-                                <source media="(min-width: 1024px)" srcset="{{album.url_large}}">
-                                <source media="(min-width: 600px)" srcset="{{album.url_medium}}"> 
-                                <source media="(min-width: 360px)" srcset="{{album.url}}">
-                                <img />
-                            </picture>-->
-                            <img sizes="100vw"
-                                srcset="{{album.url_medium}} 1100w, {{album.url_medium}} 600w,
+        <div *ngIf="shop" class="card jh-card">
+            <jhi-alert-error></jhi-alert-error>
+            <div class="row">
+                <div class="col-12 pt-1">
+                    <button mat-icon-button type="submit"
+                            (click)="previousState()">
+                        <span><mat-icon matPrefix><i class="material-icons">arrow_back</i></mat-icon></span>
+                    </button>
+
+                    <h2>{{shop.name}}</h2>
+                    <hr>
+                    <div *ngIf="albums">
+                        <mat-grid-list cols="3" rowHeight="2:1">
+                            <div *ngFor="let album of albums">
+                                <mat-grid-tile>
+                                    <a [routerLink]="['/album', album.id ]">
+                                        <!--<picture>
+                                            <source media="(min-width: 1024px)" srcset="{{album.url_large}}">
+                                            <source media="(min-width: 600px)" srcset="{{album.url_medium}}">
+                                            <source media="(min-width: 360px)" srcset="{{album.url}}">
+                                            <img />
+                                        </picture>-->
+                                        <img sizes="100vw"
+                                             srcset="{{album.url_medium}} 1100w, {{album.url_medium}} 600w,
                                 {{album.url}} 400w" alt="picture">
-                            
-                            </a></mat-grid-tile>
+
+                                    </a>
+                                </mat-grid-tile>
+                            </div>
+                        </mat-grid-list>
                     </div>
-                </mat-grid-list>
-            </div>
-            <br/>
-            <mat-tab-group>
-                <mat-tab label="รายละเอียด">
-                    <dl class="row-md jh-entity-details">
-                        <dd>
-                            <b>
-                                <span jhiTranslate="rainyApp.shop.type">Type</span>:
-                            </b>
-                            <span jhiTranslate="{{'rainyApp.Ra_type.' + shop.category}}"></span>
-                        </dd>
-                        <dd>
-                            <b>
-                                <span jhiTranslate="rainyApp.shop.price">Price</span>:
-                            </b>
-                            <span>{{shop.price}}</span>
-                        </dd>
-                        <dd>
-                            <b>
-                                <span jhiTranslate="rainyApp.shop.age">Age</span>:
-                            </b>
-                            <span>{{shop.age}}</span>
-                        </dd>
-                        <dd>
-                            <b><span jhiTranslate="rainyApp.shop.tel">Tel</span>:</b> <span>{{shop.tel}}</span>
-                        </dd>
-                        <dd>
-                            <b>
-                                <span jhiTranslate="rainyApp.shop.line_uname">Line Uname</span>:
-                            </b>
-                            <span>{{shop.line_uname}}</span>
-                        </dd>
-                        <dt>
-                            <span jhiTranslate="rainyApp.shop.description">Description</span>:
-                        </dt>
-                        <dd>
-                            <span>{{shop.description}}</span>
-                        </dd>
-                    </dl>
-                </mat-tab>
-                <mat-tab label="การบ้าน"></mat-tab>
-            </mat-tab-group>
-            <hr />
-            <h3>แผนที่</h3>
-            <agm-map [latitude]="shop.location.coordinates[0]"
-                     [longitude]="shop.location.coordinates[1]"
-                     [zoom]="17"
-                     [disableDefaultUI]="false"
-                     [zoomControl]="true"
-      			     (mapClick)="onMapClick($event)">
-                <agm-marker
-                        [latitude]="shop.location.coordinates[0]"
-                        [longitude]="shop.location.coordinates[1]">
-                </agm-marker>
-                <!--<agm-circle [latitude]="lat" [longitude]="lng"
-                                        [radius]="50"
-                                        [fillColor]="'red'"
-                                        [circleDraggable]="false"
-                                        [editable]="false">
-                </agm-circle> -->
-            </agm-map>
-            <hr />
-            <!--<div *ngIf="address">
-                <h5>{{address.results[0].address_components[2].short_name}} {{address.results[0].address_components[3].short_name}} {{address.results[0].address_components[4].short_name}}
-                {{address.results[0].address_components[5].short_name}}</h5>
-            </div>-->
+                    <br />
+                    <mat-tab-group>
+                        <mat-tab label="รายละเอียด">
+                            <dl class="row-md jh-entity-details">
+                                <dd>
+                                    <b>
+                                        <span jhiTranslate="rainyApp.shop.type">Type</span>:
+                                    </b>
+                                    <span jhiTranslate="{{'rainyApp.Ra_type.' + shop.category}}"></span>
+                                </dd>
+                                <dd>
+                                    <b>
+                                        <span jhiTranslate="rainyApp.shop.price">Price</span>:
+                                    </b>
+                                    <span>{{shop.price}}</span>
+                                </dd>
+                                <dd>
+                                    <b>
+                                        <span jhiTranslate="rainyApp.shop.age">Age</span>:
+                                    </b>
+                                    <span>{{shop.age}}</span>
+                                </dd>
+                                <dd>
+                                    <b><span jhiTranslate="rainyApp.shop.tel">Tel</span>:</b> <span>{{shop.tel}}</span>
+                                </dd>
+                                <dd>
+                                    <b>
+                                        <span jhiTranslate="rainyApp.shop.line_uname">Line Uname</span>:
+                                    </b>
+                                    <span>{{shop.line_uname}}</span>
+                                </dd>
+                                <dt>
+                                    <span jhiTranslate="rainyApp.shop.description">Description</span>:
+                                </dt>
+                                <dd>
+                                    <span>{{shop.description}}</span>
+                                </dd>
+                            </dl>
+                        </mat-tab>
+                        <mat-tab label="การบ้าน"></mat-tab>
+                    </mat-tab-group>
+                    <hr />
+                    <h3>แผนที่</h3>
+                    <agm-map [latitude]="shop.location.coordinates[0]"
+                             [longitude]="shop.location.coordinates[1]"
+                             [zoom]="17"
+                             [disableDefaultUI]="false"
+                             [zoomControl]="true"
+                             (mapClick)="onMapClick($event)">
+                        <agm-marker [latitude]="shop.location.coordinates[0]"
+                                    [longitude]="shop.location.coordinates[1]">
+                        </agm-marker>
+                        <!--<agm-circle [latitude]="lat" [longitude]="lng"
+                                                [radius]="50"
+                                                [fillColor]="'red'"
+                                                [circleDraggable]="false"
+                                                [editable]="false">
+                        </agm-circle> -->
+                    </agm-map>
+                    <hr />
+                    <!--<div *ngIf="address">
+                        <h5>{{address.results[0].address_components[2].short_name}} {{address.results[0].address_components[3].short_name}} {{address.results[0].address_components[4].short_name}}
+                        {{address.results[0].address_components[5].short_name}}</h5>
+                    </div>-->
+                </div>
+                             </div>
+
         </div>
-        <div class="col"></div>
+
     </div>
-
- 
-
-    <!--<button type="button"
-            [routerLink]="['/', { outlets: { popup: 'shop/'+ shop.id + '/edit'} }]"
-            replaceUrl="true"
-            class="btn btn-primary">
-        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
-    </button>-->
+    <div class="col"></div>
 </div>

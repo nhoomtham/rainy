@@ -19,6 +19,7 @@ import { GeoJson } from '../../geometry/map';
 import { MapService } from '../../geometry/map.service';
 import { LoaderService } from './loader.service';
 import { Ng2ImgMaxService } from 'ng2-img-max';
+import { Ng2FileInputService, Ng2FileInputAction } from 'ng2-file-input';
 
 import { QuillEditorComponent } from 'ngx-quill/src/quill-editor.component';
 
@@ -59,6 +60,7 @@ export class ShopUserNewComponent implements OnInit, OnDestroy {
     private routeSub: any;
     private paramId: number;
     private pic_cover_changed: boolean;
+    private myFileInputIdentifier: string;
 
     shop: Shop;
     isSaving: boolean;
@@ -122,6 +124,7 @@ export class ShopUserNewComponent implements OnInit, OnDestroy {
             //    console.log('view child + directly subscription', data)
             // }
             // );
+        this.myFileInputIdentifier = 'tHiS_Id_IS_sPeeCiAL';
     }
 
     private fillForm() {
@@ -338,4 +341,23 @@ export class ShopUserNewComponent implements OnInit, OnDestroy {
                 this.loaderService.hide()
             });
     }
+
+    fileChange(event) {
+        if (event.currentFiles.length > 0) {
+            this.loaderService.show();
+            this.pic_cover_changed = true;
+
+            const image = event.currentFiles[0];
+            this.ng2ImgMax.resizeImage(image, 128, 10000).subscribe((result) => {
+                this.uploadImage = new File([result], result.name);
+                // console.log('resize img done:' + result.name);
+                this.loaderService.hide()
+            },
+            (error) => {
+                    console.log('resize img error:' + error);
+                    this.loaderService.hide()
+            });
+        }
+    }
+
 }

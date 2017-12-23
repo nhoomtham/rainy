@@ -16,7 +16,8 @@
                 "title": "Album"
             },
             "url": "Url",
-            "shop": "Shop"
+            "shop": "Shop",
+            "exceeded":  "Number of pictures are exceeded"
         }
     }
 }

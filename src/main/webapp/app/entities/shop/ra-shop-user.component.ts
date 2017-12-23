@@ -14,6 +14,7 @@ export class ShopUserComponent implements OnInit, OnDestroy {
 
     shops: Shop[];
     eventSubscriber: Subscription;
+    noData: boolean;
 
     constructor(
         private shopService: ShopService,
@@ -22,6 +23,7 @@ export class ShopUserComponent implements OnInit, OnDestroy {
     ) {
     }
     ngOnInit(): void {
+        this.noData = true;
         this.loadAll();
         this.registerChangeInShops();
     }
@@ -30,7 +32,7 @@ export class ShopUserComponent implements OnInit, OnDestroy {
         this.eventSubscriber = this.eventManager.subscribe('shopListModification', (response) => this.loadAll());
     }
 
-    loadAll() {
+    loadAll(): void {
         this.shopService.findByUser().subscribe(
             (res) => this.onSuccess(res.json, res.headers),
             (res) => this.onError(res));
@@ -38,6 +40,11 @@ export class ShopUserComponent implements OnInit, OnDestroy {
 
     private onSuccess(data, headers) {
         this.shops = data;
+        if (this.shops.length > 0) {
+            this.noData = false;
+        } else {
+            this.noData = true;
+        }
     }
 
     private onError(error: any) {

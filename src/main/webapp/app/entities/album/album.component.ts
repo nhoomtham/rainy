@@ -13,6 +13,7 @@ import { Shop } from '../shop/shop.model';
 import { LoaderService } from '../shop/loader.service';
 
 import { Ng2ImgMaxService } from 'ng2-img-max';
+import { Ng2FileInputService, Ng2FileInputAction } from 'ng2-file-input';
 
 require('aws-sdk/dist/aws-sdk');
 
@@ -30,6 +31,7 @@ export class AlbumComponent implements OnInit, OnDestroy {
     private uploadImage: File;
     private uploadImage_320: File;
     private uploadImage_640: File;
+    private myFileInputIdentifier: string;
 
     @ViewChild('selectedFile')
     private elFile: ElementRef;
@@ -48,16 +50,12 @@ export class AlbumComponent implements OnInit, OnDestroy {
         private shopService: ShopService,
         private ng2ImgMax: Ng2ImgMaxService,
         private loaderService: LoaderService,
+        private ng2FileInputService: Ng2FileInputService,
     ) {}
 
     loadByShop(shopId: number) {
         this.albumService.findByShop(shopId).subscribe((res: ResponseWrapper) => {
             this.albums = res.json;
-            if (this.albums.length !== 6) {
-                this.elFile.nativeElement.disabled = false;
-            } else {
-                this.elFile.nativeElement.disabled = true;
-            }
         });
     }
 
@@ -81,7 +79,7 @@ export class AlbumComponent implements OnInit, OnDestroy {
         this.principal.identity().then((account) => {
             this.account = account;
         });
-
+        this.myFileInputIdentifier = 'tHiS_Id_IS_sPeeCiAL';
         this.registerChangeInAlbums();
     }
 
@@ -104,9 +102,10 @@ export class AlbumComponent implements OnInit, OnDestroy {
     private onSaveSuccess(result: Album) {
         this.eventManager.broadcast({ name: 'albumListModification', content: 'OK' });
         // this.albumForm.get('url').setValue(null);
-        this.elFile.nativeElement.value = '';
+        // this.elFile.nativeElement.value = '';
         this.albumForm.reset();
         this.isProgressing = false;
+        this.ng2FileInputService.reset(this.myFileInputIdentifier);
     }
 
     private uploadFile(id: number): Observable<any> {
@@ -159,12 +158,27 @@ export class AlbumComponent implements OnInit, OnDestroy {
         });
     }
 
-    onImageChange(event) {
-        this.albumForm.reset();
-        const image = this.elFile.nativeElement.files[0];
-        this.resizeImage64(image);
-        this.resizeImage320(image);
-        this.resizeImage640(image);
+    // Change(event) {
+    //    this.albumForm.reset();
+    //    const image = this.elFile.nativeElement.files[0];
+    //    this.resizeImage64(image);
+    //    this.resizeImage320(image);
+    //    this.resizeImage640(image);
+    // }
+
+    fileChange(event) {
+        if (this.albums.length === 6) {
+            this.jhiAlertService.error('rainyApp.album.exceeded', null, null);
+            this.ng2FileInputService.reset(this.myFileInputIdentifier);
+        }
+
+        if (event.currentFiles.length > 0 && this.albums.length !== 6) {
+            this.albumForm.reset();
+            const image = event.currentFiles[0];
+            this.resizeImage64(image);
+            this.resizeImage320(image);
+            this.resizeImage640(image);
+        }
     }
 
     previousState() {

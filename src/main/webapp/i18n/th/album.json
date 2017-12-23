@@ -1,6 +1,6 @@
 {
     "rainyApp": {
-        "album" : {
+        "album": {
             "home": {
                 "title": "อัลบั้ม",
                 "createLabel": "เพิ่มรูปลงในอัลบั้ม (ไม่เกิน 6 รูป)",
@@ -16,7 +16,8 @@
                 "title": "Album"
             },
             "url": "Url",
-            "shop": "Shop"
+            "shop": "Shop",
+            "exceeded": "จำนวนรูปภาพเกินจากที่กำหนดไว้"
         }
     }
 }

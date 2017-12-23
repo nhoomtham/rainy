@@ -1,219 +1,227 @@
-<div class="card jh-card">
-    <h2 jhiTranslate="global.menu.account.myinfo">Personal</h2>
-    <form novalidate [formGroup]='shopForm' (ngSubmit)="save(shopForm)">
-        <h3 jhiTranslate="rainyApp.shop.cover_info"></h3>        
-        <div class="row">
-            <div class="col-12 col-md-6 col-lg-3 pt-1">
-                <mat-form-field class='ra-full-width'>
-                    <input formControlName="id" type="number" hidden />
-                    <input matInput formControlName="name" type="text" />
-                    <mat-placeholder>*<label jhiTranslate="rainyApp.shop.name"></label></mat-placeholder>
-                    <!--<mat-hint><span jhiTranslate="rainyApp.shop.required"></span></mat-hint>-->
-                    <mat-error *ngIf="shopForm.get('name').hasError('required')">
-                        <span jhiTranslate="rainyApp.shop.required"></span>
-                    </mat-error>
-                    <mat-error *ngIf="shopForm.get('name').hasError('maxlength')">
-                        <span jhiTranslate="rainyApp.shop.invalid-length"></span>
-                    </mat-error>
-                </mat-form-field>
-            </div>
-            <div class="col-12 col-md-6 col-lg-3 pt-1">
-                <mat-form-field class='ra-full-width'>
-                    <mat-select formControlName="category">
-                        <mat-option value="MALE">{{'rainyApp.Ra_type.MALE' | translate}}</mat-option>
-                        <mat-option value="FEMALE">{{'rainyApp.Ra_type.FEMALE' | translate}}</mat-option>
-                        <mat-option value="LADY_BOY_S">{{'rainyApp.Ra_type.LADY_BOY_S' | translate}}</mat-option>
-                        <mat-option value="LADY_BOY">{{'rainyApp.Ra_type.LADY_BOY' | translate}}</mat-option>
-                        <mat-option value="TOM">{{'rainyApp.Ra_type.TOM' | translate}}</mat-option>
-                    </mat-select>
-                    <mat-placeholder>*<label jhiTranslate="rainyApp.shop.category"></label></mat-placeholder>
-                    <mat-error *ngIf="shopForm.get('category').hasError('required')">
-                        <span jhiTranslate="rainyApp.shop.required"></span>
-                    </mat-error>
-                </mat-form-field>
-            </div>
-            <div class="col-12 col-md-6 col-lg-3 pt-1">
-                <mat-form-field class='ra-full-width'>
-                    <input formControlName="age" matInput type="number" />
-                    <mat-placeholder>*<label jhiTranslate="rainyApp.shop.age"></label></mat-placeholder>
-                    <mat-error *ngIf="shopForm.get('age').hasError('required')">
-                        <span jhiTranslate="rainyApp.shop.required"></span>
-                    </mat-error>
-                    <mat-error *ngIf="shopForm.get('age').hasError('min') || shopForm.get('age').hasError('max')">
-                        <span jhiTranslate="rainyApp.shop.invalid-number"></span>
-                    </mat-error>
-                </mat-form-field>
-            </div>
-            <div class="col-12 col-md-6 col-lg-3 pt-1">
-                <mat-form-field class='ra-full-width'>
-                    <input formControlName="weight" matInput type="number" />
-                    <mat-placeholder>*<label jhiTranslate="rainyApp.shop.weight"></label></mat-placeholder>
-                    <mat-error *ngIf="shopForm.get('weight').hasError('required')">
-                        <span jhiTranslate="rainyApp.shop.required"></span>
-                    </mat-error>
-                    <mat-error *ngIf="shopForm.get('weight').hasError('min') || shopForm.get('weight').hasError('max')">
-                        <span jhiTranslate="rainyApp.shop.invalid-number"></span>
-                    </mat-error>
-                </mat-form-field>
-            </div>
-            <div class="col-12 col-md-6 col-lg-3 pt-1">
-                <mat-form-field class='ra-full-width'>
-                    <input formControlName="high" matInput type="number" />
-                    <mat-placeholder>*<label jhiTranslate="rainyApp.shop.high"></label></mat-placeholder>
-                    <mat-error *ngIf="shopForm.get('high').hasError('required')">
-                        <span jhiTranslate="rainyApp.shop.required"></span>
-                    </mat-error>
-                    <mat-error *ngIf="shopForm.get('high').hasError('min') || shopForm.get('high').hasError('max')">
-                        <span jhiTranslate="rainyApp.shop.invalid-number"></span>
-                    </mat-error>
-                </mat-form-field>
-            </div>
-            <div class="col-12 col-md-6 col-lg-3 pt-1">
-                <mat-form-field class='ra-full-width'>
-                    <input formControlName="price" matInput type="number" />
-                    <mat-placeholder>*<label jhiTranslate="rainyApp.shop.price"></label></mat-placeholder>
-                    <mat-error *ngIf="shopForm.get('price').hasError('required')">
-                        <span jhiTranslate="rainyApp.shop.required"></span>
-                    </mat-error>
-                    <mat-error *ngIf="shopForm.get('price').hasError('min') || shopForm.get('price').hasError('max')">
-                        <span jhiTranslate="rainyApp.shop.invalid-number"></span>
-                    </mat-error>
-                </mat-form-field>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-12  col-md-6 col-lg-6 pt-1">
-                <div class="form-group">
-                    <label class="form-control-label" for="field_pic_cover">*<span jhiTranslate="rainyApp.shop.pic_cover"></span></label>
-                    <input type="file" accept="image/*" class="form-control"
-                           id="field_pic_cover" (change)="onImageChange($event)" #selectedFile />
+<div class="row">
+    <div class="col"></div>
+    <div class="col-12 col-md-10 col-lg-8">
+
+        <div class="card jh-card">
+            <h2 jhiTranslate="global.menu.account.myinfo">Personal</h2>
+            <form novalidate [formGroup]='shopForm' (ngSubmit)="save(shopForm)">
+                <h3 jhiTranslate="rainyApp.shop.cover_info"></h3>
+                <div class="row">
+                    <div class="col-12 col-md-6 col-lg-3 pt-1">
+                        <mat-form-field class='ra-full-width'>
+                            <input formControlName="id" type="number" hidden />
+                            <input matInput formControlName="name" type="text" />
+                            <mat-placeholder>*<label jhiTranslate="rainyApp.shop.name"></label></mat-placeholder>
+                            <!--<mat-hint><span jhiTranslate="rainyApp.shop.required"></span></mat-hint>-->
+                            <mat-error *ngIf="shopForm.get('name').hasError('required')">
+                                <span jhiTranslate="rainyApp.shop.required"></span>
+                            </mat-error>
+                            <mat-error *ngIf="shopForm.get('name').hasError('maxlength')">
+                                <span jhiTranslate="rainyApp.shop.invalid-length"></span>
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-12 col-md-6 col-lg-3 pt-1">
+                        <mat-form-field class='ra-full-width'>
+                            <mat-select formControlName="category">
+                                <mat-option value="MALE">{{'rainyApp.Ra_type.MALE' | translate}}</mat-option>
+                                <mat-option value="FEMALE">{{'rainyApp.Ra_type.FEMALE' | translate}}</mat-option>
+                                <mat-option value="LADY_BOY_S">{{'rainyApp.Ra_type.LADY_BOY_S' | translate}}</mat-option>
+                                <mat-option value="LADY_BOY">{{'rainyApp.Ra_type.LADY_BOY' | translate}}</mat-option>
+                                <mat-option value="TOM">{{'rainyApp.Ra_type.TOM' | translate}}</mat-option>
+                            </mat-select>
+                            <mat-placeholder>*<label jhiTranslate="rainyApp.shop.category"></label></mat-placeholder>
+                            <mat-error *ngIf="shopForm.get('category').hasError('required')">
+                                <span jhiTranslate="rainyApp.shop.required"></span>
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-12 col-md-6 col-lg-3 pt-1">
+                        <mat-form-field class='ra-full-width'>
+                            <input formControlName="age" matInput type="number" />
+                            <mat-placeholder>*<label jhiTranslate="rainyApp.shop.age"></label></mat-placeholder>
+                            <mat-error *ngIf="shopForm.get('age').hasError('required')">
+                                <span jhiTranslate="rainyApp.shop.required"></span>
+                            </mat-error>
+                            <mat-error *ngIf="shopForm.get('age').hasError('min') || shopForm.get('age').hasError('max')">
+                                <span jhiTranslate="rainyApp.shop.invalid-number"></span>
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-12 col-md-6 col-lg-3 pt-1">
+                        <mat-form-field class='ra-full-width'>
+                            <input formControlName="weight" matInput type="number" />
+                            <mat-placeholder>*<label jhiTranslate="rainyApp.shop.weight"></label></mat-placeholder>
+                            <mat-error *ngIf="shopForm.get('weight').hasError('required')">
+                                <span jhiTranslate="rainyApp.shop.required"></span>
+                            </mat-error>
+                            <mat-error *ngIf="shopForm.get('weight').hasError('min') || shopForm.get('weight').hasError('max')">
+                                <span jhiTranslate="rainyApp.shop.invalid-number"></span>
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-12 col-md-6 col-lg-3 pt-1">
+                        <mat-form-field class='ra-full-width'>
+                            <input formControlName="high" matInput type="number" />
+                            <mat-placeholder>*<label jhiTranslate="rainyApp.shop.high"></label></mat-placeholder>
+                            <mat-error *ngIf="shopForm.get('high').hasError('required')">
+                                <span jhiTranslate="rainyApp.shop.required"></span>
+                            </mat-error>
+                            <mat-error *ngIf="shopForm.get('high').hasError('min') || shopForm.get('high').hasError('max')">
+                                <span jhiTranslate="rainyApp.shop.invalid-number"></span>
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-12 col-md-6 col-lg-3 pt-1">
+                        <mat-form-field class='ra-full-width'>
+                            <input formControlName="price" matInput type="number" />
+                            <mat-placeholder>*<label jhiTranslate="rainyApp.shop.price"></label></mat-placeholder>
+                            <mat-error *ngIf="shopForm.get('price').hasError('required')">
+                                <span jhiTranslate="rainyApp.shop.required"></span>
+                            </mat-error>
+                            <mat-error *ngIf="shopForm.get('price').hasError('min') || shopForm.get('price').hasError('max')">
+                                <span jhiTranslate="rainyApp.shop.invalid-number"></span>
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
                 </div>
-            </div>
-            <div class="col-12  col-md-6 col-lg-6 pt-1">
-                <img src="{{shopForm.get('pic_cover').value}}" alt="no pic" />
-            </div>
-        </div>
-        <hr />
-        <h3 jhiTranslate="rainyApp.shop.detail_page"></h3>
-        <div class="row">                            
-            <div class="col-12 col-md-6 col-lg-3 pt-1">
-                <mat-form-field class='ra-full-width'>
-                    <input formControlName="shape" matInput type="text" />
-                    <mat-placeholder><label jhiTranslate="rainyApp.shop.shape"></label></mat-placeholder>
-                    <mat-hint align="start"><strong jhiTranslate="rainyApp.shop.shape-hint"></strong></mat-hint>
-                </mat-form-field>
-            </div>
-                
-            <div class="col-12 col-md-6 col-lg-3 pt-1">
-                <mat-form-field class='ra-full-width'>
-                    <mat-select formControlName="skin">
-                        <mat-option value="WHITE">{{'rainyApp.Ra_skin.WHITE' | translate}}</mat-option>
-                        <mat-option value="PALE">{{'rainyApp.Ra_skin.PALE' | translate}}</mat-option>
-                        <mat-option value="TAN">{{'rainyApp.Ra_skin.TAN' | translate}}</mat-option>
-                        <mat-option value="BLACK">{{'rainyApp.Ra_skin.BLACK' | translate}}</mat-option>
-                    </mat-select>
-                    <mat-placeholder>*<label jhiTranslate="rainyApp.shop.skin"></label></mat-placeholder>
-                </mat-form-field>
-            </div>
-            <div class="col-12 col-md-6 col-lg-3 pt-1">
-                <mat-form-field class='ra-full-width'>
-                    <input formControlName="tel" matInput type="text" />
-                    <mat-placeholder><label jhiTranslate="rainyApp.shop.tel"></label></mat-placeholder>
-                    <mat-error *ngIf="shopForm.get('tel').hasError('maxlength')">
-                        <span jhiTranslate="rainyApp.shop.invalid-length"></span>
-                    </mat-error>
-                </mat-form-field>
-            </div>
-            <div class="col-12 col-md-6 col-lg-3 pt-1">
-                <mat-form-field class='ra-full-width'>
-                    <input formControlName="line_uname" matInput type="text" />
-                    <mat-placeholder><label jhiTranslate="rainyApp.shop.line_uname"></label></mat-placeholder>
-                    <mat-error *ngIf="shopForm.get('line_uname').hasError('maxlength')">
-                        <span jhiTranslate="rainyApp.shop.invalid-length"></span>
-                    </mat-error>
-                </mat-form-field>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-12 pt-1">
-                <label class="form-control-label" for="description"><span jhiTranslate="rainyApp.shop.description"></span></label>
-                <quill-editor [style]="{height: '200px'}" [modules]="
+                <div class="row">
+                    <div class="col-12  col-md-6 col-lg-6 pt-1">
+                        <div class="form-group">
+                            <label class="form-control-label" for="field_pic_cover"><span jhiTranslate="rainyApp.shop.pic_cover"></span></label>
+                            <!--<input type="file" accept="image/*" class="form-control"
+                                   id="field_pic_cover" (change)="onImageChange($event)" #selectedFile />-->
+                            <ng2-file-input [id]="myFileInputIdentifier" (onAction)="fileChange($event)" [multiple]="false"></ng2-file-input>
+                        </div>
+                    </div>
+                    <div class="col-12  col-md-6 col-lg-6 pt-1">
+                        <img src="{{shopForm.get('pic_cover').value}}" alt="no pic" />
+                    </div>
+                </div>
+                <hr />
+                <h3 jhiTranslate="rainyApp.shop.detail_page"></h3>
+                <div class="row">
+                    <div class="col-12 col-md-6 col-lg-3 pt-1">
+                        <mat-form-field class='ra-full-width'>
+                            <input formControlName="shape" matInput type="text" />
+                            <mat-placeholder><label jhiTranslate="rainyApp.shop.shape"></label></mat-placeholder>
+                            <mat-hint align="start"><strong jhiTranslate="rainyApp.shop.shape-hint"></strong></mat-hint>
+                        </mat-form-field>
+                    </div>
+
+                    <div class="col-12 col-md-6 col-lg-3 pt-1">
+                        <mat-form-field class='ra-full-width'>
+                            <mat-select formControlName="skin">
+                                <mat-option value="WHITE">{{'rainyApp.Ra_skin.WHITE' | translate}}</mat-option>
+                                <mat-option value="PALE">{{'rainyApp.Ra_skin.PALE' | translate}}</mat-option>
+                                <mat-option value="TAN">{{'rainyApp.Ra_skin.TAN' | translate}}</mat-option>
+                                <mat-option value="BLACK">{{'rainyApp.Ra_skin.BLACK' | translate}}</mat-option>
+                            </mat-select>
+                            <mat-placeholder>*<label jhiTranslate="rainyApp.shop.skin"></label></mat-placeholder>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-12 col-md-6 col-lg-3 pt-1">
+                        <mat-form-field class='ra-full-width'>
+                            <input formControlName="tel" matInput type="text" />
+                            <mat-placeholder><label jhiTranslate="rainyApp.shop.tel"></label></mat-placeholder>
+                            <mat-error *ngIf="shopForm.get('tel').hasError('maxlength')">
+                                <span jhiTranslate="rainyApp.shop.invalid-length"></span>
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-12 col-md-6 col-lg-3 pt-1">
+                        <mat-form-field class='ra-full-width'>
+                            <input formControlName="line_uname" matInput type="text" />
+                            <mat-placeholder><label jhiTranslate="rainyApp.shop.line_uname"></label></mat-placeholder>
+                            <mat-error *ngIf="shopForm.get('line_uname').hasError('maxlength')">
+                                <span jhiTranslate="rainyApp.shop.invalid-length"></span>
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12 pt-1">
+                        <label class="form-control-label" for="description"><span jhiTranslate="rainyApp.shop.description"></span></label>
+                        <quill-editor [style]="{height: '200px'}" [modules]="
                               {
                               toolbar: [ ['bold', 'italic', 'underline', 'strike'], ['blockquote', 'code-block'],
-                               [{ 'header': 1 }, { 'header': 2 }],               
-                               [{ 'list': 'ordered'}, { 'list': 'bullet' }],                                   
+                               [{ 'header': 1 }, { 'header': 2 }],
+                               [{ 'list': 'ordered'}, { 'list': 'bullet' }],
                                [{ 'indent': '-1'}, { 'indent': '+1' }],
-                               [{ 'size': ['small', false, 'large', 'huge'] }],                                
-                               [{ 'color': [] }, { 'background': [] }],          
+                               [{ 'size': ['small', false, 'large', 'huge'] }],
+                               [{ 'color': [] }, { 'background': [] }],
                                [{ 'font': [] }],
                                [{ 'align': [] }],
                                ['clean'] ]
                               }" #editor formControlName="description"></quill-editor>
-            </div>
+                    </div>
+                </div>
+                <br />
+                <div class="row">
+                    <div *ngIf="lat>=-1" class="col-12 col-md-6 col-lg-6 pt-1">
+                        <h4><strong>คลิ๊กบนแผนที่แล้วระบบจะใส่ข้อมูลให้เอง</strong></h4>
+                        <agm-map [latitude]="lat"
+                                 [longitude]="lng"
+                                 [zoom]="17"
+                                 [disableDefaultUI]="false"
+                                 [zoomControl]="true"
+                                 (mapClick)="onMapClick($event)">
+                        </agm-map>
+                    </div>
+                    <div *ngIf="shop" class="col-12 col-md-6 col-lg-6 pt-1">
+                        <h4><strong>คลิ๊กบนแผนที่แล้วระบบจะใส่ข้อมูลให้เอง</strong></h4>
+                        <agm-map [latitude]="shop.location.coordinates[0]"
+                                 [longitude]="shop.location.coordinates[1]"
+                                 [zoom]="17"
+                                 [disableDefaultUI]="false"
+                                 [zoomControl]="true"
+                                 (mapClick)="onMapClick($event)">
+                            <agm-marker [latitude]="shop.location.coordinates[0]"
+                                        [longitude]="shop.location.coordinates[1]">
+                            </agm-marker>
+                            <!--<agm-circle [latitude]="lat" [longitude]="lng"
+                                            [radius]="50"
+                                            [fillColor]="'red'"
+                                            [circleDraggable]="false"
+                                            [editable]="false"
+                                            [clickable]="true">
+                            </agm-circle>-->
+                        </agm-map>
+                    </div>
+                    <div class="col-12 col-md-6 col-lg-2 pt-1">
+                        <mat-form-field class='ra-full-width'>
+                            <input formControlName="district" matInput type="text" />
+                            <mat-placeholder><label jhiTranslate="rainyApp.shop.district"></label></mat-placeholder>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-12 col-md-6 col-lg-2 pt-1">
+                        <mat-form-field class='ra-full-width'>
+                            <input formControlName="subdistrict" matInput type="text" />
+                            <mat-placeholder><label jhiTranslate="rainyApp.shop.subdistrict"></label></mat-placeholder>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-12 col-md-6 col-lg-2 pt-1">
+                        <mat-form-field class='ra-full-width'>
+                            <input formControlName="province" matInput type="text" />
+                            <mat-placeholder><label jhiTranslate="rainyApp.shop.province"></label></mat-placeholder>
+                        </mat-form-field>
+                    </div>
+                    <!--<div class="col-12 col-md-6 col-lg-6 pt-1">
+                        <mat-form-field class='ra-full-width'>
+                            <input formControlName="formatted_address" matInput  />
+                            <mat-hint align="start"><strong jhiTranslate="rainyApp.shop.province"></strong></mat-hint>
+                        </mat-form-field>
+                    </div>-->
+                </div>
+                <br />
+                <!--(change)="onImageChange($event)-->
+                <!--<pre>{{shopForm.value | json}}</pre>-->
+                <hr />
+                <button mat-raised-button color="primary" type="submit" [disabled]="shopForm.invalid"><i class="material-icons">save</i><span jhiTranslate="entity.action.save">Save</span></button>
+                <button mat-raised-button type="button" routerLink="/shop-user"><i class="material-icons">cancel</i><span jhiTranslate="entity.action.cancel">Cancel</span></button>
+                <jhi-angular-loader></jhi-angular-loader>
+            </form>
         </div>
-        <br />
-        <div class="row">
-            <div *ngIf="lat>=-1" class="col-12 col-md-6 col-lg-6 pt-1">
-                <h4><strong>คลิ๊กบนแผนที่แล้วระบบจะใส่ข้อมูลให้เอง</strong></h4>
-                <agm-map [latitude]="lat"
-                            [longitude]="lng"
-                            [zoom]="17"
-                            [disableDefaultUI]="false"
-                            [zoomControl]="true"
-                            (mapClick)="onMapClick($event)">
-                </agm-map>
-            </div>
-            <div *ngIf="shop" class="col-12 col-md-6 col-lg-6 pt-1">
-                <h4><strong>คลิ๊กบนแผนที่แล้วระบบจะใส่ข้อมูลให้เอง</strong></h4>
-                <agm-map [latitude]="shop.location.coordinates[0]"
-                            [longitude]="shop.location.coordinates[1]"
-                            [zoom]="17"
-                            [disableDefaultUI]="false"
-                            [zoomControl]="true"
-                            (mapClick)="onMapClick($event)">
-                    <agm-marker [latitude]="shop.location.coordinates[0]"
-                                [longitude]="shop.location.coordinates[1]">
-                    </agm-marker>
-                    <!--<agm-circle [latitude]="lat" [longitude]="lng"
-                                [radius]="50"
-                                [fillColor]="'red'"
-                                [circleDraggable]="false"
-                                [editable]="false"
-                                [clickable]="true">
-                </agm-circle>-->
-                </agm-map>
-            </div>
-            <div class="col-12 col-md-6 col-lg-2 pt-1">
-                <mat-form-field class='ra-full-width'>
-                    <input formControlName="district" matInput type="text" />
-                    <mat-placeholder><label jhiTranslate="rainyApp.shop.district"></label></mat-placeholder>
-                </mat-form-field>
-            </div>
-            <div class="col-12 col-md-6 col-lg-2 pt-1">
-                <mat-form-field class='ra-full-width'>
-                    <input formControlName="subdistrict" matInput type="text" />
-                    <mat-placeholder><label jhiTranslate="rainyApp.shop.subdistrict"></label></mat-placeholder>
-                </mat-form-field>
-            </div>
-            <div class="col-12 col-md-6 col-lg-2 pt-1">
-                <mat-form-field class='ra-full-width'>
-                    <input formControlName="province" matInput type="text" />
-                    <mat-placeholder><label jhiTranslate="rainyApp.shop.province"></label></mat-placeholder>
-                </mat-form-field>
-            </div>
-            <!--<div class="col-12 col-md-6 col-lg-6 pt-1">
-            <mat-form-field class='ra-full-width'>
-                <input formControlName="formatted_address" matInput  />
-                <mat-hint align="start"><strong jhiTranslate="rainyApp.shop.province"></strong></mat-hint>
-            </mat-form-field>
-        </div>-->
-        </div>
-        <br />
-        <!--(change)="onImageChange($event)-->
-        <!--<pre>{{shopForm.value | json}}</pre>-->
-        <hr />
-        <button mat-raised-button color="primary" type="submit" [disabled]="shopForm.invalid"><i class="material-icons">save</i><span jhiTranslate="entity.action.save">Save</span></button>
-        <button mat-raised-button type="button" routerLink="/shop-user"><i class="material-icons">cancel</i><span jhiTranslate="entity.action.cancel">Cancel</span></button>
-        <jhi-angular-loader></jhi-angular-loader>
-    </form>
+    </div>
+    <div class="col"></div>
 </div>

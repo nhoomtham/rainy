@@ -43,7 +43,8 @@
             "required": "This field is required",
             "invalid-number": "Invalid number",
             "invalid-length": "Too long",
-            "shape-hint": "xx-xx-xx"
+            "shape-hint": "xx-xx-xx",
+            "no-data": "You do not have any data, press Add button to add"
         }
     }
 }

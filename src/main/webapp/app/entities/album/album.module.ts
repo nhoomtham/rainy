@@ -5,6 +5,7 @@ import { FormsModule, FormGroup, FormControl, ReactiveFormsModule } from '@angul
 import { Ng2ImgMaxModule } from 'ng2-img-max';
 import { RainySharedModule } from '../../shared';
 import { RainyMaterialModule } from '../../material/rainy-material.module';
+import { Ng2FileInputModule } from 'ng2-file-input';
 
 import {
     AlbumService,
@@ -31,7 +32,8 @@ const ENTITY_STATES = [
         RainySharedModule,
         RouterModule.forChild(ENTITY_STATES),
         Ng2ImgMaxModule,
-        RainyMaterialModule
+        RainyMaterialModule,
+        Ng2FileInputModule.forRoot(),
     ],
     declarations: [
         AlbumComponent,

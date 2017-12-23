@@ -14,9 +14,11 @@
 
         <form novalidate [formGroup]='albumForm' (ngSubmit)="save(albumForm)">
                 <div class="form-group">
-                    <label class="form-control-label" for="field_pic_album">*<span jhiTranslate="rainyApp.album.home.createLabel"></span></label>
+                    <label class="form-control-label">*<span jhiTranslate="rainyApp.album.home.createLabel"></span></label>
+                    <ng2-file-input [id]="myFileInputIdentifier" (onAction)="fileChange($event)" [multiple]="false" ></ng2-file-input>
+                    <!--<label class="form-control-label" for="field_pic_album">*<span jhiTranslate="rainyApp.album.home.createLabel"></span></label>
                     <input type="file" accept="image/*" class="form-control"
-                            id="field_pic_album" (change)="onImageChange($event)" #selectedFile />
+                            id="field_pic_album" (change)="onImageChange($event)" #selectedFile />-->
                 </div>
             <button mat-raised-button color="primary" type="submit" [disabled]="albumForm.invalid || albums.length === 6"><i class="material-icons">save</i><span jhiTranslate="entity.action.save">Save</span></button>
             <mat-spinner *ngIf="isProgressing">                     
