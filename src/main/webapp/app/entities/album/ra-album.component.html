@@ -20,9 +20,12 @@
                     <input type="file" accept="image/*" class="form-control"
                             id="field_pic_album" (change)="onImageChange($event)" #selectedFile />-->
                 </div>
-            <button mat-raised-button color="primary" type="submit" [disabled]="albumForm.invalid || albums.length === 6"><i class="material-icons">save</i><span jhiTranslate="entity.action.save">Save</span></button>
-            <mat-spinner *ngIf="isProgressing">                     
-            </mat-spinner>
+            <div>
+                <button mat-raised-button color="primary" type="submit" [disabled]="albumForm.invalid || albums.length === 6"><i class="material-icons">save</i><span jhiTranslate="entity.action.save">Save</span></button>
+                <div class="ra-overlay">
+                    <mat-spinner *ngIf="isProgressing"></mat-spinner>
+                </div>
+            </div>
         </form>
         <hr />
         <div class="table-responsive" *ngIf="albums">

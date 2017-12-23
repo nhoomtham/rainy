@@ -1,8 +1,8 @@
 <div class="row">
     <div class="col"></div>
     <div class="col-12 col-md-10 col-lg-8">
-
         <div class="card jh-card">
+            <jhi-angular-loader></jhi-angular-loader>
             <h2 jhiTranslate="global.menu.account.myinfo">Personal</h2>
             <form novalidate [formGroup]='shopForm' (ngSubmit)="save(shopForm)">
                 <h3 jhiTranslate="rainyApp.shop.cover_info"></h3>
@@ -217,9 +217,10 @@
                 <!--(change)="onImageChange($event)-->
                 <!--<pre>{{shopForm.value | json}}</pre>-->
                 <hr />
-                <button mat-raised-button color="primary" type="submit" [disabled]="shopForm.invalid"><i class="material-icons">save</i><span jhiTranslate="entity.action.save">Save</span></button>
-                <button mat-raised-button type="button" routerLink="/shop-user"><i class="material-icons">cancel</i><span jhiTranslate="entity.action.cancel">Cancel</span></button>
-                <jhi-angular-loader></jhi-angular-loader>
+                <div>
+                    <button mat-raised-button color="primary" type="submit" [disabled]="shopForm.invalid"><i class="material-icons">save</i><span jhiTranslate="entity.action.save">Save</span></button>
+                    <button mat-raised-button type="button" routerLink="/shop-user"><i class="material-icons">cancel</i><span jhiTranslate="entity.action.cancel">Cancel</span></button>                    
+                </div>
             </form>
         </div>
     </div>

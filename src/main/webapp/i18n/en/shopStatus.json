@@ -15,7 +15,7 @@
             "detail": {
                 "title": "Shop Status"
             },
-            "message": "Message",
+            "message": "Status",
             "shop": "Shop",
             "invalid-length": "This field to be at least 1 or cannot be longer than 128 characters."
         }

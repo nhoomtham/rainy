@@ -15,7 +15,7 @@
             "detail": {
                 "title": "Shop Status"
             },
-            "message": "ดันโพส",
+            "message": "สถานะ",
             "shop": "Shop",
             "invalid-length": "ต้องใส่ข้อความและต้องไม่ยาวเกิน 128 ตัวอักษร"
         }

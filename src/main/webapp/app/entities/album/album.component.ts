@@ -19,7 +19,8 @@ require('aws-sdk/dist/aws-sdk');
 
 @Component({
     selector: 'jhi-album',
-    templateUrl: './ra-album.component.html'
+    templateUrl: './ra-album.component.html',
+    styleUrls: ['album.css']
 })
 export class AlbumComponent implements OnInit, OnDestroy {
 
