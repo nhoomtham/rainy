@@ -6,10 +6,10 @@
             <jhi-alert-error></jhi-alert-error>
             <div class="row">
                 <div class="col-12 pt-1">
-                    <button mat-icon-button type="submit"
+                    <!--<button mat-icon-button type="submit"
                             (click)="previousState()">
                         <span><mat-icon matPrefix><i class="material-icons">arrow_back</i></mat-icon></span>
-                    </button>
+                    </button>-->
 
                     <h2>{{shop.name}}</h2>
                     <hr>
@@ -40,28 +40,29 @@
                                     <dl class="row-md jh-entity-details">
                                         <dd>
                                             <b>
-                                                <span jhiTranslate="rainyApp.shop.type">Type</span>:
+                                                <span jhiTranslate="rainyApp.shop.type">Type</span>:&nbsp;
                                             </b>
                                             <span jhiTranslate="{{'rainyApp.Ra_type.' + shop.category}}"></span>
                                         </dd>
                                         <dd>
                                             <b>
-                                                <span jhiTranslate="rainyApp.shop.price">Price</span>:
+                                                <span jhiTranslate="rainyApp.shop.price">Price</span>:&nbsp;
                                             </b>
-                                            <span>{{shop.price}}</span>
+                                            <span>{{shop.price | number : '1.0'}}</span>&nbsp;
+                                            <span jhiTranslate="rainyApp.shop.baht"></span>
                                         </dd>
                                         <dd>
                                             <b>
-                                                <span jhiTranslate="rainyApp.shop.age">Age</span>:
+                                                <span jhiTranslate="rainyApp.shop.age">Age</span>:&nbsp;
                                             </b>
-                                            <span>{{shop.age}}</span>
+                                            <span>{{shop.age}}</span>&nbsp;<span jhiTranslate="rainyApp.shop.years"></span>
                                         </dd>
                                         <dd>
                                             <b><span jhiTranslate="rainyApp.shop.tel">Tel</span>:</b> <span>{{shop.tel}}</span>
                                         </dd>
                                         <dd>
                                             <b>
-                                                <span jhiTranslate="rainyApp.shop.line_uname">Line Uname</span>:
+                                                <span jhiTranslate="rainyApp.shop.line_uname">Line Uname</span>:&nbsp;
                                             </b>
                                             <span>{{shop.line_uname}}</span>
                                         </dd>
@@ -71,25 +72,25 @@
                                     <dl class="row-md jh-entity-details">
                                         <dd>
                                             <b>
-                                                <span jhiTranslate="rainyApp.shop.skin">Skin</span>:
+                                                <span jhiTranslate="rainyApp.shop.skin">Skin</span>:&nbsp;
                                             </b>
                                             <span jhiTranslate="{{'rainyApp.Ra_skin.' + shop.skin}}"></span>
                                         </dd>
                                         <dd>
                                             <b>
-                                                <span jhiTranslate="rainyApp.shop.high">High</span>:
+                                                <span jhiTranslate="rainyApp.shop.high">High</span>:&nbsp;
                                             </b>
-                                            <span>{{shop.high}}</span>
+                                            <span>{{shop.high}}</span>&nbsp;<span jhiTranslate="rainyApp.shop.cm"></span>
                                         </dd>
                                         <dd>
                                             <b>
-                                                <span jhiTranslate="rainyApp.shop.weight">Weight</span>:
+                                                <span jhiTranslate="rainyApp.shop.weight">Weight</span>:&nbsp;
                                             </b>
-                                            <span>{{shop.weight}}</span>
+                                            <span>{{shop.weight}}</span>&nbsp;<span jhiTranslate="rainyApp.shop.kg"></span>
                                         </dd>
                                         <dd>
                                             <b>
-                                                <span jhiTranslate="rainyApp.shop.shape">Shape</span>:
+                                                <span jhiTranslate="rainyApp.shop.shape">Shape</span>:&nbsp;
                                             </b>
                                             <span>{{shop.shape}}</span>
                                         </dd>
@@ -97,18 +98,14 @@
                                 </div>
                             </div>
                             
-                            <dl class="row-md jh-entity-details">
-                                <dt>
+                            <div class="row">
+                                <div class="col-12">
                                     <span jhiTranslate="rainyApp.shop.description">Description</span>:
-                                </dt>
-                                <dd>
-                                    <!--<span>{{shop.description}}</span>-->
                                     <form [formGroup]="form">
                                         <quill-editor [readOnly]="true" [modules]="{toolbar: false}" #editor [style.display]="'block'" formControlName="editor"></quill-editor>
                                     </form>
-                                </dd>
-
-                            </dl>
+                                </div>
+                            </div>
                         </mat-tab>
                         <mat-tab label="การบ้าน"></mat-tab>
                     </mat-tab-group>

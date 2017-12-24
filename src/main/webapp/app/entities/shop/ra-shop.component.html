@@ -4,20 +4,21 @@
         <div class="col-12 col-md-6 col-lg-2 pt-1">
                 <mat-form-field class='ra-full-width'>
                     <mat-icon matPrefix><i class="material-icons">search</i></mat-icon>
-                    <input formControlName="km" matInput type="number" placeholder="&nbsp;ร้านระยะทางใกล้ๆ คุณ" />
-                    <mat-hint align="start"><strong>ใส่ระยะทางเป็นกิโลเมตร</strong> </mat-hint>
-                    <span matSuffix>กม.</span>
+                    <input formControlName="km" matInput type="number" />
+                    <mat-placeholder><label jhiTranslate="rainyApp.shop.shop-near-by"></label></mat-placeholder>
+                    <mat-hint><strong jhiTranslate="rainyApp.shop.hint"></strong></mat-hint>
+                    <span matSuffix jhiTranslate="rainyApp.shop.km"></span>
                 </mat-form-field>
         </div>
         <div class="col-12 col-md-6 col-lg-2 pt-1">
-                <label>ราคา: </label>
+                <label jhiTranslate="rainyApp.shop.sort-price"></label>
                 <mat-radio-group  formControlName="price" >
-                    <mat-radio-button value="asc" checked>น้อยไปมาก</mat-radio-button>
-                    <mat-radio-button value="desc">มากไปน้อย</mat-radio-button>
+                    <mat-radio-button value="asc" checked><span jhiTranslate="rainyApp.shop.asc"></span></mat-radio-button>
+                    <mat-radio-button value="desc"><span jhiTranslate="rainyApp.shop.desc"></span></mat-radio-button>
                 </mat-radio-group>
         </div>
         <div class="col-12 col-md-6 col-lg-2 pt-1">
-               <button mat-raised-button color="primary" type="submit">Search</button>
+               <button mat-raised-button color="primary" type="submit"><span jhiTranslate="rainyApp.shop.search"></span></button>
        </div>
         <div class="col-12 col-md-6 col-lg-2 pt-1">
             <jhi-angular-loader></jhi-angular-loader>
@@ -35,12 +36,19 @@
 rd-subtitle>{{shop.tel}}</mat-card-subtitle>
             </mat-card-header>-->
             <mat-card-title-group>
-                <mat-card-title>{{shop.name}}</mat-card-title>
-                <mat-card-subtitle><span jhiTranslate="{{'rainyApp.Ra_type.' + shop.category}}"></span></mat-card-subtitle>
-                <mat-card-subtitle><span jhiTranslate="rainyApp.shop.price"></span>: {{shop.price}}</mat-card-subtitle>
-                <mat-card-subtitle><span jhiTranslate="rainyApp.shop.distance" translateValues="{ param: {{shop.distance}}}"></span></mat-card-subtitle>
-                <img mat-card-lg-image src={{shop.pic_cover}}></mat-card-title-group>
+                <mat-card-title>{{shop.name}}, <span jhiTranslate="{{'rainyApp.Ra_type.' + shop.category}}"></span></mat-card-title>
+                <mat-card-subtitle>
+                    <mat-icon matPrefix><i class="material-icons">local_offer</i></mat-icon>
+                    <span jhiTranslate="rainyApp.shop.price-param" translateValues="{ param: {{shop.price}} }"></span></mat-card-subtitle>
+                <mat-card-subtitle>
+                    <mat-icon matPrefix><i class="material-icons">directions_walk</i></mat-icon>
+                    <span jhiTranslate="rainyApp.shop.distance" translateValues="{ param: {{shop.distance}} }"></span></mat-card-subtitle>
+                <mat-card-subtitle>
+                    <mat-icon matPrefix><i class="material-icons">cake</i></mat-icon>
+                    <span jhiTranslate="rainyApp.shop.age-param" translateValues="{ param: {{shop.age}} }"></span></mat-card-subtitle>
+                <img mat-card-lg-image src={{shop.pic_cover}} >
             </mat-card-title-group>
+
 
            <!-- <img mat-card-image src="https://i.imgsafe.org/30/30d15ed64b.jpeg" alt="Photo of a Shiba Inu">-->
 <!--            <mat-card-content>
@@ -51,7 +59,10 @@ rd-subtitle>{{shop.tel}}</mat-card-subtitle>
                 </p>
             </mat-card-content>-->
             <mat-card-actions>
-                <button mat-button type="submit"  [routerLink]="['../shop', shop.id ]"><span jhiTranslate="rainyApp.shop.more_detail"></span></button>
+                <button mat-button type="submit" [routerLink]="['../shop', shop.id]">
+                    <span jhiTranslate="rainyApp.shop.more_detail"></span>
+                </button>
+
             </mat-card-actions>
         </mat-card>
         <!--<p>&nbsp;</p>-->
