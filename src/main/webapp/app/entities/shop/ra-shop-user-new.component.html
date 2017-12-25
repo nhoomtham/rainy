@@ -159,7 +159,7 @@
                 <br />
                 <div class="row">
                     <div *ngIf="lat>=-1" class="col-12 col-md-6 col-lg-6 pt-1">
-                        <h4><strong>คลิ๊กบนแผนที่แล้วระบบจะใส่ข้อมูลให้เอง</strong></h4>
+                        <h4><strong>*<span jhiTranslate="rainyApp.shop.map-click"></span></strong></h4>
                         <agm-map [latitude]="lat"
                                  [longitude]="lng"
                                  [zoom]="17"
@@ -169,7 +169,7 @@
                         </agm-map>
                     </div>
                     <div *ngIf="shop" class="col-12 col-md-6 col-lg-6 pt-1">
-                        <h4><strong>คลิ๊กบนแผนที่แล้วระบบจะใส่ข้อมูลให้เอง</strong></h4>
+                        <h4><strong>*<span jhiTranslate="rainyApp.shop.map-click"></span></strong></h4>
                         <agm-map [latitude]="shop.location.coordinates[0]"
                                  [longitude]="shop.location.coordinates[1]"
                                  [zoom]="17"
@@ -188,10 +188,10 @@
                             </agm-circle>-->
                         </agm-map>
                     </div>
-                    <div class="col-12 col-md-6 col-lg-2 pt-1">
+                    <div class="col-12 col-md-6 col-lg-6 pt-1">
                         <mat-form-field class='ra-full-width'>
                             <input formControlName="address" matInput type="text" />
-                            <mat-placeholder><label jhiTranslate="rainyApp.shop.district"></label></mat-placeholder>
+                            <mat-placeholder><label jhiTranslate="rainyApp.shop.address"></label></mat-placeholder>
                         </mat-form-field>
                     </div>
                     <!--<div class="col-12 col-md-6 col-lg-6 pt-1">

@@ -210,7 +210,8 @@ export class ShopUserNewComponent implements OnInit, OnDestroy {
         this.geoResults.subscribe((x: GeoResult) => {
             console.log(x);
             this.addresses = x;
-            this.shopForm.get('address').setValue(this.addresses.results[1].address_components[0].short_name);
+            // this.shopForm.get('address').setValue(this.addresses.results[1].address_components[0].short_name);
+            this.shopForm.get('address').setValue(this.addresses.results[1].formatted_address);
 
             const coordinates = [];
             coordinates.push(event.coords.lat);
