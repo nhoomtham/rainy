@@ -94,18 +94,10 @@ public class Shop implements Serializable {
     @Column(name = "weight")
     private Integer weight;
 
-    @Size(max = 50)
-    @Column(name = "district", length = 50)
-    private String district;
-
-    @Size(max = 50)
-    @Column(name = "subdistrict", length = 50)
-    private String subdistrict;
-
-    @Size(max = 30)
-    @Column(name = "province", length = 30)
-    private String province;
-
+    @Size(max = 255)
+    @Column(name = "address", length = 255)
+    private String address;
+  
     @OneToMany(mappedBy = "shop")
     @JsonIgnore
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
@@ -279,45 +271,15 @@ public class Shop implements Serializable {
         this.weight = weight;
     }
 
-    public String getDistrict() {
-        return district;
+    public String getAddress() {
+        return address;
     }
 
-    public Shop district(String district) {
-        this.district = district;
+    public Shop district(String address) {
+        this.address = address;
         return this;
     }
-
-    public void setDistrict(String district) {
-        this.district = district;
-    }
-
-    public String getSubdistrict() {
-        return subdistrict;
-    }
-
-    public Shop subdistrict(String subdistrict) {
-        this.subdistrict = subdistrict;
-        return this;
-    }
-
-    public void setSubdistrict(String subdistrict) {
-        this.subdistrict = subdistrict;
-    }
-
-    public String getProvince() {
-        return province;
-    }
-
-    public Shop province(String province) {
-        this.province = province;
-        return this;
-    }
-
-    public void setProvince(String province) {
-        this.province = province;
-    }
-
+  
     public Set<Album> getAlbums() {
         return albums;
     }
@@ -394,10 +356,8 @@ public class Shop implements Serializable {
             ", skin='" + getSkin() + "'" +
             ", high=" + getHigh() +
             ", weight=" + getWeight() +
-            ", district='" + getDistrict() + "'" +
-            ", subdistrict='" + getSubdistrict() + "'" +
-            ", province='" + getProvince() + "'" +
             ", location='" + getLocation().toString() + "'" +
+            ", address='" + getAddress() + "'" +
             "}";
     }
 }

@@ -54,13 +54,8 @@ public class ShopDTO {
     private Integer high;
 
     private Integer weight;
-
-    private String district;
-
-    private String subdistrict;
-
-    private String province;
-
+    
+    private String address;
 
     public User getUser() {
         return user;
@@ -160,6 +155,14 @@ public class ShopDTO {
         this.distance = distance;
     }
 
+    public String getAddress() {
+    	return address;
+    }
+    
+    public void setAddress(String address) {
+    	this.address = address;
+    }
+    
     public ShopDTO() {
         // Empty constructor needed for Jackson.
     }
@@ -167,13 +170,12 @@ public class ShopDTO {
     public ShopDTO(Shop shop) {
         this(shop.getId(), shop.getName(), shop.getPic_cover(), shop.getTel(), shop.getLine_uname(),
             shop.getDescription(), shop.getAge(), shop.getCategory(), shop.getPrice(), shop.getLocation(),
-            shop.getShape(), shop.getSkin(), shop.getHigh(), shop.getWeight(), shop.getDistrict(), shop.getSubdistrict()
-            , shop.getProvince(), shop.getUser() );
+            shop.getShape(), shop.getSkin(), shop.getHigh(), shop.getWeight(), shop.getAddress(), shop.getUser() );
     }
 
     public ShopDTO(Long id, String name, String pic_cover, String tel, String line_uname, String description,
                    Integer age, Ra_type category, Integer price, Point location, String  shape, Ra_skin skin,
-                   Integer high, Integer weight, String district, String subdistrict, String province, User user) {
+                   Integer high, Integer weight, String address, User user) {
         this.id = id;
         this.name = name;
         this.pic_cover = pic_cover;
@@ -188,9 +190,7 @@ public class ShopDTO {
         this.skin = skin;
         this.high = high;
         this.weight = weight;
-        this.district = district;
-        this.subdistrict = district;
-        this.province = province;
+        this.address = address;
         this.user = user;
     }
     @Override
@@ -211,9 +211,7 @@ public class ShopDTO {
             ", skin" + getSkin() + "'" +
             ", weight" + getWeight() + "'" +
             ", high" + getHigh() + "'" +
-            ", district" + getDistrict() + "'" +
-            ", subdistrict" + getSubdistrict() + "'" +
-            ", province" + getProvince() + "'" +
+            ", address" + getAddress() + "'" +
             "}";
     }
 
@@ -241,14 +239,6 @@ public class ShopDTO {
         this.high = high;
     }
 
-    public String getDistrict() {
-        return district;
-    }
-
-    public void setDistrict(String district) {
-        this.district = district;
-    }
-
     public Integer getWeight() {
         return weight;
     }
@@ -257,19 +247,4 @@ public class ShopDTO {
         this.weight= weight;
     }
 
-    public String getSubdistrict() {
-        return subdistrict;
-    }
-
-    public void setSubdistrict(String subdistrict) {
-        this.subdistrict = subdistrict;
-    }
-
-    public String getProvince() {
-        return province;
-    }
-
-    public void setProvince(String province) {
-        this.province = province;
-    }
 }
