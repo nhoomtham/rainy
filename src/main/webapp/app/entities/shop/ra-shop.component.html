@@ -38,7 +38,8 @@
             <mat-card-title-group>
                 <mat-card-title>{{shop.name}}</mat-card-title>
                 <mat-card-subtitle>
-                    <mat-icon matPrefix><i class="material-icons">accessibility</i></mat-icon>:&nbsp;{{shop.category}}
+                    <mat-icon matPrefix><i class="material-icons">accessibility</i></mat-icon>:&nbsp;
+                    <span jhiTranslate="{{'rainyApp.Ra_type.' + shop.category}}"></span>
                 </mat-card-subtitle>
 
                 <mat-card-subtitle>
@@ -47,7 +48,7 @@
                 </mat-card-subtitle>
 
                 <mat-card-subtitle>
-                    <mat-icon matPrefix><i class="material-icons">directions_walk</i></mat-icon>:&nbsp;
+                    <mat-icon matPrefix><i class="material-icons">directions_car</i></mat-icon>:&nbsp;
                     <span jhiTranslate="rainyApp.shop.distance" translateValues="{ param: {{shop.distance}} }"></span>
                 </mat-card-subtitle>
 
@@ -55,8 +56,7 @@
                     <mat-icon matPrefix><i class="material-icons">cake</i></mat-icon>:&nbsp;
                     <span>{{shop.age}}</span>&nbsp;<span jhiTranslate="rainyApp.shop.years"></span>
                 </mat-card-subtitle>
-                <img mat-card-avatar src={{shop.pic_cover}}>
-                <!--<img mat-card-lg-image src={{shop.pic_cover}}>-->
+                <img mat-card-lg-image src={{shop.pic_cover}}>
             </mat-card-title-group>
 
            <!-- <img mat-card-image src="https://i.imgsafe.org/30/30d15ed64b.jpeg" alt="Photo of a Shiba Inu">-->

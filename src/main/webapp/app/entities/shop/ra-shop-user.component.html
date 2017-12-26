@@ -27,18 +27,12 @@
                     </mat-card-subtitle>
 
                     <mat-card-subtitle>
-                        <mat-icon matPrefix><i class="material-icons">directions_walk</i></mat-icon>:&nbsp;
-                        <span jhiTranslate="rainyApp.shop.distance" translateValues="{ param: {{shop.distance}} }"></span>
-                    </mat-card-subtitle>
-
-                    <mat-card-subtitle>
                         <mat-icon matPrefix><i class="material-icons">cake</i></mat-icon>:&nbsp;
                         <span>{{shop.age}}</span>&nbsp;<span jhiTranslate="rainyApp.shop.years"></span>
                     </mat-card-subtitle>
                     <img mat-card-lg-image src={{shop.pic_cover}}>
                 </mat-card-title-group>
                 <mat-card-actions>
-                   
                     <button mat-icon-button type="submit" [routerLink]= "['/', { outlets: { popup: 'shop-status-update/' + shop.id } }]">
                         <span><mat-icon matPrefix><i class="material-icons">chat</i></mat-icon></span></button>
                     <button mat-icon-button type="submit" [routerLink]="['../shop-user-edit', shop.id]">
