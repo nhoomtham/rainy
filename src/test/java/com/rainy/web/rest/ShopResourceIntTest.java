@@ -138,10 +138,7 @@ public class ShopResourceIntTest {
             .shape(DEFAULT_SHAPE)
             .skin(DEFAULT_SKIN)
             .high(DEFAULT_HIGH)
-            .weight(DEFAULT_WEIGHT)
-            .district(DEFAULT_DISTRICT)
-            .subdistrict(DEFAULT_SUBDISTRICT)
-            .province(DEFAULT_PROVINCE);
+            .weight(DEFAULT_WEIGHT);
         return shop;
     }
 
@@ -177,9 +174,6 @@ public class ShopResourceIntTest {
         assertThat(testShop.getSkin()).isEqualTo(DEFAULT_SKIN);
         assertThat(testShop.getHigh()).isEqualTo(DEFAULT_HIGH);
         assertThat(testShop.getWeight()).isEqualTo(DEFAULT_WEIGHT);
-        assertThat(testShop.getDistrict()).isEqualTo(DEFAULT_DISTRICT);
-        assertThat(testShop.getSubdistrict()).isEqualTo(DEFAULT_SUBDISTRICT);
-        assertThat(testShop.getProvince()).isEqualTo(DEFAULT_PROVINCE);
     }
 
     @Test
@@ -307,10 +301,7 @@ public class ShopResourceIntTest {
             .shape(UPDATED_SHAPE)
             .skin(UPDATED_SKIN)
             .high(UPDATED_HIGH)
-            .weight(UPDATED_WEIGHT)
-            .district(UPDATED_DISTRICT)
-            .subdistrict(UPDATED_SUBDISTRICT)
-            .province(UPDATED_PROVINCE);
+            .weight(UPDATED_WEIGHT);
 
         restShopMockMvc.perform(put("/api/shops")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -333,9 +324,6 @@ public class ShopResourceIntTest {
         assertThat(testShop.getSkin()).isEqualTo(UPDATED_SKIN);
         assertThat(testShop.getHigh()).isEqualTo(UPDATED_HIGH);
         assertThat(testShop.getWeight()).isEqualTo(UPDATED_WEIGHT);
-        assertThat(testShop.getDistrict()).isEqualTo(UPDATED_DISTRICT);
-        assertThat(testShop.getSubdistrict()).isEqualTo(UPDATED_SUBDISTRICT);
-        assertThat(testShop.getProvince()).isEqualTo(UPDATED_PROVINCE);
     }
 
     @Test

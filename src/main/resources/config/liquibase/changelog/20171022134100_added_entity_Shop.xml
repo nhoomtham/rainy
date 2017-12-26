@@ -45,7 +45,7 @@
                 <constraints nullable="true" />
             </column>
 
-            <column name="category" type="varchar(255)">
+            <column name="category" type="varchar(30)">
                 <constraints nullable="true" />
             </column>
 
@@ -57,7 +57,7 @@
                 <constraints nullable="true" />
             </column>
 
-            <column name="skin" type="varchar(255)">
+            <column name="skin" type="varchar(30)">
                 <constraints nullable="true" />
             </column>
 
@@ -69,18 +69,10 @@
                 <constraints nullable="true" />
             </column>
 
-            <column name="district" type="varchar(50)">
+            <column name="address" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-
-            <column name="subdistrict" type="varchar(50)">
-                <constraints nullable="true" />
-            </column>
-
-            <column name="province" type="varchar(30)">
-                <constraints nullable="true" />
-            </column>
-
+            
             <column name="user_id" type="bigint">
                 <constraints nullable="true" />
             </column>

@@ -31,8 +31,7 @@ export class AlbumComponent implements OnInit, OnDestroy {
     private shop: Shop;
     private uploadImage: File;
     private uploadImage_320: File;
-    private uploadImage_640: File;
-    private myFileInputIdentifier: string;
+    private uploadImage_640: File;    
 
     @ViewChild('selectedFile')
     private elFile: ElementRef;
@@ -41,6 +40,7 @@ export class AlbumComponent implements OnInit, OnDestroy {
     eventSubscriber: Subscription;
     albumForm: FormGroup;
     isProgressing: boolean;
+    myFileInputIdentifier: string;
 
     constructor(
         private albumService: AlbumService,

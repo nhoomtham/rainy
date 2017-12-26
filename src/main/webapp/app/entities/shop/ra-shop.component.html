@@ -32,42 +32,46 @@
             <!--<mat-card-header>
                 <div mat-card-avatar class="example-header-image"></div>
                 <mat-card-title>{{shop.name}}</mat-card-title>
-                <mat-ca
-rd-subtitle>{{shop.tel}}</mat-card-subtitle>
+                <mat-card-subtitle>{{shop.tel}}</mat-card-subtitle>
             </mat-card-header>-->
-            <mat-card-title-group>
-                <mat-card-title>{{shop.name}}, <span jhiTranslate="{{'rainyApp.Ra_type.' + shop.category}}"></span></mat-card-title>
-                <mat-card-subtitle>
-                    <mat-icon matPrefix><i class="material-icons">local_offer</i></mat-icon>
-                    <span jhiTranslate="rainyApp.shop.price-param" translateValues="{ param: {{shop.price}} }"></span></mat-card-subtitle>
-                <mat-card-subtitle>
-                    <mat-icon matPrefix><i class="material-icons">directions_walk</i></mat-icon>
-                    <span jhiTranslate="rainyApp.shop.distance" translateValues="{ param: {{shop.distance}} }"></span></mat-card-subtitle>
-                <mat-card-subtitle>
-                    <mat-icon matPrefix><i class="material-icons">cake</i></mat-icon>
-                    <span jhiTranslate="rainyApp.shop.age-param" translateValues="{ param: {{shop.age}} }"></span></mat-card-subtitle>
-                <img mat-card-lg-image src={{shop.pic_cover}} >
-            </mat-card-title-group>
 
+            <mat-card-title-group>
+                <mat-card-title>{{shop.name}}</mat-card-title>
+                <mat-card-subtitle>
+                    <mat-icon matPrefix><i class="material-icons">accessibility</i></mat-icon>:&nbsp;
+                    <span jhiTranslate="{{'rainyApp.Ra_type.' + shop.category}}"></span>
+                </mat-card-subtitle>
+
+                <mat-card-subtitle>
+                    <mat-icon matPrefix><i class="material-icons">local_offer</i></mat-icon>:&nbsp;
+                    <span>{{shop.price | number : '1.0'}}</span>&nbsp;<span jhiTranslate="rainyApp.shop.baht"></span>
+                </mat-card-subtitle>
+
+                <mat-card-subtitle>
+                    <mat-icon matPrefix><i class="material-icons">directions_car</i></mat-icon>:&nbsp;
+                    <span jhiTranslate="rainyApp.shop.distance" translateValues="{ param: {{shop.distance}} }"></span>
+                </mat-card-subtitle>
+
+                <mat-card-subtitle>
+                    <mat-icon matPrefix><i class="material-icons">cake</i></mat-icon>:&nbsp;
+                    <span>{{shop.age}}</span>&nbsp;<span jhiTranslate="rainyApp.shop.years"></span>
+                </mat-card-subtitle>
+                <img mat-card-lg-image src={{shop.pic_cover}}>
+            </mat-card-title-group>
 
            <!-- <img mat-card-image src="https://i.imgsafe.org/30/30d15ed64b.jpeg" alt="Photo of a Shiba Inu">-->
 <!--            <mat-card-content>
                 <p>
                     The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan.
-                    A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was originally
-                    bred for hunting.
                 </p>
             </mat-card-content>-->
             <mat-card-actions>
                 <button mat-button type="submit" [routerLink]="['../shop', shop.id]">
                     <span jhiTranslate="rainyApp.shop.more_detail"></span>
                 </button>
-
             </mat-card-actions>
         </mat-card>
-        <!--<p>&nbsp;</p>-->
     </div>
-
 </div>
 
 <div *ngIf="shops && shops.length">
@@ -79,122 +83,3 @@ rd-subtitle>{{shop.tel}}</mat-card-subtitle>
     </div>
     <mat-spinner hidden></mat-spinner>
 </div>
-<!--<div *ngIf="shops">
-    <mat-list>
-        <mat-list-item *ngFor="let shop of shops ;trackBy: trackId">
-
-            <picture matListAvatar>
-                &lt;!&ndash;<source media="(min-width: 1024px)" srcset="https://i.imgsafe.org/30/30d15ed64b.jpeg">&ndash;&gt;
-                <source media="(min-width: 600px)" srcset="https://i.imgsafe.org/30/30d1594c95.jpeg"> &lt;!&ndash;128 x 128&ndash;&gt;
-                <source media="(min-width: 360px)" srcset="https://i.imgsafe.org/30/30d146899c.jpeg"> &lt;!&ndash;256 x 256&ndash;&gt;
-                <img  />
-            </picture>
-
-            <h3 matLine> {{shop.name}} </h3>
-            <p matLine>
-                <span> {{shop.tel}} </span>
-                <span> &#45;&#45; {{shop.description}} </span>
-            </p>
-
-        </mat-list-item>
-    </mat-list>
-
-</div>-->
-
-
-<!--
-
-<div>
-    <jhi-alert></jhi-alert>
-    <div class="row">
-    </div>
-    <br/>
-
-   &lt;!&ndash; <mat-list>
-        <mat-list-item *ngFor="let shop of shops ;trackBy: trackId">
-            <img matListAvatar src="https://i.imgsafe.org/30/30d146899c.jpeg" alt="...">
-            <h3 matLine> {{{{shop.name}}}} </h3>
-            <p matLine>
-                <span> {{shop.tel}} </span>
-                <span class="demo-2"> &#45;&#45; {{shop.description}} </span>
-            </p>
-        </mat-list-item>
-    </mat-list>&ndash;&gt;
-
-
-
-    <div class="table-responsive" *ngIf="shops">
-        <table class="table table-striped">
-            <thead>
-            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
-            <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="name"><span jhiTranslate="rainyApp.shop.name">Name</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="pic_cover"><span jhiTranslate="rainyApp.shop.pic_cover">Pic Cover</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="pic_1"><span jhiTranslate="rainyApp.shop.pic_1">Pic 1</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="pic_2"><span jhiTranslate="rainyApp.shop.pic_2">Pic 2</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="pic_3"><span jhiTranslate="rainyApp.shop.pic_3">Pic 3</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="pic_4"><span jhiTranslate="rainyApp.shop.pic_4">Pic 4</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="pic_5"><span jhiTranslate="rainyApp.shop.pic_5">Pic 5</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="tel"><span jhiTranslate="rainyApp.shop.tel">Tel</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="line_uname"><span jhiTranslate="rainyApp.shop.line_uname">Line Uname</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="description"><span jhiTranslate="rainyApp.shop.description">Description</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="age"><span jhiTranslate="rainyApp.shop.age">Age</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="type"><span jhiTranslate="rainyApp.shop.type">Type</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="price"><span jhiTranslate="rainyApp.shop.price">Price</span> <span class="fa fa-sort"></span></th>
-            <th></th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr *ngFor="let shop of shops ;trackBy: trackId">
-                <td><a [routerLink]="['../shop', shop.id ]">{{shop.id}}</a></td>
-                <td>{{shop.name}}</td>
-                <td>{{shop.pic_cover}}</td>
-                <td>{{shop.pic_1}}</td>
-                <td>{{shop.pic_2}}</td>
-                <td>{{shop.pic_3}}</td>
-                <td>{{shop.pic_4}}</td>
-                <td>{{shop.pic_5}}</td>
-                <td>{{shop.tel}}</td>
-                <td>{{shop.line_uname}}</td>
-                <td>{{shop.description}}</td>
-                <td>{{shop.age}}</td>
-                <td jhiTranslate="{{'rainyApp.Shop_type.' + shop.type}}">{{shop.type}}</td>
-                <td>{{shop.price}}</td>
-                <td class="text-right">
-                    <div class="btn-group flex-btn-group-container">
-                        <button type="submit"
-                                [routerLink]="['../shop', shop.id ]"
-                                class="btn btn-info btn-sm">
-                            <span class="fa fa-eye"></span>
-                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
-                        </button>
-                        <button type="submit"
-                                [routerLink]="['/', { outlets: { popup: 'shop/'+ shop.id + '/edit'} }]"
-                                replaceUrl="true"
-                                class="btn btn-primary btn-sm">
-                            <span class="fa fa-pencil"></span>
-                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
-                        </button>
-                        <button type="submit"
-                                [routerLink]="['/', { outlets: { popup: 'shop/'+ shop.id + '/delete'} }]"
-                                replaceUrl="true"
-                                class="btn btn-danger btn-sm">
-                            <span class="fa fa-remove"></span>
-                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
-                        </button>
-                    </div>
-                </td>
-            </tr>
-            </tbody>
-        </table>
-    </div>
-        <div *ngIf="shops && shops.length">
-            <div class="row justify-content-center">
-                <jhi-item-count [page]="page" [total]="queryCount" [itemsPerPage]="itemsPerPage"></jhi-item-count>
-            </div>
-            <div class="row justify-content-center">
-                <ngb-pagination [collectionSize]="totalItems" [(page)]="page" (pageChange)="loadPage(page)"></ngb-pagination>
-            </div>
-        </div>
-</div>
--->

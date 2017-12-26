@@ -1,15 +1,11 @@
 select * from ra_album;
 select * from ra_shop;
+select * from ra_shop_status;
 
 update shop set location = ST_SetSRID(ST_MakePoint(23,-44.5),4326)
-
 update shop set location = st_GeomFromText('SRID=4326;POINT(34.774531 -96.6783449)')
-
 update shop set location = null
-
-select * from ra_shop_status;
  
-
 -- drop ra* tables
 drop table ra_shop_status cascade;
 drop table ra_album cascade;
@@ -27,3 +23,4 @@ drop table databasechangelog;
 drop table databasechangeloglock;
 
 drop sequence hibernate_sequence;
+drop sequence jhi_entity_audit_event_id_seq;

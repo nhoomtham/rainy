@@ -59,8 +59,7 @@ export class ShopUserNewComponent implements OnInit, OnDestroy {
     private uploadImage: File;
     private routeSub: any;
     private paramId: number;
-    private pic_cover_changed: boolean;
-    private myFileInputIdentifier: string;
+    private pic_cover_changed: boolean;    
 
     shop: Shop;
     isSaving: boolean;
@@ -68,6 +67,7 @@ export class ShopUserNewComponent implements OnInit, OnDestroy {
     lat: number;
     lng: number;
     geoPosition: any;
+    myFileInputIdentifier: string;
 
     constructor(
         private jhiAlertService: JhiAlertService,
@@ -140,9 +140,7 @@ export class ShopUserNewComponent implements OnInit, OnDestroy {
         this.shopForm.get('line_uname').setValue(this.shop.line_uname);
         this.shopForm.get('price').setValue(this.shop.price);
         this.shopForm.get('description').setValue(this.shop.description);
-        this.shopForm.get('district').setValue(this.shop.district);
-        this.shopForm.get('subdistrict').setValue(this.shop.subdistrict);
-        this.shopForm.get('province').setValue(this.shop.province);
+        this.shopForm.get('address').setValue(this.shop.address);
         this.shopForm.get('pic_cover').setValue(this.shop.pic_cover);
         this.shopForm.get('location').setValue(this.shop.location);
         this.shopForm.get('user').setValue(this.shop.user);
@@ -162,9 +160,7 @@ export class ShopUserNewComponent implements OnInit, OnDestroy {
             skin: new FormControl('', Validators.required),
             pic_cover: new FormControl(),
             description: new FormControl(),
-            district: new FormControl('', Validators.required),
-            subdistrict: new FormControl('', Validators.required),
-            province: new FormControl('', Validators.required),
+            address: new FormControl('', Validators.required),
             location: new FormControl(),
             user: new FormControl()
         });
@@ -214,9 +210,8 @@ export class ShopUserNewComponent implements OnInit, OnDestroy {
         this.geoResults.subscribe((x: GeoResult) => {
             console.log(x);
             this.addresses = x;
-            this.shopForm.get('subdistrict').setValue(this.addresses.results[1].address_components[0].short_name);
-            this.shopForm.get('district').setValue(this.addresses.results[1].address_components[1].short_name);
-            this.shopForm.get('province').setValue(this.addresses.results[1].address_components[2].short_name);
+            // this.shopForm.get('address').setValue(this.addresses.results[1].address_components[0].short_name);
+            this.shopForm.get('address').setValue(this.addresses.results[1].formatted_address);
 
             const coordinates = [];
             coordinates.push(event.coords.lat);

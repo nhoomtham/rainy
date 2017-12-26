@@ -37,9 +37,7 @@
             "cm": "cm.",
             "years": "years",
             "baht": "baht",
-            "weight": "Weight",
-            "district": "District",
-            "subdistrict": "Subdistrict",
+            "address": "Place",
             "province": "Province",
             "album": "Album",
             "type": "Sex",
@@ -58,7 +56,8 @@
             "hint": "put a number of KM",
             "asc": "ascending",
             "desc": "descending",
-            "search": "search"
+            "search": "search",
+            "map-click": "Click your place on map, system will automatically fill data"
         }
     }
 }
