@@ -16,29 +16,26 @@
         <div class="col-12 col-md-6 col-lg-3 pt-1" *ngFor="let shop of shops ;trackBy: trackId">
             <mat-card class="example-card">
                 <mat-card-title-group>
-                   
-                    <table width="100%" border="0">
-                        <tr><mat-card-title>{{shop.name}}</mat-card-title></tr>
-                        <tr>
-                            <td width="70%">
-                                <table width="100%" border="0">
-                                    <tr>
-                                        <td><mat-card-subtitle><span jhiTranslate="{{'rainyApp.Ra_type.' + shop.category}}"></span></mat-card-subtitle></td>
-                                        <td><mat-card-subtitle><span jhiTranslate="rainyApp.shop.age"></span>: {{shop.age}}</mat-card-subtitle></td>
-                                    </tr>
-                                    <tr>
-                                        <td><mat-card-subtitle><span jhiTranslate="rainyApp.shop.price"></span>: {{shop.price}}</mat-card-subtitle></td>
-                                        <td><mat-card-subtitle><span jhiTranslate="rainyApp.shop.weight"></span>: {{shop.weight}}</mat-card-subtitle></td>
-                                    </tr>
-                                    <tr>
-                                        <td><mat-card-subtitle><span jhiTranslate="rainyApp.shop.high"></span>: {{shop.high}}</mat-card-subtitle></td>
-                                    </tr>
-                                </table>
+                    <mat-card-title>{{shop.name}}</mat-card-title>
+                    <mat-card-subtitle>
+                        <mat-icon matPrefix><i class="material-icons">accessibility</i></mat-icon>:&nbsp;{{shop.category}}
+                    </mat-card-subtitle>
 
-                            </td>
-                            <td width="30%"><img mat-card-lg-image src={{shop.pic_cover}}></td>
-                        </tr>
-                    </table>
+                    <mat-card-subtitle>
+                        <mat-icon matPrefix><i class="material-icons">local_offer</i></mat-icon>:&nbsp;
+                        <span>{{shop.price | number : '1.0'}}</span>&nbsp;<span jhiTranslate="rainyApp.shop.baht"></span>
+                    </mat-card-subtitle>
+
+                    <mat-card-subtitle>
+                        <mat-icon matPrefix><i class="material-icons">directions_walk</i></mat-icon>:&nbsp;
+                        <span jhiTranslate="rainyApp.shop.distance" translateValues="{ param: {{shop.distance}} }"></span>
+                    </mat-card-subtitle>
+
+                    <mat-card-subtitle>
+                        <mat-icon matPrefix><i class="material-icons">cake</i></mat-icon>:&nbsp;
+                        <span>{{shop.age}}</span>&nbsp;<span jhiTranslate="rainyApp.shop.years"></span>
+                    </mat-card-subtitle>
+                    <img mat-card-lg-image src={{shop.pic_cover}}>
                 </mat-card-title-group>
                 <mat-card-actions>
                    
