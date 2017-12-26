@@ -132,7 +132,7 @@
 
             <li ngbDropdown class="nav-item dropdown pointer" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
                 <a class="nav-link dropdown-toggle" ngbDropdownToggle href="javascript:void(0);" id="find-shop-menu">
-                    <i class="fa fa-user" aria-hidden="true"></i>
+                    <i class="fa fa-search" aria-hidden="true"></i>
                     <span jhiTranslate="global.menu.find-shop.main">
                         Find Shop
                     </span>
@@ -140,19 +140,19 @@
                 <ul class="dropdown-menu dropdown-menu-right ml-auto" ngbDropdownMenu>
                     <li>
                         <a class="dropdown-item" routerLink="shop" routerLinkActive="active" (click)="collapseNavbar()">
-                            <i class="fa fa-fw fa-id-card-o" aria-hidden="true"></i>
+                            <i class="fa fa-fw fa-map-marker" aria-hidden="true"></i>
                             <span jhiTranslate="global.menu.find-shop.by-distance">By Distance</span>
                         </a>
                     </li>
                     <li>
                         <a class="dropdown-item" routerLink="shop-status-all" routerLinkActive="active" (click)="collapseNavbar()">
-                            <i class="fa fa-fw fa-id-card-o" aria-hidden="true"></i>
+                            <i class="fa fa-fw fa-commenting" aria-hidden="true"></i>
                             <span jhiTranslate="global.menu.find-shop.by-status">By Status</span>
                         </a>
                     </li>
                     <li>
                         <a class="dropdown-item"   routerLinkActive="active" (click)="collapseNavbar()">
-                            <i class="fa fa-fw fa-id-card-o" aria-hidden="true"></i>
+                            <i class="fa fa-fw fa-heart" aria-hidden="true"></i>
                             <span jhiTranslate="global.menu.find-shop.by-faverite">By Faverite</span>
                         </a>
                     </li>
@@ -162,7 +162,7 @@
 
             <li *jhiHasAnyAuthority="'ROLE_USER'" ngbDropdown class="nav-item dropdown pointer" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
                 <a class="nav-link dropdown-toggle" ngbDropdownToggle href="javascript:void(0);" id="find-customer-menu">
-                    <i class="fa fa-user" aria-hidden="true"></i>
+                    <i class="fa fa-diamond" aria-hidden="true"></i>
                     <span jhiTranslate="global.menu.find-customer.main">
                         Find Customer
                     </span>                    

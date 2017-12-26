@@ -2,7 +2,7 @@
     "rainyApp": {
         "shopStatus": {
             "home": {
-                "title": "Shop Statuses",
+                "title": "อัพเดทสถานะล่าสุด",
                 "createLabel": "สร้าง Shop Status",
                 "createOrEditLabel": "สร้างหรือแก้ไข Shop Status"
             },
