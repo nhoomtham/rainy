@@ -22,7 +22,7 @@ public interface ShopRepository extends JpaRepository<Shop, Long> {
     Page<Shop> findAllWithPosition(Pageable pageable, Geometry geometry);*/
 
     @Query(value = "select s from Shop s where dwithin(?1, s.location, ?2 * 1000.0, false) = true")
-    Page<Shop> findNearBy(Pageable pageable, Geometry geometry, Double km);
+    Page<Shop> findNearByByOrderByLastModifiedDateDesc(Pageable pageable, Geometry geometry, Double km);
 
     List<Shop> findByUserId(Long id);
 }
