@@ -23,7 +23,7 @@
             <div>
                 <button mat-raised-button color="primary" type="submit" [disabled]="albumForm.invalid || albums.length === 6"><i class="material-icons">save</i><span jhiTranslate="entity.action.save">Save</span></button>
                 <div class="ra-overlay">
-                    <mat-spinner *ngIf="isProgressing"></mat-spinner>
+                    <mat-spinner *ngIf="isProgressing" [diameter]=50></mat-spinner>
                 </div>
             </div>
         </form>

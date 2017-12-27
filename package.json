@@ -89,7 +89,7 @@
     "tslint-loader": "3.5.3",
     "typescript": "2.5.3",
     "xml2js": "0.4.17",
-    "uglifyjs-webpack-plugin": "1.1.2",
+    "uglifyjs-webpack-plugin": "1.1.5",
     "webpack": "3.10.0",
     "webpack-dev-server": "2.9.5",
     "webpack-merge": "4.1.1",
