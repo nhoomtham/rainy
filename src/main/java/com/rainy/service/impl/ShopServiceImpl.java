@@ -110,7 +110,7 @@ public class ShopServiceImpl implements ShopService{
     @Override
     public Page<ShopDTO> findShopNearby(Pageable pageable, Geometry geometry, Double km) {
         log.debug("Request to get all Shops NearBy");
-        Page<Shop> shopPages = shopRepository.findNearBy(pageable, geometry, km);
+        Page<Shop> shopPages = shopRepository.findNearByByOrderByLastModifiedDateDesc(pageable, geometry, km);
         List<ShopDTO> newShopDTOs = calculateDistance(shopPages);
         return new PageImpl<>(newShopDTOs, pageable, shopPages.getTotalElements());
     }

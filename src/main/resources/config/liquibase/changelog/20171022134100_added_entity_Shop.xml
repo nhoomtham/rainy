@@ -81,6 +81,20 @@
         </createTable>
 
     </changeSet>
+    
+    <!-- Added the entity audit columns -->
+    <changeSet id="20171227155142-audit-1" author="jhipster-entity-audit">
+        <addColumn tableName="ra_shop">
+            <column name="created_by" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_date" type="timestamp" defaultValueDate="${now}">
+                <constraints nullable="false"/>
+            </column>
+            <column name="last_modified_by" type="varchar(50)"/>
+            <column name="last_modified_date" type="timestamp"/>
+        </addColumn>
+    </changeSet>
     <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here, do not remove-->
 
     <changeSet id="20171022134100-2_add_index_ra_shop" author="che">

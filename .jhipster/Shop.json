@@ -130,6 +130,6 @@
     "service": "serviceImpl",
     "entityTableName": "ra_shop",
     "jpaMetamodelFiltering": false,
-    "pagination": "pagination", 
-	"enableEntityAudit": false
+    "pagination": "pagination",
+    "enableEntityAudit": true
 }
