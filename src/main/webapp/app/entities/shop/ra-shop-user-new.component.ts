@@ -59,7 +59,7 @@ export class ShopUserNewComponent implements OnInit, OnDestroy {
     private uploadImage: File;
     private routeSub: any;
     private paramId: number;
-    private pic_cover_changed: boolean;    
+    private pic_cover_changed: boolean;
 
     shop: Shop;
     isSaving: boolean;

@@ -1,8 +1,8 @@
 <div class="row">
     <div class="col"></div>
     <div class="col-12 col-md-10 col-lg-8">
-
         <div *ngIf="shop" class="card jh-card">
+            <jhi-angular-loader></jhi-angular-loader>
             <jhi-alert-error></jhi-alert-error>
             <div class="row">
                 <div class="col-12 pt-1">
@@ -12,6 +12,7 @@
                     </button>-->
 
                     <h2>{{shop.name}}</h2>
+                    <jhi-angular-loader></jhi-angular-loader>
                     <hr>
                     <div *ngIf="albums">
                         <mat-grid-list cols="3" rowHeight="2:1">

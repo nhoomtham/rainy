@@ -12,6 +12,7 @@ import { AlbumService } from '../album/album.service';
 
 import { QuillEditorComponent } from 'ngx-quill/src/quill-editor.component';
 import { FormGroup, FormBuilder } from '@angular/forms';
+import { LoaderService } from './loader.service';
 
 interface Address {
     long_name: string;
@@ -49,7 +50,8 @@ export class ShopDetailComponent implements OnInit, OnDestroy {
         private route: ActivatedRoute,
         private albumService: AlbumService,
         private httpClient: HttpClient,
-        private fb: FormBuilder
+        private fb: FormBuilder,
+        private loaderService: LoaderService
     ) {
         this.form = fb.group({
             editor: ['No description']
@@ -57,14 +59,12 @@ export class ShopDetailComponent implements OnInit, OnDestroy {
     }
 
     onMapClick(event) {
-        console.log('xxxxx: ' + event.coords.lat);
         this.courses = this.httpClient
             .get<GeoResult[]>('https://maps.googleapis.com/maps/api/geocode/json?latlng=' + event.coords.lat + ',' + event.coords.lng +
                 '&key=AIzaSyBlk6Nxh8iMaKuhuJK_sv3gFhi_aoeK_Kg&language=th');
         // .do(console.log);
         this.courses.subscribe((x) => {
-            console.log(x);
-
+            // console.log(x);
             this.address = x;
             console.log(this.address[0]);
             // address_components[1].short_name
@@ -72,9 +72,11 @@ export class ShopDetailComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit() {
+        this.loaderService.show();
         this.subscription = this.route.params.subscribe((params) => {
             this.load(params['id']);
             this.loadAlbums(params['id']);
+            this.loaderService.hide();
         });
         this.registerChangeInShops();
     }

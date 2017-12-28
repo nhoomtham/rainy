@@ -5,6 +5,9 @@
             <span jhiTranslate="rainyApp.shopStatus.home.title">Shop Statuses</span>
         </h2>
         <div class="card jh-card">
+            <div class="ra-overlay">
+                <mat-spinner *ngIf="isProgressing" [diameter]=50></mat-spinner>
+            </div>
             <mat-list>
                 <mat-list-item *ngFor="let shopStatus of shopStatuses ;trackBy: trackId">
                     <img matListAvatar src="{{shopStatus.shop?.pic_cover}}" alt="avatar" />

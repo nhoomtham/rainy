@@ -13,7 +13,7 @@ import { ITEMS_PER_PAGE, Principal, ResponseWrapper } from '../../shared';
 })
 export class ShopStatusComponent implements OnInit, OnDestroy {
 
-currentAccount: any;
+    currentAccount: any;
     shopStatuses: ShopStatus[];
     error: any;
     success: any;
@@ -27,6 +27,7 @@ currentAccount: any;
     predicate: any;
     previousPage: any;
     reverse: any;
+    isProgressing: boolean;
 
     constructor(
         private shopStatusService: ShopStatusService,
@@ -47,6 +48,7 @@ currentAccount: any;
     }
 
     loadAll() {
+        this.isProgressing = true;
         this.shopStatusService.query({
             page: this.page - 1,
             size: this.itemsPerPage,
@@ -113,8 +115,10 @@ currentAccount: any;
         this.queryCount = this.totalItems;
         // this.page = pagingParams.page;
         this.shopStatuses = data;
+        this.isProgressing = false;
     }
     private onError(error) {
         this.jhiAlertService.error(error.message, null, null);
+        this.isProgressing = false;
     }
 }

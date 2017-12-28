@@ -5,6 +5,7 @@ import { JhiEventManager, JhiLanguageService, JhiAlertService } from 'ng-jhipste
 
 import { Shop } from './shop.model';
 import { ShopService } from './shop.service';
+import { LoaderService } from './loader.service';
 
 @Component({
     selector: 'jhi-shop-user',
@@ -20,10 +21,12 @@ export class ShopUserComponent implements OnInit, OnDestroy {
         private shopService: ShopService,
         private jhiAlertService: JhiAlertService,
         private eventManager: JhiEventManager,
+        private loaderService: LoaderService,
     ) {
     }
     ngOnInit(): void {
         this.noData = true;
+        this.loaderService.show();
         this.loadAll();
         this.registerChangeInShops();
     }
@@ -45,10 +48,12 @@ export class ShopUserComponent implements OnInit, OnDestroy {
         } else {
             this.noData = true;
         }
+        this.loaderService.hide();
     }
 
     private onError(error: any) {
         this.jhiAlertService.error(error.message, null, null);
+        this.loaderService.hide();
     }
 
     ngOnDestroy(): void {
