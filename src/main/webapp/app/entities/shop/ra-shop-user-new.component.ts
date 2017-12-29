@@ -144,7 +144,10 @@ export class ShopUserNewComponent implements OnInit, OnDestroy {
         this.shopForm.get('pic_cover').setValue(this.shop.pic_cover);
         this.shopForm.get('location').setValue(this.shop.location);
         this.shopForm.get('user').setValue(this.shop.user);
+        this.shopForm.get('active').setValue(this.shop.active);
+        console.log('active:' + this.shop.active);
     }
+
     private initForm() {
         this.shopForm = new FormGroup({
             id: new FormControl(),
@@ -162,7 +165,8 @@ export class ShopUserNewComponent implements OnInit, OnDestroy {
             description: new FormControl(),
             address: new FormControl('', Validators.required),
             location: new FormControl(),
-            user: new FormControl()
+            user: new FormControl(),
+            active: new FormControl()
         });
     }
 

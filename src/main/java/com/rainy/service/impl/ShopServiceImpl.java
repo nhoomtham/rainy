@@ -14,6 +14,7 @@ import com.rainy.service.ShopService;
 import com.rainy.service.UserService;
 import com.rainy.service.dto.AlbumDTO;
 import com.rainy.service.dto.ShopDTO;
+import com.rainy.service.dto.ShopMiniDTO;
 import com.rainy.service.mapper.ShopMapper;
 import com.vividsolutions.jts.geom.Coordinate;
 import com.vividsolutions.jts.geom.Geometry;
@@ -100,37 +101,37 @@ public class ShopServiceImpl implements ShopService{
      */
     @Override
     @Transactional(readOnly = true)
-    public Page<ShopDTO> findAll(Pageable pageable) {
+    public Page<ShopMiniDTO> findAll(Pageable pageable) {
         log.debug("Request to get all Shops");
-        Page<Shop> shopPages = shopRepository.findAll(pageable);
-        List<ShopDTO> newShopDTOs = calculateDistance(shopPages);
-        return new PageImpl<>(newShopDTOs, pageable, shopPages.getTotalElements());
+        Page<Shop> shopPages = shopRepository.findAllByActiveTrue(pageable);
+        List<ShopMiniDTO> newShopMiniDTOs = calculateDistance(shopPages);
+        return new PageImpl<>(newShopMiniDTOs, pageable, shopPages.getTotalElements());
     }
 
     @Override
-    public Page<ShopDTO> findShopNearby(Pageable pageable, Geometry geometry, Double km) {
+    public Page<ShopMiniDTO> findShopNearby(Pageable pageable, Geometry geometry, Double km) {
         log.debug("Request to get all Shops NearBy");
         Page<Shop> shopPages = shopRepository.findNearByByOrderByLastModifiedDateDesc(pageable, geometry, km);
-        List<ShopDTO> newShopDTOs = calculateDistance(shopPages);
-        return new PageImpl<>(newShopDTOs, pageable, shopPages.getTotalElements());
+        List<ShopMiniDTO> newShopMiniDTOs = calculateDistance(shopPages);
+        return new PageImpl<>(newShopMiniDTOs, pageable, shopPages.getTotalElements());
     }
 
-    private List<ShopDTO> calculateDistance(Page<Shop> shopPages) {
+    private List<ShopMiniDTO> calculateDistance(Page<Shop> shopPages) {
         final List<Shop> shops = shopPages.getContent();
-        final List<ShopDTO> shopDTOs = shopMapper.shopsToShopDTOs(shops);
-        List<ShopDTO> newShopDTOs = new ArrayList<>();
-        for (ShopDTO shopDTO : shopDTOs) {
-            final Geometry g1 = shopDTO.getLocation().norm();
+        final List<ShopMiniDTO> shopMiniDTOs = shopMapper.shopsToShopMiniDTOs(shops);
+        List<ShopMiniDTO> newShopMiniDTOs = new ArrayList<>();
+        for (ShopMiniDTO shopMiniDTO : shopMiniDTOs) {
+            final Geometry g1 = shopMiniDTO.getLocation().norm();
             final Geometry g2 = geometryService.wktToGeometry("POINT("
                                     + geometryService.getLat().toString()
                                     + " "
                                     + geometryService.getLng().toString()
                                     + ")");
             final Double dist = g1.distance(g2) * 100;
-            shopDTO.setDistance(dist.shortValue());
-            newShopDTOs.add(shopDTO);
+            shopMiniDTO.setDistance(dist.shortValue());
+            newShopMiniDTOs.add(shopMiniDTO);
         }
-        return newShopDTOs;
+        return newShopMiniDTOs;
     }
 
     /**
@@ -204,12 +205,13 @@ public class ShopServiceImpl implements ShopService{
 	}
     
     @Override
-    public List<Shop> findByCurrentUser() {
+    public List<ShopMiniDTO> findByCurrentUser() {
+    	log.debug("Request to get all Shop belong to current user");
     	Optional<User> user = userService.getUserWithAuthorities();
     	
     	if (user.isPresent()) {
     		List<Shop> shops = shopRepository.findByUserId(user.get().getId());
-            return shops;
+            return shopMapper.shopsToShopMiniDTOs(shops);
     	} else {
     		return null;
     	}
@@ -217,8 +219,9 @@ public class ShopServiceImpl implements ShopService{
     }
 
 	@Override
-	public ShopDTO findOneByCurrentUser(Long id) {
-		
+	public ShopDTO findOneByCurrentUser(Long id) {        
+        log.debug("Request to get Shop by current user id : {}", id);
+
 		final Shop shop = shopRepository.findOne(id);
         
 		if (shop != null) {

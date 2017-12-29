@@ -8,6 +8,7 @@ import com.rainy.security.SecurityUtils;
 import com.rainy.service.GeometryService;
 import com.rainy.service.ShopService;
 import com.rainy.service.dto.ShopDTO;
+import com.rainy.service.dto.ShopMiniDTO;
 import com.rainy.web.rest.errors.BadRequestAlertException;
 import com.rainy.web.rest.util.HeaderUtil;
 import com.rainy.web.rest.util.PaginationUtil;
@@ -105,13 +106,14 @@ public class ShopResource {
      */
     @GetMapping("/shops")
     @Timed
-    public ResponseEntity<List<ShopDTO>> getAllShops(
+    public ResponseEntity<List<ShopMiniDTO>> getAllShops(
             @ApiParam Pageable pageable,
             @RequestParam(value = "lat", defaultValue = "0.0", required = false) Double lat,
             @RequestParam(value = "lon", defaultValue = "0.0", required = false) Double lon,
             @RequestParam(value = "km", defaultValue = "0.0", required = false) Double km ) {
         log.debug("REST request to get all Shops near by lat:" + lat +",lon:" + lon.toString()+ ",km:" + km.toString());
         log.debug("curr user:" + SecurityUtils.getCurrentUserLogin());
+        
         final Geometry geometry = geometryService.wktToGeometry("POINT(" + lat.toString() + " " + lon.toString() + ")");
         if (!geometry.getGeometryType().equals("Point")) {
             throw new RuntimeException("Geometry must be a point. Got a " + geometry.getGeometryType());
@@ -121,7 +123,7 @@ public class ShopResource {
         geometryService.setLat(lat);
         geometryService.setLng(lon);
 
-        Page<ShopDTO> page;
+        Page<ShopMiniDTO> page;
         if (km == 0.0) {
             page = shopService.findAll(pageable);
         } else {
@@ -169,7 +171,7 @@ public class ShopResource {
     @GetMapping("/shops/shop-user")
     @Timed
     @Secured({AuthoritiesConstants.USER,AuthoritiesConstants.ADMIN})
-    public List<Shop> getShopsByUser() {
+    public List<ShopMiniDTO> getShopsByUser() {
     	log.debug("REST request to get Shops by current user");
 		return shopService.findByCurrentUser();
     }

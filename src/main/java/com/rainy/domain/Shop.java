@@ -64,8 +64,24 @@ public class Shop extends AbstractAuditingEntity implements Serializable {
 
     @Column(name = "location", columnDefinition = "Geometry(Point,4326)")
     private Point location;
+    
+    @Column(name = "active")
+    private Boolean active;
 
-    public Point getLocation() {
+    public Boolean getActive() {
+		return active;
+	}
+
+	public Shop active(Boolean active) {
+		this.active = active;
+		return this;
+	}
+
+	public void setActive(Boolean active) {
+		this.active = active;
+	}
+	
+	public Point getLocation() {
         return location;
     }
 
@@ -275,9 +291,13 @@ public class Shop extends AbstractAuditingEntity implements Serializable {
         return address;
     }
 
-    public Shop district(String address) {
+    public Shop address(String address) {
         this.address = address;
         return this;
+    }
+    
+    public void setAddress(String address) {
+    	this.address = address;
     }
   
     public Set<Album> getAlbums() {

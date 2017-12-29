@@ -57,7 +57,9 @@
             "asc": "ascending",
             "desc": "descending",
             "search": "search",
-            "map-click": "Click your place on map, system will automatically fill data"
+            "map-click": "Click your place on map",
+            "active": "Service available",
+            "inactive": "Out of service"
         }
     }
 }

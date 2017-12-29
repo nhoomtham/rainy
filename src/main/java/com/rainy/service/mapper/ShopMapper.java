@@ -2,6 +2,8 @@ package com.rainy.service.mapper;
 
 import com.rainy.domain.Shop;
 import com.rainy.service.dto.ShopDTO;
+import com.rainy.service.dto.ShopMiniDTO;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
@@ -21,8 +23,15 @@ import java.util.stream.Collectors;
  */
 @Service
 public class ShopMapper {
-    public ShopDTO shopToShopDTO (Shop shop) { return new ShopDTO(shop); }
-
+    
+	public ShopDTO shopToShopDTO (Shop shop) { 
+    	return new ShopDTO(shop); 
+    }
+    
+	public ShopMiniDTO shopToShopMiniDTO (Shop shop) { 
+    	return new ShopMiniDTO(shop); 
+    }
+    
     public List<ShopDTO> shopsToShopDTOs(List<Shop> shops) {
         return shops.stream()
                 .filter(Objects::nonNull)
@@ -34,4 +43,12 @@ public class ShopMapper {
         List<ShopDTO> shopDTOs = shopsToShopDTOs(source.getContent());
         return new PageImpl<>(shopDTOs, pageable, source.getTotalElements());
     }
+    
+    public List<ShopMiniDTO> shopsToShopMiniDTOs(List<Shop> shops) {
+        return shops.stream()
+                .filter(Objects::nonNull)
+                .map(this::shopToShopMiniDTO)
+                .collect(Collectors.toList());
+    }
+
 }
