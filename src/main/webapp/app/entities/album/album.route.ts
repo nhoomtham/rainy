@@ -19,7 +19,7 @@ export const albumRoute: Routes = [
         path: 'album/:id',
         component: AlbumDetailComponent,
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: [],
             pageTitle: 'rainyApp.album.home.title'
         },
         canActivate: [UserRouteAccessService]
