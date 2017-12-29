@@ -35,6 +35,7 @@ export class Shop implements BaseEntity {
         public user?: User,
         public location?: GeoJson,
         public distance?: number,
+        public active?: boolean,
     ) {
     }
 }

@@ -102,7 +102,7 @@ public class ShopServiceImpl implements ShopService{
     @Transactional(readOnly = true)
     public Page<ShopDTO> findAll(Pageable pageable) {
         log.debug("Request to get all Shops");
-        Page<Shop> shopPages = shopRepository.findAll(pageable);
+        Page<Shop> shopPages = shopRepository.findAllByActiveTrue(pageable);
         List<ShopDTO> newShopDTOs = calculateDistance(shopPages);
         return new PageImpl<>(newShopDTOs, pageable, shopPages.getTotalElements());
     }
