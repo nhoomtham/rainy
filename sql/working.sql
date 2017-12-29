@@ -1,10 +1,11 @@
 select * from ra_album;
 select * from ra_shop;
 select * from ra_shop_status;
-	
-update shop set location = ST_SetSRID(ST_MakePoint(23,-44.5),4326)
-update shop set location = st_GeomFromText('SRID=4326;POINT(34.774531 -96.6783449)')
-update shop set location = null
+
+update ra_shop set active = false where id = 11;
+update ra_shop set location = ST_SetSRID(ST_MakePoint(23,-44.5),4326)
+update ra_shop set location = st_GeomFromText('SRID=4326;POINT(34.774531 -96.6783449)')
+update ra_shop set location = null
  
 -- drop ra* tables
 drop table ra_shop_status cascade;

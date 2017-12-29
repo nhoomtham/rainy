@@ -56,8 +56,18 @@ public class ShopDTO {
     private Integer weight;
     
     private String address;
+    
+    private Boolean active;
 
-    public User getUser() {
+    public Boolean getActive() {
+		return active;
+	}
+
+	public void setActive(Boolean active) {
+		this.active = active;
+	}
+
+	public User getUser() {
         return user;
     }
 
@@ -170,12 +180,13 @@ public class ShopDTO {
     public ShopDTO(Shop shop) {
         this(shop.getId(), shop.getName(), shop.getPic_cover(), shop.getTel(), shop.getLine_uname(),
             shop.getDescription(), shop.getAge(), shop.getCategory(), shop.getPrice(), shop.getLocation(),
-            shop.getShape(), shop.getSkin(), shop.getHigh(), shop.getWeight(), shop.getAddress(), shop.getUser() );
+            shop.getShape(), shop.getSkin(), shop.getHigh(), shop.getWeight(), shop.getAddress(), shop.getUser(),
+            shop.getActive());
     }
 
     public ShopDTO(Long id, String name, String pic_cover, String tel, String line_uname, String description,
                    Integer age, Ra_type category, Integer price, Point location, String  shape, Ra_skin skin,
-                   Integer high, Integer weight, String address, User user) {
+                   Integer high, Integer weight, String address, User user, Boolean active) {
         this.id = id;
         this.name = name;
         this.pic_cover = pic_cover;
@@ -192,7 +203,9 @@ public class ShopDTO {
         this.weight = weight;
         this.address = address;
         this.user = user;
+        this.active = active;
     }
+    
     @Override
     public String toString() {
         return "ShopDTO{" +
@@ -207,11 +220,12 @@ public class ShopDTO {
             ", price='" + getPrice() + "'" +
             ", location='" + getLocation().getCoordinate().toString() + "'" +
             ", distance=" + getDistance() +
-            ", shape" + getShape() + "'" +
-            ", skin" + getSkin() + "'" +
-            ", weight" + getWeight() + "'" +
-            ", high" + getHigh() + "'" +
-            ", address" + getAddress() + "'" +
+            ", shape='" + getShape() + "'" +
+            ", skin='" + getSkin() + "'" +
+            ", weight='" + getWeight() + "'" +
+            ", high='" + getHigh() + "'" +
+            ", address='" + getAddress() + "'" +
+            ", active='" + getActive() + "'" +
             "}";
     }
 
