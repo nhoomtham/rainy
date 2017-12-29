@@ -1,7 +1,3 @@
 id,url,shop_id
-101,,11
-104,,11
-103,,11
-102,,11
-104,,11
-106,,11
+101,https://s3.eu-west-2.amazonaws.com/ra-rainy/dev/admin/12/album/Hydrangeas.jpg,12
+104,https://s3.eu-west-2.amazonaws.com/ra-rainy/dev/admin/12/album/Lighthouse.jpg,12

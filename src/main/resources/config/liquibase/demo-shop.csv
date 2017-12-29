@@ -1,3 +1,3 @@
 id,name,pic_cover,tel,line_uname,description,age,category,price,location,user_id,created_by,created_date
-11,แซนวิชเห็ด,https://i.imgsafe.org/30/30d146899c.jpeg,0719999999,@okokok,The quick brown fox jumps over the lazy dog ,20,FEMALE,1500,SRID=4326;POINT(13.78566 100.56882),3,3,2017/12/27
-12,แซนวิชเบคอน,https://i.imgsafe.org/ca/cad3a6207e.jpeg,07169696969,@okokok,The quick brown fox jumps over the lazy dog ,20,MALE,1000,SRID=4326;POINT(13.85519 100.53818),3,3,2017/12/27
+11,แซนวิชเห็ด,https://s3.eu-west-2.amazonaws.com/ra-rainy/default/girl-bunny-question-icon.png,0719999999,@okokok,The quick brown fox jumps over the lazy dog ,20,FEMALE,1500,SRID=4326;POINT(13.78566 100.56882),3,3,2017/12/27
+12,แซนวิชเบคอน,https://s3.eu-west-2.amazonaws.com/ra-rainy/default/girl-bunny-question-icon.png,07169696969,@okokok,The quick brown fox jumps over the lazy dog ,20,MALE,1000,SRID=4326;POINT(13.85519 100.53818),3,3,2017/12/27
