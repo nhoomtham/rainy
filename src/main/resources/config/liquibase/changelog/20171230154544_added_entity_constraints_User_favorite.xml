@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <!--
+        Added the constraints for entity User_favorite.
+    -->
+    <changeSet id="20171230154544-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="user_id"
+                                 baseTableName="ra_user_favorite"
+                                 constraintName="fk_user_favorite_user_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="jhi_user"/>
+
+        <addForeignKeyConstraint baseColumnNames="shop_id"
+                                 baseTableName="ra_user_favorite"
+                                 constraintName="fk_user_favorite_shop_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="ra_shop"/>
+
+    </changeSet>
+</databaseChangeLog>

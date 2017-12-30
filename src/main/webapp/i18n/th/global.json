@@ -10,6 +10,7 @@
                 "shop": "Shop",
                 "album": "Album",
                 "shopStatus": "Shop Status",
+                "userFavorite": "User Favorite",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {

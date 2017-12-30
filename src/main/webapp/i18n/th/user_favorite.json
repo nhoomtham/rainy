@@ -1,0 +1,22 @@
+{
+    "rainyApp": {
+        "user_favorite" : {
+            "home": {
+                "title": "User Favorites",
+                "createLabel": "สร้าง User Favorite",
+                "createOrEditLabel": "สร้างหรือแก้ไข User Favorite"
+            },
+            "created": "User Favorite ถูกสร้างด้วย {{ param }}",
+            "updated": "User Favorite ถูกแก้ไขด้วย {{ param }}",
+            "deleted": "User Favorite ถูกลบด้วย {{ param }}",
+            "delete": {
+                "question": "คุณต้องการที่จะลบ User Favorite {{ id }}?"
+            },
+            "detail": {
+                "title": "User Favorite"
+            },
+            "user": "User",
+            "shop": "Shop"
+        }
+    }
+}

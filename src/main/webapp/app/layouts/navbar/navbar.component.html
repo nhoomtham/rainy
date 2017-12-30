@@ -48,6 +48,12 @@
                             <span jhiTranslate="global.menu.entities.shopStatus">Shop Status</span>
                         </a>
                     </li>
+                    <li>
+                        <a class="dropdown-item" routerLink="user-favorite" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                            <i class="fa fa-fw fa-asterisk" aria-hidden="true"></i>
+                            <span jhiTranslate="global.menu.entities.userFavorite">User Favorite</span>
+                        </a>
+                    </li>
                     <!-- jhipster-needle-add-entity-to-menu - JHipster will add entities to the menu here -->
                 </ul>
             </li>

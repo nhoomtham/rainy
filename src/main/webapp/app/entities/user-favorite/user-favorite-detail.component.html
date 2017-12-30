@@ -1,0 +1,32 @@
+
+<div *ngIf="user_favorite">
+    <h2><span jhiTranslate="rainyApp.user_favorite.detail.title">User Favorite</span> {{user_favorite.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="rainyApp.user_favorite.user">User</span></dt>
+        <dd>
+            {{user_favorite.user?.login}}
+        </dd>
+        <dt><span jhiTranslate="rainyApp.user_favorite.shop">Shop</span></dt>
+        <dd>
+            <div *ngIf="user_favorite.shop">
+                <a [routerLink]="['/shop', user_favorite.shop?.id]">{{user_favorite.shop?.name}}</a>
+            </div>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'user-favorite/'+ user_favorite.id + '/edit'} }]"
+            replaceUrl="true"
+            queryParamsHandling="merge"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+    </button>
+</div>
