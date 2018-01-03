@@ -12,6 +12,7 @@ import { ShopService } from './shop.service';
 import { User, UserService, Account } from '../../shared';
 import { ResponseWrapper } from '../../shared';
 import { Principal } from '../../shared/index';
+
 import { HttpErrorResponse } from '@angular/common/http';
 import { HttpParams, HttpHeaders } from '@angular/common/http';
 
@@ -79,7 +80,7 @@ export class ShopUserNewComponent implements OnInit, OnDestroy {
         private router: Router,
         private loaderService: LoaderService,
         private route: ActivatedRoute,
-        private ng2ImgMax: Ng2ImgMaxService
+        private ng2ImgMax: Ng2ImgMaxService,
         // private mapService: MapService
     ) {
     }
@@ -126,7 +127,7 @@ export class ShopUserNewComponent implements OnInit, OnDestroy {
             // );
         this.myFileInputIdentifier = 'tHiS_Id_IS_sPeeCiAL';
     }
-
+    
     private fillForm() {
         this.shopForm.get('id').setValue(this.shop.id);
         this.shopForm.get('name').setValue(this.shop.name);
@@ -273,7 +274,6 @@ export class ShopUserNewComponent implements OnInit, OnDestroy {
     private subscribeToUpdateResponse(result: Observable<Shop>) {
         result.subscribe((res: Shop) => {
             this.onSaveSuccess(res);
-            console.log('update shop');
         }, (res: Response) => this.onSaveError());
     }
 

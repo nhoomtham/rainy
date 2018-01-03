@@ -31,7 +31,7 @@ export class AlbumComponent implements OnInit, OnDestroy {
     private shop: Shop;
     private uploadImage: File;
     private uploadImage_320: File;
-    private uploadImage_640: File;    
+    private uploadImage_640: File;
 
     @ViewChild('selectedFile')
     private elFile: ElementRef;
