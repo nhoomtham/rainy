@@ -54,8 +54,9 @@ export class UserFavoriteDialogComponent implements OnInit {
             this.subscribeToSaveResponse(
                 this.userFavoriteService.update(this.user_favorite));
         } else {
-            this.subscribeToSaveResponse(
-                this.userFavoriteService.create(this.user_favorite));
+            // this.subscribeToSaveResponse(
+                // this.userFavoriteService.create(this.user_favorite)
+            // );
         }
     }
 

@@ -34,4 +34,12 @@
         
     </changeSet>
     <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here, do not remove-->
+    
+     <changeSet id="20171230154544-2" author="che">
+        <createIndex tableName="ra_user_favorite" indexName="x1_ra_user_favorite">
+            <column name="user_id" type="bigint"></column>
+            <column name="shop_id" type="bigint"></column>            
+        </createIndex>
+    </changeSet>
+    
 </databaseChangeLog>

@@ -1,6 +1,8 @@
 import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/Rx';
+import { Response } from '@angular/http';
+
 import { HttpClient } from '@angular/common/http';
 import { JhiEventManager } from 'ng-jhipster';
 import { ResponseWrapper } from '../../shared';
@@ -9,6 +11,8 @@ import { Shop } from './shop.model';
 import { ShopService } from './shop.service';
 import { Album } from '../album/album.model';
 import { AlbumService } from '../album/album.service';
+import { UserFavoriteService } from '../user-favorite/user-favorite.service';
+import { UserFavorite } from '../user-favorite/user-favorite.model';
 
 import { QuillEditorComponent } from 'ngx-quill/src/quill-editor.component';
 import { FormGroup, FormBuilder } from '@angular/forms';
@@ -51,24 +55,51 @@ export class ShopDetailComponent implements OnInit, OnDestroy {
         private albumService: AlbumService,
         private httpClient: HttpClient,
         private fb: FormBuilder,
-        private loaderService: LoaderService
+        private loaderService: LoaderService,
+        private userFavoriteService: UserFavoriteService
     ) {
         this.form = fb.group({
             editor: ['No description']
         });
     }
 
+    saveUserFavorite(userFavoriteId: number, shopId: number): void {
+        this.subscribeToSaveUserFavResponse(
+            this.userFavoriteService.doUpdate(userFavoriteId, shopId));
+    }
+
+    private subscribeToSaveUserFavResponse(result: Observable<Response>) {
+        result.subscribe(
+            (res: Response) => {
+                if (res.status === 201) {  // create success
+                    const jsonResponse = res.json();
+                    const userFavorite = this.convertItemFromServer(jsonResponse);
+                    this.shop.userFavoriteId = userFavorite.id;
+                } else {  // delete success
+                    this.shop.userFavoriteId = 0;
+                }
+            });
+    }
+
+    /**
+    * Convert a returned JSON object to UserFavorite.
+    */
+    private convertItemFromServer(json: any): UserFavorite {
+        const entity: UserFavorite = Object.assign(new UserFavorite(), json);
+        return entity;
+    }
+
     onMapClick(event) {
-        this.courses = this.httpClient
-            .get<GeoResult[]>('https://maps.googleapis.com/maps/api/geocode/json?latlng=' + event.coords.lat + ',' + event.coords.lng +
-                '&key=AIzaSyBlk6Nxh8iMaKuhuJK_sv3gFhi_aoeK_Kg&language=th');
+        // this.courses = this.httpClient
+        //     .get<GeoResult[]>('https://maps.googleapis.com/maps/api/geocode/json?latlng=' + event.coords.lat + ',' + event.coords.lng +
+        //        '&key=AIzaSyBlk6Nxh8iMaKuhuJK_sv3gFhi_aoeK_Kg&language=th');
         // .do(console.log);
-        this.courses.subscribe((x) => {
+        // this.courses.subscribe((x) => {
             // console.log(x);
-            this.address = x;
-            console.log(this.address[0]);
+        ///    this.address = x;
+        //    console.log(this.address[0]);
             // address_components[1].short_name
-        });
+        // });
     }
 
     ngOnInit() {

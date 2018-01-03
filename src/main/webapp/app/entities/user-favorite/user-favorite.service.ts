@@ -5,6 +5,7 @@ import { SERVER_API_URL } from '../../app.constants';
 
 import { UserFavorite } from './user-favorite.model';
 import { ResponseWrapper, createRequestOption } from '../../shared';
+import { Shop } from '../shop/shop.model';
 
 @Injectable()
 export class UserFavoriteService {
@@ -13,13 +14,30 @@ export class UserFavoriteService {
 
     constructor(private http: Http) { }
 
-    create(user_favorite: UserFavorite): Observable<UserFavorite> {
-        const copy = this.convert(user_favorite);
-        return this.http.post(this.resourceUrl, copy).map((res: Response) => {
-            const jsonResponse = res.json();
-            return this.convertItemFromServer(jsonResponse);
-        });
+    doUpdate(userFavoriteId: number, shopId: number): Observable<Response> {
+        if (userFavoriteId === 0) {
+            const newUserFav = new UserFavorite();
+            const shop = new Shop();
+            shop.id = shopId;
+            newUserFav.shop = shop;
+            return this.create(newUserFav);
+        } else {
+            return this.delete(userFavoriteId);
+        }
     }
+
+    create(userFavorite: UserFavorite): Observable<Response> {
+        const copy = this.convert(userFavorite);
+        return this.http.post(this.resourceUrl, copy);
+    }
+
+    // create(user_favorite: UserFavorite): Observable<UserFavorite> {
+    //    const copy = this.convert(user_favorite);
+    //    return this.http.post(this.resourceUrl, copy).map((res: Response) => {
+    //        const jsonResponse = res.json();
+    //        return this.convertItemFromServer(jsonResponse);
+    //    });
+    // }
 
     update(user_favorite: UserFavorite): Observable<UserFavorite> {
         const copy = this.convert(user_favorite);

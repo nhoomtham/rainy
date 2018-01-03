@@ -6,9 +6,9 @@
                 "createLabel": "สร้าง User Favorite",
                 "createOrEditLabel": "สร้างหรือแก้ไข User Favorite"
             },
-            "created": "User Favorite ถูกสร้างด้วย {{ param }}",
+            "created": "บันทึกไว้เป็นคนที่ชอบแล้ว",
             "updated": "User Favorite ถูกแก้ไขด้วย {{ param }}",
-            "deleted": "User Favorite ถูกลบด้วย {{ param }}",
+            "deleted": "ลบออกจากลิสต์คนที่ชอบแล้ว",
             "delete": {
                 "question": "คุณต้องการที่จะลบ User Favorite {{ id }}?"
             },

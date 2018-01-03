@@ -59,6 +59,16 @@ public class ShopDTO {
     
     private Boolean active;
 
+    private Long userFavoriteId;
+    
+    public Long getUserFavoriteId() {
+		return userFavoriteId;
+	}
+
+	public void setUserFavoriteId(Long userFavoriteId) {
+		this.userFavoriteId = userFavoriteId;
+	}
+
     public Boolean getActive() {
 		return active;
 	}

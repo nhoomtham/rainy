@@ -1,9 +1,11 @@
 package com.rainy.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
+import com.rainy.domain.User;
 import com.rainy.domain.UserFavorite;
 
 import com.rainy.repository.UserFavoriteRepository;
+import com.rainy.service.UserService;
 import com.rainy.web.rest.errors.BadRequestAlertException;
 import com.rainy.web.rest.util.HeaderUtil;
 import com.rainy.web.rest.util.PaginationUtil;
@@ -35,27 +37,40 @@ public class UserFavoriteResource {
 
     private static final String ENTITY_NAME = "user_favorite";
 
-    private final UserFavoriteRepository user_favoriteRepository;
-
-    public UserFavoriteResource(UserFavoriteRepository user_favoriteRepository) {
-        this.user_favoriteRepository = user_favoriteRepository;
+    private final UserFavoriteRepository userFavoriteRepository;
+    
+    private final UserService userService;
+    
+    public UserFavoriteResource(UserFavoriteRepository userFavoriteRepository, UserService userService) {
+        this.userFavoriteRepository = userFavoriteRepository;
+        this.userService = userService;
     }
 
     /**
      * POST  /user-favorites : Create a new user_favorite.
      *
-     * @param user_favorite the user_favorite to create
+     * @param userFavorite the user_favorite to create
      * @return the ResponseEntity with status 201 (Created) and with body the new user_favorite, or with status 400 (Bad Request) if the user_favorite has already an ID
      * @throws URISyntaxException if the Location URI syntax is incorrect
      */
     @PostMapping("/user-favorites")
     @Timed
-    public ResponseEntity<UserFavorite> createUser_favorite(@Valid @RequestBody UserFavorite user_favorite) throws URISyntaxException {
-        log.debug("REST request to save User_favorite : {}", user_favorite);
-        if (user_favorite.getId() != null) {
-            throw new BadRequestAlertException("A new user_favorite cannot already have an ID", ENTITY_NAME, "idexists");
+    public ResponseEntity<UserFavorite> createUserFavorite(@RequestBody UserFavorite userFavorite) throws URISyntaxException {
+        log.debug("REST request to save UserFavorite : {}", userFavorite);
+        if (userFavorite.getId() != null) {
+            throw new BadRequestAlertException("A new userFavorite cannot already have an ID", ENTITY_NAME, "idexists");
         }
-        UserFavorite result = user_favoriteRepository.save(user_favorite);
+        
+        Optional<User> user = userService.getUserWithAuthorities();
+    	
+    	if (user.isPresent()) {
+    		userFavorite.setUser(user.get());		
+    	} else {
+    		throw new BadRequestAlertException("You did not login to system", ENTITY_NAME, "notAuthorized");
+    	}
+    	
+        
+        UserFavorite result = userFavoriteRepository.save(userFavorite);
         return ResponseEntity.created(new URI("/api/user-favorites/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
             .body(result);
@@ -75,9 +90,9 @@ public class UserFavoriteResource {
     public ResponseEntity<UserFavorite> updateUser_favorite(@Valid @RequestBody UserFavorite user_favorite) throws URISyntaxException {
         log.debug("REST request to update User_favorite : {}", user_favorite);
         if (user_favorite.getId() == null) {
-            return createUser_favorite(user_favorite);
+            return createUserFavorite(user_favorite);
         }
-        UserFavorite result = user_favoriteRepository.save(user_favorite);
+        UserFavorite result = userFavoriteRepository.save(user_favorite);
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, user_favorite.getId().toString()))
             .body(result);
@@ -93,7 +108,7 @@ public class UserFavoriteResource {
     @Timed
     public ResponseEntity<List<UserFavorite>> getAllUser_favorites(Pageable pageable) {
         log.debug("REST request to get a page of User_favorites");
-        Page<UserFavorite> page = user_favoriteRepository.findAll(pageable);
+        Page<UserFavorite> page = userFavoriteRepository.findAll(pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/user-favorites");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
@@ -108,7 +123,7 @@ public class UserFavoriteResource {
     @Timed
     public ResponseEntity<UserFavorite> getUser_favorite(@PathVariable Long id) {
         log.debug("REST request to get User_favorite : {}", id);
-        UserFavorite user_favorite = user_favoriteRepository.findOne(id);
+        UserFavorite user_favorite = userFavoriteRepository.findOne(id);
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(user_favorite));
     }
 
@@ -122,7 +137,7 @@ public class UserFavoriteResource {
     @Timed
     public ResponseEntity<Void> deleteUser_favorite(@PathVariable Long id) {
         log.debug("REST request to delete User_favorite : {}", id);
-        user_favoriteRepository.delete(id);
+        userFavoriteRepository.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
     }
 }

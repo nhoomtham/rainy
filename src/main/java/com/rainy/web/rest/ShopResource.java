@@ -143,7 +143,6 @@ public class ShopResource {
     @Timed
     public ResponseEntity<ShopDTO> getShop(@PathVariable Long id) {
         log.debug("REST request to get Shop : {}", id);
-        log.debug("curr user:" + SecurityUtils.getCurrentUserLogin());
         ShopDTO shop = shopService.findOne(id);
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(shop));
     }

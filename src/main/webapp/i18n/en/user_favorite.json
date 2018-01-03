@@ -6,9 +6,9 @@
                 "createLabel": "Create a new User Favorite",
                 "createOrEditLabel": "Create or edit a User Favorite"
             },
-            "created": "A new User Favorite is created with identifier {{ param }}",
+            "created": "Bookmark created",
             "updated": "A User Favorite is updated with identifier {{ param }}",
-            "deleted": "A User Favorite is deleted with identifier {{ param }}",
+            "deleted": "Bookmark deleted",
             "delete": {
                 "question": "Are you sure you want to delete User Favorite {{ id }}?"
             },
