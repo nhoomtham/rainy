@@ -60,6 +60,12 @@ export class UserFavoriteService {
             .map((res: Response) => this.convertResponse(res));
     }
 
+    queryByShop(shopId: number, req?: any): Observable<ResponseWrapper> {
+        const options = createRequestOption(req);
+        return this.http.get(this.resourceUrl + '/shop/' + shopId, options)
+            .map((res: Response) => this.convertResponse(res));
+    }
+
     delete(id: number): Observable<Response> {
         return this.http.delete(`${this.resourceUrl}/${id}`);
     }

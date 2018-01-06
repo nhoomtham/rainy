@@ -127,7 +127,7 @@ export class ShopUserNewComponent implements OnInit, OnDestroy {
             // );
         this.myFileInputIdentifier = 'tHiS_Id_IS_sPeeCiAL';
     }
-    
+
     private fillForm() {
         this.shopForm.get('id').setValue(this.shop.id);
         this.shopForm.get('name').setValue(this.shop.name);

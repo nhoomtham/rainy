@@ -4,6 +4,7 @@ import { JhiPaginationUtil } from 'ng-jhipster';
 
 import { UserRouteAccessService } from '../../shared';
 import { UserFavoriteComponent } from './user-favorite.component';
+import { UserFavoriteShopComponent } from './ra-user-favorite-shop.component';
 import { UserFavoriteDetailComponent } from './user-favorite-detail.component';
 import { UserFavoritePopupComponent } from './user-favorite-dialog.component';
 import { UserFavoriteDeletePopupComponent } from './user-favorite-delete-dialog.component';
@@ -39,6 +40,17 @@ export const userFavoriteRoute: Routes = [
     }, {
         path: 'user-favorite/:id',
         component: UserFavoriteDetailComponent,
+        data: {
+            authorities: ['ROLE_USER'],
+            pageTitle: 'rainyApp.user_favorite.home.title'
+        },
+        canActivate: [UserRouteAccessService]
+    }, {
+        path: 'user-favorite/shop/:id',
+        component: UserFavoriteShopComponent,
+        resolve: {
+            'pagingParams': UserFavoriteResolvePagingParams
+        },
         data: {
             authorities: ['ROLE_USER'],
             pageTitle: 'rainyApp.user_favorite.home.title'

@@ -18,21 +18,21 @@
                 <mat-card-title-group>
                     <mat-card-title>{{shop.name}}</mat-card-title>
                     <mat-card-subtitle>
-                        <mat-icon matPrefix><i class="material-icons">wc</i></mat-icon>:&nbsp;{{shop.category}}
+                        <mat-icon><i class="material-icons">wc</i></mat-icon>:&nbsp;{{shop.category}}
                     </mat-card-subtitle>
 
                     <mat-card-subtitle>
-                        <mat-icon matPrefix><i class="material-icons">local_offer</i></mat-icon>:&nbsp;
+                        <mat-icon><i class="material-icons">local_offer</i></mat-icon>:&nbsp;
                         <span>{{shop.price | number : '1.0'}}</span>&nbsp;<span jhiTranslate="rainyApp.shop.baht"></span>
                     </mat-card-subtitle>
 
                     <mat-card-subtitle>
-                        <mat-icon matPrefix><i class="material-icons">cake</i></mat-icon>:&nbsp;
+                        <mat-icon><i class="material-icons">cake</i></mat-icon>:&nbsp;
                         <span>{{shop.age}}</span>&nbsp;<span jhiTranslate="rainyApp.shop.years"></span>
                     </mat-card-subtitle>
 
                     <mat-card-subtitle>
-                        <mat-icon matPrefix><i class="material-icons">event_available</i></mat-icon>:&nbsp;
+                        <mat-icon><i class="material-icons">event_available</i></mat-icon>:&nbsp;
                         <span *ngIf="shop.active" jhiTranslate="rainyApp.shop.active"></span>
                         <span *ngIf="!shop.active" jhiTranslate="rainyApp.shop.inactive"></span>
                     </mat-card-subtitle>
@@ -41,16 +41,19 @@
                 </mat-card-title-group>
                 <mat-card-actions>
                     <button mat-icon-button type="submit" [routerLink]= "['/', { outlets: { popup: 'shop-status-update/' + shop.id } }]">
-                        <mat-icon matPrefix><i class="material-icons">chat</i></mat-icon>
+                        <mat-icon><i class="material-icons">chat</i></mat-icon>
                     </button>
                     <button mat-icon-button type="submit" [routerLink]="['../shop-user-edit', shop.id]">
-                        <mat-icon matPrefix><i class="material-icons">border_color</i></mat-icon>
+                        <mat-icon><i class="material-icons">border_color</i></mat-icon>
                     </button>
                     <button mat-icon-button type="submit" [routerLink]="['../album-shop', shop.id]">
-                        <mat-icon matPrefix><i class="material-icons">add_a_photo</i></mat-icon>
+                        <mat-icon><i class="material-icons">add_a_photo</i></mat-icon>
                     </button>
                     <button mat-icon-button type="submit" [routerLink]="['../shop', shop.id]">
-                        <mat-icon matPrefix><i class="material-icons">account_circle</i></mat-icon>
+                        <mat-icon ><i class="material-icons">account_circle</i></mat-icon>
+                    </button>
+                    <button mat-icon-button type="submit" [routerLink]="['../user-favorite','shop', shop.id]">
+                        <mat-icon><i class="material-icons">people</i></mat-icon>
                     </button>
                     <button mat-icon-button type="submit"
                            [routerLink]="['/', { outlets: { popup: 'shop/'+ shop.id + '/delete'} }]"

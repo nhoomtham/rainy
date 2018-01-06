@@ -2,7 +2,7 @@
     "rainyApp": {
         "user_favorite" : {
             "home": {
-                "title": "User Favorites",
+                "title": "คนที่ชอบคุณ",
                 "createLabel": "สร้าง User Favorite",
                 "createOrEditLabel": "สร้างหรือแก้ไข User Favorite"
             },

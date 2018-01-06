@@ -1,17 +1,22 @@
 package com.rainy.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
+import com.rainy.domain.Shop;
 import com.rainy.domain.User;
 import com.rainy.domain.UserFavorite;
-
+import com.rainy.repository.ShopRepository;
 import com.rainy.repository.UserFavoriteRepository;
+import com.rainy.service.ShopService;
+import com.rainy.service.UserFavoriteService;
 import com.rainy.service.UserService;
+import com.rainy.service.dto.ShopDTO;
 import com.rainy.web.rest.errors.BadRequestAlertException;
 import com.rainy.web.rest.util.HeaderUtil;
 import com.rainy.web.rest.util.PaginationUtil;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.boot.actuate.audit.AuditEvent;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
@@ -41,9 +46,19 @@ public class UserFavoriteResource {
     
     private final UserService userService;
     
-    public UserFavoriteResource(UserFavoriteRepository userFavoriteRepository, UserService userService) {
+    private final ShopRepository shopRepository;
+    
+    private final UserFavoriteService userFavoriteService;
+    
+    private final ShopService shopService;
+    
+    public UserFavoriteResource(UserFavoriteRepository userFavoriteRepository, UserService userService,
+    		ShopRepository shopRepository, UserFavoriteService userFavoriteService, ShopService shopService) {
         this.userFavoriteRepository = userFavoriteRepository;
         this.userService = userService;
+        this.shopRepository = shopRepository;
+        this.userFavoriteService = userFavoriteService;
+        this.shopService = shopService;
     }
 
     /**
@@ -140,4 +155,29 @@ public class UserFavoriteResource {
         userFavoriteRepository.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
     }
+    
+    /**
+     * GET  /user-favorites/shop/:id : get a user who book mark the shop id
+     *
+     * @param id the id of the shop to retrieve all user who book mark
+     * @return the ResponseEntity with status 200 (OK) and with body the user_favorite, or with status 404 (Not Found)
+     */
+    @GetMapping("/user-favorites/shop/{id}")
+    @Timed
+    public ResponseEntity<List<UserFavorite>> getUserFavoriteByShop(Pageable pageable, @PathVariable Long id) {
+        log.debug("REST request to get UserFavorite by Shop : {}", id);
+        
+    	log.debug("Verify the shop id {} is belong to the current user.", id);
+		final ShopDTO shopDTOs = shopService.findOneByCurrentUser(id);
+		if (shopDTOs == null) {
+			throw new BadRequestAlertException("You did not login to system", ENTITY_NAME, "notAuthorized");
+		}
+		
+        Shop shop = shopRepository.findOne(id);
+        Page<UserFavorite> page = userFavoriteService.findByShop(pageable, shop);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/user-favorites/shop");
+        
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+    }
+    
 }

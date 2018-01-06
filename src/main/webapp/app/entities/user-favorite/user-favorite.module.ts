@@ -3,10 +3,13 @@ import { RouterModule } from '@angular/router';
 
 import { RainySharedModule } from '../../shared';
 import { RainyAdminModule } from '../../admin/admin.module';
+import { RainyMaterialModule } from '../../material/rainy-material.module';
+
 import {
     UserFavoriteService,
     UserFavoritePopupService,
     UserFavoriteComponent,
+    UserFavoriteShopComponent,
     UserFavoriteDetailComponent,
     UserFavoriteDialogComponent,
     UserFavoritePopupComponent,
@@ -26,10 +29,12 @@ const ENTITY_STATES = [
     imports: [
         RainySharedModule,
         RainyAdminModule,
-        RouterModule.forChild(ENTITY_STATES)
+        RouterModule.forChild(ENTITY_STATES),
+        RainyMaterialModule
     ],
     declarations: [
         UserFavoriteComponent,
+        UserFavoriteShopComponent,
         UserFavoriteDetailComponent,
         UserFavoriteDialogComponent,
         UserFavoriteDeleteDialogComponent,
@@ -38,6 +43,7 @@ const ENTITY_STATES = [
     ],
     entryComponents: [
         UserFavoriteComponent,
+        UserFavoriteShopComponent,
         UserFavoriteDialogComponent,
         UserFavoritePopupComponent,
         UserFavoriteDeleteDialogComponent,

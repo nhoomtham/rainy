@@ -125,6 +125,27 @@ public class ShopServiceImpl implements ShopService{
 
     private List<ShopMiniDTO> calculateDistance(Page<Shop> shopPages) {
         final List<Shop> shops = shopPages.getContent();
+        
+        return calculateDistance(shops);
+        /*
+        final List<ShopMiniDTO> shopMiniDTOs = shopMapper.shopsToShopMiniDTOs(shops);
+        List<ShopMiniDTO> newShopMiniDTOs = new ArrayList<>();
+        for (ShopMiniDTO shopMiniDTO : shopMiniDTOs) {
+            final Geometry g1 = shopMiniDTO.getLocation().norm();
+            final Geometry g2 = geometryService.wktToGeometry("POINT("
+                                    + geometryService.getLat().toString()
+                                    + " "
+                                    + geometryService.getLng().toString()
+                                    + ")");
+            final Double dist = g1.distance(g2) * 100;
+            shopMiniDTO.setDistance(dist.shortValue());
+            newShopMiniDTOs.add(shopMiniDTO);
+            
+        }
+        return newShopMiniDTOs;*/
+    }
+
+    private List<ShopMiniDTO> calculateDistance(List<Shop> shops) {
         final List<ShopMiniDTO> shopMiniDTOs = shopMapper.shopsToShopMiniDTOs(shops);
         List<ShopMiniDTO> newShopMiniDTOs = new ArrayList<>();
         for (ShopMiniDTO shopMiniDTO : shopMiniDTOs) {
@@ -141,7 +162,7 @@ public class ShopServiceImpl implements ShopService{
         }
         return newShopMiniDTOs;
     }
-
+    
     private Long getUserFavoriteId(Long shopId) {
     	Long userFavoriteId = 0L;
     	if (SecurityUtils.isAuthenticated()) {
@@ -255,6 +276,28 @@ public class ShopServiceImpl implements ShopService{
 				}
 			}
 		}
+		return null;
+	}
+
+	@Override
+	public Page<ShopMiniDTO> findByUserFavorite(Pageable pageable) {
+		log.debug("Request to get all favorite Shop belong to current user");
+    	Optional<User> user = userService.getUserWithAuthorities();
+    	
+    	if (user.isPresent()) {
+    		Page<UserFavorite> puf = userFavoriteRepository.findByUser(pageable, user.get().getId());
+    		List<UserFavorite> ufs =  puf.getContent();
+    		List<Shop> shops = new ArrayList<>();
+    		// calculateDistance(shopPages
+    		for (UserFavorite uf : ufs) {
+    			shops.add(uf.getShop());
+    			///ShopMiniDTO shopMiniDTO = shopMapper.shopToShopMiniDTO(uf.getShop());    			
+    			// newShopMiniDTOs.add(shopMiniDTO);
+    		}
+    		List<ShopMiniDTO> shopMiniDTOs = calculateDistance(shops);
+    		
+    		return new PageImpl<>(shopMiniDTOs, pageable, puf.getTotalElements());
+    	}
 		return null;
 	}
 
