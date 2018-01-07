@@ -6,9 +6,12 @@ import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 import com.amazonaws.services.s3.model.DeleteObjectsRequest;
 import com.rainy.domain.Shop;
 import com.rainy.domain.User;
+import com.rainy.domain.UserFavorite;
 import com.rainy.repository.AlbumRepository;
 import com.rainy.repository.ShopRepository;
 import com.rainy.repository.ShopStatusRepository;
+import com.rainy.repository.UserFavoriteRepository;
+import com.rainy.security.SecurityUtils;
 import com.rainy.service.GeometryService;
 import com.rainy.service.ShopService;
 import com.rainy.service.UserService;
@@ -52,7 +55,9 @@ public class ShopServiceImpl implements ShopService{
     private final GeometryService geometryService;
 
     private final UserService userService;
-
+    
+    private final UserFavoriteRepository userFavoriteRepository;
+    
     @Autowired
     private GeometryFactory geometryFactory;
 
@@ -63,11 +68,12 @@ public class ShopServiceImpl implements ShopService{
     private AlbumRepository albumRepository;
     
     public ShopServiceImpl(ShopRepository shopRepository, ShopMapper shopMapper, GeometryService geometryService, 
-    		UserService userService) {
+    		UserService userService, UserFavoriteRepository userFavoriteRepository) {
         this.shopRepository = shopRepository;
         this.shopMapper = shopMapper;
         this.geometryService = geometryService;
         this.userService = userService;
+        this.userFavoriteRepository = userFavoriteRepository;
     }
 
     /**
@@ -113,11 +119,15 @@ public class ShopServiceImpl implements ShopService{
         log.debug("Request to get all Shops NearBy");
         Page<Shop> shopPages = shopRepository.findNearByByOrderByLastModifiedDateDesc(pageable, geometry, km);
         List<ShopMiniDTO> newShopMiniDTOs = calculateDistance(shopPages);
+       
         return new PageImpl<>(newShopMiniDTOs, pageable, shopPages.getTotalElements());
     }
 
     private List<ShopMiniDTO> calculateDistance(Page<Shop> shopPages) {
         final List<Shop> shops = shopPages.getContent();
+        
+        return calculateDistance(shops);
+        /*
         final List<ShopMiniDTO> shopMiniDTOs = shopMapper.shopsToShopMiniDTOs(shops);
         List<ShopMiniDTO> newShopMiniDTOs = new ArrayList<>();
         for (ShopMiniDTO shopMiniDTO : shopMiniDTOs) {
@@ -130,10 +140,42 @@ public class ShopServiceImpl implements ShopService{
             final Double dist = g1.distance(g2) * 100;
             shopMiniDTO.setDistance(dist.shortValue());
             newShopMiniDTOs.add(shopMiniDTO);
+            
+        }
+        return newShopMiniDTOs;*/
+    }
+
+    private List<ShopMiniDTO> calculateDistance(List<Shop> shops) {
+        final List<ShopMiniDTO> shopMiniDTOs = shopMapper.shopsToShopMiniDTOs(shops);
+        List<ShopMiniDTO> newShopMiniDTOs = new ArrayList<>();
+        for (ShopMiniDTO shopMiniDTO : shopMiniDTOs) {
+            final Geometry g1 = shopMiniDTO.getLocation().norm();
+            final Geometry g2 = geometryService.wktToGeometry("POINT("
+                                    + geometryService.getLat().toString()
+                                    + " "
+                                    + geometryService.getLng().toString()
+                                    + ")");
+            final Double dist = g1.distance(g2) * 100;
+            shopMiniDTO.setDistance(dist.shortValue());
+            newShopMiniDTOs.add(shopMiniDTO);
+            
         }
         return newShopMiniDTOs;
     }
-
+    
+    private Long getUserFavoriteId(Long shopId) {
+    	Long userFavoriteId = 0L;
+    	if (SecurityUtils.isAuthenticated()) {
+         	Optional<String> userLogin = SecurityUtils.getCurrentUserLogin();
+         	Optional<User> user = userService.getUserWithAuthoritiesByLogin(userLogin.get());
+     		Shop shop = shopRepository.findOne(shopId);
+     		Optional<UserFavorite> userFavorite = userFavoriteRepository.findByUserAndShop(user.get(), shop);
+     		if (userFavorite.isPresent()) {
+     			userFavoriteId = userFavorite.get().getId();
+     		}
+         } 
+    	return userFavoriteId;
+    }
     /**
      * Get one shop by id.
      *
@@ -144,9 +186,11 @@ public class ShopServiceImpl implements ShopService{
     @Transactional(readOnly = true)
     public ShopDTO findOne(Long id) {
         log.debug("Request to get Shop : {}", id);
-        Shop shop = shopRepository.findOne(id);
+        final Shop shop = shopRepository.findOne(id);
         if (shop != null) {
-            return shopMapper.shopToShopDTO(shop);
+        	ShopDTO shopDTO = shopMapper.shopToShopDTO(shop);        	
+        	shopDTO.setUserFavoriteId(this.getUserFavoriteId(shop.getId()));
+            return shopDTO;
         } else {
             return null;
         }
@@ -232,6 +276,28 @@ public class ShopServiceImpl implements ShopService{
 				}
 			}
 		}
+		return null;
+	}
+
+	@Override
+	public Page<ShopMiniDTO> findByUserFavorite(Pageable pageable) {
+		log.debug("Request to get all favorite Shop belong to current user");
+    	Optional<User> user = userService.getUserWithAuthorities();
+    	
+    	if (user.isPresent()) {
+    		Page<UserFavorite> puf = userFavoriteRepository.findByUser(pageable, user.get().getId());
+    		List<UserFavorite> ufs =  puf.getContent();
+    		List<Shop> shops = new ArrayList<>();
+    		// calculateDistance(shopPages
+    		for (UserFavorite uf : ufs) {
+    			shops.add(uf.getShop());
+    			///ShopMiniDTO shopMiniDTO = shopMapper.shopToShopMiniDTO(uf.getShop());    			
+    			// newShopMiniDTOs.add(shopMiniDTO);
+    		}
+    		List<ShopMiniDTO> shopMiniDTOs = calculateDistance(shops);
+    		
+    		return new PageImpl<>(shopMiniDTOs, pageable, puf.getTotalElements());
+    	}
 		return null;
 	}
 

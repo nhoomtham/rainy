@@ -1,0 +1,22 @@
+{
+    "rainyApp": {
+        "user_favorite" : {
+            "home": {
+                "title": "User Favorites",
+                "createLabel": "Create a new User Favorite",
+                "createOrEditLabel": "Create or edit a User Favorite"
+            },
+            "created": "Bookmark created",
+            "updated": "A User Favorite is updated with identifier {{ param }}",
+            "deleted": "Bookmark deleted",
+            "delete": {
+                "question": "Are you sure you want to delete User Favorite {{ id }}?"
+            },
+            "detail": {
+                "title": "User Favorite"
+            },
+            "user": "User",
+            "shop": "Shop"
+        }
+    }
+}

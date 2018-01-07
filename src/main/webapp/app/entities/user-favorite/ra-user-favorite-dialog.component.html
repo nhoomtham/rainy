@@ -1,0 +1,54 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 class="modal-title" id="myUser_favoriteLabel" jhiTranslate="rainyApp.user_favorite.home.createOrEditLabel">Create or edit a User Favorite</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;</button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        fddsaf1111111111111111111111111111111111111
+
+        <!--<div class="form-group" [hidden]="!user_favorite.id">
+            <label for="id" jhiTranslate="global.field.id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                   [(ngModel)]="user_favorite.id" readonly />
+        </div>
+
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="rainyApp.user_favorite.user" for="field_user">User</label>
+            <select class="form-control" id="field_user" name="user" [(ngModel)]="user_favorite.user"  required>
+                <option *ngIf="!editForm.value.user" [ngValue]="null" selected></option>
+                <option [ngValue]="userOption.id === user_favorite.user?.id ? user_favorite.user : userOption" *ngFor="let userOption of users; trackBy: trackUserById">{{userOption.login}}</option>
+            </select>
+        </div>
+        <div [hidden]="!(editForm.controls.user?.dirty && editForm.controls.user?.invalid)">
+            <small class="form-text text-danger"
+                [hidden]="!editForm.controls.user?.errors?.required" jhiTranslate="entity.validation.required">
+                This field is required.
+            </small>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="rainyApp.user_favorite.shop" for="field_shop">Shop</label>
+            <select class="form-control" id="field_shop" name="shop" [(ngModel)]="user_favorite.shop"  required>
+                <option *ngIf="!editForm.value.shop" [ngValue]="null" selected></option>
+                <option [ngValue]="shopOption.id === user_favorite.shop?.id ? user_favorite.shop : shopOption" *ngFor="let shopOption of shops; trackBy: trackShopById">{{shopOption.name}}</option>
+            </select>
+        </div>
+        <div [hidden]="!(editForm.controls.shop?.dirty && editForm.controls.shop?.invalid)">
+            <small class="form-text text-danger"
+                [hidden]="!editForm.controls.shop?.errors?.required" jhiTranslate="entity.validation.required">
+                This field is required.
+            </small>
+        </div>-->
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

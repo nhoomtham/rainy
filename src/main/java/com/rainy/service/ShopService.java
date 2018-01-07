@@ -69,5 +69,12 @@ public interface ShopService {
      *  @return the entity
      */
     ShopDTO findOneByCurrentUser(Long id);
-
+    
+    /**
+     *  Get the favorite shop of current user.
+     *
+     *  @return the entity
+     */
+    Page<ShopMiniDTO> findByUserFavorite(Pageable pageable);
+    
 }

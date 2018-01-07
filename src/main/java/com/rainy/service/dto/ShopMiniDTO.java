@@ -39,7 +39,8 @@ public class ShopMiniDTO {
 
     private Boolean active;
 
-    public Boolean getActive() {
+
+	public Boolean getActive() {
 		return active;
 	}
 

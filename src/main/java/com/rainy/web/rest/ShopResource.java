@@ -112,7 +112,6 @@ public class ShopResource {
             @RequestParam(value = "lon", defaultValue = "0.0", required = false) Double lon,
             @RequestParam(value = "km", defaultValue = "0.0", required = false) Double km ) {
         log.debug("REST request to get all Shops near by lat:" + lat +",lon:" + lon.toString()+ ",km:" + km.toString());
-        log.debug("curr user:" + SecurityUtils.getCurrentUserLogin());
         
         final Geometry geometry = geometryService.wktToGeometry("POINT(" + lat.toString() + " " + lon.toString() + ")");
         if (!geometry.getGeometryType().equals("Point")) {
@@ -143,7 +142,6 @@ public class ShopResource {
     @Timed
     public ResponseEntity<ShopDTO> getShop(@PathVariable Long id) {
         log.debug("REST request to get Shop : {}", id);
-        log.debug("curr user:" + SecurityUtils.getCurrentUserLogin());
         ShopDTO shop = shopService.findOne(id);
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(shop));
     }
@@ -191,4 +189,34 @@ public class ShopResource {
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(shop));        
     }
 
+    /**
+     * GET  /shop/favorite : get the favorite shop which belong to current user by id
+     *
+     * @return the ResponseEntity with status 200 (OK) and the shop in body
+     */
+    @GetMapping("/shops/favorite")
+    @Timed
+    @Secured({AuthoritiesConstants.USER,AuthoritiesConstants.ADMIN})
+    public ResponseEntity<List<ShopMiniDTO>> getFavoriteShop( @ApiParam Pageable pageable,
+            @RequestParam(value = "lat", defaultValue = "0.0", required = false) Double lat,
+            @RequestParam(value = "lon", defaultValue = "0.0", required = false) Double lon,
+            @RequestParam(value = "km", defaultValue = "0.0", required = false) Double km ) {
+        log.debug("REST request to get favorite Shop of current user");
+        
+        
+        final Geometry geometry = geometryService.wktToGeometry("POINT(" + lat.toString() + " " + lon.toString() + ")");
+        if (!geometry.getGeometryType().equals("Point")) {
+            throw new RuntimeException("Geometry must be a point. Got a " + geometry.getGeometryType());
+        }
+
+        // sharing user's coordinates
+        geometryService.setLat(lat);
+        geometryService.setLng(lon);
+
+        
+        Page<ShopMiniDTO> page = shopService.findByUserFavorite(pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/shops/favorite");
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+    }
+    
 }

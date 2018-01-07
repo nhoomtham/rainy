@@ -74,6 +74,17 @@ export const shopRoute: Routes = [
             pageTitle: 'rainyApp.shop.home.title'
         },
         canActivate: [UserRouteAccessService]
+    }, {
+        path: 'shop-favorite',
+        component: ShopComponent,
+        resolve: {
+            'pagingParams': ShopResolvePagingParams
+        },
+        data: {
+            authorities: ['ROLE_USER'],
+            pageTitle: 'rainyApp.shop.home.title'
+        },
+        canActivate: [UserRouteAccessService]
     }
 ];
 
