@@ -5,7 +5,11 @@ import com.rainy.RainyApp;
 import com.rainy.domain.UserFavorite;
 import com.rainy.domain.User;
 import com.rainy.domain.Shop;
+import com.rainy.repository.ShopRepository;
 import com.rainy.repository.UserFavoriteRepository;
+import com.rainy.service.ShopService;
+import com.rainy.service.UserFavoriteService;
+import com.rainy.service.UserService;
 import com.rainy.web.rest.errors.ExceptionTranslator;
 
 import org.junit.Before;
@@ -54,6 +58,18 @@ public class User_favoriteResourceIntTest {
 
     @Autowired
     private EntityManager em;
+    
+    @Autowired
+    private  UserService userService;
+    
+    @Autowired
+    private  ShopRepository shopRepository;
+    
+    @Autowired
+    private  UserFavoriteService userFavoriteService;
+    
+    @Autowired
+    private  ShopService shopService;
 
     private MockMvc restUser_favoriteMockMvc;
 
@@ -62,7 +78,8 @@ public class User_favoriteResourceIntTest {
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        final UserFavoriteResource user_favoriteResource = new UserFavoriteResource(user_favoriteRepository);
+        final UserFavoriteResource user_favoriteResource = new UserFavoriteResource(user_favoriteRepository, userService,  shopRepository, 
+        		 userFavoriteService,  shopService);
         this.restUser_favoriteMockMvc = MockMvcBuilders.standaloneSetup(user_favoriteResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setControllerAdvice(exceptionTranslator)
