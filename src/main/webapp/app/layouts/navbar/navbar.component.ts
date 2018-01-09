@@ -14,7 +14,7 @@ import { ShopService } from '../../entities/shop/shop.service';
     selector: 'jhi-navbar',
     templateUrl: './navbar.component.html',
     styleUrls: [
-        'navbar.css'
+        'navbar.scss'
     ]
 })
 export class NavbarComponent implements OnInit {
@@ -32,8 +32,8 @@ export class NavbarComponent implements OnInit {
         private principal: Principal,
         private loginModalService: LoginModalService,
         private profileService: ProfileService,
-        private router: Router,
         private shopService: ShopService,
+        private router: Router
     ) {
         this.version = VERSION ? 'v' + VERSION : '';
         this.isNavbarCollapsed = true;
@@ -79,5 +79,4 @@ export class NavbarComponent implements OnInit {
     getImageUrl() {
         return this.isAuthenticated() ? this.principal.getImageUrl() : null;
     }
-
 }

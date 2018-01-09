@@ -24,7 +24,7 @@
     "enableSwaggerCodegen": false,
     "jwtSecretKey": "315488fec1d9d49a5cf96611557b31989dade541",
     "clientFramework": "angularX",
-    "useSass": false,
+    "useSass": true,
     "clientPackageManager": "yarn",
     "applicationType": "monolith",
     "testFrameworks": [
