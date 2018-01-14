@@ -1,6 +1,9 @@
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { DatePipe } from '@angular/common';
 
+import { MenuItems } from './menu-items/menu-items';
+import { AccordionAnchorDirective, AccordionLinkDirective, AccordionDirective } from './accordion';
+
 import {
     RainySharedLibsModule,
     RainySharedCommonModule,
@@ -26,7 +29,10 @@ import {
     declarations: [
         JhiSocialComponent,
         JhiLoginModalComponent,
-        HasAnyAuthorityDirective
+        HasAnyAuthorityDirective,
+        AccordionAnchorDirective,
+        AccordionLinkDirective,
+        AccordionDirective
     ],
     providers: [
         LoginService,
@@ -38,7 +44,8 @@ import {
         AuthServerProvider,
         SocialService,
         UserService,
-        DatePipe
+        DatePipe,
+        MenuItems
     ],
     entryComponents: [JhiLoginModalComponent],
     exports: [
@@ -46,9 +53,11 @@ import {
         JhiSocialComponent,
         JhiLoginModalComponent,
         HasAnyAuthorityDirective,
-        DatePipe
+        DatePipe,
+        AccordionAnchorDirective,
+        AccordionLinkDirective,
+        AccordionDirective
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
-
 })
 export class RainySharedModule {}

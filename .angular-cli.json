@@ -22,7 +22,7 @@
             "content/scss/vendor.scss",
             "content/scss/global.scss"
         ],
-        "scripts": []
+        "scripts": ["../node_modules/jquery/dist/jquery.min.js"]
     }],
     "e2e": {
         "protractor": {

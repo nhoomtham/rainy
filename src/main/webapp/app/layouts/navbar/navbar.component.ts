@@ -10,6 +10,8 @@ import { VERSION } from '../../app.constants';
 
 import { ShopService } from '../../entities/shop/shop.service';
 
+import { AppHeaderComponent } from '../full/header/header.component';
+
 @Component({
     selector: 'jhi-navbar',
     templateUrl: './navbar.component.html',

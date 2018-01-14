@@ -1,10 +1,10 @@
+import * as $ from 'jquery';
+
 import './vendor.ts';
 
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { Ng2Webstorage } from 'ngx-webstorage';
-
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 import { RainySharedModule, UserRouteAccessService } from './shared';
 import { RainyAppRoutingModule} from './app-routing.module';
@@ -12,13 +12,17 @@ import { RainyHomeModule } from './home/home.module';
 import { RainyAdminModule } from './admin/admin.module';
 import { RainyAccountModule } from './account/account.module';
 import { RainyEntityModule } from './entities/entity.module';
-
-import { MaterialModule } from './material/material.module';
-
 import { customHttpProvider } from './blocks/interceptor/http.provider';
 import { PaginationConfig } from './blocks/config/uib-pagination.config';
 
 // jhipster-needle-angular-add-module-import JHipster will add new module here
+
+/* Material Pro */
+import { FlexLayoutModule } from '@angular/flex-layout';
+// import { FullComponent } from './layouts/full/full.component';
+import { AppHeaderComponent } from './layouts/full/header/header.component';
+// import { AppSidebarComponent } from './layouts/full/sidebar/sidebar.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import {
     JhiMainComponent,
@@ -29,6 +33,8 @@ import {
     ActiveMenuDirective,
     ErrorComponent
 } from './layouts';
+
+import { RainyMaterialModule } from './material/rainy-material.module';
 
 @NgModule({
     imports: [
@@ -46,7 +52,7 @@ import {
         RainyEntityModule,
         // jhipster-needle-angular-add-module JHipster will add new module here
 
-        MaterialModule,
+        RainyMaterialModule
     ],
     declarations: [
         JhiMainComponent,
@@ -54,7 +60,10 @@ import {
         ErrorComponent,
         PageRibbonComponent,
         ActiveMenuDirective,
-        FooterComponent
+        FooterComponent,
+        AppHeaderComponent
+       // SpinnerComponent,
+       // AppSidebarComponent
     ],
     providers: [
         ProfileService,
