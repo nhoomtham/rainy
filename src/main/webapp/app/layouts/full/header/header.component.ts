@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { Principal, RaLoginModalService, RaLoginService, RaJhiLoginModalComponent } from '../../../shared';
+import { MatDialogRef } from '@angular/material';
 
 @Component({
   selector: 'app-header',
@@ -6,5 +9,32 @@ import { Component } from '@angular/core';
   styleUrls: []
 })
 export class AppHeaderComponent {
-    
+
+    private modalRef: MatDialogRef<RaJhiLoginModalComponent>;
+
+    constructor(
+        private principal: Principal,
+        private loginModalService: RaLoginModalService,
+        private loginService: RaLoginService,
+        private router: Router
+    ) { }
+
+    login() {
+        this.modalRef = this.loginModalService.open();
+    }
+
+    logout() {
+        this.loginService.logout();
+        this.router.navigate(['']);
+    }
+
+    isAuthenticated() {
+        return this.principal.isAuthenticated();
+    }
+
+    register() {
+        this.router.navigate(['/register']);
+    }
+
+
 }

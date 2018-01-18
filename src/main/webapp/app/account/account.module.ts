@@ -1,7 +1,9 @@
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { RainySharedModule } from '../shared';
+import { MatIconModule, MatCardModule, MatInputModule, MatCheckboxModule, MatButtonModule } from '@angular/material';
 
 import {
     Register,
@@ -24,7 +26,15 @@ import {
 @NgModule({
     imports: [
         RainySharedModule,
-        RouterModule.forChild(accountState)
+        RouterModule.forChild(accountState),
+        MatIconModule,
+        MatCardModule,
+        MatInputModule,
+        MatCheckboxModule,
+        MatButtonModule,
+//        FlexLayoutModule,
+        FormsModule,
+        ReactiveFormsModule
     ],
     declarations: [
         SocialRegisterComponent,

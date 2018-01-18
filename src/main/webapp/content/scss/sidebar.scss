@@ -14,26 +14,30 @@ mat-sidenav {
   width: 240px;
   padding-top: 0px;
 }
-#snav{
+#snav {
     box-shadow: 1px 0px 20px rgba(0, 0, 0, 0.08);
+
     .mat-list-item {
         height: auto;
-        &:hover{
+
+        &:hover {
             background: none;
         }
-        
-        .mat-list-item-content{
+
+        .mat-list-item-content {
             display: block;
             padding: 0px 15px;
-            &:hover{
+
+            &:hover {
                 background: none;
-                > a{
-                  color:$themecolor;
+
+                > a {
+                    color: $themecolor;
                 }
             }
         }
-        
-        a{
+
+        a {
             height: 45px;
             padding: 0 10px;
             margin-bottom: 10px;
@@ -41,51 +45,66 @@ mat-sidenav {
             display: flex;
             font-size: 15px;
             white-space: nowrap;
-            color:$sidebar-text;
-            mat-icon:not(.dd-icon){
+            color: $sidebar-text;
+
+            mat-icon:not(.dd-icon) {
                 margin-right: 8px;
             }
-            mat-icon{
-                color:$sidebar-icons;
+
+            mat-icon {
+                color: $sidebar-icons;
             }
-            .dd-icon{
+
+            .dd-icon {
                 font-size: 16px;
                 width: 16px;
                 transition: 0.2s ease-in;
                 margin: 5px 0 5px 5px;
                 height: 16px;
             }
+            .cc-icon {
+                font-size: 16px;
+                width: 16px;
+                transition: 0.2s ease-in;
+                margin: 5px 5px 5px 5px;
+                height: 16px;
+            }
         }
-        &.selected > .mat-list-item-content > a{
+
+        &.selected > .mat-list-item-content > a {
             background: $themecolor-alt;
             border-radius: $radius;
-            color:$white;
-            
-            mat-icon{
-                color:$white;
+            color: $white;
+
+            mat-icon {
+                color: $white;
             }
-            .dd-icon{
+
+            .dd-icon {
                 -webkit-transform: rotate(-180deg);
                 transform: rotate(-180deg);
             }
-            
         }
-        &.selected .sub-item .mat-list-item-content a.selected{
+
+        &.selected .sub-item .mat-list-item-content a.selected {
             background: transparent;
-            color:$inverse;
-            font-weight: 500;               
+            color: $inverse;
+            font-weight: 500;
         }
     }
-    .sub-item{
+
+    .sub-item {
         display: none;
         margin-top: -15px;
-         a{
-          padding-left: 28px;
-          height: 50px;
-          margin-bottom: 0px;
+
+        a {
+            padding-left: 28px;
+            height: 50px;
+            margin-bottom: 0px;
         }
     }
-    .saperator{
+
+    .saperator {
         cursor: text;
         font-size: 13px;
         margin-bottom: 15px;
@@ -93,10 +112,11 @@ mat-sidenav {
         font-weight: 500;
         white-space: nowrap;
     }
-    .selected{
-       .sub-item{
-        display: block;
-        } 
+
+    .selected {
+        .sub-item {
+            display: block;
+        }
     }
 }
 /*******************

@@ -21,7 +21,7 @@ import { PaginationConfig } from './blocks/config/uib-pagination.config';
 import { FlexLayoutModule } from '@angular/flex-layout';
 // import { FullComponent } from './layouts/full/full.component';
 import { AppHeaderComponent } from './layouts/full/header/header.component';
-// import { AppSidebarComponent } from './layouts/full/sidebar/sidebar.component';
+import { AppSidebarComponent } from './layouts/full/sidebar/sidebar.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import {
@@ -51,7 +51,6 @@ import { RainyMaterialModule } from './material/rainy-material.module';
         RainyAccountModule,
         RainyEntityModule,
         // jhipster-needle-angular-add-module JHipster will add new module here
-
         RainyMaterialModule
     ],
     declarations: [
@@ -61,9 +60,9 @@ import { RainyMaterialModule } from './material/rainy-material.module';
         PageRibbonComponent,
         ActiveMenuDirective,
         FooterComponent,
-        AppHeaderComponent
+        AppHeaderComponent,
        // SpinnerComponent,
-       // AppSidebarComponent
+        AppSidebarComponent
     ],
     providers: [
         ProfileService,

@@ -1,134 +1,56 @@
-<div class="modal-header">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-sm-6">
-            </div>
-            <div class="col-sm-6">
-                <button aria-label="Close" data-dismiss="modal" class="close" type="button" (click)="activeModal.dismiss('closed')">
-                    <span><i class="fa fa-times" aria-hidden="true"></i></span>
-                </button>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-sm-12"  align="center">
-                <!--<img src="{{logoUrl}}" class="img-fluid img-rounded" alt="Logo" />-->
-                <h1>NongClub</h1>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="modal-body">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-sm-12">
-                <div class="alert alert-danger" *ngIf="authenticationError" jhiTranslate="login.messages.error.authentication">
-                    <strong>Failed to sign in!</strong> Please check your credentials and try again.
+<!--<div class="login-register" style="background-image:url(assets/images/background/login-register.jpg);">-->
+    <div class="login-register-box">
+        <mat-dialog-content>
+            <!--<mat-card>
+            <mat-card-content>-->
+            <form [formGroup]="form" (ngSubmit)="login()">
+                <div class="text-center">
+                    <img alt="homepage" src="../../../content/images/logo-icon.png">
+                    <h4 class="m-t-0">Login to App</h4>
                 </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-sm-1"></div>
-            <div class="col-sm-10">
-                <form class="form" role="form" (ngSubmit)="login()">
-                    <div class="form-group">
-                        <div class="input-group">
-                            <span class="input-group-addon" id="basic-addon1"><i class="fa fa-user fa-fw" aria-hidden="true"></i></span>
-                            <input type="text" class="form-control" name="username" id="username" placeholder="{{'global.form.username.placeholder' | translate}}"
-                                   [(ngModel)]="username">
-                        </div>
+                <div fxLayout="row" fxLayoutWrap="wrap">
+                    <!-- col full-->
+                    <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">
+                        <mat-form-field>
+                            <input matInput [formControl]="form.controls['uname']">
+                            <mat-placeholder>
+                                <label jhiTranslate="global.form.username"></label>
+                            </mat-placeholder>
+                        </mat-form-field>
+                        <small *ngIf="form.controls['uname'].hasError('required') && form.controls['uname'].touched" class="text-danger support-text">Username is required.</small>
                     </div>
-                    <div class="form-group">
-                        <div class="input-group">
-                            <span class="input-group-addon" id="add-password"><i class="fa fa-key fa-fw" aria-hidden="true"></i></span>
-                            <input type="password" class="form-control" name="password" id="password" placeholder="{{'login.form.password.placeholder' | translate}}"
-                                   [(ngModel)]="password">
-                        </div>
+                    <!-- col full-->
+                    <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">
+                        <mat-form-field>
+                            <input matInput type="password" [formControl]="form.controls['password']">
+                            <mat-placeholder>
+                                <label jhiTranslate="login.form.password"></label>
+                            </mat-placeholder>
+                        </mat-form-field>
+                        <small *ngIf="form.controls['password'].hasError('required') && form.controls['password'].touched" class="text-danger support-text">Password is required.</small>
                     </div>
-                    <div class="form-check">
-                        <label class="form-check-label" for="rememberMe">
-                            <input class="form-check-input" type="checkbox" name="rememberMe" id="rememberMe" [(ngModel)]="rememberMe" checked>
-                            <span jhiTranslate="login.form.rememberme">Remember me</span>
-                        </label>
+                    <!-- col half-->
+                    <div fxFlex.gt-sm="50" fxFlex.gt-xs="50">
+                            <mat-checkbox color="warn" [formControl]="form.controls['rememberMe']"><span jhiTranslate="login.form.rememberme"></span></mat-checkbox>
                     </div>
-                    <table border="0" width="100%">
-                        <tr align="center">
-                            <!--<td>
-                                <jhi-social provider="facebook"></jhi-social>
-                            </td>
-                            <td>
-                                <jhi-social provider="google"></jhi-social>
-                            </td>
-                            <td>
-                                <jhi-social provider="twitter"></jhi-social>
-                            </td>-->
-                        </tr>
-                    </table>
-                    <br>
-                    <button type="submit" class="btn btn-primary btn-lg btn-block">Sign in</button>
-                </form>
-                <p></p>
+                    <!-- col full-->
+                    <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">
+                        <button mat-raised-button color="primary" class="btn-block btn-lg m-t-20 m-b-20" type="submit" [disabled]="!form.valid">Login</button>
+                    </div>
+                    <!-- col full-->
+                    <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" class="text-center">
+                        <a (click)="requestResetPassword()" class="link"><span jhiTranslate="login.password.forgot"></span></a>
+                    </div>
+                    <!-- col full-->
+                    <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" class="text-center">
+                        <span jhiTranslate="global.messages.info.register.noaccount" class="text-info"></span>
+                        <a (click)="register()" class="link"><span jhiTranslate="global.messages.info.register.link"></span></a>
+                    </div>
 
-                <div align="center">
-                    <i class="fa fa-plus-circle fa-fw" aria-hidden="true"></i><a class="alert-link" (click)="register()" jhiTranslate="global.messages.info.register.link">Register a new account</a>
-                    <br>
-                    <i class="fa fa-unlock fa-fw" aria-hidden="true"></i><a class="alert-link" (click)="requestResetPassword()" jhiTranslate="login.password.forgot">Forget your password?</a>
                 </div>
-            </div>
-            <div class="col-sm-1"></div>
-
-        </div>
-    </div>
-
-</div>
-
-
-<!--<div class="modal-header">
-    <h4 class="modal-title" jhiTranslate="login.title">Sign in</h4>
-    <button aria-label="Close" data-dismiss="modal" class="close" type="button" (click)="activeModal.dismiss('closed')"><span aria-hidden="true">x</span>
-    </button>
-</div>
-<div class="modal-body">
-    <div class="row justify-content-center">
-        <div class="col-12">
-            <div class="alert alert-danger" *ngIf="authenticationError" jhiTranslate="login.messages.error.authentication">
-                <strong>Failed to sign in!</strong> Please check your credentials and try again.
-            </div>
-        </div>
-        <div class="col-md-6">
-            <form class="form" role="form" (ngSubmit)="login()">
-                <div class="form-group">
-                    <label for="username" jhiTranslate="global.form.username">Login</label>
-                    <input type="text" class="form-control" name="username" id="username" placeholder="{{'global.form.username.placeholder' | translate}}"
-                    [(ngModel)]="username">
-                </div>
-                <div class="form-group">
-                    <label for="password" jhiTranslate="login.form.password">Password</label>
-                    <input type="password" class="form-control" name="password" id="password" placeholder="{{'login.form.password.placeholder' | translate}}"
-                           [(ngModel)]="password">
-                </div>
-                <div class="form-check">
-                    <label class="form-check-label" for="rememberMe">
-                        <input class="form-check-input" type="checkbox" name="rememberMe" id="rememberMe" [(ngModel)]="rememberMe" checked>
-                        <span jhiTranslate="login.form.rememberme">Remember me</span>
-                    </label>
-                </div>
-                <button type="submit" class="btn btn-primary" jhiTranslate="login.form.button">Sign in</button>
             </form>
-            <p></p>
-            <div class="alert alert-warning">
-                <a class="alert-link" (click)="requestResetPassword()" jhiTranslate="login.password.forgot">Did you forget your password?</a>
-            </div>
-            <div class="alert alert-warning">
-                <span jhiTranslate="global.messages.info.register.noaccount">You don't have an account yet?</span>
-                <a class="alert-link" (click)="register()" jhiTranslate="global.messages.info.register.link">Register a new account</a>
-            </div>
-        </div>
-        <div class="col-md-6">
-            <br/>
-            <jhi-social provider="google"></jhi-social>
-            <jhi-social provider="facebook"></jhi-social>
-            <jhi-social provider="twitter"></jhi-social>
-             jhipster-needle-add-social-button 
-        </div>
+            <!--</mat-card-content>
+        </mat-card>-->
+        </mat-dialog-content>
     </div>
-</div>-->
+<!--</div>-->

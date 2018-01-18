@@ -1,6 +1,9 @@
 /* after changing this file run 'yarn run webpack:build' */
 $fa-font-path: '~font-awesome/fonts';
 
+@import '~perfect-scrollbar/css/perfect-scrollbar.css';
+@import "~ng2-file-input/ng2-file-input.css";
+
 /***************************
 put Sass variables here:
 eg $input-color: red;
