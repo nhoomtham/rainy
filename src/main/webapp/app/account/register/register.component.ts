@@ -9,8 +9,8 @@ import { Register } from './register.service';
 import { RaLoginModalService, EMAIL_ALREADY_USED_TYPE, LOGIN_ALREADY_USED_TYPE } from '../../shared';
 import { RaLoginService, RaJhiLoginModalComponent } from '../../shared';
 
-const password = new FormControl('', [Validators.required, Validators.minLength(4), Validators.maxLength(50)]);
-const confirmPassword = new FormControl('', CustomValidators.equalTo(password));
+const password = new FormControl(null, [Validators.required, Validators.minLength(5), Validators.maxLength(50)]);
+const confirmPassword = new FormControl(null, CustomValidators.equalTo(password));
 
 @Component({
     selector: 'jhi-register',
