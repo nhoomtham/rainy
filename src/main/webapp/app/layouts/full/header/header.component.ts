@@ -36,5 +36,11 @@ export class AppHeaderComponent {
         this.router.navigate(['/register']);
     }
 
+    settings() {
+        this.router.navigate(['/settings']);
+    }
 
+    password() {
+        this.router.navigate(['/password']);
+    }
 }

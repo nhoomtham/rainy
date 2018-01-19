@@ -3,7 +3,7 @@ import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { RainySharedModule } from '../shared';
-import { MatIconModule, MatCardModule, MatInputModule, MatCheckboxModule, MatButtonModule } from '@angular/material';
+import { MatIconModule, MatCardModule, MatInputModule, MatCheckboxModule, MatButtonModule, MatSelectModule} from '@angular/material';
 
 import {
     Register,
@@ -32,6 +32,7 @@ import {
         MatInputModule,
         MatCheckboxModule,
         MatButtonModule,
+        MatSelectModule,
 //        FlexLayoutModule,
         FormsModule,
         ReactiveFormsModule

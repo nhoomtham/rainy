@@ -9,14 +9,13 @@
     </button>
     
     <mat-menu #profile="matMenu" class="mymegamenu">
-        <button *ngSwitchCase="true" mat-menu-item>
-            <mat-icon>settings</mat-icon> Settings
+        <button *ngSwitchCase="true" mat-menu-item (click)="settings()">
+            <mat-icon>settings</mat-icon>
+            <span jhiTranslate="global.menu.account.settings">Settings</span>
         </button>
-        <button *ngSwitchCase="true" mat-menu-item>
-            <mat-icon>account_box</mat-icon> Profile
-        </button>
-        <button *ngSwitchCase="true" mat-menu-item>
-            <mat-icon>notifications_off</mat-icon> Disable notifications
+        <button *ngSwitchCase="true" mat-menu-item (click)="password()">
+            <mat-icon>lock</mat-icon>
+            <span jhiTranslate="global.menu.account.password">Password</span>
         </button>
         <button *ngSwitchCase="false" mat-menu-item (click)="login()">
             <mat-icon>power_settings_new</mat-icon>
