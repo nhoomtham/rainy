@@ -1,3 +1,4 @@
+select * from jhi_user;
 select * from ra_album;
 select * from ra_shop;
 select * from ra_shop_status;

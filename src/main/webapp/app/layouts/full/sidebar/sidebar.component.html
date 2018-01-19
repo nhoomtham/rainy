@@ -43,4 +43,27 @@
             <span jhiTranslate="{{ menuitem.name }}"></span>
         </div>
     </mat-list-item>
+    <!-- Language -->
+    <mat-list-item appAccordionLink  routerLinkActive="selected" group="language">
+        <a class="" appAccordionToggle href="javascript:;">
+            <mat-icon>language</mat-icon>
+            <span jhiTranslate="global.menu.language"></span>
+            <span fxFlex></span>
+            <mat-icon class="dd-icon">keyboard_arrow_down</mat-icon>
+        </a>
+        <mat-nav-list class="sub-item">
+            <mat-list-item routerLinkActive="selected">
+                <a (click)="changeLanguage('th')" class="relative" routerLinkActive="selected">
+                    <mat-icon class="cc-icon">flag</mat-icon>
+                    <span>ไทย</span>
+                </a>
+            </mat-list-item>
+            <mat-list-item routerLinkActive="selected">
+                <a (click)="changeLanguage('en')" class="relative" routerLinkActive="selected">
+                    <mat-icon class="cc-icon">flag</mat-icon>
+                    <span>English</span>
+                </a>
+            </mat-list-item>
+        </mat-nav-list>
+    </mat-list-item>
 </mat-nav-list>
