@@ -3,6 +3,7 @@
 <!-- ============================================================== -->
 <div class="user-profile" style="background: url(https://s3.eu-west-2.amazonaws.com/ra-rainy/default/user-info.jpg) no-repeat;">
     <div class="profile-img"> <img src="../../../../content/images/users/8.jpg" alt="user"> </div>
+    <div *ngIf="isAuthenticated()" class="profile-text"><a  class=""> {{account.login}} <i class="ti-angle-down font-12 m-l-5"></i></a></div>
 </div>
 <mat-nav-list appAccordion>
     <mat-list-item appAccordionLink *ngFor="let menuitem of menuItems.getMenuitem()" routerLinkActive="selected" group="{{menuitem.state}}">

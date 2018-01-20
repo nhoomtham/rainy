@@ -2,8 +2,8 @@ import { ChangeDetectorRef, Component, NgZone, OnDestroy, ViewChild, HostListene
 import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
 import { MediaMatcher } from '@angular/cdk/layout';
 import { MenuItems } from '../../../shared/menu-items/menu-items';
-import { JhiLanguageHelper } from '../../../shared';
-import { JhiLanguageService } from 'ng-jhipster';
+import { JhiLanguageHelper, Account, Principal } from '../../../shared';
+import { JhiLanguageService, JhiEventManager} from 'ng-jhipster';
 
 @Component({
   selector: 'app-sidebar',
@@ -12,18 +12,21 @@ import { JhiLanguageService } from 'ng-jhipster';
 })
 export class AppSidebarComponent implements OnInit {
 
-  private _mobileQueryListener: () => void;
+    private _mobileQueryListener: () => void;
+    account: Account;
 
-  public config: PerfectScrollbarConfigInterface = {};
-  mobileQuery: MediaQueryList;  
-  languages: any[];
+    public config: PerfectScrollbarConfigInterface = {};
+    mobileQuery: MediaQueryList;  
+    languages: any[];
 
   constructor(
       private languageService: JhiLanguageService,
       private languageHelper: JhiLanguageHelper,
       changeDetectorRef: ChangeDetectorRef,
       media: MediaMatcher,
-      public menuItems: MenuItems
+      public menuItems: MenuItems,
+      private principal: Principal,
+      private eventManager: JhiEventManager
   ) {
         this.mobileQuery = media.matchMedia('(min-width: 768px)');
         this._mobileQueryListener = () => changeDetectorRef.detectChanges();
@@ -34,6 +37,24 @@ export class AppSidebarComponent implements OnInit {
       this.languageHelper.getAll().then((languages) => {
           this.languages = languages;
       });
+
+      this.principal.identity().then((account) => {
+          this.account = account;
+      });
+
+      this.registerAuthenticationSuccess();
+  }
+
+  registerAuthenticationSuccess() {
+      this.eventManager.subscribe('authenticationSuccess', (message) => {
+          this.principal.identity().then((account) => {
+              this.account = account;
+          });
+      });
+  }
+
+  isAuthenticated() {
+      return this.principal.isAuthenticated();
   }
 
   changeLanguage(languageKey: string) {
