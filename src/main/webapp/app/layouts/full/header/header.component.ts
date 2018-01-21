@@ -43,4 +43,8 @@ export class AppHeaderComponent {
     password() {
         this.router.navigate(['/password']);
     }
+
+    getImageUrl() {
+        return this.isAuthenticated() ? this.principal.getImageUrl() : null;
+    }
 }

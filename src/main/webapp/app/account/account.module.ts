@@ -1,6 +1,7 @@
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { RainySharedModule } from '../shared';
 import { MatIconModule, MatCardModule, MatInputModule, MatCheckboxModule, MatButtonModule, MatSelectModule} from '@angular/material';
@@ -33,7 +34,7 @@ import {
         MatCheckboxModule,
         MatButtonModule,
         MatSelectModule,
-//        FlexLayoutModule,
+        FlexLayoutModule,
         FormsModule,
         ReactiveFormsModule
     ],

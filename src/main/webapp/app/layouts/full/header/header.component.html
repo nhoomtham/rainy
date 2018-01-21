@@ -4,8 +4,11 @@
 <!-- ============================================================== -->
 <div [ngSwitch]="isAuthenticated()">
     <button [matMenuTriggerFor]="profile" mat-icon-button class="m-r-5">
-        <img *ngSwitchCase="true" src="../../../../content/images/users/1.jpg" alt="user" class="profile-pic">
-        <mat-icon *ngSwitchCase="false">account_circle</mat-icon> 
+        <mat-icon *ngSwitchCase="false">lock_open</mat-icon>
+        <div *ngSwitchCase="true">
+            <mat-icon *ngIf="!getImageUrl()">account_circle</mat-icon>
+            <img *ngIf="getImageUrl()" [src]="getImageUrl()" class="profile-pic" alt="user">
+        </div>
     </button>
     
     <mat-menu #profile="matMenu" class="mymegamenu">
