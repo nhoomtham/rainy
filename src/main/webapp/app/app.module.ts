@@ -39,9 +39,8 @@ import { RainyMaterialModule } from './material/rainy-material.module';
 @NgModule({
     imports: [
         BrowserModule,
-        // Material
         BrowserAnimationsModule,
-        // Material
+        FlexLayoutModule,
         // LayoutRoutingModule,
         RainyAppRoutingModule,
         Ng2Webstorage.forRoot({ prefix: 'jhi', separator: '-'}),

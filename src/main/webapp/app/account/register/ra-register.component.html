@@ -2,98 +2,102 @@
     <div class="login-register-box">
         <mat-card>
             <mat-card-content>
-                <form [formGroup]="form" (ngSubmit)="register()">
-                    <div fxLayout="row" fxLayoutWrap="wrap">
+                <div fxLayout="row" fxLayoutWrap="wrap" fxFlexAlign="center" class="row">
+                    <div fxFlex="100" class="m-t-20">
+                        <!--<img alt="homepage" src="../../../content/images/logo-icon.png">-->
                         <div class="text-center">
-                            <!--<img alt="homepage" src="../../../content/images/logo-icon.png">-->
-                            <h4 class="m-t-0" jhiTranslate="register.title"></h4>
-                        </div>
-                        <!-- login -->
-                        <!-- col full-->
-                        <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">
-                            <mat-form-field style="width: 100%">
-                                <input matInput type="text" [formControl]="form.controls['login']">
-                                <mat-placeholder><label jhiTranslate="global.form.username"></label></mat-placeholder>
-                                <mat-error *ngIf="form.controls['login'].hasError('required') && form.controls['login'].touched" class="text-danger support-text">
-                                    <span jhiTranslate="register.messages.validate.login.required"></span>
-                                </mat-error>
-                                <mat-error *ngIf="errorUserExists" class="text-danger support-text">
-                                    <span jhiTranslate="register.messages.error.userexists"></span>
-                                </mat-error>
-                                <mat-error *ngIf="form.controls['login'].hasError('maxlength')  && form.controls['login'].touched" class="text-danger support-text">
-                                    <span jhiTranslate="rainyApp.shop.invalid-length"></span>
-                                </mat-error>
-                                <mat-error *ngIf="form.controls['login'].hasError('pattern')  && form.controls['login'].touched" class="text-danger support-text">
-                                    <span jhiTranslate="register.messages.validate.login.pattern"></span>
-                                </mat-error>
-                            </mat-form-field>
-                        </div>
-                        <!-- email -->
-                        <!-- col full-->
-                        <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">
-                            <mat-form-field style="width: 100%">
-                                <input matInput type="email" [formControl]="form.controls['email']">
-                                <mat-placeholder><label jhiTranslate="global.form.email.placeholder"></label></mat-placeholder>
-                            </mat-form-field>
-                            <small *ngIf="form.controls['email'].hasError('required') && form.controls['email'].touched" class="text-danger support-text">
-                                <span jhiTranslate="global.messages.validate.email.required"></span>
-                            </small>
-                            <small *ngIf="form.controls['email'].hasError('maxlength')  && form.controls['email'].touched" class="text-danger support-text">
-                                <span jhiTranslate="rainyApp.shop.invalid-length"></span>
-                            </small>
-                            <small *ngIf="form.controls['email'].errors?.email && form.controls['email'].touched" class="text-danger support-text">
-                                <span jhiTranslate="global.messages.validate.email.invalid"></span>
-                            </small>
-                            <small *ngIf="errorEmailExists" class="text-danger support-text">
-                                <span jhiTranslate="register.messages.error.emailexists"></span>
-                            </small>
-
-                        </div>
-                        <!-- password -->
-                        <!-- col full-->
-                        <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">
-                            <mat-form-field style="width: 100%">
-                                <input matInput type="password" [formControl]="form.controls['password']">
-                                <mat-placeholder><label jhiTranslate="global.form.newpassword.placeholder"></label></mat-placeholder>
-                            </mat-form-field>
-                            <small *ngIf="form.controls['password'].hasError('required') && form.controls['password'].touched" class="text-danger support-text">
-                                <span jhiTranslate="global.messages.validate.newpassword.required"></span>
-                            </small>
-                            <small *ngIf="(form.controls['password'].hasError('maxlength') || form.controls['password'].hasError('minlength')) && form.controls['password'].touched" class="text-danger support-text">
-                                <span jhiTranslate="rainyApp.shop.invalid-length"></span>
-                            </small>
-                        </div>
-                        <!-- confirm password -->
-                        <!-- col full-->
-                        <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">
-                            <mat-form-field style="width: 100%">
-                                <input matInput  [formControl]="form.controls['confirmPassword']" type="password">
-                                <mat-placeholder><label jhiTranslate="global.form.confirmpassword"></label></mat-placeholder>
-                            </mat-form-field>
-                            <small *ngIf="form.controls['confirmPassword'].hasError('required') && form.controls['confirmPassword'].touched" class="text-danger support-text">
-                                <span jhiTranslate="global.messages.validate.confirmpassword.required"></span>
-                            </small>
-                            <small *ngIf="form.controls['confirmPassword'].errors?.equalTo && form.controls['confirmPassword'].touched" class="text-danger support-text">
-                                <span jhiTranslate="global.messages.error.dontmatch"></span>
-                            </small>
-                        </div>
-                        <!-- col full-->
-                        <!--<div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">
-                            <mat-checkbox class="font-14">I agree to the all <a href="javascript:void(0)" class="link text-info">terms</a>.</mat-checkbox>
-                        </div>
-                        -->
-                        <button mat-raised-button color="primary" class="btn-block btn-lg m-t-20 m-b-20" type="submit" [disabled]="!form.valid">
-                            <span jhiTranslate="register.form.button"></span>
-                        </button>
-                        <div *ngIf="success === true" fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">
-                            <div class="text-center text-success">
-                                <span jhiTranslate="register.messages.success"></span>
-                                <a (click)="openLogin()" class="link text-info">Click to login</a>
-                            </div>
+                            <h2 jhiTranslate="register.title">Register</h2>
                         </div>
                     </div>
-                </form>
-            </mat-card-content>
+                </div>
+                    <form [formGroup]="form" (ngSubmit)="register()">
+                        <div fxLayout="row" fxLayoutWrap="wrap">
+                            <!-- login -->
+                            <!-- col full-->
+                            <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">
+                                <mat-form-field style="width: 100%">
+                                    <input matInput type="text" [formControl]="form.controls['login']">
+                                    <mat-placeholder><label jhiTranslate="global.form.username"></label></mat-placeholder>
+                                    <mat-error *ngIf="form.controls['login'].hasError('required') && form.controls['login'].touched" class="text-danger support-text">
+                                        <span jhiTranslate="register.messages.validate.login.required"></span>
+                                    </mat-error>
+                                    <mat-error *ngIf="errorUserExists" class="text-danger support-text">
+                                        <span jhiTranslate="register.messages.error.userexists"></span>
+                                    </mat-error>
+                                    <mat-error *ngIf="form.controls['login'].hasError('maxlength')  && form.controls['login'].touched" class="text-danger support-text">
+                                        <span jhiTranslate="rainyApp.shop.invalid-length"></span>
+                                    </mat-error>
+                                    <mat-error *ngIf="form.controls['login'].hasError('pattern')  && form.controls['login'].touched" class="text-danger support-text">
+                                        <span jhiTranslate="register.messages.validate.login.pattern"></span>
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+                            <!-- email -->
+                            <!-- col full-->
+                            <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">
+                                <mat-form-field style="width: 100%">
+                                    <input matInput type="email" [formControl]="form.controls['email']">
+                                    <mat-placeholder><label jhiTranslate="global.form.email.placeholder"></label></mat-placeholder>
+                                </mat-form-field>
+                                <small *ngIf="form.controls['email'].hasError('required') && form.controls['email'].touched" class="text-danger support-text">
+                                    <span jhiTranslate="global.messages.validate.email.required"></span>
+                                </small>
+                                <small *ngIf="form.controls['email'].hasError('maxlength')  && form.controls['email'].touched" class="text-danger support-text">
+                                    <span jhiTranslate="rainyApp.shop.invalid-length"></span>
+                                </small>
+                                <small *ngIf="form.controls['email'].errors?.email && form.controls['email'].touched" class="text-danger support-text">
+                                    <span jhiTranslate="global.messages.validate.email.invalid"></span>
+                                </small>
+                                <small *ngIf="errorEmailExists" class="text-danger support-text">
+                                    <span jhiTranslate="register.messages.error.emailexists"></span>
+                                </small>
+
+                            </div>
+                            <!-- password -->
+                            <!-- col full-->
+                            <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">
+                                <mat-form-field style="width: 100%">
+                                    <input matInput type="password" [formControl]="form.controls['password']">
+                                    <mat-placeholder><label jhiTranslate="global.form.newpassword.placeholder"></label></mat-placeholder>
+                                </mat-form-field>
+                                <small *ngIf="form.controls['password'].hasError('required') && form.controls['password'].touched" class="text-danger support-text">
+                                    <span jhiTranslate="global.messages.validate.newpassword.required"></span>
+                                </small>
+                                <small *ngIf="(form.controls['password'].hasError('maxlength') || form.controls['password'].hasError('minlength')) && form.controls['password'].touched" class="text-danger support-text">
+                                    <span jhiTranslate="rainyApp.shop.invalid-length"></span>
+                                </small>
+                            </div>
+                            <!-- confirm password -->
+                            <!-- col full-->
+                            <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">
+                                <mat-form-field style="width: 100%">
+                                    <input matInput [formControl]="form.controls['confirmPassword']" type="password">
+                                    <mat-placeholder><label jhiTranslate="global.form.confirmpassword"></label></mat-placeholder>
+                                </mat-form-field>
+                                <small *ngIf="form.controls['confirmPassword'].hasError('required') && form.controls['confirmPassword'].touched" class="text-danger support-text">
+                                    <span jhiTranslate="global.messages.validate.confirmpassword.required"></span>
+                                </small>
+                                <small *ngIf="form.controls['confirmPassword'].errors?.equalTo && form.controls['confirmPassword'].touched" class="text-danger support-text">
+                                    <span jhiTranslate="global.messages.error.dontmatch"></span>
+                                </small>
+                            </div>
+                            <!-- col full-->
+                            <!--<div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">
+                    <mat-checkbox class="font-14">I agree to the all <a href="javascript:void(0)" class="link text-info">terms</a>.</mat-checkbox>
+                </div>
+                -->
+                            <button mat-raised-button color="primary" class="btn-block btn-lg m-t-20 m-b-20" type="submit" [disabled]="!form.valid">
+                                <span jhiTranslate="register.form.button"></span>
+                            </button>
+                            <div *ngIf="success === true" fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">
+                                <div class="text-center text-success">
+                                    <span jhiTranslate="register.messages.success"></span>
+                                    <a (click)="openLogin()" class="link text-info">Click to login</a>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+</mat-card-content>
         </mat-card>
     </div>
 </div>
