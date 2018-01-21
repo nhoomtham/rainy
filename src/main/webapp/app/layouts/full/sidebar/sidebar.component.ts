@@ -10,13 +10,13 @@ import { JhiLanguageService, JhiEventManager} from 'ng-jhipster';
   templateUrl: './sidebar.component.html',
   styleUrls: []
 })
-export class AppSidebarComponent implements OnInit {
+export class AppSidebarComponent implements OnInit, OnDestroy {
 
     private _mobileQueryListener: () => void;
     account: Account;
 
     public config: PerfectScrollbarConfigInterface = {};
-    mobileQuery: MediaQueryList;  
+    mobileQuery: MediaQueryList;
     languages: any[];
 
   constructor(
@@ -64,5 +64,4 @@ export class AppSidebarComponent implements OnInit {
   ngOnDestroy(): void {
     this.mobileQuery.removeListener(this._mobileQueryListener);
   }
- 
 }

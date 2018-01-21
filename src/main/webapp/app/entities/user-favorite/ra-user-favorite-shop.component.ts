@@ -98,7 +98,6 @@ export class UserFavoriteShopComponent implements OnInit, OnDestroy {
         this.registerChangeInUser_favorites();
     }
 
-
     private loadByShop(shopId: number) {
         this.user_favoriteService.queryByShop(shopId, {
             page: this.page - 1,

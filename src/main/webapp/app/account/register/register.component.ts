@@ -28,7 +28,7 @@ export class RegisterComponent implements OnInit, AfterViewInit {
     registerAccount: any;
     success: boolean;
     form: FormGroup;
-   
+
     constructor(
         private languageService: JhiLanguageService,
         private loginModalService: RaLoginModalService,
@@ -43,7 +43,7 @@ export class RegisterComponent implements OnInit, AfterViewInit {
         this.registerAccount = {};
         this.form = this.fb.group({
             login: [null, Validators.compose([Validators.required, Validators.minLength(1),
-                Validators.maxLength(50), Validators.pattern("^[_'.@A-Za-z0-9-]*$")])],
+                Validators.maxLength(50), Validators.pattern('^[_".@A-Za-z0-9-]*$')])],
             email: [null, Validators.compose([Validators.required, Validators.maxLength(50), CustomValidators.email])],
             password: password,
             confirmPassword: confirmPassword
